@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bing.Pan.sso.mapper.mapperInterface.SsoUserSystemMapper" >
+  <resultMap id="BaseResultMap" type="bing.Pan.sso.domain.entity.SsoUserSystem" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_login_name" property="userLoginName" jdbcType="VARCHAR" />
+    <result column="system_id" property="systemId" jdbcType="BIGINT" />
+    <result column="system_name" property="systemName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, user_login_name, system_id, system_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sso_user_system
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sso_user_system
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="bing.Pan.sso.domain.entity.SsoUserSystem" >
+    insert into sso_user_system (id, user_id, user_login_name, 
+      system_id, system_name)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userLoginName,jdbcType=VARCHAR}, 
+      #{systemId,jdbcType=BIGINT}, #{systemName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="bing.Pan.sso.domain.entity.SsoUserSystem" >
+    insert into sso_user_system
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userLoginName != null" >
+        user_login_name,
+      </if>
+      <if test="systemId != null" >
+        system_id,
+      </if>
+      <if test="systemName != null" >
+        system_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userLoginName != null" >
+        #{userLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="systemId != null" >
+        #{systemId,jdbcType=BIGINT},
+      </if>
+      <if test="systemName != null" >
+        #{systemName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="bing.Pan.sso.domain.entity.SsoUserSystem" >
+    update sso_user_system
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userLoginName != null" >
+        user_login_name = #{userLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="systemId != null" >
+        system_id = #{systemId,jdbcType=BIGINT},
+      </if>
+      <if test="systemName != null" >
+        system_name = #{systemName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="bing.Pan.sso.domain.entity.SsoUserSystem" >
+    update sso_user_system
+    set user_id = #{userId,jdbcType=BIGINT},
+      user_login_name = #{userLoginName,jdbcType=VARCHAR},
+      system_id = #{systemId,jdbcType=BIGINT},
+      system_name = #{systemName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
