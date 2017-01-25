@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="sso-manage:war">
+    <output-path>$PROJECT_DIR$/sso-manage/target</output-path>
+    <root id="archive" name="sso-manage-1.0.war">
+      <element id="artifact" artifact-name="sso-manage:war exploded" />
+    </root>
+  </artifact>
+</component>
