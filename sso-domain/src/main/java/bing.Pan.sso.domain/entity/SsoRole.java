@@ -9,6 +9,10 @@ public class SsoRole {
 
     private String code;
 
+    private Long systemId;
+
+    private String systemName;
+
     private String detailExplain;
 
     private Boolean available;
@@ -43,6 +47,22 @@ public class SsoRole {
 
     public void setCode(String code) {
         this.code = code == null ? null : code.trim();
+    }
+
+    public Long getSystemId() {
+        return systemId;
+    }
+
+    public void setSystemId(Long systemId) {
+        this.systemId = systemId;
+    }
+
+    public String getSystemName() {
+        return systemName;
+    }
+
+    public void setSystemName(String systemName) {
+        this.systemName = systemName == null ? null : systemName.trim();
     }
 
     public String getDetailExplain() {

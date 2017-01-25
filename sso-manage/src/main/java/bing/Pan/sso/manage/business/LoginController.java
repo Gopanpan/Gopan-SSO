@@ -30,9 +30,9 @@ public class LoginController {
         return "login";
 
     }
-    @RequestMapping("/index")
+    @RequestMapping("/welcome")
     public String index(){
-        return "index";
+        return "welcome";
 
     }
 

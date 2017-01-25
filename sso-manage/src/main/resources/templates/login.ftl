@@ -32,6 +32,7 @@
     <div class="bt_login_boxs">
         <div>
             <img src="static/img/logo.png">
+            <div>Copyright &copy;2017 sso All Rights Reserved.</div>
         </div>
         <form class="m-t my-form">
             <div class="form-group bt_login_inputs">
@@ -41,8 +42,7 @@
                 <input id="J-password" type="password" class="form-control" placeholder="密码"
                        required>
             </div>
-            <a id="J-submit" type="submit" class="btn btn-primary block full-width bt_login_bnt">登
-                录</a>
+            <a id="J-submit" type="submit" class="btn btn-primary block full-width bt_login_bnt">登录</a>
             <p id="J-error" class="text-muted bt_text_center"></p>
         </form>
     </div>

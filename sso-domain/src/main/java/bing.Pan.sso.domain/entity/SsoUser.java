@@ -1,9 +1,8 @@
 package bing.Pan.sso.domain.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class SsoUser implements Serializable {
+public class SsoUser {
     private Long id;
 
     private Long userNumber;
@@ -12,17 +11,21 @@ public class SsoUser implements Serializable {
 
     private String realName;
 
+    private String password;
+
     private Integer sex;
 
-    private Date birthday;
+    private String birthday;
 
-    private String phone;
+    private String idCard;
 
     private String position;
 
-    private Date joinDate;
+    private String phone;
 
-    private String password;
+    private String email;
+
+    private Date joinDate;
 
     private Date lastLogin;
 
@@ -34,7 +37,7 @@ public class SsoUser implements Serializable {
 
     private String onlineTime;
 
-    private String remarks;
+    private String detailExplain;
 
     private Boolean available;
 
@@ -78,6 +81,14 @@ public class SsoUser implements Serializable {
         this.realName = realName == null ? null : realName.trim();
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
+
     public Integer getSex() {
         return sex;
     }
@@ -86,20 +97,20 @@ public class SsoUser implements Serializable {
         this.sex = sex;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday == null ? null : birthday.trim();
     }
 
-    public String getPhone() {
-        return phone;
+    public String getIdCard() {
+        return idCard;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
+    public void setIdCard(String idCard) {
+        this.idCard = idCard == null ? null : idCard.trim();
     }
 
     public String getPosition() {
@@ -110,20 +121,28 @@ public class SsoUser implements Serializable {
         this.position = position == null ? null : position.trim();
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
+
     public Date getJoinDate() {
         return joinDate;
     }
 
     public void setJoinDate(Date joinDate) {
         this.joinDate = joinDate;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
     }
 
     public Date getLastLogin() {
@@ -166,12 +185,12 @@ public class SsoUser implements Serializable {
         this.onlineTime = onlineTime == null ? null : onlineTime.trim();
     }
 
-    public String getRemarks() {
-        return remarks;
+    public String getDetailExplain() {
+        return detailExplain;
     }
 
-    public void setRemarks(String remarks) {
-        this.remarks = remarks == null ? null : remarks.trim();
+    public void setDetailExplain(String detailExplain) {
+        this.detailExplain = detailExplain == null ? null : detailExplain.trim();
     }
 
     public Boolean getAvailable() {

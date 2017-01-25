@@ -3,7 +3,7 @@ package bing.Pan.sso.mapper.mapperInterface;
 import bing.Pan.sso.domain.entity.SsoUniversalLog;
 import bing.Pan.sso.mapper.BaseMapper;
 
-public interface SsoUniversalLogMapper extends BaseMapper {
+public interface SsoUniversalLogMapper  extends BaseMapper {
     int deleteByPrimaryKey(Long id);
 
     int insert(SsoUniversalLog record);

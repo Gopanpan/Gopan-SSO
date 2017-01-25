@@ -4,22 +4,18 @@
   <resultMap id="BaseResultMap" type="bing.Pan.sso.domain.entity.SsoUserOrg" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_login_name" property="userLoginName" jdbcType="VARCHAR" />
     <result column="organization_id" property="organizationId" jdbcType="BIGINT" />
-    <result column="is_system" property="isSystem" jdbcType="BIGINT" />
+    <result column="organization_name" property="organizationName" jdbcType="VARCHAR" />
     <result column="available" property="available" jdbcType="BIT" />
     <result column="create_user" property="createUser" jdbcType="BIGINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_user" property="updateUser" jdbcType="BIGINT" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="extends1" property="extends1" jdbcType="VARCHAR" />
-    <result column="extends2" property="extends2" jdbcType="VARCHAR" />
-    <result column="extends3" property="extends3" jdbcType="VARCHAR" />
-    <result column="extends4" property="extends4" jdbcType="VARCHAR" />
-    <result column="extends5" property="extends5" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, organization_id, is_system, available, create_user, create_time, update_user, 
-    update_time, extends1, extends2, extends3, extends4, extends5
+    id, user_id, user_login_name, organization_id, organization_name, available, create_user, 
+    create_time, update_user, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -32,16 +28,14 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="bing.Pan.sso.domain.entity.SsoUserOrg" >
-    insert into sso_user_org (id, user_id, organization_id, 
-      is_system, available, create_user, 
-      create_time, update_user, update_time, 
-      extends1, extends2, extends3, 
-      extends4, extends5)
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{organizationId,jdbcType=BIGINT}, 
-      #{isSystem,jdbcType=BIGINT}, #{available,jdbcType=BIT}, #{createUser,jdbcType=BIGINT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{extends1,jdbcType=VARCHAR}, #{extends2,jdbcType=VARCHAR}, #{extends3,jdbcType=VARCHAR}, 
-      #{extends4,jdbcType=VARCHAR}, #{extends5,jdbcType=VARCHAR})
+    insert into sso_user_org (id, user_id, user_login_name, 
+      organization_id, organization_name, available, 
+      create_user, create_time, update_user, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userLoginName,jdbcType=VARCHAR}, 
+      #{organizationId,jdbcType=BIGINT}, #{organizationName,jdbcType=VARCHAR}, #{available,jdbcType=BIT}, 
+      #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="bing.Pan.sso.domain.entity.SsoUserOrg" >
     insert into sso_user_org
@@ -52,11 +46,14 @@
       <if test="userId != null" >
         user_id,
       </if>
+      <if test="userLoginName != null" >
+        user_login_name,
+      </if>
       <if test="organizationId != null" >
         organization_id,
       </if>
-      <if test="isSystem != null" >
-        is_system,
+      <if test="organizationName != null" >
+        organization_name,
       </if>
       <if test="available != null" >
         available,
@@ -73,21 +70,6 @@
       <if test="updateTime != null" >
         update_time,
       </if>
-      <if test="extends1 != null" >
-        extends1,
-      </if>
-      <if test="extends2 != null" >
-        extends2,
-      </if>
-      <if test="extends3 != null" >
-        extends3,
-      </if>
-      <if test="extends4 != null" >
-        extends4,
-      </if>
-      <if test="extends5 != null" >
-        extends5,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -96,11 +78,14 @@
       <if test="userId != null" >
         #{userId,jdbcType=BIGINT},
       </if>
+      <if test="userLoginName != null" >
+        #{userLoginName,jdbcType=VARCHAR},
+      </if>
       <if test="organizationId != null" >
         #{organizationId,jdbcType=BIGINT},
       </if>
-      <if test="isSystem != null" >
-        #{isSystem,jdbcType=BIGINT},
+      <if test="organizationName != null" >
+        #{organizationName,jdbcType=VARCHAR},
       </if>
       <if test="available != null" >
         #{available,jdbcType=BIT},
@@ -117,21 +102,6 @@
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="extends1 != null" >
-        #{extends1,jdbcType=VARCHAR},
-      </if>
-      <if test="extends2 != null" >
-        #{extends2,jdbcType=VARCHAR},
-      </if>
-      <if test="extends3 != null" >
-        #{extends3,jdbcType=VARCHAR},
-      </if>
-      <if test="extends4 != null" >
-        #{extends4,jdbcType=VARCHAR},
-      </if>
-      <if test="extends5 != null" >
-        #{extends5,jdbcType=VARCHAR},
-      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="bing.Pan.sso.domain.entity.SsoUserOrg" >
@@ -140,11 +110,14 @@
       <if test="userId != null" >
         user_id = #{userId,jdbcType=BIGINT},
       </if>
+      <if test="userLoginName != null" >
+        user_login_name = #{userLoginName,jdbcType=VARCHAR},
+      </if>
       <if test="organizationId != null" >
         organization_id = #{organizationId,jdbcType=BIGINT},
       </if>
-      <if test="isSystem != null" >
-        is_system = #{isSystem,jdbcType=BIGINT},
+      <if test="organizationName != null" >
+        organization_name = #{organizationName,jdbcType=VARCHAR},
       </if>
       <if test="available != null" >
         available = #{available,jdbcType=BIT},
@@ -161,39 +134,20 @@
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="extends1 != null" >
-        extends1 = #{extends1,jdbcType=VARCHAR},
-      </if>
-      <if test="extends2 != null" >
-        extends2 = #{extends2,jdbcType=VARCHAR},
-      </if>
-      <if test="extends3 != null" >
-        extends3 = #{extends3,jdbcType=VARCHAR},
-      </if>
-      <if test="extends4 != null" >
-        extends4 = #{extends4,jdbcType=VARCHAR},
-      </if>
-      <if test="extends5 != null" >
-        extends5 = #{extends5,jdbcType=VARCHAR},
-      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="bing.Pan.sso.domain.entity.SsoUserOrg" >
     update sso_user_org
     set user_id = #{userId,jdbcType=BIGINT},
+      user_login_name = #{userLoginName,jdbcType=VARCHAR},
       organization_id = #{organizationId,jdbcType=BIGINT},
-      is_system = #{isSystem,jdbcType=BIGINT},
+      organization_name = #{organizationName,jdbcType=VARCHAR},
       available = #{available,jdbcType=BIT},
       create_user = #{createUser,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_user = #{updateUser,jdbcType=BIGINT},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      extends1 = #{extends1,jdbcType=VARCHAR},
-      extends2 = #{extends2,jdbcType=VARCHAR},
-      extends3 = #{extends3,jdbcType=VARCHAR},
-      extends4 = #{extends4,jdbcType=VARCHAR},
-      extends5 = #{extends5,jdbcType=VARCHAR}
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

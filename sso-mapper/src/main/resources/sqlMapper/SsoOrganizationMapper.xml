@@ -3,20 +3,14 @@
 <mapper namespace="bing.Pan.sso.mapper.mapperInterface.SsoOrganizationMapper" >
   <resultMap id="BaseResultMap" type="bing.Pan.sso.domain.entity.SsoOrganization" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="parent_Id" property="parentId" jdbcType="BIGINT" />
     <result column="parent_Ids" property="parentIds" jdbcType="VARCHAR" />
-    <result column="is_system" property="isSystem" jdbcType="BIGINT" />
+    <result column="parent_Id" property="parentId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="organization_code" property="organizationCode" jdbcType="VARCHAR" />
     <result column="available" property="available" jdbcType="BIT" />
-    <result column="extends1" property="extends1" jdbcType="VARCHAR" />
-    <result column="extends2" property="extends2" jdbcType="VARCHAR" />
-    <result column="extends3" property="extends3" jdbcType="VARCHAR" />
-    <result column="extends4" property="extends4" jdbcType="VARCHAR" />
-    <result column="extends5" property="extends5" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, parent_Id, parent_Ids, is_system, available, extends1, extends2, extends3, 
-    extends4, extends5
+    id, parent_Ids, parent_Id, name, organization_code, available
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -29,14 +23,12 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="bing.Pan.sso.domain.entity.SsoOrganization" >
-    insert into sso_organization (id, name, parent_Id, 
-      parent_Ids, is_system, available, 
-      extends1, extends2, extends3, 
-      extends4, extends5)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, 
-      #{parentIds,jdbcType=VARCHAR}, #{isSystem,jdbcType=BIGINT}, #{available,jdbcType=BIT}, 
-      #{extends1,jdbcType=VARCHAR}, #{extends2,jdbcType=VARCHAR}, #{extends3,jdbcType=VARCHAR}, 
-      #{extends4,jdbcType=VARCHAR}, #{extends5,jdbcType=VARCHAR})
+    insert into sso_organization (id, parent_Ids, parent_Id, 
+      name, organization_code, available
+      )
+    values (#{id,jdbcType=BIGINT}, #{parentIds,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, 
+      #{name,jdbcType=VARCHAR}, #{organizationCode,jdbcType=VARCHAR}, #{available,jdbcType=BIT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="bing.Pan.sso.domain.entity.SsoOrganization" >
     insert into sso_organization
@@ -44,121 +36,71 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="name != null" >
-        name,
+      <if test="parentIds != null" >
+        parent_Ids,
       </if>
       <if test="parentId != null" >
         parent_Id,
       </if>
-      <if test="parentIds != null" >
-        parent_Ids,
+      <if test="name != null" >
+        name,
       </if>
-      <if test="isSystem != null" >
-        is_system,
+      <if test="organizationCode != null" >
+        organization_code,
       </if>
       <if test="available != null" >
         available,
-      </if>
-      <if test="extends1 != null" >
-        extends1,
-      </if>
-      <if test="extends2 != null" >
-        extends2,
-      </if>
-      <if test="extends3 != null" >
-        extends3,
-      </if>
-      <if test="extends4 != null" >
-        extends4,
-      </if>
-      <if test="extends5 != null" >
-        extends5,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="parentIds != null" >
+        #{parentIds,jdbcType=VARCHAR},
       </if>
       <if test="parentId != null" >
         #{parentId,jdbcType=BIGINT},
       </if>
-      <if test="parentIds != null" >
-        #{parentIds,jdbcType=VARCHAR},
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
-      <if test="isSystem != null" >
-        #{isSystem,jdbcType=BIGINT},
+      <if test="organizationCode != null" >
+        #{organizationCode,jdbcType=VARCHAR},
       </if>
       <if test="available != null" >
         #{available,jdbcType=BIT},
-      </if>
-      <if test="extends1 != null" >
-        #{extends1,jdbcType=VARCHAR},
-      </if>
-      <if test="extends2 != null" >
-        #{extends2,jdbcType=VARCHAR},
-      </if>
-      <if test="extends3 != null" >
-        #{extends3,jdbcType=VARCHAR},
-      </if>
-      <if test="extends4 != null" >
-        #{extends4,jdbcType=VARCHAR},
-      </if>
-      <if test="extends5 != null" >
-        #{extends5,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="bing.Pan.sso.domain.entity.SsoOrganization" >
     update sso_organization
     <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+      <if test="parentIds != null" >
+        parent_Ids = #{parentIds,jdbcType=VARCHAR},
       </if>
       <if test="parentId != null" >
         parent_Id = #{parentId,jdbcType=BIGINT},
       </if>
-      <if test="parentIds != null" >
-        parent_Ids = #{parentIds,jdbcType=VARCHAR},
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="isSystem != null" >
-        is_system = #{isSystem,jdbcType=BIGINT},
+      <if test="organizationCode != null" >
+        organization_code = #{organizationCode,jdbcType=VARCHAR},
       </if>
       <if test="available != null" >
         available = #{available,jdbcType=BIT},
-      </if>
-      <if test="extends1 != null" >
-        extends1 = #{extends1,jdbcType=VARCHAR},
-      </if>
-      <if test="extends2 != null" >
-        extends2 = #{extends2,jdbcType=VARCHAR},
-      </if>
-      <if test="extends3 != null" >
-        extends3 = #{extends3,jdbcType=VARCHAR},
-      </if>
-      <if test="extends4 != null" >
-        extends4 = #{extends4,jdbcType=VARCHAR},
-      </if>
-      <if test="extends5 != null" >
-        extends5 = #{extends5,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="bing.Pan.sso.domain.entity.SsoOrganization" >
     update sso_organization
-    set name = #{name,jdbcType=VARCHAR},
+    set parent_Ids = #{parentIds,jdbcType=VARCHAR},
       parent_Id = #{parentId,jdbcType=BIGINT},
-      parent_Ids = #{parentIds,jdbcType=VARCHAR},
-      is_system = #{isSystem,jdbcType=BIGINT},
-      available = #{available,jdbcType=BIT},
-      extends1 = #{extends1,jdbcType=VARCHAR},
-      extends2 = #{extends2,jdbcType=VARCHAR},
-      extends3 = #{extends3,jdbcType=VARCHAR},
-      extends4 = #{extends4,jdbcType=VARCHAR},
-      extends5 = #{extends5,jdbcType=VARCHAR}
+      name = #{name,jdbcType=VARCHAR},
+      organization_code = #{organizationCode,jdbcType=VARCHAR},
+      available = #{available,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
