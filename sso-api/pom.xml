@@ -12,4 +12,40 @@
     <artifactId>sso-api</artifactId>
 
 
+    <dependencies>
+        <dependency>
+            <groupId>bing.Pan</groupId>
+            <artifactId>sso-service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+        </plugins>
+
+        <resources>
+
+            <resource>
+                <directory>src/main/resources/profile/${prop.dir.name}</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>*.xml</include>
+                    <include>*.properties</include>
+                </includes>
+            </resource>
+        </resources>
+
+    </build>
+
+
+
+
 </project>

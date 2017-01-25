@@ -22,7 +22,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 @SpringBootApplication
 @ComponentScan(value = "bing.Pan")
 @Import({DynamicDataSourceRegister.class})
-public class Application {
+public class SsoManagerApplication {
 
 
     /**
@@ -43,7 +43,7 @@ public class Application {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(SsoManagerApplication.class, args);
 
     }
 }

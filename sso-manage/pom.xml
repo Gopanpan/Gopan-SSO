@@ -24,7 +24,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>bing.Pan.sso.manage.Application</mainClass>
+                    <mainClass>bing.Pan.sso.manage.SsoManagerApplication</mainClass>
                     <layout>ZIP</layout>
                 </configuration>
             </plugin>
