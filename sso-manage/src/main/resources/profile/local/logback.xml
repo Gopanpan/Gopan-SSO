@@ -19,7 +19,7 @@
     </appender>
 
     <!-- project default level -->
-    <logger name="com.yunqiandai.crm" level="INFO"/>
+    <logger name="bing.Pan.sso" level="DEBUG"/>
 
     <!-- root -->
     <root level="INFO">

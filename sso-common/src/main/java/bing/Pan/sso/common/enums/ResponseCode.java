@@ -18,51 +18,7 @@ public enum ResponseCode {
 
     CLIENT_UNABLE_RESOLVE_ERR("40004", "坏请求"),
 
-    USER_ROLE_NOT_EXIST("50700", "用户角色不存在"),
-
-    NO_SYS_INFO("50701", "系统为空!"),
-
-    ROOT_PID_CANNOT_DEL("50702", "根节点不能删除!"),
-
-    PID_CANNOT_DELETE("50703", "父节点不能删除!"),
-
-    RESOURCE_NOT_FUND("50704", "未获取到选中资源!"),
-
-    ROLE_EXIST("50705", "角色名称已经存在!"),
-
-    PARAM_NOT_PASS("50706", "参数校验未通过!"),
-
-    USER_REGISTER_FAIL("50707", "用户注册失败!"),
-
-    RESOURCE_NAME_CANNOT_NULL("50708", "资源名称不能为空!"),
-
-    INCLUDE_ERROR_STR("50709", "列信息不能有非法字符!"),
-
-    USERNAME_NOTNULL("60001", "用户名不能为空"),
-
-    PWD_NOTNULL("60002", "密码不能为空"),
-
-    USERNAME_REPEAT("60003", "用户名不能重复"),
-
-    USER_NOT_EXIST("60004", "用户不存在"),
-
-    PWD_WRONG("60005", "用户密码错误"),
-
-    PWD_REPEAT("60006", "旧密码与新密码不能重复!"),
-
-    OLD_PWD_WRONG("60007", "旧密码不正确!"),
-
-    TOKEN_WRONG("60008", "无效的Token!"),
-
-    TICKET_WRONG("60009", "无效的Ticket!"),
-
-    SYS_INFO_EXIST_RESOURCE("60010", "该系统对应资源非空!"),
-
-    SYS_ROLE_USERD("60011", "该角色已被引用,无法删除!"),
-
-    NO_SYS_USER("60012", "用户不存在!"),
-
-    NO_SYS_ROLE("60013", "角色不存在!");
+    SERVE_UNKNOWN_ERROR("50000", "服务器端异常!");
 
 
     private String code;

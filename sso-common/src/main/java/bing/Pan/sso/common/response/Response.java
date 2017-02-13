@@ -1,4 +1,4 @@
-package bing.Pan.sso.domain.pObject;
+package bing.Pan.sso.common.response;
 
 import bing.Pan.sso.common.enums.ResponseCode;
 

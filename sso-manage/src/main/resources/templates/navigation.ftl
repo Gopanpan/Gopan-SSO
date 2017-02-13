@@ -28,7 +28,7 @@
             </li>
             <li class="line dk"></li>
             <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                <span class="ng-scope">后台系统管理</span>
+                <h3>SSO系统资源管理</h3>
             </li>
             <li>
                 <a href="#">
@@ -75,7 +75,19 @@
             <li class="line dk"></li>
 
             <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                <span class="ng-scope">用户管理</span>
+                <h3>用户管理</h3>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa fa-bar-chart-o"></i>
+                    <span class="nav-label">SSO系统用户管理</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a class="J_menuItem" href="${ctx}/manage/systemUserListView">用户列表</a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="#">
@@ -85,22 +97,10 @@
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a class="J_menuItem" href="${ctx}/manager/sysUserList">用户列表</a>
+                        <a href="">用户列表</a>
                     </li>
                 </ul>
             </li>
-            <#--<li>-->
-                <#--<a href="#">-->
-                    <#--<i class="fa fa fa-bar-chart-o"></i>-->
-                    <#--<span class="nav-label">普通用户管理</span>-->
-                    <#--<span class="fa arrow"></span>-->
-                <#--</a>-->
-                <#--<ul class="nav nav-second-level">-->
-                    <#--<li>-->
-                        <#--<a href="">用户列表</a>-->
-                    <#--</li>-->
-                <#--</ul>-->
-            <#--</li>-->
 
         </ul>
     </div>

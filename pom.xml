@@ -43,6 +43,7 @@
         <jxl.version>2.4.2_4</jxl.version>
         <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
         <springloaded.verion>1.2.6.RELEASE</springloaded.verion>
+        <httpclient.version>4.5.2</httpclient.version>
         <swagger.scope>compile</swagger.scope>
     </properties>
 
@@ -69,11 +70,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
@@ -146,6 +142,13 @@
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
             <version>${pagehelper.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpclient.version}</version>
         </dependency>
     </dependencies>
 

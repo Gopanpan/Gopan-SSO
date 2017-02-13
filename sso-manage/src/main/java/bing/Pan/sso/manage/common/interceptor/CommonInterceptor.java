@@ -23,14 +23,6 @@ public class CommonInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o,
                            ModelAndView modelAndView) throws Exception {
-//
-//        if (modelAndView == null) {
-//            return;
-//        }
-//        modelAndView.addObject("ctx", httpServletRequest.getContextPath());
-//        modelAndView.addObject("version", System.currentTimeMillis());
-//
-
 
     }
 

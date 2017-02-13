@@ -7,7 +7,7 @@ var oldSysUserPassword;
 $(document).ready(function () {
     var sysUserId = $("#sysUserId").val();
     $.ajax({
-            url: webConfig.webUrl + '/getSysUserById',
+            url: webConfig.webUrl + '/getSystemUserById',
             type: 'POST',
             dataType: 'json',
             data: {sysUserId: sysUserId}
