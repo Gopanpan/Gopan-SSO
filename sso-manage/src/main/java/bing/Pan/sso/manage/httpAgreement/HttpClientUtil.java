@@ -14,10 +14,14 @@ import java.util.List;
 
 import javax.net.ssl.SSLContext;
 
+import bing.Pan.sso.common.utils.EncryptUtils;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -25,9 +29,12 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -158,12 +165,10 @@ public class HttpClientUtil {
         // 创建默认的httpClient实例.
         CloseableHttpClient httpclient = HttpClients.createDefault();
         // 创建httppost
-        HttpPost httppost = new HttpPost("http://localhost:3333/manage/systemUserList");
+        HttpPost httppost = new HttpPost("http://10.0.128.242:8080/YQDService/CreateLoanSetting");
         // 创建参数队列
         List<NameValuePair> formparams = new ArrayList<>();
-        formparams.add(new BasicNameValuePair("pageIndex", "1"));
-        formparams.add(new BasicNameValuePair("pageSize", "10"));
-        formparams.add(new BasicNameValuePair("loginName","0000"));
+        formparams.add(new BasicNameValuePair("loanAmount", "10000"));
         UrlEncodedFormEntity uefEntity;
         try {
             uefEntity = new UrlEncodedFormEntity(formparams, "UTF-8");
@@ -173,10 +178,14 @@ public class HttpClientUtil {
             try {
                 HttpEntity entity = response.getEntity();
                 if (entity != null) {
-                    System.out.println("--------------------------------------");
-                    System.out.println("Response content: " + EntityUtils.toString(entity, "UTF-8"));
-                    System.out.println("--------------------------------------");
+                    System.out.println("------------------------------------------------");
+                    System.out.println(EntityUtils.toString(entity, "UTF-8"));
+                    System.out.println("------------------------------------------------");
+
+
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             } finally {
                 response.close();
             }
@@ -198,6 +207,30 @@ public class HttpClientUtil {
 
 
     public static void main (String[] agrs){
-       post();
+
+        String retVal = "";
+        //服务地址
+        String method = "http://10.0.128.242:8080/YQDService.svc/CreateLoanSetting";
+        HttpClient client = new DefaultHttpClient();
+        HttpPost request = new HttpPost(method);
+
+        JSONObject p = new JSONObject();
+        p.put("loanAmount", 1000);
+
+        System.out.println(p.toString());
+        try {
+            request.setEntity(new StringEntity(p.toString()));
+            request.setHeader(HTTP.CONTENT_TYPE, "text/json");
+
+            //request.setHeader("Accept", "application/json");
+            //request.setHeader("Content-type", "application/json");
+
+            HttpResponse response = client.execute(request);
+            retVal = EntityUtils.toString(response.getEntity(),"gb2312");
+            System.out.println("retVal"+ retVal+"retVal");
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+
     }
 }
