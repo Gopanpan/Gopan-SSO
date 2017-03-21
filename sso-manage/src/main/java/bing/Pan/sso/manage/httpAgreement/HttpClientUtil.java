@@ -14,7 +14,6 @@ import java.util.List;
 
 import javax.net.ssl.SSLContext;
 
-import bing.Pan.sso.common.utils.EncryptUtils;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

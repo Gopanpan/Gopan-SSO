@@ -1,31 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <jmxConfigurator/>
-    <property name="logBase" value="../crm_sit/logs/web"/>
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder charset="UTF-8">
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{80} - %msg%n</pattern>
+    <property name="logBase" value="D:/logs"/>
+    <!-- 控制台 appender -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${logBase}/yunqiandai_crm.log</file>
+    <!-- 出错日志 appender  -->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${logBase}/yunqiandai_crm.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <!-- 按天回滚 daily -->
+            <!-- log.dir 在maven profile里配置 -->
+            <fileNamePattern>${logBase}/sso-error-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 日志最大的历史 60天 -->
+            <maxHistory>60</maxHistory>
         </rollingPolicy>
-        <encoder charset="UTF-8">
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{80} - %msg%n</pattern>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter"><!-- 只打印错误日志 -->
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    <!-- 访问日志 appender  -->
+    <appender name="ACCESS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 按天回滚 daily -->
+            <fileNamePattern>${logBase}/sso-access-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 日志最大的历史 60天 -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <!-- project default level -->
-    <logger name="com.yunqiandai.crm" level="DEBUG"/>
+    <!-- info日志 appender  -->
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 按天回滚 daily -->
+            <fileNamePattern>${logBase}/sso-info-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 日志最大的历史 60天 -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter"><!-- 只打印错误日志 -->
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
 
-    <!-- root -->
-    <root level="DEBUG">
-        <appender-ref ref="console"/>
-        <appender-ref ref="rollingFile"/>
+
+
+    <!--日志打印的包的范围，及分类日志文件存储，可以多个节点 -->
+    <logger name="bing.Pan.sso" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="ACCESS"/>
+        <appender-ref ref="INFO" />
+    </logger>
+
+    <!--控制台打印资源加载信息-->
+    <root level="info">
+        <appender-ref ref="STDOUT" />
     </root>
+
 
     <!-- 下面配置一些第三方包的日志过滤级别，用于避免刷屏 -->
     <logger name="org.apache" level="INFO"/>
