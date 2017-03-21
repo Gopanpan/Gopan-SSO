@@ -46,52 +46,33 @@ function ChangeDateFormat(val) {
     return '';
 }
 
-/**
- * 根据权限显示按钮
- * @param  {string} btnParent 将btn添加到的元素ID
- * @param  {string} type 默认top; 只有left、top、right、bottom：按钮显示位置
- * @return 循环按钮添加到btnParent元素
- */
-function showBtn(type){
-    var btns = getQueryString('btn'),result='';
-    if(btns){
-        var btn=btns.split('-');
-        for(var i=0; i<btn.length;i++){
-            var item= btn[i].split('_');
-            if(item[2]==(type||'top')){
-                result += '<a class="btn btn-primary '+(type=='right' && 'btn-xs')+'" onclick="'+item[0]+'();">'+item[1]+'</a>';
-            }
-        }
-    }
-    return result;
-}
 
 /**
- * 获取客户意愿列表
- * @param  {[type]} code [description]
- * @return {[type]}      [description]
+ * 性别格式化
+ * 性别(0女,1男,2未知)
  */
-function getDicDetailsByCode(code){
-    $.ajax({
-        url: webConfig.webUrl+'crm_server/1/dic/queryDicDetailsByCode',
-        type: 'POST',
-        dataType: 'json',
-        async:false,
-        data:{code:code},
-        success:function(data){
-            if(data.code==-2){
-                top.location.href="/login.html";
-            }
-            if(data && data.obj){
-                var arr=data.obj,
-                    selEle=document.getElementById('dicList');
-                for(var i=0;i<arr.length;i++){
-                    selEle.options.add(new Option(arr[i].name,arr[i].id));
-                }
-            }
-        }
-    });
+function sexFormat(sex){
+
+    if(sex) {
+        if(sex == 0){return '女'}
+        if(sex == 1){return '男'}
+        else{return '未知'}
+
+    }
+    return '';
+
+
 }
+
+function availableFormat(avaliable){
+    if(avaliable == true){return '是'}
+    if(avaliable == false){return '否'}
+    if(avaliable == undefined){return ''}
+
+
+}
+
+
 
 /**
  * 数组去重
@@ -114,17 +95,6 @@ function unique(arr) {
     }
     return result;
 }
-
-
-/**
- * 设置保存外呼记录ID的值为''
- */
-function setCallIdToNull(){
-    if(document.getElementById('hidCallId')){
-        document.getElementById('hidCallId').value=''
-    }
-}
-
 
 /**
  * 正则验证
@@ -165,19 +135,7 @@ function validator(val,type){
     return regexStr[type].test(val);
 }
 
-
-function setCustomerLevel(eleId){
-    if(!document.getElementById(eleId)){
-        console.log('元素不存在');
-    }
-    var arr=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'],selEle=document.getElementById(eleId);
-    for(var i=0;i<arr.length;i++){
-        selEle.options.add(new Option(arr[i],arr[i]));
-    }
-}
-
-
-;(function ($, window) {
+(function ($, window) {
     $.fn.extend({
         /**
          * 模拟百度搜索下拉 通过获取selector的data-kay属性获取对应的真实值
@@ -209,27 +167,6 @@ function setCustomerLevel(eleId){
                 if(!stinckNoteEle){
                     $(_this).wrap('<div id="stickyNoteEle"></div>');
                 }
-                
-                // var arrObj = [
-                //         {value:'a',key:1},
-                //         {value:'abcd',key:11},
-                //         {value:'abcde',key:111},
-                //         {value:'abcdef',key:1111},
-                //         {value:'abcdefg',key:11111},
-                //         {value:'abcdefgh',key:111111},
-                //         {value:'bc',key:2},
-                //         {value:'bcd',key:22},
-                //         {value:'bcde',key:222},
-                //         {value:'bcdef',key:2222},
-                //         {value:'bcdefg',key:22222},
-                //         {value:'bcdefgh',key:222222},
-                //         {value:'c',key:3},
-                //         {value:'cd',key:33},
-                //         {value:'cde',key:333},
-                //         {value:'cdef',key:3333},
-                //         {value:'cdefg',key:33333},
-                //         {value:'cdefgh',key:333333}
-                //     ];
 
                 $.ajax({
                     url: defaultVal.url,
@@ -285,7 +222,7 @@ function setCustomerLevel(eleId){
 
 
 //小tips
-;(function($) {
+(function($) {
     function ToolTips(elem, options){
         this.elem = elem;
         this.set = options;
@@ -454,7 +391,7 @@ function setCustomerLevel(eleId){
                 self.setPosition();
             });
         }
-    }
+    };
     $.fn.ToolTips = function(options){
         var defaults = {
             height:"auto",
@@ -480,3 +417,7 @@ function setCustomerLevel(eleId){
         });
     }
 })(jQuery);
+
+
+
+

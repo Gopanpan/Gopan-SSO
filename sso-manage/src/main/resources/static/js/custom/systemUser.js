@@ -1,7 +1,3 @@
-//常量
-var oldSysUserName;
-var oldSysUserPassword;
-
 
 //加载页面
 $(document).ready(function () {
@@ -14,11 +10,12 @@ $(document).ready(function () {
         })
         .done(function (data) {
             if (data) {
-                if (data.code == "10000" && data.result) {
-                    $("#sysUserName").val(data.result.userName);
-                    $("#sysUserPassword").val(data.result.password);
-                    oldSysUserName = data.result.userName;
-                    oldSysUserPassword = data.result.password;
+                if (data.code == "20000" && data.result) {
+                    $("#loginName").val(data.result.loginName);
+                    $("#realName").val(data.result.realName);
+                    $("#password").val(data.result.password);
+                    $("#phone").val(data.result.phone);
+
                 }
             }
         });
@@ -53,10 +50,7 @@ $('#btnUpdate').click(function () {
         return false;
     }
 
-    if (oldSysUserName == sysUserInfo.userName && oldSysUserPassword == sysUserInfo.password) {
-        layer.alert("参数未变化", {icon: 2});
-        return false;
-    }
+
 
 
     $.ajax({

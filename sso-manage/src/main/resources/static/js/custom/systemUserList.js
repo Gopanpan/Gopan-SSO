@@ -44,18 +44,20 @@ function initJqgrid() {
         //是否显示行号
         //rownumbers: true,
 
-        //table → caption
-        //caption: "系统管理员列表",
-
         //显示的标题
-        colNames: ['用户Id','用户名','真实名称','性别','电话号码','电子邮件','创建时间','更新时间', '操作'],
+        colNames: ['用户Id','<div align="center"><span>用户名</span></div>','<div align="center"><span>真实名称</span></div>','<div align="center"><span>性别</span></div>','<div align="center"><span>电话号码</span></div>','<div align="center"><span>电子邮件</span></div>','<div align="center"><span>创建时间</span></div>','<div align="center"><span>更新时间</span></div>', '<div align="center"><span>操作</span></div>'],
 
         //列属性，和colNames的个数和顺序必须对应
         colModel: [
             {name: 'id', index: 'id',hidden: true },
             {name: 'loginName', index: 'loginName', sortable: false, align: 'center', width: 100},
             {name: 'realName', index: 'realName', sortable: false, align: 'center', width: 100},
-            {name: 'sex', index: 'sex', sortable: false, align: 'center', width: 50},
+            {
+                name: 'sex', index: 'sex', sortable: false, align: 'center', width: 50,
+                formatter: function (x) {
+                    return sexFormat(x);
+                }
+            },
             {name: 'phone', index: 'phone', sortable: false, align: 'center', width: 100},
             {name: 'email', index: 'email', sortable: false, align: 'center', width: 80},
             {

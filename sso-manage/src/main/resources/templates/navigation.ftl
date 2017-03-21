@@ -38,7 +38,7 @@
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a class="J_menuItem" href="${ctx}/manager/sysInfoList">系统列表</a>
+                        <a class="J_menuItem" href="${ctx}/manage/sysInfoListView">系统列表</a>
                     </li>
                 </ul>
             </li>

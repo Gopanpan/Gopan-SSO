@@ -16,7 +16,14 @@
     <div class="form-group">
         <label class="col-sm-4 control-label">真实名称：</label>
         <div class="col-sm-6">
-            <input type="password" placeholder="" class="form-control" value="" id="realName">
+            <input type="text" placeholder="" class="form-control" value="" id="realName">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-4 control-label">登陆密码：</label>
+        <div class="col-sm-6">
+            <input type="password" placeholder="" class="form-control" value="" id="password">
         </div>
     </div>
 

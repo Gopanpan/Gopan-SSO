@@ -1,5 +1,6 @@
 package bing.Pan.sso.manage.business.controller;
 
+import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.common.response.Response;
 import bing.Pan.sso.domain.vObject.SystemUserVo;
 import bing.Pan.sso.manage.business.service.SystemUserService;
@@ -39,8 +40,10 @@ public class SystemUserController {
     }
 
 
-    public Object getSystemUserById(@ModelAttribute SystemUserVo systemUserVo){
-        return new Response<>(systemUserService.getSystemUserById(systemUserVo));
+    @ApiOperation(value = "根据系统管理用户ID获取详情")
+    @RequestMapping(value = "/getSystemUserById", method = RequestMethod.POST)
+    public Object getSystemUserById(Long sysUserId) throws ServiceException {
+        return new Response<>(systemUserService.getSystemUserById(sysUserId));
 
     }
 

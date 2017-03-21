@@ -22,6 +22,15 @@ public class BaseVo implements Serializable {
     @ApiModelProperty("每页数据量")
     private int pageSize;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public int getPageIndex() {
         return pageIndex;
     }

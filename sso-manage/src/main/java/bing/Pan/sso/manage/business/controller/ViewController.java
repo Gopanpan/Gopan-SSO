@@ -77,4 +77,13 @@ public class ViewController {
         map.put("sysUserId", sysUserId);
         return new ModelAndView("systemUser", map);
     }
+
+    /**
+     * 系统列表
+     * @return
+     */
+    @RequestMapping(value = "/sysInfoListView",method = RequestMethod.GET)
+    public String sysInfoListView(){
+        return "sysInfoList";
+    }
 }

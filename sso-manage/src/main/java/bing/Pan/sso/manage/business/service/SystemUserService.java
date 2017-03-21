@@ -1,5 +1,7 @@
 package bing.Pan.sso.manage.business.service;
 
+import bing.Pan.sso.common.enums.ResponseCode;
+import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.domain.vObject.SystemUserVo;
 import bing.Pan.sso.mapper.mapperInterface.SsoSystemUserMapper;
 import com.github.pagehelper.PageHelper;
@@ -26,7 +28,8 @@ public class SystemUserService {
         return new PageInfo(systemUserMapper.systemUserList(systemUserVo));
     }
 
-    public Object getSystemUserById(SystemUserVo systemUserVo) {
-        return null;
+    public Object getSystemUserById(Long sysUserId) throws ServiceException {
+        if(null == sysUserId) throw new ServiceException(ResponseCode.CLIENT_PARAM_ERR);
+        return systemUserMapper.selectByPrimaryKey(sysUserId);
     }
 }
