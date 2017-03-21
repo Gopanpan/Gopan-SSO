@@ -1,7 +1,8 @@
-package bing.Pan.sso.manage.business.service;
+package bing.Pan.sso.service;
 
 import bing.Pan.sso.domain.vObject.BaseVo;
 import bing.Pan.sso.mapper.mapperInterface.SsoSystemMapper;
+import bing.Pan.sso.service.config.dynamicDataSource.TargetDataSource;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class SystemInfoService {
 
     @Autowired SsoSystemMapper systemMapper;
 
+    @TargetDataSource("ds3")
     public Object getSysInfoPageList(BaseVo baseVo) {
         PageHelper.startPage(baseVo.getPageIndex(),baseVo.getPageSize());
         return  new PageInfo(systemMapper.systemUserList());

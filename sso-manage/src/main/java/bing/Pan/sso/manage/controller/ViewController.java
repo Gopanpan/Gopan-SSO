@@ -1,4 +1,4 @@
-package bing.Pan.sso.manage.business.controller;
+package bing.Pan.sso.manage.controller;
 
 import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;

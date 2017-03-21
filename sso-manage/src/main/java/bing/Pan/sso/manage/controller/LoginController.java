@@ -1,4 +1,4 @@
-package bing.Pan.sso.manage.business.controller;
+package bing.Pan.sso.manage.controller;
 
 import bing.Pan.sso.common.response.Response;
 import io.swagger.annotations.Api;

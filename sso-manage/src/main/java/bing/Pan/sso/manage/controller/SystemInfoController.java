@@ -1,8 +1,8 @@
-package bing.Pan.sso.manage.business.controller;
+package bing.Pan.sso.manage.controller;
 
 import bing.Pan.sso.common.response.Response;
 import bing.Pan.sso.domain.vObject.BaseVo;
-import bing.Pan.sso.manage.business.service.SystemInfoService;
+import bing.Pan.sso.service.SystemInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class SystemInfoController {
 
 
-    @Autowired SystemInfoService systemInfoService;
+    @Autowired
+    SystemInfoService systemInfoService;
 
     @ApiOperation(value = "系统管理用户列表")
     @RequestMapping(value = "/getSysInfoPageList", method = RequestMethod.POST)

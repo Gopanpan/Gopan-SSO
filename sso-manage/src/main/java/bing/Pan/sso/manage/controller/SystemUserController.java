@@ -1,9 +1,9 @@
-package bing.Pan.sso.manage.business.controller;
+package bing.Pan.sso.manage.controller;
 
 import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.common.response.Response;
 import bing.Pan.sso.domain.vObject.SystemUserVo;
-import bing.Pan.sso.manage.business.service.SystemUserService;
+import bing.Pan.sso.service.SystemUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;

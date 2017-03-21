@@ -24,8 +24,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 @SpringBootApplication
 @ComponentScan(value = "bing.Pan")
 @Import({DynamicDataSourceRegister.class})
-@EnableAutoConfiguration(exclude={SecurityAutoConfiguration.class})
-
 public class SsoManagerApplication {
 
 

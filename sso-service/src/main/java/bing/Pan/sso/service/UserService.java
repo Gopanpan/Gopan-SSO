@@ -2,6 +2,7 @@ package bing.Pan.sso.service;
 
 import bing.Pan.sso.domain.entity.SsoUser;
 import bing.Pan.sso.mapper.mapperInterface.SsoUserMapper;
+import bing.Pan.sso.service.config.dynamicDataSource.TargetDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class UserService implements BaseService{
 
     @Autowired private SsoUserMapper userMapper;
 
+    @TargetDataSource("ds1")
     public SsoUser selectByPrimaryKey(){
         return userMapper.selectByPrimaryKey(1L);
     }
