@@ -12,11 +12,19 @@ package bing.Pan.sso.common.enums;
  */
 public enum ResponseCode {
 
-    SUCCESS("20000", "success"),
+    SUCCESS("20000", "success!"),
 
-    CLIENT_PARAM_ERR("40001", "参数错误"),
+    CLIENT_PARAM_ERR("40000", "参数解析失败!"),
 
-    CLIENT_UNABLE_RESOLVE_ERR("40004", "坏请求"),
+    CLIENT_PARAM_MISS("40001", "参数丢失!"),
+
+    CLIENT_UNABLE_RESOLVE_ERR("40004", "坏请求!"),
+
+    CLIENT_NO_SUPPORT_METHOD("40005","不支持该请求方法!"),
+
+    CLIENT_NO_SUPPORT_TYPE("40015"," 不支持当前媒体类型!"),
+
+
 
     SERVE_UNKNOWN_ERROR("50000", "服务器端异常!");
 
