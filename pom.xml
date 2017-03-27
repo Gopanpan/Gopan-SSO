@@ -44,6 +44,11 @@
         <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
         <springloaded.verion>1.2.6.RELEASE</springloaded.verion>
         <httpclient.version>4.5.2</httpclient.version>
+        <itex-asian.version>5.2.0</itex-asian.version>
+        <itextpdf.version>5.5.11</itextpdf.version>
+        <core-renderer.version>R8pre2</core-renderer.version>
+        <xmlworker.version>5.4.1</xmlworker.version>
+        <bcprov-ext-jdk15on.version>1.52</bcprov-ext-jdk15on.version>
         <swagger.scope>compile</swagger.scope>
     </properties>
 
@@ -130,7 +135,7 @@
             <version>${guava.version}</version>
         </dependency>
 
-        <!--jxl.jar-->
+        <!--excel jxl.jar-->
         <dependency>
             <groupId>org.apache.servicemix.bundles</groupId>
             <artifactId>org.apache.servicemix.bundles.jexcelapi</artifactId>
@@ -144,18 +149,34 @@
             <version>${pagehelper.version}</version>
         </dependency>
 
-
+        <!--httpclient-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>${httpclient.version}</version>
         </dependency>
 
+        <!--PDF相关-->
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>${itextpdf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.itextpdf.tool</groupId>
+            <artifactId>xmlworker</artifactId>
+            <version>${xmlworker.version}</version>
+        </dependency>
+        <dependency><!--防止篡改-->
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-ext-jdk15on</artifactId>
+            <version>${bcprov-ext-jdk15on.version}</version>
+        </dependency>
+
+
+
 
     </dependencies>
-
-
-
 
 
     <profiles>
