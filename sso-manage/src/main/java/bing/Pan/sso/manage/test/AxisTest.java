@@ -8,8 +8,6 @@ import org.apache.axis2.addressing.EndpointReference;
 import org.apache.axis2.client.Options;
 import org.apache.axis2.rpc.client.RPCServiceClient;
 
-import java.io.*;
-
 /**
  * @crea : Created by intelliJ IDEA 16.1.3
  * @auth : bing.Pan
@@ -20,67 +18,10 @@ import java.io.*;
 public class AxisTest {
 
     public static void main(String[] agrs) throws AxisFault {
-        testOne();
-        testTwo();
+        axis2CleintTest();
     }
 
-    private static void testTwo() throws AxisFault {
-
-
-        // 文件转bytep[]
-        byte[] buffer = null;
-        try {
-            File file = new File("D:/测试合同.pdf");
-            FileInputStream fis = new FileInputStream(file);
-            ByteArrayOutputStream bos = new ByteArrayOutputStream(1000);
-            byte[] b = new byte[1000];
-            int n;
-            while ((n = fis.read(b)) != -1) {
-                bos.write(b, 0, n);
-            }
-            fis.close();
-            bos.close();
-            buffer = bos.toByteArray();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println(buffer);
-
-
-
-
-
-        //byte[]转文件
-        BufferedOutputStream bos = null;
-        FileOutputStream fos = null;
-        File file =  new File("D:/测试合同_convert.pdf");
-        try {
-            file.createNewFile();
-            fos = new FileOutputStream(file);
-            bos = new BufferedOutputStream(fos);
-            bos.write(buffer);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (bos != null) {
-                try {
-                    bos.close();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            }
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        }
-
-    }
-
-    private static void testOne() {
+    private static void axis2CleintTest() {
         try{
             RPCServiceClient client = new RPCServiceClient();
             Options options = client.getOptions();

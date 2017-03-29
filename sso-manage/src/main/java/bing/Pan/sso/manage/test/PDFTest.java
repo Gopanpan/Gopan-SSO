@@ -30,9 +30,8 @@ public class PDFTest {
 
 
     public static void main(String[] args) throws IOException, DocumentException {
-        //createPdf();
-        //waterMark();
-        //convert(WORD_DOC,PDF_DOC);
+        htmlConvertPDF();
+        waterMark();
         office2PDF(WORD_DOC,PDF_DOC);
     }
 
@@ -80,43 +79,19 @@ public class PDFTest {
         return 1;
     }
 
-
-
-    public static void convert(String input, String output) throws IOException {
-
-        File file = new File(output);
-        file.createNewFile();
-
-        File inputFile = new File(input);
-        File outputFile = new File(output);
-        OpenOfficeConnection connection = new SocketOpenOfficeConnection(8100);
-        try {
-            connection.connect();
-            DocumentConverter converter = new OpenOfficeDocumentConverter(connection);
-            converter.convert(inputFile, outputFile);
-        } catch(Exception e) {
-            e.printStackTrace();
-        } finally {
-            try{ if(connection != null){connection.disconnect(); connection = null;}}catch(Exception e){}
-        }
-    }
-
-
-
     /**
-     * 生成PDF文件
+     * html文件转换成PDF文件
      * @throws IOException
      * @throws DocumentException
      */
-    public static void createPdf() throws IOException, DocumentException {
+    public static void htmlConvertPDF() throws IOException, DocumentException {
         File file = new File(PDF_DOC);
         file.getParentFile().mkdirs();
 
         Document document = new Document();
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file));
-       // writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.STANDARD_ENCRYPTION_128);
-
-
+        //设置打开密码   USER_PASS，OWNER_PASS 参数为空时这表示打开不需要密码
+        writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.STANDARD_ENCRYPTION_128);
         document.open();
         XMLWorkerHelper.getInstance().parseXHtml(writer, document,new FileInputStream(WORD_DOC), Charset.forName("UTF-8"));
         document.close();
@@ -132,8 +107,7 @@ public class PDFTest {
 
         // 待加水印的文件
         //PdfReader reader = new PdfReader(PDF_DOC,OWNER_PASS.getBytes());
-        PdfReader reader = new PdfReader(PDF_DOC
-        );
+        PdfReader reader = new PdfReader(PDF_DOC);
         // 加完水印的文件
 
         File file = new File(DEST_MARK);
