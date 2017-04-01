@@ -20,7 +20,8 @@ import com.itextpdf.tool.xml.XMLWorkerHelper;
  */
 public class PDFTest {
 
-    public static final String WORD_DOC = "D:/CFCA电子签章产品需求说明书.doc";
+    public static final String WORD_DOC = "D:/49181098-15501150001-201703281600437235.doc";
+    public static final String HTML_DOC = "D:/49181098-15501150001-201703281600437235.html";
     public static final String PDF_DOC = "D:/测试合同.pdf";
     public static final String DEST_MARK = "D:/hello_mark.pdf";
 
@@ -31,8 +32,8 @@ public class PDFTest {
 
     public static void main(String[] args) throws IOException, DocumentException {
         htmlConvertPDF();
-        waterMark();
-        office2PDF(WORD_DOC,PDF_DOC);
+        //waterMark();
+        //office2PDF(WORD_DOC,PDF_DOC);
     }
 
 
@@ -91,9 +92,9 @@ public class PDFTest {
         Document document = new Document();
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file));
         //设置打开密码   USER_PASS，OWNER_PASS 参数为空时这表示打开不需要密码
-        writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.STANDARD_ENCRYPTION_128);
+        //writer.setEncryption(USER_PASS.getBytes(), OWNER_PASS.getBytes(), PdfWriter.ALLOW_PRINTING, PdfWriter.STANDARD_ENCRYPTION_128);
         document.open();
-        XMLWorkerHelper.getInstance().parseXHtml(writer, document,new FileInputStream(WORD_DOC), Charset.forName("UTF-8"));
+        XMLWorkerHelper.getInstance().parseXHtml(writer, document,new FileInputStream(HTML_DOC), Charset.forName("UTF-8"));
         document.close();
     }
 
