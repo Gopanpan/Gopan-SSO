@@ -35,8 +35,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -46,8 +44,7 @@ import java.util.Properties;
  *
  */
 @Configuration
-@EnableTransactionManagement
-public class MyBatisConfig implements TransactionManagementConfigurer {
+public class MyBatisConfig  {
 
     @Autowired
     DataSource dataSource;
@@ -81,7 +78,6 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
     }
 
     @Bean
-    @Override
     public PlatformTransactionManager annotationDrivenTransactionManager() {
         return new DataSourceTransactionManager(dataSource);
     }

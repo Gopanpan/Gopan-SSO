@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @crea :Created by intelliJ IDEA 16.1.1 .
@@ -14,9 +15,9 @@ import org.springframework.stereotype.Service;
  * @date :2017/1/17 18:52
  * @desc :
  */
-
 @Service
-public class UserService implements BaseService{
+@Transactional(readOnly = true)
+public class UserService extends BaseService{
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
