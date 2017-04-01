@@ -41,7 +41,7 @@
     delete from sso_system_user
     where ID = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="bing.Pan.sso.domain.entity.SsoSystemUser" >
+  <insert id="insert" parameterType="bing.Pan.sso.domain.entity.SsoSystemUser" useGeneratedKeys="true" keyProperty="id">
     insert into sso_system_user (ID, user_number, login_name, 
       real_name, password, sex, 
       birthday, Id_card, position, 

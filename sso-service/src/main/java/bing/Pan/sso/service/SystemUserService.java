@@ -2,6 +2,7 @@ package bing.Pan.sso.service;
 
 import bing.Pan.sso.common.enums.ResponseCode;
 import bing.Pan.sso.common.exception.ServiceException;
+import bing.Pan.sso.domain.entity.SsoSystemUser;
 import bing.Pan.sso.domain.vObject.SystemUserVo;
 import bing.Pan.sso.mapper.mapperInterface.SsoSystemUserMapper;
 import com.github.pagehelper.PageHelper;
@@ -29,6 +30,7 @@ public class SystemUserService extends BaseService {
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public Object systemUserList(SystemUserVo systemUserVo) {
         logger.info("执行查询系统用户列表方法");
+
         PageHelper.startPage(systemUserVo.getPageIndex(),systemUserVo.getPageSize());
         return new PageInfo(systemUserMapper.findListByE(systemUserVo));
     }
