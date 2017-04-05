@@ -1,5 +1,6 @@
 package bing.Pan.sso.service;
 
+import bing.Pan.sso.domain.entity.SsoSystemUser;
 import bing.Pan.sso.domain.entity.SsoUser;
 import bing.Pan.sso.mapper.mapperInterface.SsoUserMapper;
 import bing.Pan.sso.service.config.dynamicDataSource.TargetDataSource;
@@ -18,17 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 public class UserService extends BaseService{
-
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    @Autowired private SsoUserMapper userMapper;
-
-    @TargetDataSource("ds1")
-    public SsoUser selectByPrimaryKey(){
-        return userMapper.selectByPrimaryKey(1L);
-    }
-
-
 
 
 }

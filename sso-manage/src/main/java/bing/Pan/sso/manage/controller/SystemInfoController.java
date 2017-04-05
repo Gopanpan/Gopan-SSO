@@ -23,15 +23,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SystemInfoController {
 
-
-    @Autowired
-    SystemInfoService systemInfoService;
-
-    @ApiOperation(value = "系统管理用户列表")
-    @RequestMapping(value = "/getSysInfoPageList", method = RequestMethod.POST)
-    public Object getSysInfoPageList(@ModelAttribute BaseVo baseVo){
-        return new Response(systemInfoService.getSysInfoPageList(baseVo));
-    }
-
-
 }

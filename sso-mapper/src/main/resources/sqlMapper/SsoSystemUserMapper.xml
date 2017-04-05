@@ -357,6 +357,18 @@
     </where>
   </select>
 
+  <select id="findUserByLoginName" parameterType="string" resultMap="BaseResultMap">
+    SELECT
+      <include refid="Base_Column_List"/>
+    from
+      sso_system_user  su
+    <where>
+      1=1
+      <if test="loginName !=null and loginName !=''">
+        and su.login_name = #{loginName}
+      </if>
+    </where>
+  </select>
 
 
 

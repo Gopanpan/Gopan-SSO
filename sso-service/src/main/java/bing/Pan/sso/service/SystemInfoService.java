@@ -14,15 +14,6 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class SystemInfoService {
+public class SystemInfoService extends BaseService{
 
-    //@Autowired SsoSystemMapper systemMapper;
-
-    @TargetDataSource("ds3")
-    public Object getSysInfoPageList(BaseVo baseVo) {
-
-        PageHelper.startPage(baseVo.getPageIndex(),baseVo.getPageSize());
-        //return  new PageInfo(systemMapper.findAllList());
-        return null;
-    }
 }

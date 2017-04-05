@@ -38,4 +38,8 @@ public class SystemUserService extends BaseService {
         if(null == sysUserId) throw new ServiceException(ResponseCode.CLIENT_PARAM_ERR);
         return systemUserMapper.selectByPrimaryKey(sysUserId);
     }
+
+    public void findUserByLoginName(String loginName) {
+        SsoSystemUser systemUser = systemUserMapper.findUserByLoginName(loginName);
+    }
 }

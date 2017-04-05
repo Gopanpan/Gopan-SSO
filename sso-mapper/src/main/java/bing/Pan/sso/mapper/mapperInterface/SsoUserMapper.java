@@ -1,18 +1,10 @@
 package bing.Pan.sso.mapper.mapperInterface;
 
+import bing.Pan.sso.domain.entity.SsoSystemUser;
 import bing.Pan.sso.domain.entity.SsoUser;
 import bing.Pan.sso.mapper.BaseMapper;
 
-public interface SsoUserMapper  extends BaseMapper {
-    int deleteByPrimaryKey(Long id);
+public interface SsoUserMapper   extends BaseMapper<SsoSystemUser,Object>  {
 
-    int insert(SsoUser record);
-
-    int insertSelective(SsoUser record);
-
-    SsoUser selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(SsoUser record);
-
-    int updateByPrimaryKey(SsoUser record);
+    SsoSystemUser findUserByLoginName(String userName);
 }

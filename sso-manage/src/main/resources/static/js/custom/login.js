@@ -1,7 +1,7 @@
 function login(){
-    var username = $('#J-username').val();
+    var loginName = $('#J-username').val();
     var password = $('#J-password').val();
-    if (!username || !password) {
+    if (!loginName || !password) {
         $('#J-error').html('用户名密码不能为空！');
     } else {
         $.ajax({
@@ -9,7 +9,7 @@ function login(){
             url :  webConfig.webUrl+"/loginSysUser",
             dataType:"json",
             data: {
-                userName: username,
+                loginName: loginName,
                 password: md5(password)
             },
             success: function(data){
