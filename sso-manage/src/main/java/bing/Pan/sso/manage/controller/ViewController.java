@@ -41,7 +41,7 @@ public class ViewController {
      */
     @RequestMapping(value = "/ssoMain", method = RequestMethod.GET)
     public Object ssoMain(){
-        return "manager";
+        return "basic";
     }
 
 

@@ -1,4 +1,3 @@
-<#macro page_html>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -62,8 +61,7 @@
             </nav>
         </div>
         <div class="row J_mainContent" id="content-main">
-            <iframe id="J_iframe" width="100%" height="100%" src="/manage/welcome"
-                    frameborder="0" data-id="index_v1.html" seamless>
+            <iframe id="J_iframe" width="100%" height="100%" src="/manage/welcome"frameborder="0" >
             </iframe>
         </div>
     </div>
@@ -79,4 +77,3 @@
 <script type="text/javascript" src="static/js/index.js"></script>
 </body>
 </html>
-</#macro>
