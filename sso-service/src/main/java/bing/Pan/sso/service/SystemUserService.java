@@ -29,8 +29,6 @@ public class SystemUserService extends BaseService {
     //@TargetDataSource("ds1")
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public Object systemUserList(SystemUserVo systemUserVo) {
-        logger.info("执行查询系统用户列表方法");
-
         PageHelper.startPage(systemUserVo.getPageIndex(),systemUserVo.getPageSize());
         return new PageInfo(systemUserMapper.findListByE(systemUserVo));
     }
