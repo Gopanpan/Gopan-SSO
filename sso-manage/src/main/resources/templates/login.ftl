@@ -55,6 +55,7 @@
 
 <script type="text/javascript" src="static/js/custom/config.js"></script>
 <script type="text/javascript" src="static/js/custom/mylib.js"></script>
+<script type="text/javascript" src="static/js/md5.js"></script>
 
 <script type="text/javascript" src="static/js/custom/login.js"></script>
 </body>

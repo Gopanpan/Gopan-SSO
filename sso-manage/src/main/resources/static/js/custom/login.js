@@ -10,7 +10,7 @@ function login(){
             dataType:"json",
             data: {
                 userName: username,
-                password: password
+                password: md5(password)
             },
             success: function(data){
                 if(data.code == "20000") {

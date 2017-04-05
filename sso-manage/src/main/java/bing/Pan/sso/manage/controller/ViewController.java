@@ -22,17 +22,15 @@ import java.util.Map;
 @Controller
 public class ViewController {
 
-
     /**
      * 登陆页面
      * @return
      */
-    @RequestMapping(value = "/login",method = RequestMethod.GET )
+    @RequestMapping(value = "/",method = RequestMethod.GET )
     public String login(){
         return "login";
 
     }
-
 
 
     /**
