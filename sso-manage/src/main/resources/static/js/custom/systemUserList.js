@@ -4,7 +4,6 @@ var dataUrl = webConfig.webUrl+'/systemUserList',
     pager_selector = "#grid-pager",
     pageSize = 10;
 
-
 //封装请求页面加载的参数
 function setPostData(){
     return {
@@ -23,7 +22,6 @@ $(document).ready(function () {
         postData: setPostData()
     };
     initJqgrid();
-
 });
 
 
@@ -31,21 +29,44 @@ $(document).ready(function () {
 function initJqgrid() {
     $(grid_selector).jqGrid({
         height:'atuo',
-
         //是否允许全选
         multiselect: true,
-
-        //全选的宽度(只有multiselect:true时)
-        //multiselectWidth: 30,
-
         //是否允许显示/隐藏，只有caption不为空时有效
         hidegrid: false,
+        //可选显示的行数
+        rowList: [10, 20, 30],
+        //默认显示行数
+        rowNum: pageSize,
+        //总条数
+        viewrecords: true,
+        //分页层 id
+        pager: pager_selector,
+        //提交方式，默认get
+        mtype: 'post',
+        postData: setPostData(),
+        //数据格式
+        datatype: "json",
+        jsonReader: {
+            //是否允许乱序显示数据,true:不可以
+            repeatitems: true,
+            root: "result.list",       //当前页的list数据集合
+            total: "result.pages",     //总页数
+            page: "result.pageNum",    //当前页码
+            records: "result.total"   //总数据量
 
-        //是否显示行号
-        //rownumbers: true,
+        },
+        //数据来源地址
+        url: dataUrl,
+        //分页参数
+        prmNames: {
+            page: 'pageIndex', rows: "pageSize", order: null, search: null, sort: null, nd: null, sidx: null
+        },
 
         //显示的标题
-        colNames: ['用户Id','<div align="center"><span>用户名</span></div>','<div align="center"><span>真实名称</span></div>','<div align="center"><span>性别</span></div>','<div align="center"><span>电话号码</span></div>','<div align="center"><span>电子邮件</span></div>','<div align="center"><span>创建时间</span></div>','<div align="center"><span>更新时间</span></div>', '<div align="center"><span>操作</span></div>'],
+        colNames: ['用户Id','<div align="center"><span>用户名</span></div>','<div align="center"><span>真实名称</span></div>',
+            '<div align="center"><span>性别</span></div>','<div align="center"><span>电话号码</span></div>',
+            '<div align="center"><span>电子邮件</span></div>','<div align="center"><span>创建时间</span></div>',
+            '<div align="center"><span>更新时间</span></div>', '<div align="center"><span>操作</span></div>'],
 
         //列属性，和colNames的个数和顺序必须对应
         colModel: [
@@ -81,44 +102,12 @@ function initJqgrid() {
                 }
             }
         ],
-
-        //可选显示的行数
-        rowList: [10, 20, 30],
-
-        //默认显示行数
-        rowNum: pageSize,
-
-        //总条数
-        viewrecords: true,
-
-        //分页层 id
-        pager: pager_selector,
-
-        //分页参数
-        prmNames: {
-            page: 'pageIndex', rows: "pageSize", order: null, search: null, sort: null, nd: null, sidx: null
-        },
-
-        //提交方式，默认get
-        mtype: 'post',
-
-        postData: setPostData(),
-
-        //数据格式
-        datatype: "json",
-
-        jsonReader: {
-            //是否允许乱序显示数据,true:不可以
-            repeatitems: true,
-            root: "result.list",       //当前页的list数据集合
-            total: "result.pages",     //总页数
-            page: "result.pageNum",    //当前页码
-            records: "result.total"    //总数据量
-        },
-
-        //数据来源地址
-        url: dataUrl
-    }).jqGrid('setGridWidth', $(".ibox-content").width());
+        loadComplete: function (data) {
+           if(data.code != 2000 || data.code != '2000'){
+               layer.msg("服务器异常<br/>异常代码："+data.code+",异常内容："+data.message,{icon:5,time:3000});
+           }
+        }
+        }).jqGrid('setGridWidth', $(".ibox-content").width());
 
     //设置grid宽度为自适应,适应比例根据每列设置的宽度
     $(window).on('resize.jqGrid', function () {

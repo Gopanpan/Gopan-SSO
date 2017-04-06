@@ -1,5 +1,6 @@
 package bing.Pan.sso.manage.controller;
 
+import bing.Pan.sso.common.enums.ResponseCode;
 import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.common.response.Response;
 import bing.Pan.sso.domain.vObject.SystemUserVo;
@@ -9,7 +10,12 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @crea : Created by intelliJ IDEA 16.1.3
@@ -35,7 +41,13 @@ public class SystemUserController {
      */
     @ApiOperation(value = "系统管理用户列表")
     @RequestMapping(value = "/systemUserList", method = RequestMethod.POST)
-    public Object systemUserList(@ModelAttribute SystemUserVo systemUserVo){
+    public Object systemUserList(@Valid SystemUserVo systemUserVo, BindingResult result) throws ServiceException {
+        if (result.hasErrors()) {
+            List<ObjectError> list = result.getAllErrors();
+            for (ObjectError error : list) {
+                throw new ServiceException(ResponseCode.CLIENT_PARAM_ERR);
+            }
+        }
         return new Response(systemUserService.systemUserList(systemUserVo));
     }
 

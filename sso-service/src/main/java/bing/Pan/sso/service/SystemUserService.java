@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 /**
  * @crea : Created by intelliJ IDEA 16.1.3
@@ -26,20 +27,27 @@ public class SystemUserService extends BaseService {
 
     @Autowired private SsoSystemUserMapper systemUserMapper;
 
-    //@TargetDataSource("ds1")
+
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public Object systemUserList(SystemUserVo systemUserVo) {
         PageHelper.startPage(systemUserVo.getPageIndex(),systemUserVo.getPageSize());
         return new PageInfo(systemUserMapper.findListByE(systemUserVo));
     }
 
-    //@TargetDataSource("ds1")
+
     public Object getSystemUserById(Long sysUserId) throws ServiceException {
         if(null == sysUserId) throw new ServiceException(ResponseCode.CLIENT_PARAM_ERR);
         return systemUserMapper.selectByPrimaryKey(sysUserId);
     }
 
-    public void findUserByLoginName(String loginName) {
+    public SsoSystemUser findUserByLoginName(String loginName, String password) throws ServiceException {
         SsoSystemUser systemUser = systemUserMapper.findUserByLoginName(loginName);
+        if(ObjectUtils.isEmpty(systemUser))
+            throw new ServiceException(ResponseCode.LOGIN_USER_MISS);
+        if(!systemUser.getPassword().equals(password))
+            throw new ServiceException(ResponseCode.LOGIN_PASSWORD_ERR);
+
+        return systemUser;
+
     }
 }

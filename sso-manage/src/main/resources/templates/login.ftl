@@ -50,13 +50,11 @@
 <!-- 全局js -->
 <script src="static/js/jquery.min.js?v=2.1.4"></script>
 <script src="static/js/bootstrap.min.js?v=3.3.6"></script>
-
-<script src="static/js/plugins/layer/layer.min.js?v=9a34e40"></script>
+<script type="text/javascript" src="static/js/md5.js"></script>
+<script src="static/js/plugins/layer/layer.js"></script>
 
 <script type="text/javascript" src="static/js/custom/config.js"></script>
 <script type="text/javascript" src="static/js/custom/mylib.js"></script>
-<script type="text/javascript" src="static/js/md5.js"></script>
-
 <script type="text/javascript" src="static/js/custom/login.js"></script>
 </body>
 </html>

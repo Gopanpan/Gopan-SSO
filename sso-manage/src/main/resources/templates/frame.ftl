@@ -23,7 +23,7 @@
 <script src="static/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="static/js/plugins/layer/layer.min.js"></script>
+<script src="static/js/plugins/layer/layer.js"></script>
 <script src="static/js/hAdmin.js?v=4.1.0"></script>
 <script src="static/js/plugins/jqgrid/jquery.jqGrid.min.js"></script>
 <script src="static/js/plugins/jqgrid/i18n/grid.locale-cn.js"></script>
