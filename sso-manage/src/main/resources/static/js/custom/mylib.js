@@ -64,13 +64,28 @@ function sexFormat(sex){
 
 }
 
+/**
+ * boolean 格式化
+ * @param avaliable
+ * @returns {*}
+ */
 function availableFormat(avaliable){
     if(avaliable == true){return '是'}
     if(avaliable == false){return '否'}
     if(avaliable == undefined){return ''}
-
-
 }
+
+
+/**
+ * 表格列表获取服务器端数据服务异常校验
+ * @param data
+ */
+function tableErrorValidate(data){
+    if(data.code != 20000 || data.code != '20000'){
+        layer.msg("服务器异常<br/>异常代码："+data.code+",异常内容："+data.message,{icon:5,time:3000});
+    }
+}
+
 
 
 

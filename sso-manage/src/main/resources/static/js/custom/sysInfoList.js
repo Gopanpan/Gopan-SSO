@@ -1,5 +1,5 @@
 //常量
-var dataUrl = webConfig.webUrl + '/getSysInfoPageList',
+var dataUrl = webConfig.webUrl + '/sysInfoPageList',
     grid_selector = "#grid-table",
     pager_selector = "#grid-pager",
     pageSize = 20;

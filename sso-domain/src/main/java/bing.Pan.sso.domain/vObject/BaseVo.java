@@ -1,7 +1,9 @@
 package bing.Pan.sso.domain.vObject;
 
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -17,9 +19,11 @@ public class BaseVo implements Serializable {
     private Long id;
 
     @ApiModelProperty("当前页码")
+    @NotNull(message="当前页码不能为空!")
     private int pageIndex;
 
     @ApiModelProperty("每页数据量")
+    @NotNull(message = "每页数量不能为空!")
     private int pageSize;
 
 

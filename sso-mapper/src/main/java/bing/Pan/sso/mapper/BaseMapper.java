@@ -31,7 +31,7 @@ public interface BaseMapper<T,E> {
 
     /**
      * 根基条件查询List集合
-     * @param custom 如果没有具体的类型，那么就传入Object类型
+     * @param custom 自定义类型
      * @return
      */
     List<T> findListByE(E custom);
@@ -40,7 +40,7 @@ public interface BaseMapper<T,E> {
 
     /**
      * 根基条件查询List集合
-     * @param entity 如果没有具体的类型，那么就传入Object类型
+     * @param entity
      * @return
      */
     List<T> findListByT(T entity);

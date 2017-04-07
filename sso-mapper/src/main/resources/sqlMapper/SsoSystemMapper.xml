@@ -141,11 +141,10 @@
   </update>
 
 
-  <select id="systemUserList" resultMap="BaseResultMap"  >
+
+  <select id="findListByE" parameterType="bing.Pan.sso.domain.vObject.BaseVo" resultMap="BaseResultMap"  >
     select
     <include refid="Base_Column_List" />
-    from sso_system
+    from sso_system  ss
   </select>
-
-
 </mapper>

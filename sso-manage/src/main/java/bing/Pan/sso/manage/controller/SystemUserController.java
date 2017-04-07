@@ -42,7 +42,6 @@ public class SystemUserController {
     @ApiOperation(value = "系统管理用户列表")
     @RequestMapping(value = "/systemUserList", method = RequestMethod.POST)
     public Object systemUserList(@Valid SystemUserVo systemUserVo, BindingResult result) throws ServiceException {
-
         return new Response(systemUserService.systemUserList(systemUserVo));
     }
 

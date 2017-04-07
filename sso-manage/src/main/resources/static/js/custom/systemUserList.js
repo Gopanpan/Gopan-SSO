@@ -103,10 +103,7 @@ function initJqgrid() {
             }
         ],
         loadComplete: function (data) {
-           if(data.code != 20000 || data.code != '20000'){
-               alert(data.code);
-               layer.msg("服务器异常<br/>异常代码："+data.code+",异常内容："+data.message,{icon:5,time:3000});
-           }
+            tableErrorValidate(data);
         }
         }).jqGrid('setGridWidth', $(".ibox-content").width());
 

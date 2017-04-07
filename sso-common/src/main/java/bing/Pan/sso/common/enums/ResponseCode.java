@@ -16,7 +16,7 @@ public enum ResponseCode {
 
 
     // ---------------------客户端请求异常-------------------
-    CLIENT_PARAM_ERR("40000", "参数解析失败!"),
+    CLIENT_PARAM_ERR("40000", "参数解析失败/参数缺少!"),
 
     CLIENT_PARAM_MISS("40001", "参数丢失!"),
 
