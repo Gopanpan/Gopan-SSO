@@ -42,12 +42,7 @@ public class SystemUserController {
     @ApiOperation(value = "系统管理用户列表")
     @RequestMapping(value = "/systemUserList", method = RequestMethod.POST)
     public Object systemUserList(@Valid SystemUserVo systemUserVo, BindingResult result) throws ServiceException {
-        if (result.hasErrors()) {
-            List<ObjectError> list = result.getAllErrors();
-            for (ObjectError error : list) {
-                throw new ServiceException(ResponseCode.CLIENT_PARAM_ERR);
-            }
-        }
+
         return new Response(systemUserService.systemUserList(systemUserVo));
     }
 
