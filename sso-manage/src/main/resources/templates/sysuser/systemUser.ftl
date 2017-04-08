@@ -44,6 +44,6 @@
 </#macro>
 
 <#macro business_js>
-<script type="text/javascript" src="static/js/custom/systemUser.js"></script>
+<script type="text/javascript" src="static/js/custom/sysuser/systemUser.js"></script>
 </#macro>
 <@frame_html/>

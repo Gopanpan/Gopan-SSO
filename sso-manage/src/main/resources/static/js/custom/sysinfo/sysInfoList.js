@@ -9,20 +9,10 @@ var dataUrl = webConfig.webUrl + '/sysInfoPageList',
 $(document).ready(function () {
     $.jgrid.defaults.styleUI = 'Bootstrap';
     var reloadParams = {
-        url: dataUrl,
-        postData: setPostData()
+        url: dataUrl
     };
     initJqgrid();
 });
-
-
-//封装请求页面加载的参数
-function setPostData() {
-    return {
-        pageSize: pageSize
-    };
-}
-
 
 //初始化表格
 function initJqgrid() {
@@ -77,7 +67,7 @@ function initJqgrid() {
         //提交方式，默认get
         mtype: 'post',
 
-        postData: setPostData(),
+        //postData: setPostData(),
 
         //数据格式
         datatype: "json",
@@ -111,12 +101,12 @@ function andOrupdateSysInfo(sysInfoId) {
 
     parent.layer.open({
         type: 2,
-        title: '新增或修改系统',
+        title: '新增系统',
         shadeClose: true,
         shade: [0.5],
         maxmin: true, //开启最大化最小化按钮
         area: ['768px', '250px'],
-        content: webConfig.webUrl + '/manager/sysInfoDetail?sysInfoId=' + sysInfoId,
+        content: webConfig.webUrl + '/templates/sysinfo/sysInfo.ftl',
         end: function () {
             reload();
         }
@@ -168,8 +158,7 @@ function confirmDelete(sysInfoId) {
 //刷新页面
 function reload() {
     var reloadParams = {
-        url: dataUrl,
-        postData: setPostData()
+        url: dataUrl
     };
     $(grid_selector).jqGrid("setGridParam", reloadParams).trigger("reloadGrid", [{page: 1}]);
 }

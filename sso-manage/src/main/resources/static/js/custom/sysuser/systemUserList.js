@@ -58,9 +58,7 @@ function initJqgrid() {
         //数据来源地址
         url: dataUrl,
         //分页参数
-        prmNames: {
-            page: 'pageIndex', rows: "pageSize", order: null, search: null, sort: null, nd: null, sidx: null
-        },
+        prmNames: {page: 'pageIndex', rows: "pageSize", order: null, search: null, sort: null, nd: null, sidx: null},
 
         //显示的标题
         colNames: ['用户Id','<div align="center"><span>用户名</span></div>','<div align="center"><span>真实名称</span></div>',
@@ -113,24 +111,14 @@ function initJqgrid() {
     });
 }
 
-
-
-
 //查询
 $("#querySysUsers").bind('click',function(){
-    querySysUsers();
-});
-
-//查询
-function querySysUsers() {
     var reloadParams = {
         url: dataUrl,
         postData: setPostData()
     };
     $(grid_selector).jqGrid("setGridParam", reloadParams).trigger("reloadGrid",[{ page: 1 }]);
-}
-
-
+});
 
 
 //新增
@@ -140,7 +128,6 @@ $("#addSysUser").bind('click',function(){
 
 //新增或修改用户
 function andOrupdateSysUser(sysUserId) {
-
     parent.layer.open({
         type: 2,
         title: '新增/修改系统用户',
@@ -154,9 +141,6 @@ function andOrupdateSysUser(sysUserId) {
         }
     });
 }
-
-
-
 
 //详情
 function sysUserDetail(sysUserId) {
@@ -174,8 +158,6 @@ function sysUserDetail(sysUserId) {
     });
 }
 
-
-
 //删除用户
 function deleteSysInfo(sysUserId, sysUserName) {
 
@@ -189,32 +171,27 @@ function deleteSysInfo(sysUserId, sysUserName) {
 
 }
 
-
-
-
 function confirmDelete(sysUserId) {
-
     var sysUserInfo = {},
         url = webConfig.webUrl + '/deleteSysUser';
-    sysUserInfo.id = sysUserId;
-
+        sysUserInfo.id = sysUserId;
     $.ajax({
             url: url,
             type: 'POST',
             dataType: 'json',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(sysUserInfo)
-        })
-        .done(function (data) {
-            if (data) {
-                if (data.code == "10000") {
-                    layer.alert(data.message, {icon: 1});
-                    reload();
-                } else {
-                    layer.alert(data.message, {icon: 2});
-                }
+    })
+    .done(function (data) {
+        if (data) {
+            if (data.code == "10000") {
+                layer.alert(data.message, {icon: 1});
+                reload();
+            } else {
+                layer.alert(data.message, {icon: 2});
             }
-        });
+        }
+    });
 }
 
 

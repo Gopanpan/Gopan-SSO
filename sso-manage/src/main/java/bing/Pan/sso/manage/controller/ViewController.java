@@ -61,7 +61,7 @@ public class ViewController {
      */
     @RequestMapping(value = "/systemUserListView",method = RequestMethod.GET)
     public String systemUserListView(){
-        return "systemUserList";
+        return "sysuser/systemUserList";
     }
 
     /**
@@ -73,7 +73,7 @@ public class ViewController {
     public ModelAndView andOrupdateSysUserView(String sysUserId){
         Map<String, Object> map = new HashMap<>();
         map.put("sysUserId", sysUserId);
-        return new ModelAndView("systemUser", map);
+        return new ModelAndView("sysuser/systemUser", map);
     }
 
     /**
@@ -82,6 +82,6 @@ public class ViewController {
      */
     @RequestMapping(value = "/sysInfoListView",method = RequestMethod.GET)
     public String sysInfoListView(){
-        return "sysInfoList";
+        return "sysinfo/sysInfoList";
     }
 }
