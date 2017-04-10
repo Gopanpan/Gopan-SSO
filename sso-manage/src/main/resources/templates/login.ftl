@@ -43,7 +43,7 @@
                        required>
             </div>
             <a id="J-submit" type="submit" class="btn btn-primary block full-width bt_login_bnt">登录</a>
-            <p id="J-error" class="text-muted bt_text_center"></p>
+            <p id="J-message" class="text-muted bt_text_center"></p>
         </form>
     </div>
 </div>

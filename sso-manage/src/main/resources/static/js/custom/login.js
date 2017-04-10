@@ -2,7 +2,7 @@ function login(){
     var loginName = $('#J-username').val();
     var password = $('#J-password').val();
     if (!loginName || !password) {
-        $('#J-error').html('用户名密码不能为空！');
+        $('#J-message').html('用户名密码不能为空！');
     } else {
         $.ajax({
             type:	"POST",
@@ -14,9 +14,10 @@ function login(){
             },
             success: function(data){
                 if(data.code == "20000") {
+                    $('#J-message').html('登陆成功!');
                     top.location.href = webConfig.webUrl+"/ssoMain";
                 }else{
-                    $('#J-error').html(data.message);
+                    $('#J-message').html(data.message);
                 }
             }
         });
