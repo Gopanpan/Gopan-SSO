@@ -1,7 +1,5 @@
 package bing.Pan.sso.service;
 
-import bing.Pan.sso.common.enums.ResponseCode;
-import bing.Pan.sso.common.response.Response;
 import bing.Pan.sso.domain.vObject.BaseVo;
 import bing.Pan.sso.mapper.mapperInterface.SsoSystemMapper;
 import com.github.pagehelper.PageHelper;
@@ -25,6 +23,7 @@ public class SystemInfoService extends BaseService{
 
     public Object sysInfoPageList(BaseVo baseVo) {
         PageHelper.startPage(baseVo.getPageIndex(),baseVo.getPageSize());
-        return  new PageInfo(ssoSystemMapper.findListByE(baseVo));
+        PageHelper.orderBy("id desc");
+        return new PageInfo(ssoSystemMapper.findListByE(baseVo));
     }
 }
