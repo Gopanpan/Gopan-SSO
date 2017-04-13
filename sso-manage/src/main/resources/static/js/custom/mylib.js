@@ -77,13 +77,22 @@ function availableFormat(avaliable){
 
 
 /**
- * 表格列表获取服务器端数据服务异常校验
+ * 服务器端返回异常校验
  * @param data
  */
-function tableErrorValidate(data){
+function serviceErrorValidate(data){
     if(data.code != 20000 || data.code != '20000'){
         layer.msg("服务器异常<br/>异常代码："+data.code+",异常内容："+data.message,{icon:5,time:3000});
     }
+}
+
+/**
+ * 客户端校验
+ * @param data
+ */
+function frontErrorValidate(data){
+    layer.msg("页面校验失败<br/>异常内容："+data,{icon:5,time:3000});
+    return false;
 }
 
 

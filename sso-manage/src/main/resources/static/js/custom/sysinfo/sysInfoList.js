@@ -18,16 +18,9 @@ $(document).ready(function () {
 function initJqgrid() {
     $(grid_selector).jqGrid({
         height: 'atuo',
-        //是否允许全选
         multiselect: true,
-
-        //是否允许显示/隐藏，只有caption不为空时有效
         hidegrid: false,
-        //显示的标题
         colNames: ['系统Id', '<div align="center"><span>系统名称</span></div>', '<div align="center"><span>系统编码</span></div>',  '<div align="center"><span>是否可用</span></div>','<div align="center"><span>系统描述</span></div>','<div align="center"><span>操作</span></div>'],
-
-        //列属性，和colNames的个数和顺序必须对应
-        //参考：http://www.helloweba.com/view-blog-162.html#col
         colModel: [
             {name: 'id', index: 'id',hidden: true },
             {name: 'name', index: 'name', sortable: false, align: 'center', width: 70},
@@ -46,32 +39,15 @@ function initJqgrid() {
                 }
             }
         ],
-
-        //可选显示的行数
         rowList: [10, 20, 30],
-
-        //默认显示行数
         rowNum: pageSize,
-
-        //总条数
         viewrecords: true,
-
-        //分页层 id
         pager: pager_selector,
-
-        //分页参数
         prmNames: {
             page: 'pageIndex', rows: "pageSize", order: null, search: null, sort: null, nd: null, sidx: null
         },
-
-        //提交方式，默认get
         mtype: 'post',
-
-        //postData: setPostData(),
-
-        //数据格式
         datatype: "json",
-
         jsonReader: {
             //是否允许乱序显示数据,true:不可以
             repeatitems: true,
@@ -80,9 +56,10 @@ function initJqgrid() {
             page: "result.pageNum",    //当前页码
             records: "result.total"    //总数据量
         },
-
-        //数据来源地址
-        url: dataUrl
+        url: dataUrl,
+        loadComplete: function (data) {
+            serviceErrorValidate(data);
+        }
     }).jqGrid('setGridWidth', $(".ibox-content").width());
 
     //设置grid宽度为自适应,适应比例根据每列设置的宽度
@@ -98,14 +75,13 @@ $("#addSysInfo").bind('click', function () {
 
 //新增或修改系统
 function andOrupdateSysInfo(sysInfoId) {
-
     parent.layer.open({
         type: 2,
         title: '新增系统',
         shadeClose: true,
         shade: [0.5],
         maxmin: true, //开启最大化最小化按钮
-        area: ['500px', '600px'],
+        area: ['600px', '600px'],
         content: webConfig.webUrl + '/andOrUpdateSysInfoView',
         end: function () {
             reload();

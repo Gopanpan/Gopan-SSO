@@ -101,7 +101,7 @@ function initJqgrid() {
             }
         ],
         loadComplete: function (data) {
-            tableErrorValidate(data);
+            serviceErrorValidate(data);
         }
         }).jqGrid('setGridWidth', $(".ibox-content").width());
 

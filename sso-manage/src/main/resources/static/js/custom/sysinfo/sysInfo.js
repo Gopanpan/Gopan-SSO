@@ -7,7 +7,6 @@ var oldSysUserStatus;
 
 //加载页面
 $(document).ready(function () {
-
     var sysUserId = $("#sysUserId").val();
     $.ajax({
             url: webConfig.webUrl + '/getSysUserById',
@@ -17,7 +16,7 @@ $(document).ready(function () {
         })
         .done(function (data) {
             if (data) {
-                if (data.code == "10000" && data.result) {
+                if (data.code == "20000" && data.result) {
                     $("#sysUserName").val(data.result.userName);
                     $("#sysUserPassword").val(data.result.password);
                     $("#sysUserStatus").val(data.result.status);
@@ -31,25 +30,20 @@ $(document).ready(function () {
 
 //提交
 $('#btnUpdate').click(function () {
-
     var sysUserInfo = {},
         id = $("#sysUserId").val(),
         url = webConfig.webUrl + '/addSysUser';
-
-
     if (null != id && "" != id && id != "undefined") {
         sysUserInfo.id = $("#sysUserId").val(); //用户id
         url = webConfig.webUrl + '/updateSysUser';
     }
 
-    
     sysUserInfo.userName = $("#sysUserName").val();  //用户名称
     sysUserInfo.password = $("#sysUserPassword").val();  //用户密码
     sysUserInfo.status = $("#sysUserStatus").val();  //用户状态
     
     if (sysUserInfo.userName == null || sysUserInfo.userName == "") {
-        layer.alert("请输入用户名", {icon: 2});
-        return false;
+        return frontErrorValidate("系统名称不能为空!");
     }
     
     if (sysUserInfo.password == null || sysUserInfo.password == "") {
