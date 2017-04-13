@@ -1,8 +1,5 @@
 package bing.Pan.sso.manage.common.Interceptor;
 
-import bing.Pan.sso.common.enums.ResponseCode;
-import bing.Pan.sso.common.response.Response;
-import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ObjectUtils;
@@ -12,8 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * @crea : Created by intelliJ IDEA 16.1.3
