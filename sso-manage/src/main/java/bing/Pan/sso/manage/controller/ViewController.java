@@ -84,4 +84,9 @@ public class ViewController {
     public String sysInfoListView(){
         return "sysinfo/sysInfoList";
     }
+
+    @RequestMapping(value = "/andOrUpdateSysInfoView",method = RequestMethod.GET)
+    public String andOrUpdateSysInfoView(){
+        return "sysinfo/sysInfo";
+    }
 }

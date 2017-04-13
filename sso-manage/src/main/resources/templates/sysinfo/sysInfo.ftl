@@ -12,15 +12,29 @@
             <input type="text" placeholder="" class="form-control" value="" id="sysInfoName">
         </div>
     </div>
-
     <div class="form-group">
-        <label class="col-sm-4 control-label">是否存在子站：</label>
-
+        <label class="col-sm-4 control-label">系统编码：</label>
         <div class="col-sm-6">
-            <input type="radio" name="subStationStatus" value="0" checked='checked'> 不存在
-            <input type="radio" name="subStationStatus" value="1"> 存在
+            <input type="text" placeholder="" class="form-control" value="" id="sysInfoName">
         </div>
     </div>
+
+    <div class="form-group">
+        <label class="col-sm-4 control-label">是否可用：</label>
+        <div class="col-sm-6">
+            <input type="radio" name="subStationStatus" value="1" checked='checked'> 可用
+            <input type="radio" name="subStationStatus" value="0"> 不可用
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-4 control-label">系统描述：</label>
+        <div class="col-sm-6 ckeditor">
+            <textarea id="TextArea1" cols="20" rows="2" class="ckeditor"></textarea>
+        </div>
+    </div>
+
+
 
     <div class="form-group">
         <div class="col-sm-10 text-center">
@@ -33,6 +47,6 @@
 </#macro>
 
 <#macro business_js>
-<script type="text/javascript" src="static/js/custom/sysinfo/sysInfo.js"></script>
+    <script type="text/javascript" src="static/js/custom/sysinfo/sysInfo.js"></script>
 </#macro>
 <@frame_html/>

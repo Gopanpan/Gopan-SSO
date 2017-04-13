@@ -12,8 +12,6 @@
     <link href="static/css/animate.css" rel="stylesheet">
     <link href="static/css/style.css?v=4.1.0" rel="stylesheet">
     <link href="static/css/plugins/zTree/zTreeStyle.css" rel="stylesheet" type="text/css">
-<#--<link href="static/css/custom/style.css?v=4.1.0" rel="stylesheet">-->
-
 </head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
@@ -32,6 +30,7 @@
 <script type="text/javascript" src="static/js/custom/mylib.js"></script>
 <script type="text/javascript" src="static/js/plugins/zTree/jquery.ztree.core-3.5.min.js"></script>
 <script type="text/javascript" src="static/js/plugins/zTree/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="static/js/plugins/ckeditor/ckeditor.js"></script>
     <@business_js/>
 </body>
 

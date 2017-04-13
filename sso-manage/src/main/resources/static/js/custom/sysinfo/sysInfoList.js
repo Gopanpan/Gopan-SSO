@@ -105,8 +105,8 @@ function andOrupdateSysInfo(sysInfoId) {
         shadeClose: true,
         shade: [0.5],
         maxmin: true, //开启最大化最小化按钮
-        area: ['768px', '250px'],
-        content: webConfig.webUrl + '/templates/sysinfo/sysInfo.ftl',
+        area: ['500px', '600px'],
+        content: webConfig.webUrl + '/andOrUpdateSysInfoView',
         end: function () {
             reload();
         }

@@ -4,8 +4,10 @@ var oldSysUserPassword;
 var oldSysUserStatus;
 
 
+
 //加载页面
 $(document).ready(function () {
+
     var sysUserId = $("#sysUserId").val();
     $.ajax({
             url: webConfig.webUrl + '/getSysUserById',

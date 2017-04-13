@@ -2,6 +2,7 @@
 //加载页面
 $(document).ready(function () {
     var sysUserId = $("#sysUserId").val();
+    if(sysUserId == null || sysUserId == '' || sysUserId == 'undefined' ){ return;}
     $.ajax({
             url: webConfig.webUrl + '/getSystemUserById',
             type: 'POST',
