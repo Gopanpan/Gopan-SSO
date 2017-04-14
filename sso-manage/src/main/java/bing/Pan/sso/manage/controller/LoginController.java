@@ -41,7 +41,6 @@ public class LoginController {
                                HttpServletRequest request) throws ServiceException {
 
         SsoSystemUser byLoginName = systemUserService.findUserByLoginName(loginName, password);
-
         request.getSession().setAttribute("user",byLoginName);
         return new Response();
 

@@ -39,8 +39,7 @@
                 <input id="J-username" type="text" class="form-control" placeholder="用户名" required>
             </div>
             <div class="form-group bt_login_inputs">
-                <input id="J-password" type="password" class="form-control" placeholder="密码"
-                       required>
+                <input id="J-password" type="password" class="form-control" placeholder="密码" required>
             </div>
             <a id="J-submit" type="submit" class="btn btn-primary block full-width bt_login_bnt">登录</a>
             <p id="J-message" class="text-muted bt_text_center"></p>

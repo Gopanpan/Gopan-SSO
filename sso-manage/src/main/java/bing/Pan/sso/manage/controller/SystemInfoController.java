@@ -42,11 +42,9 @@ public class SystemInfoController {
     public Object systemUserList(@Valid BaseVo baseVo,BindingResult result)  throws ServiceException {
         if (result.hasErrors()) {
             List<ObjectError> list = result.getAllErrors();
-            for (ObjectError error : list) {
+            if(list.size()>0)
                 throw new ServiceException(ResponseCode.CLIENT_PARAM_ERR);
-            }
         }
-
         return new Response(systemInfoService.sysInfoPageList(baseVo));
     }
 
