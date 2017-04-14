@@ -5,6 +5,7 @@ import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.domain.entity.SsoSystemUser;
 import bing.Pan.sso.domain.vObject.SystemUserVo;
 import bing.Pan.sso.mapper.mapperInterface.SsoSystemUserMapper;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class SystemUserService extends BaseService {
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public Object systemUserList(SystemUserVo systemUserVo) {
-        PageHelper.startPage(systemUserVo.getPageIndex(),systemUserVo.getPageSize());
+        Page<Object> page = PageHelper.startPage(systemUserVo.getPageIndex(), systemUserVo.getPageSize());
         return new PageInfo(systemUserMapper.findListByE(systemUserVo));
     }
 
