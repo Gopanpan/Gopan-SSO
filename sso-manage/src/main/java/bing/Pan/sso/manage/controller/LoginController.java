@@ -4,7 +4,6 @@ import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.common.response.Response;
 import bing.Pan.sso.domain.entity.SsoSystemUser;
 import bing.Pan.sso.service.SystemUserService;
-import bing.Pan.sso.service.UserService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
