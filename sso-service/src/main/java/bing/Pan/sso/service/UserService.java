@@ -1,12 +1,5 @@
 package bing.Pan.sso.service;
 
-import bing.Pan.sso.domain.entity.SsoSystemUser;
-import bing.Pan.sso.domain.entity.SsoUser;
-import bing.Pan.sso.mapper.mapperInterface.SsoUserMapper;
-import bing.Pan.sso.service.config.dynamicDataSource.TargetDataSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

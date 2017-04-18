@@ -8,14 +8,16 @@
     <result column="organization_id" property="organizationId" jdbcType="BIGINT" />
     <result column="organization_name" property="organizationName" jdbcType="VARCHAR" />
     <result column="available" property="available" jdbcType="BIT" />
+    <result column="system_id" property="systemId" jdbcType="BIGINT" />
+    <result column="system_name" property="systemName" jdbcType="VARCHAR" />
     <result column="create_user" property="createUser" jdbcType="BIGINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_user" property="updateUser" jdbcType="BIGINT" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, user_login_name, organization_id, organization_name, available, create_user, 
-    create_time, update_user, update_time
+    id, user_id, user_login_name, organization_id, organization_name, available, system_id, 
+    system_name, create_user, create_time, update_user, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -30,12 +32,14 @@
   <insert id="insert" parameterType="bing.Pan.sso.domain.entity.SsoUserOrg" >
     insert into sso_user_org (id, user_id, user_login_name, 
       organization_id, organization_name, available, 
-      create_user, create_time, update_user, 
-      update_time)
+      system_id, system_name, create_user, 
+      create_time, update_user, update_time
+      )
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userLoginName,jdbcType=VARCHAR}, 
       #{organizationId,jdbcType=BIGINT}, #{organizationName,jdbcType=VARCHAR}, #{available,jdbcType=BIT}, 
-      #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{systemId,jdbcType=BIGINT}, #{systemName,jdbcType=VARCHAR}, #{createUser,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="bing.Pan.sso.domain.entity.SsoUserOrg" >
     insert into sso_user_org
@@ -57,6 +61,12 @@
       </if>
       <if test="available != null" >
         available,
+      </if>
+      <if test="systemId != null" >
+        system_id,
+      </if>
+      <if test="systemName != null" >
+        system_name,
       </if>
       <if test="createUser != null" >
         create_user,
@@ -90,6 +100,12 @@
       <if test="available != null" >
         #{available,jdbcType=BIT},
       </if>
+      <if test="systemId != null" >
+        #{systemId,jdbcType=BIGINT},
+      </if>
+      <if test="systemName != null" >
+        #{systemName,jdbcType=VARCHAR},
+      </if>
       <if test="createUser != null" >
         #{createUser,jdbcType=BIGINT},
       </if>
@@ -122,6 +138,12 @@
       <if test="available != null" >
         available = #{available,jdbcType=BIT},
       </if>
+      <if test="systemId != null" >
+        system_id = #{systemId,jdbcType=BIGINT},
+      </if>
+      <if test="systemName != null" >
+        system_name = #{systemName,jdbcType=VARCHAR},
+      </if>
       <if test="createUser != null" >
         create_user = #{createUser,jdbcType=BIGINT},
       </if>
@@ -144,6 +166,8 @@
       organization_id = #{organizationId,jdbcType=BIGINT},
       organization_name = #{organizationName,jdbcType=VARCHAR},
       available = #{available,jdbcType=BIT},
+      system_id = #{systemId,jdbcType=BIGINT},
+      system_name = #{systemName,jdbcType=VARCHAR},
       create_user = #{createUser,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_user = #{updateUser,jdbcType=BIGINT},

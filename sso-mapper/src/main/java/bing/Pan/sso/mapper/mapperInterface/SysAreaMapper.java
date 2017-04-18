@@ -2,5 +2,5 @@ package bing.Pan.sso.mapper.mapperInterface;
 
 import bing.Pan.sso.mapper.BaseMapper;
 
-public interface SsoUserOrgMapper extends BaseMapper<SsoUserOrgMapper,Object> {
+public interface SysAreaMapper extends BaseMapper<SysAreaMapper,Object> {
 }

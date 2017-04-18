@@ -1,7 +1,6 @@
-package bing.Pan.sso.domain.vObject;
+package bing.Pan.sso.domain.valueobject;
 
 import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @crea : Created by intelliJ IDEA 16.1.3
@@ -15,7 +14,6 @@ public class SystemUserVo extends BaseVo {
 
 
     @ApiModelProperty("登录名")
-    @NotEmpty(message="登陆名不能为空")
     private String loginName;
 
     @ApiModelProperty("真实名称")

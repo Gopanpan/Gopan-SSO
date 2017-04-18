@@ -1,9 +1,8 @@
 package bing.Pan.sso.service;
 
-import bing.Pan.sso.domain.vObject.BaseVo;
+import bing.Pan.sso.domain.bussinessobject.PageBo;
 import bing.Pan.sso.mapper.mapperInterface.SsoSystemMapper;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,9 +20,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class SystemInfoService extends BaseService{
     @Autowired private SsoSystemMapper ssoSystemMapper;
 
-    public Object sysInfoPageList(BaseVo baseVo) {
-        PageHelper.startPage(baseVo.getPageIndex(),baseVo.getPageSize());
+    public Object sysInfoPageList(PageBo pageBo) {
+        PageHelper.startPage(pageBo.getPageIndex(),pageBo.getPageSize());
         PageHelper.orderBy("id desc");
-        return new PageInfo(ssoSystemMapper.findListByE(baseVo));
+        //return new PageInfo(ssoSystemMapper.findListByE(pageBo));
+        return null;
     }
 }

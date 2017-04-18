@@ -2,10 +2,8 @@ package bing.Pan.sso.domain.entity;
 
 import java.util.Date;
 
-public class SsoSystemUser {
+public class SysUser {
     private Long id;
-
-    private Long userNumber;
 
     private String loginName;
 
@@ -17,27 +15,13 @@ public class SsoSystemUser {
 
     private String birthday;
 
-    private String idCard;
-
-    private String position;
-
     private String phone;
 
     private String email;
 
-    private Date joinDate;
-
     private Date lastLogin;
 
     private String lastIp;
-
-    private String salt;
-
-    private Long sumLogin;
-
-    private String onlineTime;
-
-    private String detailExplain;
 
     private Boolean available;
 
@@ -55,14 +39,6 @@ public class SsoSystemUser {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getUserNumber() {
-        return userNumber;
-    }
-
-    public void setUserNumber(Long userNumber) {
-        this.userNumber = userNumber;
     }
 
     public String getLoginName() {
@@ -105,22 +81,6 @@ public class SsoSystemUser {
         this.birthday = birthday == null ? null : birthday.trim();
     }
 
-    public String getIdCard() {
-        return idCard;
-    }
-
-    public void setIdCard(String idCard) {
-        this.idCard = idCard == null ? null : idCard.trim();
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position == null ? null : position.trim();
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -137,14 +97,6 @@ public class SsoSystemUser {
         this.email = email == null ? null : email.trim();
     }
 
-    public Date getJoinDate() {
-        return joinDate;
-    }
-
-    public void setJoinDate(Date joinDate) {
-        this.joinDate = joinDate;
-    }
-
     public Date getLastLogin() {
         return lastLogin;
     }
@@ -159,38 +111,6 @@ public class SsoSystemUser {
 
     public void setLastIp(String lastIp) {
         this.lastIp = lastIp == null ? null : lastIp.trim();
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt == null ? null : salt.trim();
-    }
-
-    public Long getSumLogin() {
-        return sumLogin;
-    }
-
-    public void setSumLogin(Long sumLogin) {
-        this.sumLogin = sumLogin;
-    }
-
-    public String getOnlineTime() {
-        return onlineTime;
-    }
-
-    public void setOnlineTime(String onlineTime) {
-        this.onlineTime = onlineTime == null ? null : onlineTime.trim();
-    }
-
-    public String getDetailExplain() {
-        return detailExplain;
-    }
-
-    public void setDetailExplain(String detailExplain) {
-        this.detailExplain = detailExplain == null ? null : detailExplain.trim();
     }
 
     public Boolean getAvailable() {

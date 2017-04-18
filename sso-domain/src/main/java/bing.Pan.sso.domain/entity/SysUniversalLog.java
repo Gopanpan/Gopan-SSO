@@ -2,7 +2,7 @@ package bing.Pan.sso.domain.entity;
 
 import java.util.Date;
 
-public class SsoUniversalLog {
+public class SysUniversalLog {
     private Long id;
 
     private String moduleName;

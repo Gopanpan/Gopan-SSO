@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="bing.Pan.sso.mapper.mapperInterface.SsoUniversalLogMapper" >
-  <resultMap id="BaseResultMap" type="bing.Pan.sso.domain.entity.SsoUniversalLog" >
+<mapper namespace="bing.Pan.sso.mapper.mapperInterface.SysUniversalLogMapper" >
+  <resultMap id="BaseResultMap" type="bing.Pan.sso.domain.entity.SysUniversalLog" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="module_name" property="moduleName" jdbcType="VARCHAR" />
     <result column="feature_name" property="featureName" jdbcType="VARCHAR" />
     <result column="feature_path" property="featurePath" jdbcType="VARCHAR" />
+    <result column="request_param" property="requestParam" jdbcType="LONGVARCHAR" />
     <result column="request_result" property="requestResult" jdbcType="VARCHAR" />
     <result column="request_user" property="requestUser" jdbcType="VARCHAR" />
     <result column="request_time" property="requestTime" jdbcType="TIMESTAMP" />
@@ -17,30 +18,26 @@
     <result column="extends4" property="extends4" jdbcType="VARCHAR" />
     <result column="extends5" property="extends5" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="bing.Pan.sso.domain.entity.SsoUniversalLog" extends="BaseResultMap" >
-    <result column="request_param" property="requestParam" jdbcType="LONGVARCHAR" />
-  </resultMap>
+
   <sql id="Base_Column_List" >
-    id, module_name, feature_name, feature_path, request_result, request_user, request_time, 
+    id, module_name, feature_name, feature_path,request_param, request_result, request_user, request_time,
     request_pc_name, request_ip, extends1, extends2, extends3, extends4, extends5
   </sql>
   <sql id="Blob_Column_List" >
     request_param
   </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from sso_universal_log
+    from sys_universal_log
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from sso_universal_log
+    delete from sys_universal_log
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="bing.Pan.sso.domain.entity.SsoUniversalLog" >
-    insert into sso_universal_log (id, module_name, feature_name, 
+  <insert id="insert" parameterType="bing.Pan.sso.domain.entity.SysUniversalLog" >
+    insert into sys_universal_log (id, module_name, feature_name, 
       feature_path, request_result, request_user, 
       request_time, request_pc_name, request_ip, 
       extends1, extends2, extends3, 
@@ -53,8 +50,8 @@
       #{extends4,jdbcType=VARCHAR}, #{extends5,jdbcType=VARCHAR}, #{requestParam,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="bing.Pan.sso.domain.entity.SsoUniversalLog" >
-    insert into sso_universal_log
+  <insert id="insertSelective" parameterType="bing.Pan.sso.domain.entity.SysUniversalLog" >
+    insert into sys_universal_log
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -150,8 +147,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="bing.Pan.sso.domain.entity.SsoUniversalLog" >
-    update sso_universal_log
+  <update id="updateByPrimaryKeySelective" parameterType="bing.Pan.sso.domain.entity.SysUniversalLog" >
+    update sys_universal_log
     <set >
       <if test="moduleName != null" >
         module_name = #{moduleName,jdbcType=VARCHAR},
@@ -198,29 +195,13 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="bing.Pan.sso.domain.entity.SsoUniversalLog" >
-    update sso_universal_log
+
+  <update id="updateByPrimaryKey" parameterType="bing.Pan.sso.domain.entity.SysUniversalLog" >
+    update sys_universal_log
     set module_name = #{moduleName,jdbcType=VARCHAR},
       feature_name = #{featureName,jdbcType=VARCHAR},
       feature_path = #{featurePath,jdbcType=VARCHAR},
-      request_result = #{requestResult,jdbcType=VARCHAR},
-      request_user = #{requestUser,jdbcType=VARCHAR},
-      request_time = #{requestTime,jdbcType=TIMESTAMP},
-      request_pc_name = #{requestPcName,jdbcType=VARCHAR},
-      request_ip = #{requestIp,jdbcType=VARCHAR},
-      extends1 = #{extends1,jdbcType=VARCHAR},
-      extends2 = #{extends2,jdbcType=VARCHAR},
-      extends3 = #{extends3,jdbcType=VARCHAR},
-      extends4 = #{extends4,jdbcType=VARCHAR},
-      extends5 = #{extends5,jdbcType=VARCHAR},
-      request_param = #{requestParam,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="bing.Pan.sso.domain.entity.SsoUniversalLog" >
-    update sso_universal_log
-    set module_name = #{moduleName,jdbcType=VARCHAR},
-      feature_name = #{featureName,jdbcType=VARCHAR},
-      feature_path = #{featurePath,jdbcType=VARCHAR},
+      request_param = #{requestParam,jdbcType=LONGVARCHAR},
       request_result = #{requestResult,jdbcType=VARCHAR},
       request_user = #{requestUser,jdbcType=VARCHAR},
       request_time = #{requestTime,jdbcType=TIMESTAMP},

@@ -9,6 +9,10 @@ public class SsoRoleRes {
 
     private Long resourceId;
 
+    private Long systemId;
+
+    private String systemName;
+
     private Boolean available;
 
     private Long createUser;
@@ -41,6 +45,22 @@ public class SsoRoleRes {
 
     public void setResourceId(Long resourceId) {
         this.resourceId = resourceId;
+    }
+
+    public Long getSystemId() {
+        return systemId;
+    }
+
+    public void setSystemId(Long systemId) {
+        this.systemId = systemId;
+    }
+
+    public String getSystemName() {
+        return systemName;
+    }
+
+    public void setSystemName(String systemName) {
+        this.systemName = systemName == null ? null : systemName.trim();
     }
 
     public Boolean getAvailable() {

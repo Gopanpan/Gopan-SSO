@@ -2,7 +2,7 @@ package bing.Pan.sso.manage.controller;
 
 import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.common.response.Response;
-import bing.Pan.sso.domain.entity.SsoSystemUser;
+import bing.Pan.sso.domain.entity.SysUser;
 import bing.Pan.sso.service.SystemUserService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class LoginController {
                                @RequestParam(required = true)  String password,
                                HttpServletRequest request) throws ServiceException {
 
-        SsoSystemUser byLoginName = systemUserService.findUserByLoginName(loginName, password);
+        SysUser byLoginName = systemUserService.findUserByLoginName(loginName, password);
         request.getSession().setAttribute("user",byLoginName);
         return new Response();
 

@@ -1,7 +1,6 @@
-package bing.Pan.sso.domain.vObject;
+package bing.Pan.sso.domain.bussinessobject;
 
 import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -10,13 +9,10 @@ import java.io.Serializable;
  * @crea : Created by intelliJ IDEA 16.1.3
  * @auth : bing.Pan
  * @mail : 15923508369@163.com
- * @date : 2017/2/9 12:43
- * @desc :
+ * @date : 2017/4/18 16:46
+ * @desc : 页码Bo
  */
-public class BaseVo implements Serializable {
-
-    @ApiModelProperty("主键ID")
-    private Long id;
+public class PageBo implements Serializable {
 
     @ApiModelProperty("当前页码")
     @NotNull(message="当前页码不能为空!")
@@ -26,14 +22,6 @@ public class BaseVo implements Serializable {
     @NotNull(message = "每页数量不能为空!")
     private int pageSize;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public int getPageIndex() {
         return pageIndex;

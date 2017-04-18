@@ -15,6 +15,10 @@ public class SsoUserOrg {
 
     private Boolean available;
 
+    private Long systemId;
+
+    private String systemName;
+
     private Long createUser;
 
     private Date createTime;
@@ -69,6 +73,22 @@ public class SsoUserOrg {
 
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    public Long getSystemId() {
+        return systemId;
+    }
+
+    public void setSystemId(Long systemId) {
+        this.systemId = systemId;
+    }
+
+    public String getSystemName() {
+        return systemName;
+    }
+
+    public void setSystemName(String systemName) {
+        this.systemName = systemName == null ? null : systemName.trim();
     }
 
     public Long getCreateUser() {

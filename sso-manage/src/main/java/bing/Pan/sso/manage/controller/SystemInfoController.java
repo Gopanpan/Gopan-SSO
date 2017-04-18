@@ -3,7 +3,8 @@ package bing.Pan.sso.manage.controller;
 import bing.Pan.sso.common.enums.ResponseCode;
 import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.common.response.Response;
-import bing.Pan.sso.domain.vObject.BaseVo;
+import bing.Pan.sso.domain.bussinessobject.PageBo;
+import bing.Pan.sso.domain.valueobject.BaseVo;
 import bing.Pan.sso.service.SystemInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,14 +40,16 @@ public class SystemInfoController {
      */
     @ApiOperation(value = "系统管理列表")
     @RequestMapping(value = "/sysInfoPageList", method = RequestMethod.POST)
-    public Object systemUserList(@Valid BaseVo baseVo,BindingResult result)  throws ServiceException {
+    public Object systemUserList(@Valid PageBo pageBo, BindingResult result)  throws ServiceException {
         if (result.hasErrors()) {
-            List<ObjectError> list = result.getAllErrors();
-            if(list.size()>0)
                 throw new ServiceException(ResponseCode.CLIENT_PARAM_ERR);
         }
-        return new Response(systemInfoService.sysInfoPageList(baseVo));
+        return new Response(systemInfoService.sysInfoPageList(pageBo));
     }
 
+
+    public Object andOrupdateSysInfo(){
+        return null;
+    }
 
 }

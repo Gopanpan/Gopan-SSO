@@ -2,9 +2,9 @@ package bing.Pan.sso.service;
 
 import bing.Pan.sso.common.enums.ResponseCode;
 import bing.Pan.sso.common.exception.ServiceException;
-import bing.Pan.sso.domain.entity.SsoSystemUser;
-import bing.Pan.sso.domain.vObject.SystemUserVo;
-import bing.Pan.sso.mapper.mapperInterface.SsoSystemUserMapper;
+import bing.Pan.sso.domain.bussinessobject.SystemUserBo;
+import bing.Pan.sso.domain.entity.SysUser;
+import bing.Pan.sso.mapper.mapperInterface.SysUserMapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -26,23 +26,23 @@ import org.springframework.util.ObjectUtils;
 @Transactional(readOnly = true)
 public class SystemUserService extends BaseService {
 
-    @Autowired private SsoSystemUserMapper systemUserMapper;
+    @Autowired private SysUserMapper sysUserMapper;
 
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public Object systemUserList(SystemUserVo systemUserVo) {
-        Page<Object> page = PageHelper.startPage(systemUserVo.getPageIndex(), systemUserVo.getPageSize());
-        return new PageInfo(systemUserMapper.findListByE(systemUserVo));
+    public Object systemUserList(SystemUserBo systemUserBo) {
+        Page<Object> page = PageHelper.startPage(systemUserBo.getPageIndex(), systemUserBo.getPageSize());
+        return new PageInfo(sysUserMapper.findListByE(systemUserBo));
     }
 
 
     public Object getSystemUserById(Long sysUserId) throws ServiceException {
         if(null == sysUserId) throw new ServiceException(ResponseCode.CLIENT_PARAM_ERR);
-        return systemUserMapper.selectByPrimaryKey(sysUserId);
+        return sysUserMapper.selectByPrimaryKey(sysUserId);
     }
 
-    public SsoSystemUser findUserByLoginName(String loginName, String password) throws ServiceException {
-        SsoSystemUser systemUser = systemUserMapper.findUserByLoginName(loginName);
+    public SysUser findUserByLoginName(String loginName, String password) throws ServiceException {
+        SysUser systemUser = sysUserMapper.findUserByLoginName(loginName);
         if(ObjectUtils.isEmpty(systemUser))
             throw new ServiceException(ResponseCode.LOGIN_USER_MISS);
         if(!systemUser.getPassword().equals(password))
