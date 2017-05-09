@@ -5,9 +5,11 @@ import bing.Pan.sso.common.enums.ResponseCode;
 import java.io.Serializable;
 
 /**
- * 通用返回类 Created by god on 15/8/16.
+ * @crea :Created by intelliJ IDEA 16.1.3
+ * @auth :bing.Pan 15923508369@163.com
+ * @date :2017/1/17 18:58
+ * @desc :系统接口返回通用类
  */
-
 public class Response<T> implements Serializable {
 
     private static final long serialVersionUID = 355207958304927788L;

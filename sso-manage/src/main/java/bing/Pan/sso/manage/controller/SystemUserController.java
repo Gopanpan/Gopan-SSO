@@ -3,7 +3,6 @@ package bing.Pan.sso.manage.controller;
 import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.common.response.Response;
 import bing.Pan.sso.domain.bussinessobject.SystemUserBo;
-import bing.Pan.sso.domain.valueobject.SystemUserVo;
 import bing.Pan.sso.service.SystemUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,7 +30,7 @@ public class SystemUserController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired SystemUserService systemUserService;
+    @Autowired private SystemUserService systemUserService;
 
 
     /**
@@ -42,7 +41,7 @@ public class SystemUserController {
     @ApiOperation(value = "系统管理用户列表")
     @RequestMapping(value = "/systemUserList", method = RequestMethod.POST)
     public Object systemUserList(@Valid SystemUserBo systemUserBo, BindingResult result) throws ServiceException {
-        return new Response(systemUserService.systemUserList(systemUserBo));
+        return new Response<>(systemUserService.systemUserList(systemUserBo));
     }
 
 

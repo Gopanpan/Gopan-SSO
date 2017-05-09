@@ -60,13 +60,13 @@
 
 
     <!--日志打印的包的范围，及分类日志文件存储，可以多个节点 -->
-    <logger name="bing.Pan.sso" additivity="false">
+   <!-- <logger name="bing.Pan.sso" additivity="false">
         <level value="DEBUG" />
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="ERROR"/>
         <appender-ref ref="ACCESS"/>
         <appender-ref ref="INFO" />
-    </logger>
+    </logger>-->
 
     <!--控制台打印资源加载信息-->
     <root level="info">

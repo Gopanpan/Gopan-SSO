@@ -44,7 +44,7 @@ public class SystemInfoController {
         if (result.hasErrors()) {
                 throw new ServiceException(ResponseCode.CLIENT_PARAM_ERR);
         }
-        return new Response(systemInfoService.sysInfoPageList(pageBo));
+        return new Response<>(systemInfoService.sysInfoPageList(pageBo));
     }
 
 
