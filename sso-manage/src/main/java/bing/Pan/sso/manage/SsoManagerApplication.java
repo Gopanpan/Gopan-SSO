@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 public class SsoManagerApplication {
 
     @Value("${server.session.timeout}")
-    private int basePath;
+    private int serverSessionTimeout;
 
     /**
      * 配置 Spring boot session失效时间
@@ -36,7 +36,7 @@ public class SsoManagerApplication {
         return new EmbeddedServletContainerCustomizer() {
             @Override
             public void customize(ConfigurableEmbeddedServletContainer container) {
-                container.setSessionTimeout(basePath, TimeUnit.MINUTES);
+                container.setSessionTimeout(serverSessionTimeout, TimeUnit.MINUTES);
             }
         };
     }
