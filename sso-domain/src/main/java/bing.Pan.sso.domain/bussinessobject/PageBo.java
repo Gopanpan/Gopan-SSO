@@ -1,5 +1,6 @@
 package bing.Pan.sso.domain.bussinessobject;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ import java.io.Serializable;
  * @date : 2017/4/18 16:46
  * @desc : 页码Bo
  */
+@ApiModel
 public class PageBo implements Serializable {
 
     @ApiModelProperty("当前页码")

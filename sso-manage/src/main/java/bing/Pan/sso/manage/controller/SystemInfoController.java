@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,7 +41,7 @@ public class SystemInfoController extends BaseController{
      */
     @ApiOperation(value = "系统管理列表")
     @RequestMapping(value = "/sysInfoPageList", method = RequestMethod.POST)
-    public Object systemUserList(@Valid PageBo pageBo, BindingResult result)  throws ServiceException {
+    public Object systemUserList(@Valid @ModelAttribute PageBo pageBo, BindingResult result)  throws ServiceException {
         if (result.hasErrors()) {
                 throw new ServiceException(ResponseCode.CLIENT_PARAM_ERR);
         }

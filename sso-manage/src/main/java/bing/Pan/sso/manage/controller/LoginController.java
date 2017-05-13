@@ -4,7 +4,7 @@ import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.common.response.Response;
 import bing.Pan.sso.domain.entity.SysUser;
 import bing.Pan.sso.service.SystemUserService;
-import io.swagger.annotations.Api;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +33,11 @@ public class LoginController extends BaseController {
      * @param password  密码
      * @return
      */
+    @ApiOperation(value = "登陆", notes = "系统管理员登陆接口", response = Response.class)
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "loginName", value = "登陆名", required = true, dataType = "Long", paramType = "query"),
+        @ApiImplicitParam(name = "password", value = "MD5加密后的密码", required = true, dataType = "Long", paramType = "query")
+    })
     @RequestMapping(value = "/loginSysUser", method = RequestMethod.POST)
     @ResponseBody
     public Object loginSysUser(@RequestParam(required = true)  String loginName,

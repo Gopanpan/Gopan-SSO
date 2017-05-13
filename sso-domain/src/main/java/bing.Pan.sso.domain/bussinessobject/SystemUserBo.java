@@ -1,8 +1,7 @@
 package bing.Pan.sso.domain.bussinessobject;
 
-import bing.Pan.sso.domain.valueobject.BaseVo;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @crea : Created by intelliJ IDEA 16.1.3
@@ -11,9 +10,8 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @date : 2017/2/6 19:46
  * @desc :
  */
+@ApiModel
 public class SystemUserBo extends PageBo {
-
-
 
     @ApiModelProperty("登录名")
     private String loginName;
