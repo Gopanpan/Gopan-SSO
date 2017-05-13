@@ -69,7 +69,7 @@
     </logger>-->
 
     <!--控制台打印资源加载信息-->
-    <root level="info">
+    <root level="INFO">
         <appender-ref ref="STDOUT" />
     </root>
 
@@ -79,4 +79,5 @@
     <logger name="org.springframework" level="INFO"/>
     <logger name="org.quartz.core.QuartzSchedulerThread" level="INFO"/>
     <logger name="org.springframework.data.redis" level="INFO"/>
+    <logger name="bing.Pan.sso" level="DEBUG"/>
 </configuration>
