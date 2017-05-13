@@ -26,9 +26,7 @@ import javax.validation.Valid;
 
 @Api(value = "SystemUserController", description = "系统用户管理接口")
 @RestController
-public class SystemUserController {
-
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+public class SystemUserController extends BaseController{
 
     @Autowired private SystemUserService systemUserService;
 

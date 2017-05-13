@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Api(value = "LoginController", description = "登录、登出")
 @Controller
-public class LoginController {
+public class LoginController extends BaseController {
 
     @Autowired SystemUserService systemUserService;
 

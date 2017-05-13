@@ -28,7 +28,7 @@ import java.util.List;
 
 @Api(value = "SystemUserController", description = "系统管理接口")
 @RestController
-public class SystemInfoController {
+public class SystemInfoController extends BaseController{
 
     @Autowired private SystemInfoService systemInfoService;
 
