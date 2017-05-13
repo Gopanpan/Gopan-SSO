@@ -42,7 +42,6 @@ public class SystemUserController extends BaseController{
         if(result.hasErrors()){
             throw new ServiceException(ResponseCode.CLIENT_PARAM_ERR);
         }
-
         return new Response<>(systemUserService.systemUserList(systemUserBo));
     }
 
