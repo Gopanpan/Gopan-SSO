@@ -1,79 +1,105 @@
 
 //加载页面
 $(document).ready(function () {
-    var sysUserId = $("#sysUserId").val();
-    if(sysUserId == null || sysUserId == '' || sysUserId == 'undefined' ){ return;}
-    $.ajax({
-            url: webConfig.webUrl + '/getSystemUserById',
-            type: 'POST',
-            dataType: 'json',
-            data: {sysUserId: sysUserId}
-        })
-        .done(function (data) {
-            if (data) {
-                if (data.code == "20000" && data.result) {
-                    $("#loginName").val(data.result.loginName);
-                    $("#realName").val(data.result.realName);
-                    $("#password").val(data.result.password);
-                    $("#phone").val(data.result.phone);
-
+    $("#generalForm").bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            loginName:{
+                validators: {
+                    notEmpty: {
+                        message: '登陆名不能为空!'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: '登陆名长度必须在6到30之间'
+                    },
+                }
+            },
+            realName:{
+                validators: {
+                    notEmpty: {
+                        message: '真实名不能为空!'
+                    }
+                }
+            },
+            sex:{
+                validators: {
+                    notEmpty: {
+                        message: '性别不能为空!'
+                    }
+                }
+            },
+            phone:{
+                message: 'The phone is not valid',
+                validators: {
+                    notEmpty: {
+                        message: '手机号码不能为空'
+                    },
+                    regexp: {
+                        regexp: /^1[3|5|8]{1}[0-9]{9}$/,
+                        message: '请输入正确的手机号码'
+                    }
+                }
+            },
+            email:{
+                validators: {
+                    notEmpty: {
+                        message: 'email不能为空!'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    }
                 }
             }
-        });
+        }
+    });
 });
 
 
 //提交
 $('#btnUpdate').click(function () {
 
-    var sysUserInfo = {},
-        id = $("#sysUserId").val();
-    url = webConfig.webUrl + '/addSysUser';
+        var bootstrapValidator = $("#generalForm").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if(bootstrapValidator.isValid()){
 
+            var sysUser = {},url = webConfig.webUrl + '/sysUser/addSysUser';
 
-    if (null != id && "" != id && id != "undefined") {
-        sysUserInfo.id = $("#sysUserId").val(); //用户id
-        url = webConfig.webUrl + '/updateSysUser';
-    }
+            sysUser. loginName = $("#loginName").val();
+            sysUser.realName = $("#realName").val();
+            sysUser.sex = $("#sex").val();
+            sysUser.phone = $("#phone").val();
+            sysUser.email = $("#email").val();
+            sysUser.birthday = $("#birthday").val();
 
-    sysUserInfo.userName = $("#sysUserName").val();  //用户名称
-    sysUserInfo.password = $("#sysUserPassword").val();  //用户密码
-
-
-    if (sysUserInfo.userName == null || sysUserInfo.userName == "") {
-        layer.alert("请输入用户名", {icon: 2});
-        return false;
-    }
-
-
-    if (sysUserInfo.password == null || sysUserInfo.password == "") {
-        layer.alert("请输入密码", {icon: 2});
-        return false;
-    }
-
-
-
-
-    $.ajax({
-            url: url,
-            type: 'POST',
-            dataType: 'json',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(sysUserInfo)
-        })
-        .done(function (data) {
-            if (data) {
-                if (data.code == "10000") {
-                    layer.alert(data.message, {icon: 1}, function () {
-                        parent.layer.closeAll('iframe');
-                    });
-                    return;
-                } else {
-                    layer.alert(data.message, {icon: 2});
+            $.ajax({
+                url: url,
+                type: 'POST',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(sysUser)
+            })
+            .done(function (data) {
+                if (data) {
+                    if (data.code == "20000") {
+                        layer.alert(data.message, {icon: 1}, function () {
+                            parent.layer.closeAll('iframe');
+                        });
+                        return true;
+                    } else {
+                        layer.alert(data.message, {icon: 2});
+                    }
                 }
-            }
-        });
-});
+            });
+        }
+        else return false;
+    });
 
 
 //取消

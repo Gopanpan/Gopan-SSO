@@ -2,9 +2,11 @@ package bing.Pan.sso.service;
 
 import bing.Pan.sso.common.enums.ResponseCode;
 import bing.Pan.sso.common.exception.ServiceException;
+import bing.Pan.sso.common.utils.EncryptUtils;
 import bing.Pan.sso.domain.bussinessobject.SystemUserBo;
 import bing.Pan.sso.domain.entity.SysUser;
 import bing.Pan.sso.mapper.mapperInterface.SysUserMapper;
+import bing.Pan.sso.service.config.properties.SsoSystemProperties;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
+
 
 /**
  * @crea : Created by intelliJ IDEA 16.1.3
@@ -25,6 +29,7 @@ import org.springframework.util.ObjectUtils;
 @Transactional(readOnly = true)
 public class SystemUserService extends BaseService {
 
+    @Autowired private SsoSystemProperties ssoSystemProperties;
     @Autowired private SysUserMapper sysUserMapper;
 
 
@@ -49,5 +54,15 @@ public class SystemUserService extends BaseService {
 
         return systemUser;
 
+    }
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public void addAUpdateSysUser(SysUser sysUser) throws Exception {
+        if(StringUtils.isEmpty(sysUser.getId())){
+            if(StringUtils.isEmpty(sysUser.getPassword()))
+                sysUser.setPassword(EncryptUtils.aesEncrypt(ssoSystemProperties.getDefaultPassword()));
+            sysUserMapper.insert(sysUser);
+        }else
+            sysUserMapper.updateByPrimaryKeySelective(sysUser);
     }
 }

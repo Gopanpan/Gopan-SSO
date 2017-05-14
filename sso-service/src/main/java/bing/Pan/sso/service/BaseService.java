@@ -11,8 +11,9 @@ import org.slf4j.LoggerFactory;
  * @desc :
  */
 
-
 public class BaseService {
+
+
     public Logger logger =  LoggerFactory.getLogger(BaseService.class);
 
 

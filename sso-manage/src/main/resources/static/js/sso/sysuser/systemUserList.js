@@ -1,5 +1,5 @@
 //常量
-var dataUrl = webConfig.webUrl+'/systemUserList',
+var dataUrl = webConfig.webUrl+'/sysUser/systemUserList',
     grid_selector = "#grid-table",
     pager_selector = "#grid-pager",
     pageSize = 10;
@@ -149,7 +149,7 @@ function andOrupdateSysUser(sysUserId) {
         shadeClose: true,
         shade: [0.5],
         maxmin: true, //开启最大化最小化按钮
-        area: ['500px', '500px'],
+        area: ['790px', '500px'],
         content: webConfig.webUrl + '/andOrupdateSysUserView?sysUserId=' + sysUserId,
         end: function () {
             reload();
@@ -165,7 +165,7 @@ function sysUserDetail(sysUserId) {
         shadeClose: true,
         shade: [0.5],
         maxmin: true, //开启最大化最小化按钮
-        area: ['768px', '400px'],
+        area: ['768px', '700px'],
         content: webConfig.webUrl + "/manager/sysUserDetail?sysUserId="+sysUserId,
         end: function () {
             reload();
