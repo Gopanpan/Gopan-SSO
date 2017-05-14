@@ -12,7 +12,6 @@
     <link href="static/css/animate.css" rel="stylesheet">
     <link href="static/css/style.css" rel="stylesheet">
     <link href="static/css/zTree/zTreeStyle.css" rel="stylesheet" type="text/css">
-    <link href="static/assets/combobox/bootstrap-select.min.css" rel="stylesheet">
 </head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">

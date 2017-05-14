@@ -10,7 +10,7 @@
     <meta name="description" content="">
 
     <link rel="shortcut icon" href="static/img/favicon.ico">
-    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link href="static/css/animate.css" rel="stylesheet">
     <link href="static/css/style.css" rel="stylesheet">
