@@ -8,17 +8,17 @@
     <link rel="shortcut icon" href="static/img/favicon.ico">
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
     <link href="static/css/font-awesome.min.css" rel="stylesheet">
-    <link href="static/css/plugins/jqgrid/ui.jqgrid.css" rel="stylesheet">
+    <link href="static/css/jqgrid/ui.jqgrid.css" rel="stylesheet">
     <link href="static/css/animate.css" rel="stylesheet">
     <link href="static/css/style.css" rel="stylesheet">
-    <link href="static/css/plugins/zTree/zTreeStyle.css" rel="stylesheet" type="text/css">
+    <link href="static/css/zTree/zTreeStyle.css" rel="stylesheet" type="text/css">
     <link href="static/assets/combobox/bootstrap-select.min.css" rel="stylesheet">
 </head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
     <@frame_content/>
 </div>
-<script src="static/js/jquery.min.js"></script>
+<script src="static/js/jquery/jquery.min.js"></script>
 <script src="static/js/bootstrap/bootstrap.min.js"></script>
 <script src="static/js/jquery/metisMenu/jquery.metisMenu.js"></script>
 <script src="static/js/jquery/slimscroll/jquery.slimscroll.min.js"></script>

@@ -13,7 +13,7 @@
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
     <link href="static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link href="static/css/animate.css" rel="stylesheet">
-    <link href="static/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 
@@ -62,7 +62,7 @@
     </div>
     <!--右侧部分结束-->
 </div>
-<script src="static/js/jquery.min.js"></script>
+<script src="static/js/jquery/jquery.min.js"></script>
 <script src="static/js/bootstrap/bootstrap.min.js"></script>
 <script src="static/js/jquery/metisMenu/jquery.metisMenu.js"></script>
 <script src="static/js/jquery/slimscroll/jquery.slimscroll.min.js"></script>

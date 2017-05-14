@@ -47,13 +47,13 @@
     </div>
 </div>
 <!-- 全局js -->
-<script src="static/js/jquery.min.js?v=2.1.4"></script>
-<script src="static/js/bootstrap/bootstrap.min.js?v=3.3.6"></script>
-<script type="text/javascript" src="static/js/md5.js"></script>
+<script src="static/js/jquery/jquery.min.js"></script>
+<script src="static/js/bootstrap/bootstrap.min.js"></script>
+<script src="static/js/md5.js"></script>
 <script src="static/js/layer/layer.js"></script>
 
-<script type="text/javascript" src="static/js/sso/config.js"></script>
-<script type="text/javascript" src="static/js/sso/mylib.js"></script>
-<script type="text/javascript" src="static/js/sso/login.js"></script>
+<script src="static/js/sso/config.js"></script>
+<script src="static/js/sso/mylib.js"></script>
+<script src="static/js/sso/login.js"></script>
 </body>
 </html>
