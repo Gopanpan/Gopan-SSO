@@ -6,6 +6,7 @@ import bing.Pan.sso.common.response.Response;
 import bing.Pan.sso.domain.bussinessobject.SystemUserAddBo;
 import bing.Pan.sso.domain.bussinessobject.SystemUserBo;
 import bing.Pan.sso.domain.entity.SysUser;
+import bing.Pan.sso.domain.valueobject.SysUserVo;
 import bing.Pan.sso.service.SystemUserService;
 import com.google.common.collect.Maps;
 import io.swagger.annotations.Api;
@@ -13,12 +14,11 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.http.HttpRequest;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -84,10 +84,12 @@ public class SystemUserController extends BaseController{
     public Object checkLoginName(String loginName){
 
         Map<String, Boolean> result = Maps.newHashMap();
-        if(loginName.equals("bing.Pan")){
-            result.put("valid",false);
-        }else
+        SysUserVo sysUserVo = systemUserService.findByLoginName(loginName);
+        if(ObjectUtils.isEmpty(sysUserVo))
             result.put("valid",true);
+        else
+            result.put("valid",false);
+
         return result;
 
     }

@@ -64,41 +64,49 @@ function initJqgrid() {
         colNames: ['用户Id','<div align="center"><span>用户名</span></div>','<div align="center"><span>真实名称</span></div>',
             '<div align="center"><span>性别</span></div>','<div align="center"><span>电话号码</span></div>',
             '<div align="center"><span>电子邮件</span></div>','<div align="center"><span>创建时间</span></div>',
-            '<div align="center"><span>更新时间</span></div>', '<div align="center"><span>操作</span></div>'],
+            '<div align="center"><span>最后登录时间</span></div>','<div align="center"><span>是否启用</span></div>',
+            '<div align="center"><span>操作</span></div>'],
 
         //列属性，和colNames的个数和顺序必须对应
         colModel: [
             {name: 'id', index: 'id',hidden: true },
-            {name: 'loginName', index: 'loginName', sortable: false, align: 'center', width: 100},
-            {name: 'realName', index: 'realName', sortable: false, align: 'center', width: 100},
+            {name: 'loginName', index: 'loginName', sortable: false, align: 'center', width: 70},
+            {name: 'realName', index: 'realName', sortable: false, align: 'center', width: 70},
             {
                 name: 'sex', index: 'sex', sortable: false, align: 'center', width: 50,
                 formatter: function (x) {
                     return sexFormat(x);
                 }
             },
-            {name: 'phone', index: 'phone', sortable: false, align: 'center', width: 100},
-            {name: 'email', index: 'email', sortable: false, align: 'center', width: 80},
+            {name: 'phone', index: 'phone', sortable: false, align: 'center', width: 80},
+            {name: 'email', index: 'email', sortable: false, align: 'center', width: 130},
             {
-                name: 'createTime', index: 'createTime', sortable: false, align: 'center', width: 100,
+                name: 'createTime', index: 'createTime', sortable: false, align: 'center', width: 105,
                 formatter: function (x) {
                     return ChangeDateFormat(x);
                 }
             },
             {
-                name: 'updateTime', index: 'updateTime', sortable: false, align: 'center', width: 100,
+                name: 'lastLogin', index: 'lastLogin', sortable: false, align: 'center', width: 105,
                 formatter: function (x) {
                     return ChangeDateFormat(x);
                 }
             },
             {
-                name: 'id', index: 'id', sortable: false, resizable: false, align: 'center', width: 100,
+                name: 'available', index: 'available', sortable: false, align: 'center', width: 55,
+                formatter: function (x) {
+                    return availableFormat(x);
+                }
+            },
+            {
+                name: 'id', index: 'id', sortable: false, resizable: false, align: 'center', width: 105,
                 formatter: function (x,y,z) {
                     return '<a class="btn btn-primary btn-xs" onclick="sysUserDetail(\''+x+'\');">详情</a> ' +
                         '<a class="btn btn-primary btn-xs" onclick="andOrupdateSysUser(\''+x+'\');">修改</a> ' +
                         '<a class="btn btn-primary btn-xs" onclick="deleteSysInfo(\''+x+'\',\''+z['loginName']+'\');">删除</a>';
                 }
             }
+
         ],
         loadComplete: function (data) {
             serviceErrorValidate(data);

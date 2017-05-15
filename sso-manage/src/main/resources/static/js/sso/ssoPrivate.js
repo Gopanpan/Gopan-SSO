@@ -53,15 +53,9 @@ function ChangeDateFormat(val) {
  */
 function sexFormat(sex){
 
-    if(sex) {
-        if(sex == 0){return '女'}
-        if(sex == 1){return '男'}
-        else{return '未知'}
-
-    }
-    return '';
-
-
+    if(sex == 0){return '女'}
+    if(sex == 1){return '男'}
+    else{return '未知'}
 }
 
 /**

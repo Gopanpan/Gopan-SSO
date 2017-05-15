@@ -4,20 +4,17 @@ import bing.Pan.sso.common.enums.ResponseCode;
 import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.common.response.Response;
 import bing.Pan.sso.domain.bussinessobject.PageBo;
-import bing.Pan.sso.domain.valueobject.BaseVo;
 import bing.Pan.sso.service.SystemInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * @crea : Created by intelliJ IDEA 16.1.3

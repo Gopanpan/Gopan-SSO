@@ -6,6 +6,7 @@ import bing.Pan.sso.common.utils.EncryptUtils;
 import bing.Pan.sso.common.utils.Md5Utils;
 import bing.Pan.sso.domain.bussinessobject.SystemUserBo;
 import bing.Pan.sso.domain.entity.SysUser;
+import bing.Pan.sso.domain.valueobject.SysUserVo;
 import bing.Pan.sso.mapper.mapperInterface.SysUserMapper;
 import bing.Pan.sso.service.config.properties.SsoSystemProperties;
 import com.github.pagehelper.PageHelper;
@@ -46,14 +47,14 @@ public class SystemUserService extends BaseService {
         return sysUserMapper.selectByPrimaryKey(sysUserId);
     }
 
-    public SysUser findUserByLoginName(String loginName, String password) throws ServiceException {
-        SysUser systemUser = sysUserMapper.findUserByLoginName(loginName);
-        if(ObjectUtils.isEmpty(systemUser))
+    public SysUserVo findByLoginName(String loginName, String password) throws ServiceException {
+        SysUserVo sysUserVo = sysUserMapper.findUserByLoginName(loginName);
+        if(ObjectUtils.isEmpty(sysUserVo))
             throw new ServiceException(ResponseCode.LOGIN_USER_MISS);
-        if(!systemUser.getPassword().equals(password))
+        if(!sysUserVo.getPassword().equals(password))
             throw new ServiceException(ResponseCode.LOGIN_PASSWORD_ERR);
 
-        return systemUser;
+        return sysUserVo;
 
     }
 
@@ -65,5 +66,10 @@ public class SystemUserService extends BaseService {
             sysUserMapper.insert(sysUser);
         }else
             sysUserMapper.updateByPrimaryKeySelective(sysUser);
+    }
+
+
+    public SysUserVo findByLoginName(String loginName) {
+        return sysUserMapper.findUserByLoginName(loginName);
     }
 }
