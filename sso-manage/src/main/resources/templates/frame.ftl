@@ -41,8 +41,8 @@
 
 
 <script src="static/js/index.js"></script>
-<script src="static/js/sso/config.js"></script>
-<script src="static/js/sso/mylib.js"></script>
+<script src="static/js/sso/ssoconfig.js"></script>
+<script src="static/js/sso/ssoPrivate.js"></script>
 
     <@business_js/>
 </body>

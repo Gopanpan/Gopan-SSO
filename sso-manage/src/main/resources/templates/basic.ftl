@@ -68,7 +68,7 @@
 <script src="static/js/jquery/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="static/js/layer/layer.js"></script>
 <script src="static/js/hAdmin/hAdmin.js"></script>
-<script src="static/js/sso/config.js"></script>
+<script src="static/js/sso/ssoConfig.js"></script>
 <script src="static/js/index.js"></script>
 </body>
 </html>

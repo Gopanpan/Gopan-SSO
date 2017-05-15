@@ -52,8 +52,8 @@
 <script src="static/js/md5.js"></script>
 <script src="static/js/layer/layer.js"></script>
 
-<script src="static/js/sso/config.js"></script>
-<script src="static/js/sso/mylib.js"></script>
+<script src="static/js/sso/ssoConfig.js"></script>
+<script src="static/js/sso/ssoPrivate.js"></script>
 <script src="static/js/sso/login.js"></script>
 </body>
 </html>
