@@ -4,7 +4,6 @@ import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
-import org.springframework.util.SystemPropertyUtils;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -19,11 +18,11 @@ import java.net.URLDecoder;
  * @date : 2017/4/5 13:39
  * @desc :
  */
-public class Base64Util {
+public class Base64Utils {
 	
-	private static Logger log = LoggerFactory.getLogger(Base64Util.class);
+	private static Logger log = LoggerFactory.getLogger(Base64Utils.class);
 
-	public Base64Util() {}
+	public Base64Utils() {}
 	
 	/**
 	 * base64加密字符串

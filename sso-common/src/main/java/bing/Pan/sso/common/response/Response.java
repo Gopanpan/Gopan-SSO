@@ -14,12 +14,11 @@ public class Response<T> implements Serializable {
 
     private static final long serialVersionUID = 355207958304927788L;
 
-    // 状态码
-    private String code;
-    // 消息
-    private String message;
-    // 数据
-    private T result;
+
+    private String code;            // 状态码
+    private String message;         // 消息
+    private String detailMessage;   //详细信息
+    private T result;               // 数据
 
     private Long timestamp = System.currentTimeMillis();
 
@@ -33,17 +32,32 @@ public class Response<T> implements Serializable {
         this.message = response.getDescription();
     }
 
+
+    public Response(ResponseCode response,String detailMessage) {
+        this.code = response.getCode();
+        this.message = response.getDescription();
+        this.detailMessage = detailMessage;
+    }
+
+
     public Response(String code, String message) {
         this.code = code;
         this.message = message;
     }
+
+    public Response(String code, String message,String detailMessage) {
+        this.code = code;
+        this.message = message;
+        this.detailMessage = detailMessage;
+    }
+
+
 
     public Response(T result) {
         this.code = ResponseCode.SUCCESS.getCode();
         this.message = ResponseCode.SUCCESS.getDescription();
         this.result = result;
     }
-
 
 
     public String getCode() {
@@ -62,6 +76,14 @@ public class Response<T> implements Serializable {
         this.message = message;
     }
 
+    public String getDetailMessage() {
+        return detailMessage;
+    }
+
+    public void setDetailMessage(String detailMessage) {
+        this.detailMessage = detailMessage;
+    }
+
     public T getResult() {
         return result;
     }
@@ -77,5 +99,4 @@ public class Response<T> implements Serializable {
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
     }
-
 }

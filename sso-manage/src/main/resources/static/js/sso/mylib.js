@@ -77,7 +77,7 @@ function availableFormat(avaliable){
 
 
 /**
- * 服务器端返回异常校验
+ * 执行jqgrid获取表格数据时,校验服务器端是否返回异常
  * @param data
  */
 function serviceErrorValidate(data){
@@ -93,6 +93,33 @@ function serviceErrorValidate(data){
 function frontErrorValidate(data){
     layer.msg("页面校验失败<br/>异常内容："+data,{icon:5,time:3000});
     return false;
+}
+
+
+/**
+ * 验证服务器端处理的返回结果
+ * @param data             服务器端返回的处理结果数据
+ * @param successOperate   服务器端处理结果为成功后的页面操作 为true是执行回调函数，false不执行
+ * @param errorOperate     服务器端处理结果为失败后的页面操作 为true是执行回调函数，false不执行
+ */
+function topSuccessMessage (data,successOperate,errorOperate) {
+
+    if (data) {
+        if (data.code == "20000") {
+            layer.msg(data.message, {icon: 1,time:3000}, function () {
+                if(successOperate ==true){
+                    parent.layer.closeAll('iframe');
+                }
+            });
+        } else {
+            layer.msg(data.message, {icon: 2,time:3000}, function () {
+                if(errorOperate ==true){
+                    parent.layer.closeAll('iframe');
+                }
+            });
+        }
+    }
+
 }
 
 

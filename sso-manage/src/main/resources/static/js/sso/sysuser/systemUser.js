@@ -17,8 +17,14 @@ $(document).ready(function () {
                     stringLength: {
                         min: 6,
                         max: 30,
-                        message: '登陆名长度必须在6到30之间'
+                        message: '登陆名长度必须在6到30之间!'
                     },
+                    remote:{
+                        message: '该登陆名太抢手了,请换一个试试!',//提示消息
+                        delay :  1000,//每输入一个字符，就发ajax请求，服务器压力还是太大，设置2秒发送一次ajax（默认输入一个字符，提交一次，服务器压力太大）
+                        type:"POST",
+                        url: webConfig.webUrl + '/sysUser/checkLoginName'
+                    }
                 }
             },
             realName:{
@@ -86,16 +92,7 @@ $('#btnUpdate').click(function () {
                 data: JSON.stringify(sysUser)
             })
             .done(function (data) {
-                if (data) {
-                    if (data.code == "20000") {
-                        layer.alert(data.message, {icon: 1}, function () {
-                            parent.layer.closeAll('iframe');
-                        });
-                        return true;
-                    } else {
-                        layer.alert(data.message, {icon: 2});
-                    }
-                }
+                topSuccessMessage(data,true,false);
             });
         }
         else return false;

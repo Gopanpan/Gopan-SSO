@@ -11,7 +11,7 @@ import java.security.NoSuchAlgorithmException;
  * @date : 2017/4/5 13:39
  * @desc :
  */
-public class Md5Util {
+public class Md5Utils {
 
     /**
      * 使用md5的算法进行加密
@@ -19,8 +19,7 @@ public class Md5Util {
     public static String md5(String plainText) {
         byte[] secretBytes = null;
         try {
-            secretBytes = MessageDigest.getInstance("md5").digest(
-                    plainText.getBytes());
+            secretBytes = MessageDigest.getInstance("md5").digest( plainText.getBytes());
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("没有md5这个算法！");
         }

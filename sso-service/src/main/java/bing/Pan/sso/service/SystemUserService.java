@@ -3,6 +3,7 @@ package bing.Pan.sso.service;
 import bing.Pan.sso.common.enums.ResponseCode;
 import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.common.utils.EncryptUtils;
+import bing.Pan.sso.common.utils.Md5Utils;
 import bing.Pan.sso.domain.bussinessobject.SystemUserBo;
 import bing.Pan.sso.domain.entity.SysUser;
 import bing.Pan.sso.mapper.mapperInterface.SysUserMapper;
@@ -60,7 +61,7 @@ public class SystemUserService extends BaseService {
     public void addAUpdateSysUser(SysUser sysUser) throws Exception {
         if(StringUtils.isEmpty(sysUser.getId())){
             if(StringUtils.isEmpty(sysUser.getPassword()))
-                sysUser.setPassword(EncryptUtils.aesEncrypt(ssoSystemProperties.getDefaultPassword()));
+                sysUser.setPassword(EncryptUtils.aesEncrypt(Md5Utils.md5(ssoSystemProperties.getDefaultPassword())));
             sysUserMapper.insert(sysUser);
         }else
             sysUserMapper.updateByPrimaryKeySelective(sysUser);

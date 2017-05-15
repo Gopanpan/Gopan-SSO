@@ -41,7 +41,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public Object handleHttpMessageNotReadableException(HttpMessageNotReadableException ex,HttpServletRequest request) {
-        writeLog(ex, request);
+        writeLog(ex, request,null);
         return new Response<>(ResponseCode.CLIENT_PARAM_ERR);
     }
 
@@ -51,7 +51,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public Response handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException ex,HttpServletRequest request) {
-        writeLog(ex, request);
+        writeLog(ex, request,null);
         return new Response<>(ResponseCode.CLIENT_NO_SUPPORT_METHOD);
     }
 
@@ -61,7 +61,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     public Object handleHttpMediaTypeNotSupportedException(Exception ex,HttpServletRequest request) {
-        writeLog(ex, request);
+        writeLog(ex, request,null);
         return new Response<>(ResponseCode.CLIENT_NO_SUPPORT_TYPE);
     }
 
@@ -69,38 +69,40 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public Object handleMissingServletRequestParameterException(MissingServletRequestParameterException ex,
                                                                 HttpServletRequest request) {
-        writeLog(ex, request);
+        writeLog(ex, request,null);
         return new Response<>(ResponseCode.CLIENT_PARAM_ERR);
     }
 
     @ExceptionHandler(UnsatisfiedServletRequestParameterException.class)
-    public Object handleRequestParameterException(UnsatisfiedServletRequestParameterException exception) {
-        Response<Object> cp = new Response<>();
-        cp.setCode("50501");
-        cp.setMessage("参数错误!" + exception.getMessage());
-        return cp;
+    public Object handleRequestParameterException(UnsatisfiedServletRequestParameterException ex,HttpServletRequest request) {
+        Response<Object> rs = new Response<>();
+        rs.setCode("50501");
+        rs.setMessage("参数错误!" + ex.getMessage());
+        writeLog(ex, request,null);
+        return rs;
     }
 
     @ExceptionHandler(Exception.class)
-    public Object handleException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
+    public Object handleException(Exception ex, HttpServletRequest request) {
 
-        writeLog(ex, request);
+        writeLog(ex, request,null);
         return new Response<>(ResponseCode.SERVE_UNKNOWN_ERROR);
     }
 
     @ExceptionHandler(ServiceException.class)
-    public Object serviceExceptionHandle(ServiceException ex, HttpServletRequest request,
-                                         HttpServletResponse response) {
+    public Object serviceExceptionHandle(ServiceException ex, HttpServletRequest request) {
 
-        Response<Object> cp = new Response<>();
-        cp.setCode(ex.getErrorCode());
-        cp.setMessage(ex.getMessage());
-        writeLog(ex, request);
-        return cp;
+        Response<Object> rs = new Response<>();
+        rs.setCode(ex.getErrorCode());
+        rs.setMessage(ex.getMessage());
+        rs.setDetailMessage(ex.getDetailErrorMsg());
+        writeLog(ex, request,ex.getDetailErrorMsg());
+        return rs;
     }
 
-    private void writeLog(Exception ex, HttpServletRequest request) {
-        String url = MessageFormat.format("Exception :{0}?{1}", request.getRequestURL(), request.getQueryString());
+    private void writeLog(Exception ex, HttpServletRequest request,String detailMessage) {
+        String url = MessageFormat.format("Exception :{0}?{1}", request.getRequestURL(), request.getParameterMap());
+        log.error(String.format("%s%s","错误详情:",detailMessage));
         log.error(url, ex);
     }
 }

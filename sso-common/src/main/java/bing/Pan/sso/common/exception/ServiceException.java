@@ -15,9 +15,11 @@ public class ServiceException extends Exception implements Serializable {
 
     private static final long serialVersionUID = -1695036681341844113L;
 
-    private String errorCode;
+    private String errorCode;       //错误代码
 
-    private String errorMsg;
+    private String errorMsg;        //错误描述
+
+    private String detailErrorMsg;  //错误详细描述
 
     public ServiceException(String errorMsg) {
         super(errorMsg);
@@ -37,14 +39,25 @@ public class ServiceException extends Exception implements Serializable {
         this.errorMsg = responseCode.getDescription();
     }
 
+
+    public ServiceException(ResponseCode responseCode,String detailErrorMsg) {
+
+        super(responseCode.getDescription());
+        this.errorCode = responseCode.getCode();
+        this.errorMsg = responseCode.getDescription();
+        this.detailErrorMsg = detailErrorMsg;
+    }
+
+
+
     public ServiceException(ServiceException e) {
-        super(e);
+        super(e.getMessage());
         this.errorCode = e.getErrorCode();
         this.errorMsg = e.getMessage();
     }
 
     public ServiceException(Exception e) {
-        super(e);
+        super(e.getMessage());
         this.errorCode = ResponseCode.SERVE_UNKNOWN_ERROR.getCode();
         this.errorMsg = ResponseCode.SERVE_UNKNOWN_ERROR.getDescription();
     }
@@ -64,5 +77,13 @@ public class ServiceException extends Exception implements Serializable {
 
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
+    }
+
+    public String getDetailErrorMsg() {
+        return detailErrorMsg;
+    }
+
+    public void setDetailErrorMsg(String detailErrorMsg) {
+        this.detailErrorMsg = detailErrorMsg;
     }
 }
