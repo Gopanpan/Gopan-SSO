@@ -10,102 +10,25 @@ function setPostData(){
 
 //加载页面
 $(document).ready(function () {
-    $.jgrid.defaults.styleUI = 'Bootstrap';
-    initJqgrid();
+
+    var data_colNames = ['用户Id','<div align="center"><span>用户名</span></div>','<div align="center"><span>真实名称</span></div>','<div align="center"><span>性别</span></div>','<div align="center"><span>电话号码</span></div>', '<div align="center"><span>电子邮件</span></div>','<div align="center"><span>创建时间</span></div>', '<div align="center"><span>最后登录时间</span></div>','<div align="center"><span>是否启用</span></div>', '<div align="center"><span>操作</span></div>'];
+    var data_colModel = [
+        {name: 'id', index: 'id',hidden: true },
+        {name: 'loginName', index: 'loginName', sortable: false, align: 'center', width: 70},
+        {name: 'realName', index: 'realName', sortable: false, align: 'center', width: 70},
+        {name: 'sex', index: 'sex', sortable: false, align: 'center', width: 50,formatter: function (x) { return sexFormat(x);}},
+        {name: 'phone', index: 'phone', sortable: false, align: 'center', width: 80},
+        {name: 'email', index: 'email', sortable: false, align: 'center', width: 130},
+        {name: 'createTime', index: 'createTime', sortable: false, align: 'center', width: 105,formatter: function (x) {return ChangeDateFormat(x);}},
+        {name: 'lastLogin', index: 'lastLogin', sortable: false, align: 'center', width: 105, formatter: function (x) {return ChangeDateFormat(x);}},
+        {name: 'available', index: 'available', sortable: false, align: 'center', width: 55,formatter: function (x) {return availableFormat(x);}},
+        {name: 'id', index: 'id', sortable: false, resizable: false, align: 'center', width: 105,formatter: function (x,y,z) {return '<a class="btn btn-primary btn-xs" onclick="sysUserDetail(\''+x+'\');">详情</a><a class="btn btn-primary btn-xs" onclick="andOrupdateSysUser(\''+x+'\');">修改</a> <a class="btn btn-primary btn-xs" onclick="deleteSysInfo(\''+x+'\',\''+z['loginName']+'\');">删除</a>';}}];
+
+    initJqgrid(sysUser_list_url,data_colNames,data_colModel);
 });
 
 
-//初始化表格
-function initJqgrid() {
-    $(jqgrid_config.grid_selector).jqGrid({
-        height:'atuo',
-        multiselect: true,   //是否允许全选
-        hidegrid: false,     //是否允许显示/隐藏，只有caption不为空时有效
 
-        rowList: [           //可选显示的行数
-            jqgrid_config.optional_table_rowNum_1,jqgrid_config.optional_table_rowNum_2,
-            jqgrid_config.optional_table_rowNum_3
-        ],
-        rowNum: jqgrid_config.pageSize,             //默认显示行数
-        viewrecords: true,                          //总条数
-        pager: jqgrid_config.pager_selector,        //分页层 id
-        mtype: 'post',                              //提交方式，默认get
-        postData: setPostData(),
-        datatype: "json",                           //数据格式
-        jsonReader: {
-            repeatitems: true,                      //是否允许乱序显示数据,true:不可以
-            root: "result.list",                    //当前页的list数据集合
-            total: "result.pages",                  //总页数
-            page: "result.pageNum",                 //当前页码
-            records: "result.total"                 //总数据量
-
-        },
-        url: sysUser_list_url,                      //数据来源地址
-
-        prmNames: {                                 //分页参数
-            page: 'pageIndex', rows: "pageSize", order: null, search: null, sort: null, nd: null, sidx: null
-        },
-
-
-        colNames: [                                 //显示的标题
-            '用户Id','<div align="center"><span>用户名</span></div>','<div align="center"><span>真实名称</span></div>',
-            '<div align="center"><span>性别</span></div>','<div align="center"><span>电话号码</span></div>',
-            '<div align="center"><span>电子邮件</span></div>','<div align="center"><span>创建时间</span></div>',
-            '<div align="center"><span>最后登录时间</span></div>','<div align="center"><span>是否启用</span></div>',
-            '<div align="center"><span>操作</span></div>'
-        ],
-
-
-        colModel: [                                 //列属性，和colNames的个数和顺序必须对应
-            {name: 'id', index: 'id',hidden: true },
-            {name: 'loginName', index: 'loginName', sortable: false, align: 'center', width: 70},
-            {name: 'realName', index: 'realName', sortable: false, align: 'center', width: 70},
-            {
-                name: 'sex', index: 'sex', sortable: false, align: 'center', width: 50,
-                formatter: function (x) {
-                    return sexFormat(x);
-                }
-            },
-            {name: 'phone', index: 'phone', sortable: false, align: 'center', width: 80},
-            {name: 'email', index: 'email', sortable: false, align: 'center', width: 130},
-            {
-                name: 'createTime', index: 'createTime', sortable: false, align: 'center', width: 105,
-                formatter: function (x) {
-                    return ChangeDateFormat(x);
-                }
-            },
-            {
-                name: 'lastLogin', index: 'lastLogin', sortable: false, align: 'center', width: 105,
-                formatter: function (x) {
-                    return ChangeDateFormat(x);
-                }
-            },
-            {
-                name: 'available', index: 'available', sortable: false, align: 'center', width: 55,
-                formatter: function (x) {
-                    return availableFormat(x);
-                }
-            },
-            {
-                name: 'id', index: 'id', sortable: false, resizable: false, align: 'center', width: 105,
-                formatter: function (x,y,z) {
-                    return '<a class="btn btn-primary btn-xs" onclick="sysUserDetail(\''+x+'\');">详情</a> ' +
-                        '<a class="btn btn-primary btn-xs" onclick="andOrupdateSysUser(\''+x+'\');">修改</a> ' +
-                        '<a class="btn btn-primary btn-xs" onclick="deleteSysInfo(\''+x+'\',\''+z['loginName']+'\');">删除</a>';
-                }
-            }
-
-        ],
-        loadComplete: function (data) {
-            serviceErrorValidate(data);
-        }
-        }).jqGrid('setGridWidth', $(".ibox-content").width());
-
-    //设置grid宽度为自适应,适应比例根据每列设置的宽度
-    $(window).on('resize.jqGrid', function () {
-        $(jqgrid_config.grid_selector).jqGrid('setGridWidth', $(".ibox-content").width());
-    });
-}
 
 //查询
 $("#querySysUsers").bind('click',function(){
@@ -113,7 +36,7 @@ $("#querySysUsers").bind('click',function(){
         url: sysUser_list_url,
         postData: setPostData()
     };
-    $(jqgrid_config.grid_selector).jqGrid("setGridParam", reloadParams).trigger("reloadGrid",[{ page: 1 }]);
+    jqgrid_reload(reloadParams);
 });
 
 
@@ -215,5 +138,5 @@ function reload(){
         url: dataUrl,
         postData: setPostData()
     };
-    $(jqgrid_config.grid_selector).jqGrid("setGridParam", reloadParams).trigger("reloadGrid", [{page: 1}]);
+    jqgrid_reload(reloadParams);
 }
