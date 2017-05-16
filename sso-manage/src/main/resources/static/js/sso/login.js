@@ -7,8 +7,8 @@ function login(){
     }
 
     $.ajax({
-        type:	"POST",
-        url :  webConfig.webUrl+"/loginSysUser",
+        type: "POST",
+        url : user_login_url,
         dataType:"json",
         data: {
             loginName: loginName,
@@ -20,7 +20,7 @@ function login(){
         success: function(data){
             if(data.code == "20000") {
                 $('#J-message').html('登陆成功!');
-                top.location.href = webConfig.webUrl+"/ssoMain";
+                top.location.href = system_main_url;
             }else{
                 $('#J-message').html(data.message);
             }

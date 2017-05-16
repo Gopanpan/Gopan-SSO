@@ -1,9 +1,3 @@
-//常量
-var dataUrl = webConfig.webUrl+'/sysUser/systemUserList',
-    grid_selector = "#grid-table",
-    pager_selector = "#grid-pager",
-    pageSize = 10;
-
 //封装请求页面加载的参数
 function setPostData(){
     return {
@@ -17,58 +11,52 @@ function setPostData(){
 //加载页面
 $(document).ready(function () {
     $.jgrid.defaults.styleUI = 'Bootstrap';
-    var reloadParams = {
-        url: dataUrl,
-        postData: setPostData()
-    };
     initJqgrid();
 });
 
 
 //初始化表格
 function initJqgrid() {
-    $(grid_selector).jqGrid({
+    $(jqgrid_config.grid_selector).jqGrid({
         height:'atuo',
-        //是否允许全选
-        multiselect: true,
-        //是否允许显示/隐藏，只有caption不为空时有效
-        hidegrid: false,
-        //可选显示的行数
-        rowList: [10, 20, 30],
-        //默认显示行数
-        rowNum: pageSize,
-        //总条数
-        viewrecords: true,
-        //分页层 id
-        pager: pager_selector,
-        //提交方式，默认get
-        mtype: 'post',
+        multiselect: true,   //是否允许全选
+        hidegrid: false,     //是否允许显示/隐藏，只有caption不为空时有效
+
+        rowList: [           //可选显示的行数
+            jqgrid_config.optional_table_rowNum_1,jqgrid_config.optional_table_rowNum_2,
+            jqgrid_config.optional_table_rowNum_3
+        ],
+        rowNum: jqgrid_config.pageSize,             //默认显示行数
+        viewrecords: true,                          //总条数
+        pager: jqgrid_config.pager_selector,        //分页层 id
+        mtype: 'post',                              //提交方式，默认get
         postData: setPostData(),
-        //数据格式
-        datatype: "json",
+        datatype: "json",                           //数据格式
         jsonReader: {
-            //是否允许乱序显示数据,true:不可以
-            repeatitems: true,
-            root: "result.list",       //当前页的list数据集合
-            total: "result.pages",     //总页数
-            page: "result.pageNum",    //当前页码
-            records: "result.total"   //总数据量
+            repeatitems: true,                      //是否允许乱序显示数据,true:不可以
+            root: "result.list",                    //当前页的list数据集合
+            total: "result.pages",                  //总页数
+            page: "result.pageNum",                 //当前页码
+            records: "result.total"                 //总数据量
 
         },
-        //数据来源地址
-        url: dataUrl,
-        //分页参数
-        prmNames: {page: 'pageIndex', rows: "pageSize", order: null, search: null, sort: null, nd: null, sidx: null},
+        url: sysUser_list_url,                      //数据来源地址
 
-        //显示的标题
-        colNames: ['用户Id','<div align="center"><span>用户名</span></div>','<div align="center"><span>真实名称</span></div>',
+        prmNames: {                                 //分页参数
+            page: 'pageIndex', rows: "pageSize", order: null, search: null, sort: null, nd: null, sidx: null
+        },
+
+
+        colNames: [                                 //显示的标题
+            '用户Id','<div align="center"><span>用户名</span></div>','<div align="center"><span>真实名称</span></div>',
             '<div align="center"><span>性别</span></div>','<div align="center"><span>电话号码</span></div>',
             '<div align="center"><span>电子邮件</span></div>','<div align="center"><span>创建时间</span></div>',
             '<div align="center"><span>最后登录时间</span></div>','<div align="center"><span>是否启用</span></div>',
-            '<div align="center"><span>操作</span></div>'],
+            '<div align="center"><span>操作</span></div>'
+        ],
 
-        //列属性，和colNames的个数和顺序必须对应
-        colModel: [
+
+        colModel: [                                 //列属性，和colNames的个数和顺序必须对应
             {name: 'id', index: 'id',hidden: true },
             {name: 'loginName', index: 'loginName', sortable: false, align: 'center', width: 70},
             {name: 'realName', index: 'realName', sortable: false, align: 'center', width: 70},
@@ -115,17 +103,17 @@ function initJqgrid() {
 
     //设置grid宽度为自适应,适应比例根据每列设置的宽度
     $(window).on('resize.jqGrid', function () {
-        $(grid_selector).jqGrid('setGridWidth', $(".ibox-content").width());
+        $(jqgrid_config.grid_selector).jqGrid('setGridWidth', $(".ibox-content").width());
     });
 }
 
 //查询
 $("#querySysUsers").bind('click',function(){
     var reloadParams = {
-        url: dataUrl,
+        url: sysUser_list_url,
         postData: setPostData()
     };
-    $(grid_selector).jqGrid("setGridParam", reloadParams).trigger("reloadGrid",[{ page: 1 }]);
+    $(jqgrid_config.grid_selector).jqGrid("setGridParam", reloadParams).trigger("reloadGrid",[{ page: 1 }]);
 });
 
 
@@ -227,5 +215,5 @@ function reload(){
         url: dataUrl,
         postData: setPostData()
     };
-    $(grid_selector).jqGrid("setGridParam", reloadParams).trigger("reloadGrid", [{page: 1}]);
+    $(jqgrid_config.grid_selector).jqGrid("setGridParam", reloadParams).trigger("reloadGrid", [{page: 1}]);
 }

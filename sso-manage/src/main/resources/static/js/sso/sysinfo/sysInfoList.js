@@ -1,10 +1,3 @@
-//常量
-var dataUrl = webConfig.webUrl + '/sysInfoPageList',
-    grid_selector = "#grid-table",
-    pager_selector = "#grid-pager",
-    pageSize = 20;
-
-
 //加载页面
 $(document).ready(function () {
     $.jgrid.defaults.styleUI = 'Bootstrap';
