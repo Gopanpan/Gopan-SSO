@@ -16,13 +16,13 @@ import java.io.Serializable;
 @ApiModel
 public class PageBo implements Serializable {
 
-    @ApiModelProperty("当前页码")
+    @ApiModelProperty(value = "当前页码",required = true)
     @NotNull(message="当前页码不能为空!")
-    private int pageIndex;
+    private int pageIndex = 1;
 
-    @ApiModelProperty("每页数据量")
+    @ApiModelProperty(value = "每页数据量",required = true)
     @NotNull(message = "每页数量不能为空!")
-    private int pageSize;
+    private int pageSize = 20;
 
 
     public int getPageIndex() {

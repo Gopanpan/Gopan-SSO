@@ -27,7 +27,7 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("sso单点登录系统")
+                .title("sso单点登录后台管理系统")
                 .description("sso单点登录系统后台系统管理员操作接口API")
                 .termsOfServiceUrl("")
                 .contact(new Contact("bing.Pan", "", ""))

@@ -31,8 +31,6 @@ public class ViewController {
         return "login";
 
     }
-
-
     /**
      * 系统主页面
      * @return
@@ -41,8 +39,6 @@ public class ViewController {
     public Object ssoMain(){
         return "basic";
     }
-
-
 
     /**
      * 系统欢迎页面
@@ -54,6 +50,8 @@ public class ViewController {
 
     }
 
+
+    //----------------------------------------sso系统用户管理页面跳转-------------------------------------
 
     /**
      * 系统管理用户列表
@@ -69,12 +67,16 @@ public class ViewController {
      * @param sysUserId
      * @return
      */
-    @RequestMapping(value = "/sysUser/addAUPdateSysUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/sysUser/addAUPdateSysUserView", method = RequestMethod.GET)
     public ModelAndView addAUPdateSysUser(String sysUserId){
         Map<String, Object> map = new HashMap<>();
         map.put("sysUserId", sysUserId);
         return new ModelAndView("sysuser/systemUser", map);
     }
+
+
+
+
 
     /**
      * 系统列表

@@ -1,6 +1,34 @@
 
 //加载页面
 $(document).ready(function () {
+
+    var sysUserId = $("#sysUserId").val();
+    if(sysUserId){
+        $.ajax({
+            url: sysUser_findById_url,
+            type: 'POST',
+            dataType: 'json',
+            data: {sysUserId: sysUserId}
+        })
+            .done(function (data) {
+                serviceErrorValidate(data);
+
+                if (data.code == "20000" && data.result) {
+                    $("#loginName").val(data.result.loginName);
+                    $("#realName").val(data.result.realName);
+                    $("#sex").val(data.result.sex);
+                    $("#phone").val(data.result.phone);
+                    $("#email").val(data.result.email);
+                    $("#birthday").val(data.result.birthday);
+                }
+
+            });
+
+    }
+
+
+
+
     $("#generalForm").bootstrapValidator({
         message: 'This value is not valid',
         feedbackIcons: {
@@ -23,7 +51,7 @@ $(document).ready(function () {
                         message: '该登陆名太抢手了,请换一个试试!',//提示消息
                         delay :  1000,//每输入一个字符，就发ajax请求，服务器压力还是太大，设置2秒发送一次ajax（默认输入一个字符，提交一次，服务器压力太大）
                         type:"POST",
-                        url: base_serve_url_config.webUrl + '/sysUser/checkLoginName'
+                        url: sysUsr_check_unique_loginName
                     }
                 }
             },
@@ -65,17 +93,18 @@ $(document).ready(function () {
             }
         }
     });
+
 });
 
 
 //提交
 $('#btnUpdate').click(function () {
-
+        //提交时validate数据是否通过bootstrapValidator的校验
         var bootstrapValidator = $("#generalForm").data('bootstrapValidator');
         bootstrapValidator.validate();
         if(bootstrapValidator.isValid()){
 
-            var sysUser = {},url = base_serve_url_config.webUrl + '/sysUser/addSysUser';
+            var sysUser = {},url = sysUser_addAUpdate_url;
 
             sysUser. loginName = $("#loginName").val();
             sysUser.realName = $("#realName").val();

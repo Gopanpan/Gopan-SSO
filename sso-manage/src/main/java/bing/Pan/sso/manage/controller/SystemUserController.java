@@ -10,6 +10,8 @@ import bing.Pan.sso.domain.valueobject.SysUserVo;
 import bing.Pan.sso.service.SystemUserService;
 import com.google.common.collect.Maps;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.http.HttpRequest;
 import org.springframework.beans.BeanUtils;
@@ -41,7 +43,7 @@ public class SystemUserController extends BaseController{
      * @param systemUserBo
      * @return
      */
-    @ApiOperation(value = "系统管理用户列表")
+    @ApiOperation(value = "系统管理用户列表",  response = Response.class)
     @RequestMapping(value = "/systemUserList", method = RequestMethod.POST)
     public Object systemUserList(@Valid @ModelAttribute SystemUserBo systemUserBo, BindingResult result) throws ServiceException {
         if(result.hasErrors()){
@@ -51,7 +53,10 @@ public class SystemUserController extends BaseController{
     }
 
 
-    @ApiOperation(value = "根据系统管理用户ID获取详情")
+    @ApiOperation(value = "根据系统管理用户ID获取详情", response = Response.class)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "sysUserId", value = "系统用户Id", required = true, dataType = "Long", paramType = "query"),
+    })
     @RequestMapping(value = "/getSystemUserById", method = RequestMethod.POST)
     public Object getSystemUserById(Long sysUserId) throws ServiceException {
         return new Response<>(systemUserService.getSystemUserById(sysUserId));
@@ -80,6 +85,9 @@ public class SystemUserController extends BaseController{
      * @return
      */
     @ApiOperation(value = "添加系统管理员是校验登陆名是否重复")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "loginName", value = "登陆名", required = true, dataType = "string", paramType = "query"),
+    })
     @RequestMapping(value = "/checkLoginName", method = RequestMethod.POST)
     public Object checkLoginName(String loginName){
 

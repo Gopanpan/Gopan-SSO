@@ -13,7 +13,11 @@ var system_main_url = base_serve_url_config + "/ssoMain";
 
 
 var sysUser_list_url = base_serve_url_config + "/sysUser/systemUserList";
-var sysUser_addAUpdate_url = base_serve_url_config + "/sysUser/addAUPdateSysUser";
+var sysUser_addAUpdate_view_url = base_serve_url_config + "/sysUser/addAUPdateSysUserView";
+var sysUser_addAUpdate_url = base_serve_url_config +"/sysUser/addAUPdateSysUser";
+var sysUsr_check_unique_loginName = base_serve_url_config +"/sysUser/checkLoginName";
+var sysUser_findById_url = base_serve_url_config +"/sysUser/getSystemUserById";
+
 
 
 var sysInfo_list_url = base_serve_url_config + "/sysInfoPageList";
@@ -28,7 +32,7 @@ $.extend(jqgrid_config,{
     grid_selector : "#grid-table",
     pager_selector : "#grid-pager",
     pageSize : 10,
-    optional_table_rowNum_1 : 10,
+    optional_table_rowNum_1 : 20,
     optional_table_rowNum_2 : 30,
     optional_table_rowNum_3 : 50
 
