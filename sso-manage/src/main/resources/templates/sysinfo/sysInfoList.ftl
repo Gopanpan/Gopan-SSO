@@ -26,6 +26,6 @@
 </#macro>
 
 <#macro business_js>
-<script type="text/javascript" src="static/js/sso/sysinfo/sysInfoList.js"></script>
+<script type="text/javascript" src="/static/js/sso/sysinfo/sysInfoList.js"></script>
 </#macro>
 <@frame_html/>

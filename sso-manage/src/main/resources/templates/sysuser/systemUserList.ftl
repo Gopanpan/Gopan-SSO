@@ -37,7 +37,7 @@
 </#macro>
 
 <#macro business_js>
-<script type="text/javascript" src="static/js/sso/sysuser/systemUserList.js"></script>
-<script type="text/javascript" src="static/js/sso/jqgrid-public.js"></script>
+<script type="text/javascript" src="/static/js/sso/sysuser/systemUserList.js"></script>
+<script type="text/javascript" src="/static/js/sso/jqgrid-public.js"></script>
 </#macro>
 <@frame_html/>

@@ -52,7 +52,7 @@ $("#addSysUser").bind('click',function(){
         shade: [0.5],
         maxmin: true, //开启最大化最小化按钮
         area: ['500px', '500px'],
-        content: webConfig.webUrl + '/andOrupdateSysUserView?sysUserId=' + sysUserId,
+        content: sysUser_addAUpdate_url,
         end: function () {
             reload();
         }
@@ -69,7 +69,7 @@ function andOrupdateSysUser(sysUserId) {
         shade: [0.5],
         maxmin: true, //开启最大化最小化按钮
         area: ['790px', '500px'],
-        content: webConfig.webUrl + '/andOrupdateSysUserView?sysUserId=' + sysUserId,
+        content: base_serve_url_config.webUrl + '/andOrupdateSysUserView?sysUserId=' + sysUserId,
         end: function () {
             reload();
         }
@@ -85,7 +85,7 @@ function sysUserDetail(sysUserId) {
         shade: [0.5],
         maxmin: true, //开启最大化最小化按钮
         area: ['768px', '700px'],
-        content: webConfig.webUrl + "/manager/sysUserDetail?sysUserId="+sysUserId,
+        content: base_serve_url_config.webUrl + "/manager/sysUserDetail?sysUserId="+sysUserId,
         end: function () {
             reload();
         }
@@ -107,7 +107,7 @@ function deleteSysInfo(sysUserId, sysUserName) {
 
 function confirmDelete(sysUserId) {
     var sysUserInfo = {},
-        url = webConfig.webUrl + '/deleteSysUser';
+        url = base_serve_url_config.webUrl + '/deleteSysUser';
         sysUserInfo.id = sysUserId;
     $.ajax({
             url: url,

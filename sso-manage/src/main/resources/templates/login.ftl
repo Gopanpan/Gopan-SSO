@@ -7,10 +7,10 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    <link href="static/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link href="static/css/font-awesome.css" rel="stylesheet">
-    <link href="static/css/animate.css" rel="stylesheet">
-    <link href="static/css/style.css" rel="stylesheet">
+    <link href="/static/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.css" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
 
     <script>if (window.top !== window.self) {
         window.top.location = window.location;
@@ -31,7 +31,7 @@
 <div class="middle-box text-center loginscreen  animated fadeInDown">
     <div class="bt_login_boxs">
         <div>
-            <img src="static/img/logo.png">
+            <img src="/static/img/logo.png">
             <div>Copyright &copy;2017 sso All Rights Reserved.</div>
         </div>
         <form class="m-t my-form">
@@ -47,13 +47,13 @@
     </div>
 </div>
 <!-- 全局js -->
-<script src="static/js/jquery/jquery.min.js"></script>
-<script src="static/js/bootstrap/bootstrap.min.js"></script>
-<script src="static/js/md5.js"></script>
-<script src="static/js/layer/layer.js"></script>
+<script src="/static/js/jquery/jquery.min.js"></script>
+<script src="/static/js/bootstrap/bootstrap.min.js"></script>
+<script src="/static/js/md5.js"></script>
+<script src="/static/js/layer/layer.js"></script>
 
-<script src="static/js/sso/ssoConfig.js"></script>
-<script src="static/js/sso/ssoPrivate.js"></script>
-<script src="static/js/sso/login.js"></script>
+<script src="/static/js/sso/ssoUrlConfig.js"></script>
+<script src="/static/js/sso/ssoPrivate.js"></script>
+<script src="/static/js/sso/login.js"></script>
 </body>
 </html>

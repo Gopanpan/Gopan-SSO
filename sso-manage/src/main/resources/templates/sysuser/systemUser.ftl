@@ -74,6 +74,6 @@
 </#macro>
 
 <#macro business_js>
-<script type="text/javascript" src="static/js/sso/sysuser/systemUser.js"></script>
+<script type="text/javascript" src="/static/js/sso/sysuser/systemUser.js"></script>
 </#macro>
 <@frame_html/>

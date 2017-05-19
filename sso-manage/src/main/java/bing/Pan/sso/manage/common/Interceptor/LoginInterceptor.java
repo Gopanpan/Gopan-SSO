@@ -23,16 +23,14 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     private final String[] noFilters = new String[]{"/","/login","/loginSysUser"};
 
-    @Value("${server.context-path}")
-    private String basePath;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
        /* response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json; charset=utf-8");
         response.addHeader("Access-Control-Allow-Headers", "Content-Type,Accept");*/
 
-        String url = request.getRequestURI();for (String no : noFilters) {
-            if (url.endsWith(String.format("%s%s", basePath, no))) {
+        String url = request.getRequestURI();for (String noFilter : noFilters) {
+            if (url.endsWith(noFilter)) {
                 return true;
             }
         }

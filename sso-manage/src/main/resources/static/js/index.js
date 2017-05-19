@@ -12,12 +12,12 @@ $(function () {
 function logOut() {
     $.ajax({
         type: "POST",
-        url: webConfig.webUrl + "/manager/loginOut",
+        url: base_serve_url_config.webUrl + "/manager/loginOut",
         dataType: "json",
         data: {},
         success: function (data) {
             if (data.code == "10000") {
-                top.location.href = webConfig.webUrl + "/login";
+                top.location.href = base_serve_url_config.webUrl + "/login";
             } else {
                 layer.alert(data.message, {icon: 2});
             }

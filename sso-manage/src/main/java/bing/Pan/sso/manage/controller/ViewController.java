@@ -69,8 +69,8 @@ public class ViewController {
      * @param sysUserId
      * @return
      */
-    @RequestMapping(value = "/andOrupdateSysUserView", method = RequestMethod.GET)
-    public ModelAndView andOrupdateSysUserView(String sysUserId){
+    @RequestMapping(value = "/sysUser/addAUPdateSysUser", method = RequestMethod.GET)
+    public ModelAndView addAUPdateSysUser(String sysUserId){
         Map<String, Object> map = new HashMap<>();
         map.put("sysUserId", sysUserId);
         return new ModelAndView("sysuser/systemUser", map);

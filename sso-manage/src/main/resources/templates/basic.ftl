@@ -9,11 +9,11 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    <link rel="shortcut icon" href="static/img/favicon.ico">
-    <link href="static/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <link href="static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-    <link href="static/css/animate.css" rel="stylesheet">
-    <link href="static/css/style.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/static/img/favicon.ico">
+    <link href="/static/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 
@@ -56,19 +56,19 @@
             </nav>
         </div>
         <div class="row J_mainContent" id="content-main">
-            <iframe id="J_iframe" width="100%" height="100%" src="/manage/welcome"frameborder="0" >
+            <iframe id="J_iframe" width="100%" height="100%" src="/welcome"frameborder="0" >
             </iframe>
         </div>
     </div>
     <!--右侧部分结束-->
 </div>
-<script src="static/js/jquery/jquery.min.js"></script>
-<script src="static/js/bootstrap/bootstrap.min.js"></script>
-<script src="static/js/jquery/metisMenu/jquery.metisMenu.js"></script>
-<script src="static/js/jquery/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="static/js/layer/layer.js"></script>
-<script src="static/js/hAdmin/hAdmin.js"></script>
-<script src="static/js/sso/ssoConfig.js"></script>
-<script src="static/js/index.js"></script>
+<script src="/static/js/jquery/jquery.min.js"></script>
+<script src="/static/js/bootstrap/bootstrap.min.js"></script>
+<script src="/static/js/jquery/metisMenu/jquery.metisMenu.js"></script>
+<script src="/static/js/jquery/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/static/js/layer/layer.js"></script>
+<script src="/static/js/hAdmin/hAdmin.js"></script>
+<script src="/static/js/sso/ssoUrlConfig.js"></script>
+<script src="/static/js/index.js"></script>
 </body>
 </html>

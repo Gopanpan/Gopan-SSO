@@ -21,7 +21,7 @@
                 <span class="ng-scope"></span>
             </li>
             <li>
-                <a href="/manage/ssoMain">
+                <a href="/ssoMain">
                     <i class="fa fa-home"></i>
                     <span class="nav-label">主页</span>
                 </a>
@@ -38,7 +38,7 @@
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a class="J_menuItem" href="${ctx}/manage/sysInfoListView">系统列表</a>
+                        <a class="J_menuItem" href="/sysInfoListView">系统列表</a>
                     </li>
                 </ul>
             </li>
@@ -50,7 +50,7 @@
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a class="J_menuItem" href="${ctx}/manager/sysResource">资源列表</a>
+                        <a class="J_menuItem" href="/sysResource">资源列表</a>
                     </li>
                 </ul>
             </li>
@@ -62,13 +62,13 @@
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a class="J_menuItem" href="${ctx}/manager/sysRoleList">角色列表</a>
+                        <a class="J_menuItem" href="/sysRoleList">角色列表</a>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="${ctx}/manager/sysRole">角色权限分配</a>
+                        <a class="J_menuItem" href="/sysRole">角色权限分配</a>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="${ctx}/manager/sysUserRole">角色用户分配</a>
+                        <a class="J_menuItem" href="/sysUserRole">角色用户分配</a>
                     </li>
                 </ul>
             </li>
@@ -85,7 +85,7 @@
                 </a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a class="J_menuItem" href="${ctx}/manage/systemUserListView">用户列表</a>
+                        <a class="J_menuItem" href="/systemUserListView">用户列表</a>
                     </li>
                 </ul>
             </li>
