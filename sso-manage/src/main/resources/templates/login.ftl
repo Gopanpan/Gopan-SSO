@@ -53,7 +53,6 @@
 <script src="/static/js/layer/layer.js"></script>
 
 <script src="/static/js/sso/ssoUrlConfig.js"></script>
-<script src="/static/js/sso/ssoPrivate.js"></script>
 <script src="/static/js/sso/login.js"></script>
 </body>
 </html>

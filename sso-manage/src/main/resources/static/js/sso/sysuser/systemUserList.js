@@ -62,7 +62,7 @@ function openPage(requestUrl){
         shadeClose: true,
         shade: [0.5],
         maxmin: true, //开启最大化最小化按钮
-        area: ['500px', '500px'],
+        area: ['768px', '600px'],
         content: requestUrl,
         end: function () {
             reload();

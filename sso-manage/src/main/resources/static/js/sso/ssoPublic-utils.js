@@ -1,3 +1,22 @@
+/**
+ * 左侧导航页面加载
+ */
+$(function () {
+    //菜单点击
+    // J_iframe
+    $(".J_menuItem").on('click', function () {
+        var url = $(this).attr('href');
+        $("#J_iframe").attr('src', url);
+        return false;
+    });
+});
+
+
+
+
+
+
+
 /*
 * 
 * 根据名称获取url参数
@@ -22,14 +41,9 @@ String.prototype.toJson=function(){
 // 日期格式转换
 function ChangeDateFormat(val) {
     if (val) {
-        //if(val.indexOf('-')>-1){ return '';}
-        //var date = new Date(parseInt(val.replace("/Date(", "").replace(")/", ""), 10));
-
         var date = new Date(val);
         //如果是1900年，则代表数据库数据为空
-        if (date.getFullYear() == 1900) {
-            return '';
-        }
+        if (date.getFullYear() == 1900) {return ;}
         //月份为0-11，所以+1，月份小于10时补个0
         var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
         var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
@@ -37,13 +51,11 @@ function ChangeDateFormat(val) {
         var min = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
         var s = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
         if ((date.getFullYear() + "-" + month + "-" + currentDate + " " + hour + ":" + min + ":" + s) == "1-01-01 08:00:00") {
-            return '';
-        }
-        else {
+            return ;
+        } else {
             return date.getFullYear() + "-" + month + "-" + currentDate + " " + hour + ":" + min + ":" + s;
         }
     }
-    return '';
 }
 
 
@@ -69,17 +81,6 @@ function availableFormat(avaliable){
     if(avaliable == undefined){return ''}
 }
 
-
-/**
- * 执行jqgrid获取表格数据时,校验服务器端是否返回异常
- * @param data
- */
-function serviceErrorValidate(data){
-    if(data.code != 20000 || data.code != '20000'){
-        var message = "异常代码   "+data.code+"<br/>异常摘要   "+data.message+"<br/>详细信息   "+ data.detailMessage;
-        layer.msg(message,{icon:5,title:'服务器返回异常',time:3000});
-    }
-}
 
 /**
  * 客户端校验

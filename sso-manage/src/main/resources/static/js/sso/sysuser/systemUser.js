@@ -11,7 +11,7 @@ $(document).ready(function () {
             data: {sysUserId: sysUserId}
         })
             .done(function (data) {
-                serviceErrorValidate(data);
+                serviceValidateErrorTipsMessage(data);
 
                 if (data.code == "20000" && data.result) {
                     $("#loginName").val(data.result.loginName);
@@ -121,7 +121,7 @@ $('#btnUpdate').click(function () {
                 data: JSON.stringify(sysUser)
             })
             .done(function (data) {
-                topSuccessMessage(data,true,false);
+                serviceValidateHandleCurrent(data,true,false);
             });
         }
         else return false;

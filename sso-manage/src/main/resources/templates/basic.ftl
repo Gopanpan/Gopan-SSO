@@ -69,6 +69,6 @@
 <script src="/static/js/layer/layer.js"></script>
 <script src="/static/js/hAdmin/hAdmin.js"></script>
 <script src="/static/js/sso/ssoUrlConfig.js"></script>
-<script src="/static/js/index.js"></script>
+<script src="/static/js/sso/ssoPublic-utils.js"></script>
 </body>
 </html>

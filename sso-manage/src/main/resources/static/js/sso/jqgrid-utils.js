@@ -1,4 +1,19 @@
 
+/**
+ * jqgrid 公共参数配置
+ * @type {{}}
+ */
+var jqgrid_config = {};
+$.extend(jqgrid_config,{
+    grid_selector : "#grid-table",
+    pager_selector : "#grid-pager",
+    pageSize : 10,
+    optional_table_rowNum_1 : 20,
+    optional_table_rowNum_2 : 30,
+    optional_table_rowNum_3 : 50
+
+});
+
 
 /**
  * 初始化列表数据
@@ -36,15 +51,10 @@ function initJqgrid(data_url,data_colNames,data_colModel) {
         prmNames: {                                 //分页参数
             page: 'pageIndex', rows: "pageSize", order: null, search: null, sort: null, nd: null, sidx: null
         },
-
-
-        //colNames: [data_colNames],                  //显示的标题
         colNames: data_colNames,                  //显示的标题
-
-                                                    //列属性,和colNames的个数和顺序必须对应
         colModel: data_colModel,
         loadComplete: function (data) {
-            serviceErrorValidate(data);
+            serviceValidateErrorTipsMessage(data);
         }
     }).jqGrid('setGridWidth', $(".ibox-content").width());
 

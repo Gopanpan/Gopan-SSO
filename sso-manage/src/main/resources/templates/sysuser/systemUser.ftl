@@ -67,7 +67,7 @@
     <div class="form-group">
         <div class="col-sm-15 text-center">
             <button type="submit" class="btn btn-primary" id="btnUpdate">提交</button>
-            <button type="submit" class="btn btn-primary" id="btnCancel">取消</button>
+            <button type="button" class="btn btn-primary" id="btnCancel">取消</button>
         </div>
     </div>
 </div>

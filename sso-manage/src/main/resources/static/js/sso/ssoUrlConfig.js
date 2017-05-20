@@ -23,17 +23,3 @@ var sysUser_findById_url = base_serve_url_config +"/sysUser/getSystemUserById";
 var sysInfo_list_url = base_serve_url_config + "/sysInfoPageList";
 
 
-/**
- * jqgrid 公共参数配置
- * @type {{}}
- */
-var jqgrid_config = {};
-$.extend(jqgrid_config,{
-    grid_selector : "#grid-table",
-    pager_selector : "#grid-pager",
-    pageSize : 10,
-    optional_table_rowNum_1 : 20,
-    optional_table_rowNum_2 : 30,
-    optional_table_rowNum_3 : 50
-
-});
