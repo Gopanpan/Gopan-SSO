@@ -18,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
+import java.util.Date;
+
 
 /**
  * @crea : Created by intelliJ IDEA 16.1.3
@@ -42,16 +44,16 @@ public class SystemUserService extends BaseService {
     }
 
 
-    public Object getSystemUserById(Long sysUserId) throws ServiceException {
-        if(null == sysUserId) throw new ServiceException(ResponseCode.CLIENT_PARAM_ERR);
-        return sysUserMapper.selectByPrimaryKey(sysUserId);
+    public Object getSystemUserById(Long id) throws ServiceException {
+        if(null == id) throw new ServiceException(ResponseCode.CLIENT_PARAM_ERR);
+        return sysUserMapper.selectByPrimaryKey(id);
     }
 
-    public SysUserVo findByLoginName(String loginName, String password) throws ServiceException {
+    public SysUserVo findByLoginName(String loginName, String password) throws Exception {
         SysUserVo sysUserVo = sysUserMapper.findUserByLoginName(loginName);
         if(ObjectUtils.isEmpty(sysUserVo))
             throw new ServiceException(ResponseCode.LOGIN_USER_MISS);
-        if(!sysUserVo.getPassword().equals(password))
+        if(!EncryptUtils.aesEncrypt(password).equals(sysUserVo.getPassword()))
             throw new ServiceException(ResponseCode.LOGIN_PASSWORD_ERR);
 
         return sysUserVo;
@@ -60,11 +62,17 @@ public class SystemUserService extends BaseService {
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void addAUpdateSysUser(SysUser sysUser) throws Exception {
+
         if(StringUtils.isEmpty(sysUser.getId())){
             if(StringUtils.isEmpty(sysUser.getPassword()))
                 sysUser.setPassword(EncryptUtils.aesEncrypt(Md5Utils.md5(ssoSystemProperties.getDefaultPassword())));
+
+            sysUser.setCreateTime(new Date());
+            sysUser.setUpdateTime(new Date());
+            sysUser.setAvailable(true);
             sysUserMapper.insert(sysUser);
         }else
+            sysUser.setUpdateTime(new Date());
             sysUserMapper.updateByPrimaryKeySelective(sysUser);
     }
 

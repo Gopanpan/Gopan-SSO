@@ -19,6 +19,7 @@ import javax.validation.constraints.Size;
  */
 public class SystemUserAddBo {
 
+    private Long id;
 
     @NotBlank
     @Size(min=6,max=12,message="登录名长度应在6-12之间")
@@ -40,6 +41,14 @@ public class SystemUserAddBo {
 
     private String birthday;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getLoginName() {
         return loginName;

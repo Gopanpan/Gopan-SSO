@@ -33,6 +33,7 @@ public class SysUser {
 
     private Date updateTime;
 
+
     public Long getId() {
         return id;
     }

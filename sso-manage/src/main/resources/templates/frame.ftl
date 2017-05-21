@@ -44,6 +44,9 @@
 
 <script src="/static/js/hAdmin/hAdmin.js"></script>
 
+<script src="/static/js/My97DatePicker/WdatePicker.js"></script>
+
+
 
 <script src="/static/js/sso/jqgrid-utils.js"></script>
 <script src="/static/js/sso/layer-utils.js"></script>

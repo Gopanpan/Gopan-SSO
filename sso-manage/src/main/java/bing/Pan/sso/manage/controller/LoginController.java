@@ -43,7 +43,7 @@ public class LoginController extends BaseController {
     @ResponseBody
     public Object loginSysUser(@RequestParam(required = true)  String loginName,
                                @RequestParam(required = true)  String password,
-                               HttpServletRequest request) throws ServiceException {
+                               HttpServletRequest request) throws Exception {
 
         SysUserVo byLoginName = systemUserService.findByLoginName(loginName, password);
         request.getSession().setAttribute("user",byLoginName);

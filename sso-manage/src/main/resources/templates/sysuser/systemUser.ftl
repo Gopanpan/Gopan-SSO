@@ -4,11 +4,11 @@
 
 <#macro frame_content>
 <div id="generalForm" class="ibox-content form-horizontal" >
-    <input type="hidden" value="${sysUserId}" id="sysUserId">
+    <input type="hidden" value="${id}" name="id" id="id"/>
 
     <div class="form-group">
         <label class="col-sm-4 control-label ">登陆名
-            <label class="text-danger">*：</label>
+            <label class="text-danger">*</label>
         </label>
         <div class="col-sm-5">
             <input type="text" class="form-control required" name="loginName" id="loginName" placeholder="请输入登陆名">
@@ -17,7 +17,7 @@
 
     <div class="form-group">
         <label class="col-sm-4 control-label">真实名称
-            <label class="text-danger">*：</label>
+            <label class="text-danger">*</label>
         </label>
         <div class="col-sm-5">
             <input type="text" placeholder="请输入真实名称" class="form-control" id="realName" name="realName">
@@ -27,7 +27,7 @@
 
     <div class="form-group">
         <label class="col-sm-4 control-label">性别
-            <label class="text-danger">*：</label>
+            <label class="text-danger">*</label>
         </label>
         <div class="col-sm-5">
            <select class="selectpicker" data-live-search="true" title="--请选择--" id="sex" name="sex">
@@ -40,7 +40,7 @@
 
     <div class="form-group">
         <label class="col-sm-4 control-label">电话号码
-            <label class="text-danger">*：</label>
+            <label class="text-danger">*</label>
         </label>
         <div class="col-sm-5">
             <input type="text" placeholder="请输入电话号码" class="form-control" value="" id="phone" name="phone">
@@ -48,7 +48,7 @@
     </div>
     <div class="form-group">
         <label class="col-sm-4 control-label">电子邮件
-            <label class="text-danger">*：</label>
+            <label class="text-danger">*</label>
         </label>
         <div class="col-sm-5">
             <input type="text" placeholder="" class="form-control" value="" id="email" name="email">
@@ -59,7 +59,9 @@
     <div class="form-group">
         <label class="col-sm-4 control-label">生日：</label>
         <div class="col-sm-5">
-            <input type="text" placeholder="请输入生日" class="form-control" value="" id="birthday" name="birthday">
+            <input name="birthday" id="birthday"  type="text" placeholder="请输入生日" class="form-control"
+                   onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});"/>
+
         </div>
     </div>
 
@@ -74,6 +76,7 @@
 </#macro>
 
 <#macro business_js>
+<script type="text/javascript" src="/static/js/sso/sysuser/systemUserList.js"></script>
 <script type="text/javascript" src="/static/js/sso/sysuser/systemUser.js"></script>
 </#macro>
 <@frame_html/>

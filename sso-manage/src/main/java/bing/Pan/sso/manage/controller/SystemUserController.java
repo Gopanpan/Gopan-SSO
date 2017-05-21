@@ -55,17 +55,17 @@ public class SystemUserController extends BaseController{
 
     @ApiOperation(value = "根据系统管理用户ID获取详情", response = Response.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "sysUserId", value = "系统用户Id", required = true, dataType = "Long", paramType = "query"),
+            @ApiImplicitParam(name = "id", value = "系统用户Id", required = true, dataType = "Long", paramType = "query"),
     })
     @RequestMapping(value = "/getSystemUserById", method = RequestMethod.POST)
-    public Object getSystemUserById(Long sysUserId) throws ServiceException {
-        return new Response<>(systemUserService.getSystemUserById(sysUserId));
+    public Object getSystemUserById(Long id) throws ServiceException {
+        return new Response<>(systemUserService.getSystemUserById(id));
 
     }
 
     @ApiOperation(value = "添加系统管理员账户")
-    @RequestMapping(value = "/addSysUser", method = RequestMethod.POST)
-    public Object addSysUser(@Valid @RequestBody SystemUserAddBo userAddBo, BindingResult result,HttpRequest request) throws Exception {
+    @RequestMapping(value = "/addAUPdateSysUser", method = RequestMethod.POST)
+    public Object addSysUser(@Valid @ModelAttribute SystemUserAddBo userAddBo, BindingResult result) throws Exception {
         checkValid(result);
 
         SysUser sysUser = new SysUser();

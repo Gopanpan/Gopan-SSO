@@ -45,13 +45,23 @@ $("#querySysUsers").bind('click',function(){
     jqgrid_reload(reloadParams);
 });
 
+//刷新页面
+function reload(){
+    var reloadParams = {
+        url: sysUser_list_url,
+        postData: setPostData()
+    };
+    jqgrid_reload(reloadParams);
+}
+
+
 
 //新增
 $("#addSysUser").bind('click',function(){
     openPage(sysUser_addAUpdate_view_url);
 });
-function updateSysUser(sysUserId){
-    openPage(sysUser_addAUpdate_view_url +"?sysUserId="+sysUserId);
+function updateSysUser(id){
+    openPage(sysUser_addAUpdate_view_url +"?id="+id);
 
 }
 
@@ -71,7 +81,7 @@ function openPage(requestUrl){
 }
 
 //详情
-function sysUserDetail(sysUserId) {
+function sysUserDetail(id) {
     parent.layer.open({
         type: 2,
         title: '用户详情',
@@ -79,7 +89,7 @@ function sysUserDetail(sysUserId) {
         shade: [0.5],
         maxmin: true, //开启最大化最小化按钮
         area: ['768px', '700px'],
-        content: base_serve_url_config.webUrl + "/manager/sysUserDetail?sysUserId="+sysUserId,
+        content: base_serve_url_config.webUrl + "/manager/sysUserDetail?id="+id,
         end: function () {
             reload();
         }
@@ -87,22 +97,22 @@ function sysUserDetail(sysUserId) {
 }
 
 //删除用户
-function deleteSysInfo(sysUserId, sysUserName) {
+function deleteSysInfo(id, sysUserName) {
 
     layer.confirm('确定要删除系统:' + sysUserName, {
         btn: ['确定', '取消'] //按钮
     }, function () {
-        confirmDelete(sysUserId);
+        confirmDelete(id);
     }, function () {
         parent.layer.closeAll('iframe');
     });
 
 }
 
-function confirmDelete(sysUserId) {
+function confirmDelete(id) {
     var sysUserInfo = {},
         url = base_serve_url_config.webUrl + '/deleteSysUser';
-        sysUserInfo.id = sysUserId;
+        sysUserInfo.id = id;
     $.ajax({
             url: url,
             type: 'POST',
@@ -120,17 +130,4 @@ function confirmDelete(sysUserId) {
             }
         }
     });
-}
-
-
-
-
-
-//刷新页面
-function reload(){
-    var reloadParams = {
-        url: dataUrl,
-        postData: setPostData()
-    };
-    jqgrid_reload(reloadParams);
 }

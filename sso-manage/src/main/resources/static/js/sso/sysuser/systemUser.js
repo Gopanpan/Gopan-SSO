@@ -1,20 +1,19 @@
 
 //加载页面
 $(document).ready(function () {
-
-    var sysUserId = $("#sysUserId").val();
-    if(sysUserId){
+    var id = $("#id").val();
+    if(id){
         $.ajax({
             url: sysUser_findById_url,
             type: 'POST',
             dataType: 'json',
-            data: {sysUserId: sysUserId}
+            data: {id: id}
         })
             .done(function (data) {
                 serviceValidateErrorTipsMessage(data);
 
                 if (data.code == "20000" && data.result) {
-                    $("#loginName").val(data.result.loginName);
+                    $("#loginName").val(data.result.loginName).attr("disabled",true);
                     $("#realName").val(data.result.realName);
                     $("#sex").val(data.result.sex);
                     $("#phone").val(data.result.phone);
@@ -25,9 +24,6 @@ $(document).ready(function () {
             });
 
     }
-
-
-
 
     $("#generalForm").bootstrapValidator({
         message: 'This value is not valid',
@@ -97,6 +93,20 @@ $(document).ready(function () {
 });
 
 
+function setPostData(){
+    return {
+        id  : $("#id").val(),
+        loginName : $("#loginName").val(),
+        realName : $("#realName").val(),
+        sex : $("#sex").val(),
+        phone: $("#phone").val(),
+        email : $("#email").val(),
+        birthday : $("#birthday").val()
+    }
+}
+
+
+
 //提交
 $('#btnUpdate').click(function () {
         //提交时validate数据是否通过bootstrapValidator的校验
@@ -104,24 +114,15 @@ $('#btnUpdate').click(function () {
         bootstrapValidator.validate();
         if(bootstrapValidator.isValid()){
 
-            var sysUser = {},url = sysUser_addAUpdate_url;
-
-            sysUser. loginName = $("#loginName").val();
-            sysUser.realName = $("#realName").val();
-            sysUser.sex = $("#sex").val();
-            sysUser.phone = $("#phone").val();
-            sysUser.email = $("#email").val();
-            sysUser.birthday = $("#birthday").val();
-
             $.ajax({
-                url: url,
+                url: sysUser_addAUpdate_url,
                 type: 'POST',
                 dataType: 'json',
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(sysUser)
+                data: setPostData()
             })
             .done(function (data) {
                 serviceValidateHandleCurrent(data,true,false);
+                reload();
             });
         }
         else return false;

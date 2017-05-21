@@ -64,13 +64,13 @@ public class ViewController {
 
     /**
      * 系统管理用户新增/修改页面
-     * @param sysUserId
+     * @param id
      * @return
      */
     @RequestMapping(value = "/sysUser/addAUPdateSysUserView", method = RequestMethod.GET)
-    public ModelAndView addAUPdateSysUser(String sysUserId){
+    public ModelAndView addAUPdateSysUser(String id){
         Map<String, Object> map = new HashMap<>();
-        map.put("sysUserId", sysUserId);
+        map.put("id", id);
         return new ModelAndView("sysuser/systemUser", map);
     }
 

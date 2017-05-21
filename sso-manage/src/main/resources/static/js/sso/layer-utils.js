@@ -24,7 +24,7 @@ function serviceValidateHandleCurrent (data, successOperate, errorOperate) {
 
     if (data) {
         if (data.code == "20000") {
-            layer.msg(data.message, {icon: 1,title:'服务器返回成功',time:3000}, function () {
+            layer.msg(data.message, {icon: 1,title:'服务器返回成功',time:2000}, function () {
                 if(successOperate ==true){
                     parent.layer.closeAll('iframe');
                 }

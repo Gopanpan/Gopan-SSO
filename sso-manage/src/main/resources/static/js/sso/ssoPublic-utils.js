@@ -51,11 +51,12 @@ function ChangeDateFormat(val) {
         var min = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
         var s = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
         if ((date.getFullYear() + "-" + month + "-" + currentDate + " " + hour + ":" + min + ":" + s) == "1-01-01 08:00:00") {
-            return ;
+            return '';
         } else {
             return date.getFullYear() + "-" + month + "-" + currentDate + " " + hour + ":" + min + ":" + s;
         }
     }
+    return '';
 }
 
 
