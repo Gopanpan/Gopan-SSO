@@ -59,6 +59,9 @@ public class SystemUserController extends BaseController{
     })
     @RequestMapping(value = "/getSystemUserById", method = RequestMethod.POST)
     public Object getSystemUserById(Long id) throws ServiceException {
+        if(ObjectUtils.isEmpty(id))
+            throw new ServiceException(ResponseCode.CLIENT_PARAM_MISS,"传入的系统用户ID为空!");
+
         return new Response<>(systemUserService.getSystemUserById(id));
 
     }
@@ -92,8 +95,8 @@ public class SystemUserController extends BaseController{
     public Object checkLoginName(String loginName){
 
         Map<String, Boolean> result = Maps.newHashMap();
-        SysUserVo sysUserVo = systemUserService.findByLoginName(loginName);
-        if(ObjectUtils.isEmpty(sysUserVo))
+        SysUser sysUser = systemUserService.findByLoginName(loginName);
+        if(ObjectUtils.isEmpty(sysUser))
             result.put("valid",true);
         else
             result.put("valid",false);

@@ -25,8 +25,8 @@ $(document).ready(function () {
         {name: 'sex', index: 'sex', sortable: false, align: 'center', width: 50,formatter: function (x) { return sexFormat(x);}},
         {name: 'phone', index: 'phone', sortable: false, align: 'center', width: 80},
         {name: 'email', index: 'email', sortable: false, align: 'center', width: 130},
-        {name: 'createTime', index: 'createTime', sortable: false, align: 'center', width: 105,formatter: function (x) {return ChangeDateFormat(x);}},
-        {name: 'lastLogin', index: 'lastLogin', sortable: false, align: 'center', width: 105, formatter: function (x) {return ChangeDateFormat(x);}},
+        {name: 'createTime', index: 'createTime', sortable: false, align: 'center', width: 105,formatter: function (x) {return changeDateFormat(x);}},
+        {name: 'lastLogin', index: 'lastLogin', sortable: false, align: 'center', width: 105, formatter: function (x) {return changeDateFormat(x);}},
         {name: 'available', index: 'available', sortable: false, align: 'center', width: 55,formatter: function (x) {return availableFormat(x);}},
         {name: 'id', index: 'id', sortable: false, resizable: false, align: 'center', width: 105,formatter: function (x,y,z) {return '<a class="btn btn-primary btn-xs" onclick="sysUserDetail(\''+x+'\');">详情</a> <a class="btn btn-primary btn-xs" onclick="updateSysUser(\''+x+'\');">修改</a> <a class="btn btn-primary btn-xs" onclick="deleteSysInfo(\''+x+'\',\''+z['loginName']+'\');">删除</a>';}}];
 
@@ -89,7 +89,7 @@ function sysUserDetail(id) {
         shade: [0.5],
         maxmin: true, //开启最大化最小化按钮
         area: ['768px', '700px'],
-        content: base_serve_url_config.webUrl + "/manager/sysUserDetail?id="+id,
+        content: sysUser_detail_url+"?id="+id,
         end: function () {
             reload();
         }

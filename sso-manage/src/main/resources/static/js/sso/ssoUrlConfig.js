@@ -14,9 +14,10 @@ var system_main_url = base_serve_url_config + "/ssoMain";
 
 var sysUser_list_url = base_serve_url_config + "/sysUser/systemUserList";
 var sysUser_addAUpdate_view_url = base_serve_url_config + "/sysUser/addAUPdateSysUserView";
-var sysUser_addAUpdate_url = base_serve_url_config +"/sysUser/addAUPdateSysUser";
-var sysUsr_check_unique_loginName = base_serve_url_config +"/sysUser/checkLoginName";
-var sysUser_findById_url = base_serve_url_config +"/sysUser/getSystemUserById";
+var sysUser_addAUpdate_url = base_serve_url_config + "/sysUser/addAUPdateSysUser";
+var sysUsr_check_unique_loginName = base_serve_url_config + "/sysUser/checkLoginName";
+var sysUser_findById_url = base_serve_url_config + "/sysUser/getSystemUserById";
+var sysUser_detail_url = base_serve_url_config +　"/sysUser/sysUserDetail";
 
 
 

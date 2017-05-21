@@ -32,6 +32,7 @@ public enum ResponseCode {
 
     // ---------------------登陆-------------------
     LOGIN_USER_MISS("6001","用户不存在!"),
+    LOGIN_USER_NOT_AVAILABLE("6002","账户已被禁用!"),
     LOGIN_PASSWORD_ERR("6002","密码不正确!"),
     LOGIN_TOME_OUT("6003","登陆过期!");
 

@@ -39,7 +39,7 @@ String.prototype.toJson=function(){
 };
 
 // 日期格式转换
-function ChangeDateFormat(val) {
+function changeDateFormat(val) {
     if (val) {
         var date = new Date(val);
         //如果是1900年，则代表数据库数据为空

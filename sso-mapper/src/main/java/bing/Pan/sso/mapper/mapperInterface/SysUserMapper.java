@@ -7,6 +7,6 @@ import org.apache.ibatis.annotations.Param;
 
 public interface SysUserMapper extends BaseMapper<SysUser,Object>{
 
-    SysUserVo findUserByLoginName(@Param("loginName") String loginName);
+    SysUser findUserByLoginName(@Param("loginName") String loginName);
 
 }

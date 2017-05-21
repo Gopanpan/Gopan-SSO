@@ -34,7 +34,6 @@
                <option value="0">女</option>
                <option value="1">男</option>
            </select>
-
         </div>
     </div>
 

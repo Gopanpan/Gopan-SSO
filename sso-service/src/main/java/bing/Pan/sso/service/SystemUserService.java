@@ -11,6 +11,7 @@ import bing.Pan.sso.mapper.mapperInterface.SysUserMapper;
 import bing.Pan.sso.service.config.properties.SsoSystemProperties;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -30,7 +31,6 @@ import java.util.Date;
  */
 
 @Service
-@Transactional(readOnly = true)
 public class SystemUserService extends BaseService {
 
     @Autowired private SsoSystemProperties ssoSystemProperties;
@@ -43,20 +43,33 @@ public class SystemUserService extends BaseService {
         return new PageInfo<>(sysUserMapper.findListByE(systemUserBo));
     }
 
-
+    @Transactional(readOnly = true)
     public Object getSystemUserById(Long id) throws ServiceException {
-        if(null == id) throw new ServiceException(ResponseCode.CLIENT_PARAM_ERR);
-        return sysUserMapper.selectByPrimaryKey(id);
-    }
+        SysUser sysUser = sysUserMapper.selectByPrimaryKey(id);
+        SysUser createUser = sysUserMapper.selectByPrimaryKey(sysUser.getCreateUser());
+        SysUser updateUser = sysUserMapper.selectByPrimaryKey(sysUser.getUpdateUser());
+        SysUserVo sysUserVo = new SysUserVo();
 
-    public SysUserVo findByLoginName(String loginName, String password) throws Exception {
-        SysUserVo sysUserVo = sysUserMapper.findUserByLoginName(loginName);
-        if(ObjectUtils.isEmpty(sysUserVo))
-            throw new ServiceException(ResponseCode.LOGIN_USER_MISS);
-        if(!EncryptUtils.aesEncrypt(password).equals(sysUserVo.getPassword()))
-            throw new ServiceException(ResponseCode.LOGIN_PASSWORD_ERR);
+        BeanUtils.copyProperties(sysUser,sysUserVo);
+        if(!ObjectUtils.isEmpty(createUser))
+            sysUserVo.setCreateUserName(createUser.getLoginName());
+        if(!ObjectUtils.isEmpty(updateUser))
+            sysUserVo.setUpdateUserName(updateUser.getLoginName());
 
         return sysUserVo;
+    }
+    @Transactional(readOnly = true)
+    public SysUser findByLoginName(String loginName, String password) throws Exception {
+        SysUser sysUser = sysUserMapper.findUserByLoginName(loginName);
+        if(ObjectUtils.isEmpty(sysUser))
+            throw new ServiceException(ResponseCode.LOGIN_USER_MISS);
+        if(!sysUser.getAvailable()){
+            throw new ServiceException(ResponseCode.LOGIN_USER_NOT_AVAILABLE);
+        }
+        if(!EncryptUtils.aesEncrypt(password).equals(sysUser.getPassword()))
+            throw new ServiceException(ResponseCode.LOGIN_PASSWORD_ERR);
+
+        return sysUser;
 
     }
 
@@ -76,8 +89,8 @@ public class SystemUserService extends BaseService {
             sysUserMapper.updateByPrimaryKeySelective(sysUser);
     }
 
-
-    public SysUserVo findByLoginName(String loginName) {
+    @Transactional(readOnly = true)
+    public SysUser findByLoginName(String loginName) {
         return sysUserMapper.findUserByLoginName(loginName);
     }
 }

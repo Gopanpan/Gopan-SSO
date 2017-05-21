@@ -40,6 +40,9 @@ public class SysUserVo {
 
     private Date updateTime;
 
+    private String createUserName;
+    private String updateUserName;
+
 
     public Long getId() {
         return id;
@@ -159,5 +162,22 @@ public class SysUserVo {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+
+    public String getCreateUserName() {
+        return createUserName;
+    }
+
+    public void setCreateUserName(String createUserName) {
+        this.createUserName = createUserName;
+    }
+
+    public String getUpdateUserName() {
+        return updateUserName;
+    }
+
+    public void setUpdateUserName(String updateUserName) {
+        this.updateUserName = updateUserName;
     }
 }

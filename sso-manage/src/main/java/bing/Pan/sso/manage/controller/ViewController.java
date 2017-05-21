@@ -74,6 +74,22 @@ public class ViewController {
         return new ModelAndView("sysuser/systemUser", map);
     }
 
+    /**
+     * 系统用户详情
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/sysUser/sysUserDetail", method = RequestMethod.GET)
+    public ModelAndView sysUserDetail(String id){
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        return new ModelAndView("sysuser/systemUserDetail", map);
+    }
+
+
+
+
+
 
 
 
