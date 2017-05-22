@@ -1,6 +1,8 @@
 package bing.Pan.sso.manage.common.Interceptor;
 
-import org.springframework.beans.factory.annotation.Value;
+import bing.Pan.sso.common.enums.ResponseCode;
+import bing.Pan.sso.common.response.Response;
+import com.alibaba.fastjson.JSON;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -9,6 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * @crea : Created by intelliJ IDEA 16.1.3
@@ -21,16 +25,20 @@ import javax.servlet.http.HttpSession;
 @Configuration
 public class LoginInterceptor implements HandlerInterceptor {
 
-    private final String[] noFilters = new String[]{"/","/login","/loginSysUser"};
+    private final String[] noFilters = new String[]{"/","/login","/loginSysUser",
+            "/swagger-resources/configuration/ui","/swagger-resources",
+            "/v2/api-docs","/swagger-resources/configuration/security","/error"};
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-       /* response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json; charset=utf-8");
-        response.addHeader("Access-Control-Allow-Headers", "Content-Type,Accept");*/
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
 
-        String url = request.getRequestURI();for (String noFilter : noFilters) {
+        String url = request.getRequestURI();
+        System.out.println(url);
+        for (String noFilter : noFilters) {
             if (url.endsWith(noFilter)) {
+                if(url.endsWith("/error")){
+                    dealResult(request,response);
+                }
                 return true;
             }
         }
@@ -50,6 +58,26 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
 
+    }
+
+
+
+    private boolean dealResult(HttpServletRequest request, HttpServletResponse response) {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json; charset=utf-8");
+        response.addHeader("Access-Control-Allow-Headers", "Content-Type,Accept");
+        PrintWriter out = null;
+        try {
+            out = response.getWriter();
+            out.append(JSON.toJSONString(new Response<>(ResponseCode.LOGIN_NOT_LOGININ)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (out != null) {
+                out.close();
+            }
+        }
+        return false;
     }
 
 
