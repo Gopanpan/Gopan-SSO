@@ -15,9 +15,9 @@ import java.security.SecureRandom;
  * @crea :Created by intelliJ IDEA 16.1.1 .
  * @auth :bing.Pan  15923508369@163.com .
  * @date :2016/12/16 10:24
- * @desc :
+ * @desc :AES对称加密工具类
  */
-public class EncryptUtils {
+public class AESEncryptUtils {
 
     /**
      * 密钥

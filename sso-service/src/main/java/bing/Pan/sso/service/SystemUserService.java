@@ -2,7 +2,7 @@ package bing.Pan.sso.service;
 
 import bing.Pan.sso.common.enums.ResponseCode;
 import bing.Pan.sso.common.exception.ServiceException;
-import bing.Pan.sso.common.utils.EncryptUtils;
+import bing.Pan.sso.common.utils.AESEncryptUtils;
 import bing.Pan.sso.common.utils.Md5Utils;
 import bing.Pan.sso.domain.bussinessobject.SystemUserBo;
 import bing.Pan.sso.domain.entity.SysUser;
@@ -66,7 +66,7 @@ public class SystemUserService extends BaseService {
         if(!sysUser.getAvailable()){
             throw new ServiceException(ResponseCode.LOGIN_USER_NOT_AVAILABLE);
         }
-        if(!EncryptUtils.aesEncrypt(password).equals(sysUser.getPassword()))
+        if(!AESEncryptUtils.aesEncrypt(password).equals(sysUser.getPassword()))
             throw new ServiceException(ResponseCode.LOGIN_PASSWORD_ERR);
 
         return sysUser;
@@ -78,7 +78,7 @@ public class SystemUserService extends BaseService {
 
         if(StringUtils.isEmpty(sysUser.getId())){
             if(StringUtils.isEmpty(sysUser.getPassword()))
-                sysUser.setPassword(EncryptUtils.aesEncrypt(Md5Utils.md5(ssoSystemProperties.getDefaultPassword())));
+                sysUser.setPassword(AESEncryptUtils.aesEncrypt(Md5Utils.md5(ssoSystemProperties.getDefaultPassword())));
 
             sysUser.setCreateTime(new Date());
             sysUser.setUpdateTime(new Date());
