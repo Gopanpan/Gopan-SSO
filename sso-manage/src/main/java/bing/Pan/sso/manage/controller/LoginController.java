@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @crea :Created by intelliJ IDEA 16.1.3
@@ -45,7 +46,7 @@ public class LoginController extends BaseController {
                                @RequestParam(required = true)  String password,
                                HttpServletRequest request) throws Exception {
 
-        SysUser byLoginName = systemUserService.findByLoginName(loginName, password);
+        SysUser byLoginName = systemUserService.findByLoginName(loginName, password,request);
         request.getSession().setAttribute("user",byLoginName);
         return new Response();
 
