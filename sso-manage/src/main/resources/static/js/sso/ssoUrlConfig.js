@@ -18,6 +18,7 @@ var sysUser_addAUpdate_url = base_serve_url_config + "/sysUser/addAUPdateSysUser
 var sysUsr_check_unique_loginName = base_serve_url_config + "/sysUser/checkLoginName";
 var sysUser_findById_url = base_serve_url_config + "/sysUser/getSystemUserById";
 var sysUser_detail_url = base_serve_url_config +　"/sysUser/sysUserDetail";
+var sysUser_delete_url = base_serve_url_config + "/sysUser/deleteUser";
 
 
 

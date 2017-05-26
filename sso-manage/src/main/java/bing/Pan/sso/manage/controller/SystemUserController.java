@@ -17,6 +17,7 @@ import org.apache.http.HttpRequest;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -103,6 +104,21 @@ public class SystemUserController extends BaseController{
 
         return result;
 
+    }
+
+
+    @ApiOperation(value = "删除系统用户")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "sysUserId",value = "系统用户Id",required = true,dataType = "Long",paramType = "query")
+    })
+    @RequestMapping(value = "/deleteUser",method = RequestMethod.POST)
+    public Object deleteUser(Long sysUserId) throws ServiceException {
+        if(StringUtils.isEmpty(sysUserId))
+            throw new ServiceException(ResponseCode.CLIENT_PARAM_MISS,"系统用户ID为空!");
+
+        systemUserService.deleteSysUserById(sysUserId);
+
+        return new Response<>();
     }
 
 }

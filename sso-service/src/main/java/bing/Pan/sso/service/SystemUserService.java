@@ -3,6 +3,7 @@ package bing.Pan.sso.service;
 import bing.Pan.sso.common.enums.ResponseCode;
 import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.common.utils.AESEncryptUtils;
+import bing.Pan.sso.common.utils.IPAddressUtils;
 import bing.Pan.sso.common.utils.Md5Utils;
 import bing.Pan.sso.domain.bussinessobject.SystemUserBo;
 import bing.Pan.sso.domain.entity.SysUser;
@@ -19,7 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.concurrent.CompletableFuture;
 
 
 /**
@@ -58,8 +61,8 @@ public class SystemUserService extends BaseService {
 
         return sysUserVo;
     }
-    @Transactional(readOnly = true)
-    public SysUser findByLoginName(String loginName, String password) throws Exception {
+    @Transactional(readOnly = false)
+    public SysUser findByLoginName(String loginName, String password, HttpServletRequest request) throws Exception {
         SysUser sysUser = sysUserMapper.findUserByLoginName(loginName);
         if(ObjectUtils.isEmpty(sysUser))
             throw new ServiceException(ResponseCode.LOGIN_USER_MISS);
@@ -68,6 +71,12 @@ public class SystemUserService extends BaseService {
         }
         if(!AESEncryptUtils.aesEncrypt(password).equals(sysUser.getPassword()))
             throw new ServiceException(ResponseCode.LOGIN_PASSWORD_ERR);
+
+
+
+        sysUser.setLastIp(IPAddressUtils.getIpAddr(request));
+        sysUser.setLastLogin(new Date());
+        sysUserMapper.updateByPrimaryKeySelective(sysUser);
 
         return sysUser;
 
@@ -92,5 +101,10 @@ public class SystemUserService extends BaseService {
     @Transactional(readOnly = true)
     public SysUser findByLoginName(String loginName) {
         return sysUserMapper.findUserByLoginName(loginName);
+    }
+
+    @Transactional(readOnly = false,propagation = Propagation.REQUIRED)
+    public void deleteSysUserById(Long sysUserId) {
+        sysUserMapper.deleteByPrimaryKey(sysUserId);
     }
 }

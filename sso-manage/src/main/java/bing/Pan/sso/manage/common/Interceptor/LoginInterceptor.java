@@ -25,20 +25,14 @@ import java.io.PrintWriter;
 @Configuration
 public class LoginInterceptor implements HandlerInterceptor {
 
-    private final String[] noFilters = new String[]{"/","/login","/loginSysUser",
-            "/swagger-resources/configuration/ui","/swagger-resources",
-            "/v2/api-docs","/swagger-resources/configuration/security","/error"};
+    private final String[] noFilters = new String[]{"/","/login","/loginSysUser"};
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
 
         String url = request.getRequestURI();
-        System.out.println(url);
         for (String noFilter : noFilters) {
             if (url.endsWith(noFilter)) {
-                if(url.endsWith("/error")){
-                    dealResult(request,response);
-                }
                 return true;
             }
         }

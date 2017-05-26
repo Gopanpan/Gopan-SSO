@@ -99,35 +99,22 @@ function sysUserDetail(id) {
 //删除用户
 function deleteSysInfo(id, sysUserName) {
 
-    layer.confirm('确定要删除系统:' + sysUserName, {
+    layer.confirm('确定要删除系统用户:' + sysUserName, {
         btn: ['确定', '取消'] //按钮
     }, function () {
-        confirmDelete(id);
+        $.ajax({
+            url: sysUser_delete_url,
+            type: 'POST',
+            dataType: 'json',
+            data: {sysUserId:id}
+        })
+            .done(function (data) {
+                serviceValidateHandleCurrent(data,true,true);
+                reload();
+            });
     }, function () {
         parent.layer.closeAll('iframe');
     });
 
 }
 
-function confirmDelete(id) {
-    var sysUserInfo = {},
-        url = base_serve_url_config.webUrl + '/deleteSysUser';
-        sysUserInfo.id = id;
-    $.ajax({
-            url: url,
-            type: 'POST',
-            dataType: 'json',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(sysUserInfo)
-    })
-    .done(function (data) {
-        if (data) {
-            if (data.code == "10000") {
-                layer.alert(data.message, {icon: 1});
-                reload();
-            } else {
-                layer.alert(data.message, {icon: 2});
-            }
-        }
-    });
-}
