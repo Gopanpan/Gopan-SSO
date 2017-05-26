@@ -4,12 +4,10 @@ import bing.Pan.sso.common.enums.ResponseCode;
 import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.common.utils.AESEncryptUtils;
 import bing.Pan.sso.common.utils.IPAddressUtils;
-import bing.Pan.sso.common.utils.Md5Utils;
 import bing.Pan.sso.domain.bussinessobject.SystemUserBo;
 import bing.Pan.sso.domain.entity.SysUser;
 import bing.Pan.sso.domain.valueobject.SysUserVo;
 import bing.Pan.sso.mapper.mapperInterface.SysUserMapper;
-import bing.Pan.sso.service.config.properties.SsoSystemProperties;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
@@ -22,7 +20,6 @@ import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
-import java.util.concurrent.CompletableFuture;
 
 
 /**
@@ -83,10 +80,10 @@ public class SystemUserService extends BaseService {
     }
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void addAUpdateSysUser(SysUser sysUser) throws Exception {
+    public void addAUpdateSysUser(SysUser sysUser, SysUser currnentUser) throws Exception {
 
 
-        SysUser sysUserTemp = (SysUser)verifyEntity(sysUser);
+        SysUser sysUserTemp = (SysUser)verifyEntity(sysUser, currnentUser);
         if(StringUtils.isEmpty(sysUserTemp.getId()))
             sysUserMapper.insert(sysUserTemp);
         else

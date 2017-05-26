@@ -57,10 +57,10 @@ public class SsoUserService extends BaseService{
 
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void addAUpdateSysUser(SsoUser ssoUser) throws Exception {
+    public void addAUpdateSsoUser(SsoUser ssoUser, SysUser currentUser) throws Exception {
 
 
-        SsoUser ssoUserTemp = (SsoUser)verifyEntity(ssoUser);
+        SsoUser ssoUserTemp = (SsoUser)verifyEntity(ssoUser,currentUser);
         if(StringUtils.isEmpty(ssoUserTemp.getId()))
             ssoUserMapper.insert(ssoUserTemp);
         else
@@ -74,7 +74,7 @@ public class SsoUserService extends BaseService{
     }
 
     @Transactional(readOnly = false,propagation = Propagation.REQUIRED)
-    public void deleteSysUserById(Long sysUserId) {
+    public void deleteSsoUserById(Long sysUserId) {
         ssoUserMapper.deleteByPrimaryKey(sysUserId);
     }
 

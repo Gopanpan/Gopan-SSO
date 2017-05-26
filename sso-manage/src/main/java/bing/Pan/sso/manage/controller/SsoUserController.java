@@ -5,7 +5,6 @@ import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.common.response.Response;
 import bing.Pan.sso.domain.bussinessobject.SsoUserAddBo;
 import bing.Pan.sso.domain.bussinessobject.SsoUserBo;
-import bing.Pan.sso.domain.bussinessobject.SystemUserAddBo;
 import bing.Pan.sso.domain.entity.SsoUser;
 import bing.Pan.sso.domain.entity.SysUser;
 import bing.Pan.sso.service.SsoUserService;
@@ -48,11 +47,10 @@ public class SsoUserController extends BaseController {
      * @return
      */
     @ApiOperation(value = "应用系统用户列表",  response = Response.class)
-    @RequestMapping(value = "/systemUserList", method = RequestMethod.POST)
-    public Object systemUserList(@Valid @ModelAttribute SsoUserBo systemUserBo, BindingResult result) throws ServiceException {
-        if(result.hasErrors()){
-            throw new ServiceException(ResponseCode.CLIENT_PARAM_ERR);
-        }
+    @RequestMapping(value = "/ssoUserList", method = RequestMethod.POST)
+    public Object ssoUserList(@Valid @ModelAttribute SsoUserBo systemUserBo, BindingResult result) throws ServiceException {
+        checkValid(result);
+
         return new Response<>(ssoUserService.ssoUserList(systemUserBo));
     }
 
@@ -72,12 +70,13 @@ public class SsoUserController extends BaseController {
 
     @ApiOperation(value = "添加应用系统用户")
     @RequestMapping(value = "/addAUPdateSsoUser", method = RequestMethod.POST)
-    public Object addAUPdateSsoUser(@Valid @ModelAttribute SsoUserAddBo ssoUserAddBo, BindingResult result) throws Exception {
+    public Object addAUPdateSsoUser(@Valid @ModelAttribute SsoUserAddBo ssoUserAddBo,
+                                    BindingResult result) throws Exception {
         checkValid(result);
 
         SsoUser ssoUser = new SsoUser();
         BeanUtils.copyProperties(ssoUserAddBo,ssoUser);
-        ssoUserService.addAUpdateSysUser(ssoUser);
+        ssoUserService.addAUpdateSsoUser(ssoUser,getCurrnentUser());
 
         return new Response<>();
 
@@ -91,7 +90,7 @@ public class SsoUserController extends BaseController {
      * @param loginName
      * @return
      */
-    @ApiOperation(value = "添加系统管理员是校验登陆名是否重复")
+    @ApiOperation(value = "添加应用系统管理员是校验登陆名是否重复")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "loginName", value = "登陆名", required = true, dataType = "string", paramType = "query"),
     })
@@ -119,7 +118,7 @@ public class SsoUserController extends BaseController {
         if(StringUtils.isEmpty(sysUserId))
             throw new ServiceException(ResponseCode.CLIENT_PARAM_MISS,"系统用户ID为空!");
 
-        ssoUserService.deleteSysUserById(sysUserId);
+        ssoUserService.deleteSsoUserById(sysUserId);
 
         return new Response<>();
     }

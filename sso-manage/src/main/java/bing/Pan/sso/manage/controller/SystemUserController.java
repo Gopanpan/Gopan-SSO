@@ -46,10 +46,10 @@ public class SystemUserController extends BaseController{
      */
     @ApiOperation(value = "系统管理用户列表",  response = Response.class)
     @RequestMapping(value = "/systemUserList", method = RequestMethod.POST)
-    public Object systemUserList(@Valid @ModelAttribute SystemUserBo systemUserBo, BindingResult result) throws ServiceException {
-        if(result.hasErrors()){
-            throw new ServiceException(ResponseCode.CLIENT_PARAM_ERR);
-        }
+    public Object systemUserList(@Valid @ModelAttribute SystemUserBo systemUserBo,
+                                 BindingResult result) throws ServiceException {
+        checkValid(result);
+
         return new Response<>(systemUserService.systemUserList(systemUserBo));
     }
 
@@ -74,7 +74,7 @@ public class SystemUserController extends BaseController{
 
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(userAddBo,sysUser);
-        systemUserService.addAUpdateSysUser(sysUser);
+        systemUserService.addAUpdateSysUser(sysUser,getCurrnentUser());
 
         return new Response<>();
 

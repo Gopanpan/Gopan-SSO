@@ -6,7 +6,7 @@
 <div class="ibox">
     <div class="ibox-heading">
         <div class="ibox-title">
-            <h5>系统管理用户列表 </h5>
+            <h5>应用系统管理用户列表 </h5>
         </div>
         <div class="ibox-oper">
             <form class="form-inline" role="form">

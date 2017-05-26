@@ -4,7 +4,7 @@ $(document).ready(function () {
     var id = $("#id").val();
     if(id){
         $.ajax({
-            url: sysUser_findById_url,
+            url: ssoUser_findById_url,
             type: 'POST',
             dataType: 'json',
             data: {id: id}

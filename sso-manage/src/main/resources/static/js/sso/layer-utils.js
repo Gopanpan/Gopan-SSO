@@ -7,7 +7,7 @@
 function serviceValidateErrorTipsMessage(data){
     if(data.code != 20000 || data.code != '20000'){
         var message = "异常代码   "+data.code+"<br/>异常摘要   "+data.message+"<br/>详细信息   "+ data.detailMessage;
-        layer.msg(message,{icon:5,title:'服务器返回异常',time:3000});
+        layer.msg(message,{icon:5,title:'服务器返回异常',time:4000});
     }
 }
 
@@ -31,7 +31,7 @@ function serviceValidateHandleCurrent (data, successOperate, errorOperate) {
             });
         } else {
             var message = "异常代码   "+data.code+"<br/>异常摘要   "+data.message+"<br/>详细信息   "+ data.detailMessage;
-            layer.msg(message, {icon: 5,title:'服务器返回异常',time:3000}, function () {
+            layer.msg(message, {icon: 5,title:'服务器返回异常',time:4000}, function () {
                 if(errorOperate ==true){
                     parent.layer.closeAll('iframe');
                 }

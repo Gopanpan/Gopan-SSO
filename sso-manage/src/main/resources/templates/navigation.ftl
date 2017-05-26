@@ -35,7 +35,7 @@
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
-                    <li> <a class="J_menuItem" href="/systemUserListView">用户列表</a></li>
+                    <li> <a class="J_menuItem" href="/ssoUserListView">用户列表</a></li>
                     <li> <a class="J_menuItem" href="/sysInfoListView">系统列表</a></li>
                     <li> <a class="J_menuItem" href="/sysResource">资源列表</a> </li>
                     <li> <a class="J_menuItem" href="/sysRoleList">角色列表</a></li>

@@ -79,8 +79,8 @@ public class ViewController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/sysUser/sysUserDetail", method = RequestMethod.GET)
-    public ModelAndView sysUserDetail(String id){
+    @RequestMapping(value = "/sysUser/sysUserDetailView", method = RequestMethod.GET)
+    public ModelAndView sysUserDetailView(String id){
         Map<String, Object> map = new HashMap<>();
         map.put("id", id);
         return new ModelAndView("sysuser/systemUserDetail", map);
@@ -90,6 +90,29 @@ public class ViewController {
 
 
 
+    //----------------------------------------应用系统用户管理页面跳转--------------------------
+
+
+    /**
+     * 系统管理用户列表
+     * @return
+     */
+    @RequestMapping(value = "/ssoUserListView",method = RequestMethod.GET)
+    public String ssoUserListView(){
+        return "ssouser/ssoUserList";
+    }
+
+    /**
+     * 应用系统管理用户新增/修改页面
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/ssoUser/addAUPdateSsoUserView", method = RequestMethod.GET)
+    public ModelAndView addAUPdateSsoUserView(String id){
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        return new ModelAndView("ssouser/ssoUser", map);
+    }
 
 
 

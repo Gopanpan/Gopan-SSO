@@ -58,10 +58,10 @@ function reload(){
 
 //新增
 $("#addSysUser").bind('click',function(){
-    openPage(sysUser_addAUpdate_view_url);
+    openPage(ssoUser_addAUpdate_view_url);
 });
 function updateSysUser(id){
-    openPage(sysUser_addAUpdate_view_url +"?id="+id);
+    openPage(ssoUser_addAUpdate_view_url +"?id="+id);
 
 }
 
@@ -89,7 +89,7 @@ function sysUserDetail(id) {
         shade: [0.5],
         maxmin: true, //开启最大化最小化按钮
         area: ['768px', '700px'],
-        content: sysUser_detail_url+"?id="+id,
+        content: sysUser_detail_view_url+"?id="+id,
         end: function () {
             reload();
         }
@@ -103,7 +103,7 @@ function deleteSysInfo(id, sysUserName) {
         btn: ['确定', '取消'] //按钮
     }, function () {
         $.ajax({
-            url: sysUser_delete_url,
+            url: ssoUser_delete_url,
             type: 'POST',
             dataType: 'json',
             data: {sysUserId:id}

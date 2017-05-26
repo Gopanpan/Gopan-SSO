@@ -21,7 +21,7 @@ var sysUser_addAUpdate_view_url = base_serve_url_config + "/sysUser/addAUPdateSy
 var sysUser_addAUpdate_url = base_serve_url_config + "/sysUser/addAUPdateSysUser";
 var sysUsr_check_unique_loginName = base_serve_url_config + "/sysUser/checkLoginName";
 var sysUser_findById_url = base_serve_url_config + "/sysUser/getSystemUserById";
-var sysUser_detail_url = base_serve_url_config +　"/sysUser/sysUserDetail";
+var sysUser_detail_view_url = base_serve_url_config +　"/sysUser/sysUserDetailView";
 var sysUser_delete_url = base_serve_url_config + "/sysUser/deleteUser";
 
 
@@ -30,5 +30,10 @@ var sysUser_delete_url = base_serve_url_config + "/sysUser/deleteUser";
  * @type {string}
  */
 var ssoUser_list_url = base_serve_url_config + "/ssoUser/ssoUserList";
+var ssoUser_addAUpdate_view_url = base_serve_url_config + "/ssoUser/addAUPdateSsoUserView";
+var ssoUser_addAUpdate_url = base_serve_url_config + "/ssoUser/addAUPdateSsoUser";
+var ssoUser_delete_url = base_serve_url_config + "/ssoUser/deleteUser";
+var ssoUser_findById_url = base_serve_url_config + "/ssoUser/getSsoUserById";
+var ssoUsr_check_unique_loginName = base_serve_url_config + "/ssoUser/checkLoginName";
 
 

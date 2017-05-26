@@ -309,7 +309,7 @@
   <select id="findListByE" parameterType="bing.Pan.sso.domain.bussinessobject.SsoUserBo" resultMap="BaseResultMap"  >
     select
     <include refid="Base_Column_List" />
-    from sys_user  su
+    from sso_user  su
     <where>
       1=1
       <if test="loginName != null and loginName != ''">
@@ -320,6 +320,20 @@
       </if>
       <if test="phone != null and phone !=''">
         and su.phone like concat('%',#{phone},'%')
+      </if>
+    </where>
+  </select>
+
+
+  <select id="findUserByLoginName" parameterType="string" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from
+      sso_user  su
+    <where>
+      1=1
+      <if test="loginName !=null and loginName !=''">
+        and su.login_name = #{loginName}
       </if>
     </where>
   </select>
