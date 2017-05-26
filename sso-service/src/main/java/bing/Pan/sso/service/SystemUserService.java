@@ -40,7 +40,7 @@ public class SystemUserService extends BaseService {
     @Autowired private SysUserMapper sysUserMapper;
 
 
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Transactional(readOnly = true)
     public Object systemUserList(SystemUserBo systemUserBo) {
         PageHelper.startPage(systemUserBo.getPageIndex(), systemUserBo.getPageSize());
         return new PageInfo<>(sysUserMapper.findListByE(systemUserBo));

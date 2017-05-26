@@ -27,60 +27,30 @@
                 </a>
             </li>
             <li class="line dk"></li>
-            <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                <h3>SSO系统资源管理</h3>
-            </li>
+
             <li>
                 <a href="#">
                     <i class="fa fa fa-bar-chart-o"></i>
-                    <span class="nav-label">系统设置</span>
+                    <span class="nav-label">应用系统资源管理</span>
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
-                    <li>
-                        <a class="J_menuItem" href="/sysInfoListView">系统列表</a>
-                    </li>
+                    <li> <a class="J_menuItem" href="/systemUserListView">用户列表</a></li>
+                    <li> <a class="J_menuItem" href="/sysInfoListView">系统列表</a></li>
+                    <li> <a class="J_menuItem" href="/sysResource">资源列表</a> </li>
+                    <li> <a class="J_menuItem" href="/sysRoleList">角色列表</a></li>
+                    <li> <a class="J_menuItem" href="/sysRole">角色权限分配</a></li>
+                    <li> <a class="J_menuItem" href="/sysUserRole">角色用户分配</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa fa-bar-chart-o"></i>
-                    <span class="nav-label">资源设置</span>
-                    <span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a class="J_menuItem" href="/sysResource">资源列表</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa fa-bar-chart-o"></i>
-                    <span class="nav-label">角色设置</span>
-                    <span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a class="J_menuItem" href="/sysRoleList">角色列表</a>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="/sysRole">角色权限分配</a>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="/sysUserRole">角色用户分配</a>
-                    </li>
-                </ul>
-            </li>
+
             <li class="line dk"></li>
 
-            <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                <h3>用户管理</h3>
-            </li>
+
             <li>
                 <a href="#">
                     <i class="fa fa fa-bar-chart-o"></i>
-                    <span class="nav-label">SSO系统用户管理</span>
+                    <span class="nav-label">系统管理</span>
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
@@ -89,19 +59,6 @@
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa fa-bar-chart-o"></i>
-                    <span class="nav-label">系统用户管理</span>
-                    <span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="">用户列表</a>
-                    </li>
-                </ul>
-            </li>
-
         </ul>
     </div>
 </nav>

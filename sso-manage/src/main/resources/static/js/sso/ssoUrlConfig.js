@@ -12,6 +12,10 @@ var user_login_out_url = base_serve_url_config + "/loginOut";
 var system_main_url = base_serve_url_config + "/ssoMain";
 
 
+/**
+ * 系统用户url
+ * @type {string}
+ */
 var sysUser_list_url = base_serve_url_config + "/sysUser/systemUserList";
 var sysUser_addAUpdate_view_url = base_serve_url_config + "/sysUser/addAUPdateSysUserView";
 var sysUser_addAUpdate_url = base_serve_url_config + "/sysUser/addAUPdateSysUser";
@@ -21,7 +25,10 @@ var sysUser_detail_url = base_serve_url_config +　"/sysUser/sysUserDetail";
 var sysUser_delete_url = base_serve_url_config + "/sysUser/deleteUser";
 
 
-
-var sysInfo_list_url = base_serve_url_config + "/sysInfoPageList";
+/**
+ * 应用系统用户url
+ * @type {string}
+ */
+var ssoUser_list_url = base_serve_url_config + "/ssoUser/ssoUserList";
 
 

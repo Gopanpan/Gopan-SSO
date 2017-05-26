@@ -222,10 +222,13 @@
     <where>
       1=1
       <if test="loginName != null and loginName != ''">
-        and su.login_name = #{loginName}
+        and su.login_name  like concat('%',#{loginName}, '%')
       </if>
       <if test="realName != null and realName !=''">
-        and su.real_name = #{realName}
+        and su.real_name like concat('%',#{realName},'%')
+      </if>
+      <if test="phone != null and phone !=''">
+        and su.phone like concat('%',#{phone},'%')
       </if>
     </where>
   </select>
