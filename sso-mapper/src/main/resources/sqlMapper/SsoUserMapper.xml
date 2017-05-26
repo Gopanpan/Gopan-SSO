@@ -302,4 +302,27 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=BIGINT}
   </update>
+
+
+
+
+  <select id="findListByE" parameterType="bing.Pan.sso.domain.bussinessobject.SsoUserBo" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from sys_user  su
+    <where>
+      1=1
+      <if test="loginName != null and loginName != ''">
+        and su.login_name  like concat('%',#{loginName}, '%')
+      </if>
+      <if test="realName != null and realName !=''">
+        and su.real_name like concat('%',#{realName},'%')
+      </if>
+      <if test="phone != null and phone !=''">
+        and su.phone like concat('%',#{phone},'%')
+      </if>
+    </where>
+  </select>
+
+
 </mapper>

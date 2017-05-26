@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SsoSystemProperties {
 
-    private String defaultPassword;
+    private String defaultPassword;                  //系统初始用户密码
 
 
     public String getDefaultPassword() {

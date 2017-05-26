@@ -1,15 +1,8 @@
 package bing.Pan.sso.domain.valueobject;
 
-import bing.Pan.sso.domain.entity.SysUser;
+import bing.Pan.sso.domain.entity.SsoUser;
 
-/**
- * @crea : Created by intelliJ IDEA 16.1.3
- * @auth : bing.Pan
- * @mail : 15923508369@163.com
- * @date : 2017/5/15 21:27
- * @desc :
- */
-public class SysUserVo extends SysUser {
+public class SsoUserVo extends SsoUser{
 
 
     private String createUserName;
@@ -31,4 +24,6 @@ public class SysUserVo extends SysUser {
     public void setUpdateUserName(String updateUserName) {
         this.updateUserName = updateUserName;
     }
+
+
 }

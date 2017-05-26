@@ -236,20 +236,6 @@
 
 
 
-  <select id="findListByT" parameterType="bing.Pan.sso.domain.bussinessobject.SystemUserBo" resultMap="BaseResultMap"  >
-    select
-    <include refid="Base_Column_List" />
-    from sys_user  su
-    <where>
-      1=1
-      <if test="loginName != null and loginName != ''">
-        and su.login_name = #{loginName}
-      </if>
-      <if test="realName != null and realName !=''">
-        and su.real_name = #{realName}
-      </if>
-    </where>
-  </select>
 
   <select id="findUserByLoginName" parameterType="string" resultMap="BaseResultMap">
     SELECT

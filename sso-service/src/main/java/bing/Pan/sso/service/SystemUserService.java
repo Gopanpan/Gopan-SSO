@@ -36,7 +36,7 @@ import java.util.concurrent.CompletableFuture;
 @Service
 public class SystemUserService extends BaseService {
 
-    @Autowired private SsoSystemProperties ssoSystemProperties;
+
     @Autowired private SysUserMapper sysUserMapper;
 
 
@@ -85,17 +85,12 @@ public class SystemUserService extends BaseService {
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void addAUpdateSysUser(SysUser sysUser) throws Exception {
 
-        if(StringUtils.isEmpty(sysUser.getId())){
-            if(StringUtils.isEmpty(sysUser.getPassword()))
-                sysUser.setPassword(AESEncryptUtils.aesEncrypt(Md5Utils.md5(ssoSystemProperties.getDefaultPassword())));
 
-            sysUser.setCreateTime(new Date());
-            sysUser.setUpdateTime(new Date());
-            sysUser.setAvailable(true);
-            sysUserMapper.insert(sysUser);
-        }else
-            sysUser.setUpdateTime(new Date());
-            sysUserMapper.updateByPrimaryKeySelective(sysUser);
+        SysUser sysUserTemp = (SysUser)verifyEntity(sysUser);
+        if(StringUtils.isEmpty(sysUserTemp.getId()))
+            sysUserMapper.insert(sysUserTemp);
+        else
+            sysUserMapper.updateByPrimaryKeySelective(sysUserTemp);
     }
 
     @Transactional(readOnly = true)
