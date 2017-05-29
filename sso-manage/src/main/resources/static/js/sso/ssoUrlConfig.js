@@ -34,6 +34,7 @@ var ssoUser_addAUpdate_view_url = base_serve_url_config + "/ssoUser/addAUPdateSs
 var ssoUser_addAUpdate_url = base_serve_url_config + "/ssoUser/addAUPdateSsoUser";
 var ssoUser_delete_url = base_serve_url_config + "/ssoUser/deleteUser";
 var ssoUser_findById_url = base_serve_url_config + "/ssoUser/getSsoUserById";
+var ssoUser_detail_view_url = base_serve_url_config + "/ssoUser/ssoUserDetailView";
 var ssoUsr_check_unique_loginName = base_serve_url_config + "/ssoUser/checkLoginName";
 
 

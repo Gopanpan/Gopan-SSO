@@ -90,7 +90,7 @@ public class ViewController {
 
 
 
-    //----------------------------------------应用系统用户管理页面跳转--------------------------
+    //------------------------------------应用系统用户管理页面跳转--------------------------
 
 
     /**
@@ -115,19 +115,23 @@ public class ViewController {
     }
 
 
-
-
     /**
-     * 系统列表
+     * 应用系统用户详情
+     * @param id
      * @return
      */
-    @RequestMapping(value = "/sysInfoListView",method = RequestMethod.GET)
-    public String sysInfoListView(){
-        return "sysinfo/sysInfoList";
+    @RequestMapping(value = "/ssoUser/ssoUserDetailView", method = RequestMethod.GET)
+    public ModelAndView ssoUserDetailView(String id){
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        return new ModelAndView("ssouser/ssoUserDetail", map);
     }
 
-    @RequestMapping(value = "/andOrUpdateSysInfoView",method = RequestMethod.GET)
-    public String andOrUpdateSysInfoView(){
-        return "sysinfo/sysInfo";
-    }
+
+
+
+
+
+
+
 }

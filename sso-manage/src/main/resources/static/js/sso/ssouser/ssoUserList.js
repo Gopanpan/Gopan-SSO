@@ -89,7 +89,7 @@ function sysUserDetail(id) {
         shade: [0.5],
         maxmin: true, //开启最大化最小化按钮
         area: ['768px', '700px'],
-        content: sysUser_detail_view_url+"?id="+id,
+        content: ssoUser_detail_view_url+"?id="+id,
         end: function () {
             reload();
         }
