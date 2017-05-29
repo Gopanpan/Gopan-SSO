@@ -1,8 +1,6 @@
 package bing.Pan.sso.service;
 
 import bing.Pan.sso.common.exception.ServiceException;
-import bing.Pan.sso.common.utils.AESEncryptUtils;
-import bing.Pan.sso.common.utils.Md5Utils;
 import bing.Pan.sso.domain.bussinessobject.SsoUserBo;
 import bing.Pan.sso.domain.entity.SsoUser;
 import bing.Pan.sso.domain.entity.SysUser;
@@ -18,8 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
-import java.util.Date;
-
 /**
  * @crea :Created by intelliJ IDEA 16.1.1 .
  * @auth :bing.Pan 15923508369@163.com .
@@ -27,7 +23,6 @@ import java.util.Date;
  * @desc :
  */
 @Service
-
 public class SsoUserService extends BaseService{
     
     @Autowired private SsoUserMapper ssoUserMapper;

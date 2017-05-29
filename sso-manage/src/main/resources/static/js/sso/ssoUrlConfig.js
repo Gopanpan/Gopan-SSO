@@ -38,3 +38,7 @@ var ssoUser_detail_view_url = base_serve_url_config + "/ssoUser/ssoUserDetailVie
 var ssoUsr_check_unique_loginName = base_serve_url_config + "/ssoUser/checkLoginName";
 
 
+
+var ssoSystem_list_url= base_serve_url_config + "/ssoSystem/ssoSystemList";
+
+

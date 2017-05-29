@@ -129,7 +129,18 @@ public class ViewController {
 
 
 
+    //---------------------------应用系统管理页面跳转-------------------------------
 
+
+
+    /**
+     * 系统管理用户列表
+     * @return
+     */
+    @RequestMapping(value = "/ssoSystemListView",method = RequestMethod.GET)
+    public String ssoSystemListView(){
+        return "ssoSystem/ssoSystemList";
+    }
 
 
 

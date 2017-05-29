@@ -109,7 +109,7 @@ public class SsoUserController extends BaseController {
     }
 
 
-    @ApiOperation(value = "删除系统用户")
+    @ApiOperation(value = "删除应用系统用户")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "sysUserId",value = "系统用户Id",required = true,dataType = "Long",paramType = "query")
     })

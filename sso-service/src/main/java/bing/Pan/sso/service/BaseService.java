@@ -29,6 +29,10 @@ public class BaseService<T> {
 
 
 
+
+
+
+
     //系统数据结构中通用可修改字段
     private static final String[] GENERAL_VALUE = new String[]{"password","createUser","createTime",
             "updateUser","updateTime","available"};

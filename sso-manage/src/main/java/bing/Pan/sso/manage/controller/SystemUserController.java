@@ -6,20 +6,21 @@ import bing.Pan.sso.common.response.Response;
 import bing.Pan.sso.domain.bussinessobject.SystemUserAddBo;
 import bing.Pan.sso.domain.bussinessobject.SystemUserBo;
 import bing.Pan.sso.domain.entity.SysUser;
-import bing.Pan.sso.domain.valueobject.SysUserVo;
 import bing.Pan.sso.service.SystemUserService;
 import com.google.common.collect.Maps;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.http.HttpRequest;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class SystemUserController extends BaseController{
                                  BindingResult result) throws ServiceException {
         checkValid(result);
 
-        return new Response<>(systemUserService.systemUserList(systemUserBo));
+        return new Response<>(systemUserService.findPageListByE(systemUserBo));
     }
 
 
@@ -63,7 +64,7 @@ public class SystemUserController extends BaseController{
         if(ObjectUtils.isEmpty(id))
             throw new ServiceException(ResponseCode.CLIENT_PARAM_MISS,"传入的系统用户ID为空!");
 
-        return new Response<>(systemUserService.getSystemUserById(id));
+        return new Response<>(systemUserService.selectById(id));
 
     }
 
@@ -74,7 +75,7 @@ public class SystemUserController extends BaseController{
 
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(userAddBo,sysUser);
-        systemUserService.addAUpdateSysUser(sysUser,getCurrnentUser());
+        systemUserService.insertOrUpdate(sysUser,getCurrnentUser());
 
         return new Response<>();
 
@@ -116,7 +117,7 @@ public class SystemUserController extends BaseController{
         if(StringUtils.isEmpty(sysUserId))
             throw new ServiceException(ResponseCode.CLIENT_PARAM_MISS,"系统用户ID为空!");
 
-        systemUserService.deleteSysUserById(sysUserId);
+        systemUserService.deleteById(sysUserId);
 
         return new Response<>();
     }

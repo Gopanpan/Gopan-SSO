@@ -47,6 +47,6 @@
 </#macro>
 
 <#macro business_js>
-    <script type="text/javascript" src="/static/js/sso/sysinfo/sysInfo.js"></script>
+    <script type="text/javascript" src="/static/js/sso/ssosystem/ssoSystem.js"></script>
 </#macro>
 <@frame_html/>

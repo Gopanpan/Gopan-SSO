@@ -20,6 +20,7 @@ import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -31,33 +32,12 @@ import java.util.Date;
  */
 
 @Service
-public class SystemUserService extends BaseService {
+public class SystemUserService extends BaseService  implements BaseServiceInterface<SysUser,SystemUserBo,SysUser>{
 
 
     @Autowired private SysUserMapper sysUserMapper;
 
 
-    @Transactional(readOnly = true)
-    public Object systemUserList(SystemUserBo systemUserBo) {
-        PageHelper.startPage(systemUserBo.getPageIndex(), systemUserBo.getPageSize());
-        return new PageInfo<>(sysUserMapper.findListByE(systemUserBo));
-    }
-
-    @Transactional(readOnly = true)
-    public Object getSystemUserById(Long id) throws ServiceException {
-        SysUser sysUser = sysUserMapper.selectByPrimaryKey(id);
-        SysUser createUser = sysUserMapper.selectByPrimaryKey(sysUser.getCreateUser());
-        SysUser updateUser = sysUserMapper.selectByPrimaryKey(sysUser.getUpdateUser());
-        SysUserVo sysUserVo = new SysUserVo();
-
-        BeanUtils.copyProperties(sysUser,sysUserVo);
-        if(!ObjectUtils.isEmpty(createUser))
-            sysUserVo.setCreateUserName(createUser.getLoginName());
-        if(!ObjectUtils.isEmpty(updateUser))
-            sysUserVo.setUpdateUserName(updateUser.getLoginName());
-
-        return sysUserVo;
-    }
     @Transactional(readOnly = false)
     public SysUser findByLoginName(String loginName, String password, HttpServletRequest request) throws Exception {
         SysUser sysUser = sysUserMapper.findUserByLoginName(loginName);
@@ -79,24 +59,70 @@ public class SystemUserService extends BaseService {
 
     }
 
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void addAUpdateSysUser(SysUser sysUser, SysUser currnentUser) throws Exception {
-
-
-        SysUser sysUserTemp = (SysUser)verifyEntity(sysUser, currnentUser);
-        if(StringUtils.isEmpty(sysUserTemp.getId()))
-            sysUserMapper.insert(sysUserTemp);
-        else
-            sysUserMapper.updateByPrimaryKeySelective(sysUserTemp);
-    }
 
     @Transactional(readOnly = true)
     public SysUser findByLoginName(String loginName) {
         return sysUserMapper.findUserByLoginName(loginName);
     }
 
-    @Transactional(readOnly = false,propagation = Propagation.REQUIRED)
-    public void deleteSysUserById(Long sysUserId) {
-        sysUserMapper.deleteByPrimaryKey(sysUserId);
+
+    @Override
+    @Transactional(readOnly = false,rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
+    public int insertOrUpdate(SysUser record, SysUser currentLoginUser) throws Exception {
+
+        SysUser sysUserTemp = (SysUser)verifyEntity(record, currentLoginUser);
+        if(StringUtils.isEmpty(sysUserTemp.getId()))
+           return sysUserMapper.insert(sysUserTemp);
+        else
+           return sysUserMapper.updateByPrimaryKeySelective(sysUserTemp);
     }
+
+    @Override
+    @Transactional(readOnly = false,rollbackFor = Exception.class,propagation = Propagation.REQUIRED)
+    public int deleteById(Long id) {
+        return sysUserMapper.deleteByPrimaryKey(id);
+
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public SysUser selectById(Long id) {
+        SysUser sysUser = sysUserMapper.selectByPrimaryKey(id);
+        SysUser createUser = sysUserMapper.selectByPrimaryKey(sysUser.getCreateUser());
+        SysUser updateUser = sysUserMapper.selectByPrimaryKey(sysUser.getUpdateUser());
+        SysUserVo sysUserVo = new SysUserVo();
+
+        BeanUtils.copyProperties(sysUser,sysUserVo);
+        if(!ObjectUtils.isEmpty(createUser))
+            sysUserVo.setCreateUserName(createUser.getLoginName());
+        if(!ObjectUtils.isEmpty(updateUser))
+            sysUserVo.setUpdateUserName(updateUser.getLoginName());
+
+        return sysUserVo;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PageInfo findPageListByE(SystemUserBo customBo) {
+
+        PageHelper.startPage(customBo.getPageIndex(), customBo.getPageSize());
+
+        return new PageInfo<>(sysUserMapper.findListByE(customBo));
+    }
+
+
+
+    @Override
+    public List<SysUser> findList() {
+        return null;
+    }
+
+
+
+    @Override
+    public PageInfo findPageListByT(SysUser entity) {
+        return null;
+    }
+
+
 }
