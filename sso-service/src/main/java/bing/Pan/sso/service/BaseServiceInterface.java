@@ -19,9 +19,9 @@ public interface BaseServiceInterface<T,E,S> {
 
     int insertOrUpdate(T record,S currentLoginUser) throws Exception;
 
-    int deleteById(Long id);
+    int deleteById(Long id) throws Exception;
 
-    Object selectById(Long id);
+    Object selectById(Long id) throws Exception;
 
 
 
@@ -29,14 +29,14 @@ public interface BaseServiceInterface<T,E,S> {
      * 查询所有不带条件
      * @return
      */
-    List<T> findList();
+    List<T> findList() throws Exception;
 
     /**
      * 根基条件查询List集合
      * @param customBo 自定义类型
      * @return
      */
-    PageInfo findPageListByE(E customBo);
+    PageInfo findPageListByE(E customBo) throws Exception;
 
 
 
@@ -45,7 +45,7 @@ public interface BaseServiceInterface<T,E,S> {
      * @param entity
      * @return
      */
-    PageInfo findPageListByT(T entity);
+    PageInfo findPageListByT(T entity) throws Exception;
 
 
 

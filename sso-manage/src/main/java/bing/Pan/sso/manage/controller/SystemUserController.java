@@ -48,7 +48,7 @@ public class SystemUserController extends BaseController{
     @ApiOperation(value = "系统管理用户列表",  response = Response.class)
     @RequestMapping(value = "/systemUserList", method = RequestMethod.POST)
     public Object systemUserList(@Valid @ModelAttribute SystemUserBo systemUserBo,
-                                 BindingResult result) throws ServiceException {
+                                 BindingResult result) throws Exception {
         checkValid(result);
 
         return new Response<>(systemUserService.findPageListByE(systemUserBo));
@@ -60,7 +60,7 @@ public class SystemUserController extends BaseController{
             @ApiImplicitParam(name = "id", value = "系统用户Id", required = true, dataType = "Long", paramType = "query"),
     })
     @RequestMapping(value = "/getSystemUserById", method = RequestMethod.POST)
-    public Object getSystemUserById(Long id) throws ServiceException {
+    public Object getSystemUserById(Long id) throws Exception {
         if(ObjectUtils.isEmpty(id))
             throw new ServiceException(ResponseCode.CLIENT_PARAM_MISS,"传入的系统用户ID为空!");
 
@@ -94,7 +94,7 @@ public class SystemUserController extends BaseController{
             @ApiImplicitParam(name = "loginName", value = "登陆名", required = true, dataType = "string", paramType = "query"),
     })
     @RequestMapping(value = "/checkLoginName", method = RequestMethod.POST)
-    public Object checkLoginName(String loginName){
+    public Object checkLoginName(String loginName) throws Exception {
 
         Map<String, Boolean> result = Maps.newHashMap();
         SysUser sysUser = systemUserService.findByLoginName(loginName);
@@ -113,7 +113,7 @@ public class SystemUserController extends BaseController{
             @ApiImplicitParam(name = "sysUserId",value = "系统用户Id",required = true,dataType = "Long",paramType = "query")
     })
     @RequestMapping(value = "/deleteUser",method = RequestMethod.POST)
-    public Object deleteUser(Long sysUserId) throws ServiceException {
+    public Object deleteUser(Long sysUserId) throws Exception {
         if(StringUtils.isEmpty(sysUserId))
             throw new ServiceException(ResponseCode.CLIENT_PARAM_MISS,"系统用户ID为空!");
 

@@ -20,7 +20,7 @@ $(document).ready(function () {
                     $("#phone").val(data.result.phone).attr("disabled",true);
                     $("#email").val(data.result.email).attr("disabled",true);
                     $("#birthday").val(data.result.birthday).attr("disabled",true);
-                    $("#lastLogin").val(data.result.lastLogin).attr("disabled",true);
+                    $("#lastLogin").val(changeDateFormat(data.result.lastLogin)).attr("disabled",true);
                     $("#lastIp").val(data.result.lastIp).attr("disabled",true);
                     $("#createUserName").val(data.result.createUserName).attr("disabled",true);
                     $("#createTime").val(changeDateFormat(data.result.createTime)).attr("disabled",true);

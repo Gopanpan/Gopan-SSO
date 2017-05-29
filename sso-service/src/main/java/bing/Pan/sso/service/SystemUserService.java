@@ -61,7 +61,7 @@ public class SystemUserService extends BaseService  implements BaseServiceInterf
 
 
     @Transactional(readOnly = true)
-    public SysUser findByLoginName(String loginName) {
+    public SysUser findByLoginName(String loginName) throws Exception  {
         return sysUserMapper.findUserByLoginName(loginName);
     }
 
@@ -79,14 +79,14 @@ public class SystemUserService extends BaseService  implements BaseServiceInterf
 
     @Override
     @Transactional(readOnly = false,rollbackFor = Exception.class,propagation = Propagation.REQUIRED)
-    public int deleteById(Long id) {
+    public int deleteById(Long id) throws Exception  {
         return sysUserMapper.deleteByPrimaryKey(id);
 
     }
 
     @Override
     @Transactional(readOnly = true)
-    public SysUser selectById(Long id) {
+    public SysUser selectById(Long id) throws Exception  {
         SysUser sysUser = sysUserMapper.selectByPrimaryKey(id);
         SysUser createUser = sysUserMapper.selectByPrimaryKey(sysUser.getCreateUser());
         SysUser updateUser = sysUserMapper.selectByPrimaryKey(sysUser.getUpdateUser());
@@ -103,7 +103,7 @@ public class SystemUserService extends BaseService  implements BaseServiceInterf
 
     @Override
     @Transactional(readOnly = true)
-    public PageInfo findPageListByE(SystemUserBo customBo) {
+    public PageInfo findPageListByE(SystemUserBo customBo) throws Exception  {
 
         PageHelper.startPage(customBo.getPageIndex(), customBo.getPageSize());
 
@@ -113,14 +113,14 @@ public class SystemUserService extends BaseService  implements BaseServiceInterf
 
 
     @Override
-    public List<SysUser> findList() {
+    public List<SysUser> findList() throws Exception  {
         return null;
     }
 
 
 
     @Override
-    public PageInfo findPageListByT(SysUser entity) {
+    public PageInfo findPageListByT(SysUser entity) throws Exception  {
         return null;
     }
 

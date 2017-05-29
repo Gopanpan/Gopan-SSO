@@ -42,16 +42,16 @@ public class SsoUserController extends BaseController {
     @Autowired private SsoUserService ssoUserService;
 
     /**
-     * 系统管理用户列表
+     * 应用系统管理用户列表
      * @param systemUserBo
      * @return
      */
     @ApiOperation(value = "应用系统用户列表",  response = Response.class)
     @RequestMapping(value = "/ssoUserList", method = RequestMethod.POST)
-    public Object ssoUserList(@Valid @ModelAttribute SsoUserBo systemUserBo, BindingResult result) throws ServiceException {
+    public Object ssoUserList(@Valid @ModelAttribute SsoUserBo systemUserBo, BindingResult result) throws Exception {
         checkValid(result);
 
-        return new Response<>(ssoUserService.ssoUserList(systemUserBo));
+        return new Response<>(ssoUserService.findPageListByE(systemUserBo));
     }
 
 
@@ -60,11 +60,11 @@ public class SsoUserController extends BaseController {
             @ApiImplicitParam(name = "id", value = "系统用户Id", required = true, dataType = "Long", paramType = "query"),
     })
     @RequestMapping(value = "/getSsoUserById", method = RequestMethod.POST)
-    public Object getSsoUserById(Long id) throws ServiceException {
+    public Object getSsoUserById(Long id) throws Exception {
         if(ObjectUtils.isEmpty(id))
             throw new ServiceException(ResponseCode.CLIENT_PARAM_MISS,"传入的应用系统用户ID为空!");
 
-        return new Response<>(ssoUserService.getSsoUserById(id));
+        return new Response<>(ssoUserService.selectById(id));
 
     }
 
@@ -76,7 +76,7 @@ public class SsoUserController extends BaseController {
 
         SsoUser ssoUser = new SsoUser();
         BeanUtils.copyProperties(ssoUserAddBo,ssoUser);
-        ssoUserService.addAUpdateSsoUser(ssoUser,getCurrnentUser());
+        ssoUserService.insertOrUpdate(ssoUser,getCurrnentUser());
 
         return new Response<>();
 
@@ -95,7 +95,7 @@ public class SsoUserController extends BaseController {
             @ApiImplicitParam(name = "loginName", value = "登陆名", required = true, dataType = "string", paramType = "query"),
     })
     @RequestMapping(value = "/checkLoginName", method = RequestMethod.POST)
-    public Object checkLoginName(String loginName){
+    public Object checkLoginName(String loginName) throws Exception {
 
         Map<String, Boolean> result = Maps.newHashMap();
         SysUser sysUser = ssoUserService.findByLoginName(loginName);
@@ -114,11 +114,11 @@ public class SsoUserController extends BaseController {
             @ApiImplicitParam(name = "sysUserId",value = "系统用户Id",required = true,dataType = "Long",paramType = "query")
     })
     @RequestMapping(value = "/deleteUser",method = RequestMethod.POST)
-    public Object deleteUser(Long sysUserId) throws ServiceException {
+    public Object deleteUser(Long sysUserId) throws Exception {
         if(StringUtils.isEmpty(sysUserId))
-            throw new ServiceException(ResponseCode.CLIENT_PARAM_MISS,"系统用户ID为空!");
+            throw new ServiceException(ResponseCode.CLIENT_PARAM_MISS,"应用系统用户ID为空!");
 
-        ssoUserService.deleteSsoUserById(sysUserId);
+        ssoUserService.deleteById(sysUserId);
 
         return new Response<>();
     }
