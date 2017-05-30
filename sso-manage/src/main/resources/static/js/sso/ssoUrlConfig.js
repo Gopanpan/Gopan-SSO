@@ -38,7 +38,12 @@ var ssoUser_detail_view_url = base_serve_url_config + "/ssoUser/ssoUserDetailVie
 var ssoUsr_check_unique_loginName = base_serve_url_config + "/ssoUser/checkLoginName";
 
 
-
+/**
+ * 应用系统url
+ * @type {string}
+ */
 var ssoSystem_list_url= base_serve_url_config + "/ssoSystem/ssoSystemList";
+var ssoSystem_addAUpdate_view_url = base_serve_url_config + "/ssoSystem/addAUPdateSsoUserSystemView";
+var ssoSystem_addAUpdate_url = base_serve_url_config + "/ssoSystem/addAUPdateSsoSystem";
 
 

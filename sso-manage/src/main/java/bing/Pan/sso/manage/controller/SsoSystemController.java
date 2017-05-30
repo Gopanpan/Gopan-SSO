@@ -1,5 +1,8 @@
 package bing.Pan.sso.manage.controller;
 
+import bing.Pan.sso.common.exception.ServiceException;
+import bing.Pan.sso.common.response.Response;
+import bing.Pan.sso.domain.bussinessobject.SsoSystemAddBo;
 import bing.Pan.sso.domain.bussinessobject.SsoSystemBo;
 import bing.Pan.sso.service.SsoSystemService;
 import io.swagger.annotations.Api;
@@ -28,10 +31,18 @@ public class SsoSystemController extends BaseController{
 
 
     @RequestMapping("/ssoSystemList")
-    private Object ssoSystemList(@Valid @ModelAttribute SsoSystemBo ssoSystemBo, BindingResult result){
+    private Object ssoSystemList(@Valid @ModelAttribute SsoSystemBo ssoSystemBo, BindingResult result) throws Exception {
 
-        //systemInfoService
+        checkValid(result);
+
+        return new Response<>(systemInfoService.findPageListByE(ssoSystemBo));
+    }
+
+    @RequestMapping("/addAUPdateSsoSystem")
+    private Object addAUPdateSsoSystem(@Valid @ModelAttribute SsoSystemAddBo ssoSystemAddBo, BindingResult result) throws ServiceException {
+        checkValid(result);
         return null;
+
     }
 
 

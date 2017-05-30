@@ -34,7 +34,7 @@ $(document).ready(function () {
 
 
 
-//取消
+//确认
 $('#btnCancel').click(function () {
     parent.layer.closeAll('iframe');
 });

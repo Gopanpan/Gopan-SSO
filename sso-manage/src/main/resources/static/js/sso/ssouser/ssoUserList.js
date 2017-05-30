@@ -28,7 +28,7 @@ $(document).ready(function () {
         {name: 'createTime', index: 'createTime', sortable: false, align: 'center', width: 105,formatter: function (x) {return changeDateFormat(x);}},
         {name: 'lastLogin', index: 'lastLogin', sortable: false, align: 'center', width: 105, formatter: function (x) {return changeDateFormat(x);}},
         {name: 'available', index: 'available', sortable: false, align: 'center', width: 55,formatter: function (x) {return availableFormat(x);}},
-        {name: 'id', index: 'id', sortable: false, resizable: false, align: 'center', width: 105,formatter: function (x,y,z) {return '<a class="btn btn-primary btn-xs" onclick="sysUserDetail(\''+x+'\');">详情</a> <a class="btn btn-primary btn-xs" onclick="updateSysUser(\''+x+'\');">修改</a> <a class="btn btn-primary btn-xs" onclick="deleteSysInfo(\''+x+'\',\''+z['loginName']+'\');">删除</a>';}}];
+        {name: 'id', index: 'id', sortable: false, resizable: false, align: 'center', width: 105,formatter: function (x,y,z) {return '<a class="btn btn-primary btn-xs" onclick="generalDetail(\''+x+'\');">详情</a> <a class="btn btn-primary btn-xs" onclick="generalUpdate(\''+x+'\');">修改</a> <a class="btn btn-primary btn-xs" onclick="generalDelete(\''+x+'\',\''+z['loginName']+'\');">删除</a>';}}];
 
     initJqgrid(ssoUser_list_url,data_colNames,data_colModel);
 });
@@ -37,7 +37,7 @@ $(document).ready(function () {
 
 
 //查询
-$("#querySysUsers").bind('click',function(){
+$("#generalQuery").bind('click',function(){
     var reloadParams = {
         url: ssoUser_list_url,
         postData: setPostData()
@@ -57,10 +57,10 @@ function reload(){
 
 
 //新增
-$("#addSysUser").bind('click',function(){
+$("#generalAdd").bind('click',function(){
     openPage(ssoUser_addAUpdate_view_url);
 });
-function updateSysUser(id){
+function generalUpdate(id){
     openPage(ssoUser_addAUpdate_view_url +"?id="+id);
 
 }
@@ -81,7 +81,7 @@ function openPage(requestUrl){
 }
 
 //详情
-function sysUserDetail(id) {
+function generalDetail(id) {
     parent.layer.open({
         type: 2,
         title: '用户详情',
@@ -97,7 +97,7 @@ function sysUserDetail(id) {
 }
 
 //删除用户
-function deleteSysInfo(id, sysUserName) {
+function generalDelete(id, sysUserName) {
 
     layer.confirm('确定要删除系统用户:' + sysUserName, {
         btn: ['确定', '取消'] //按钮

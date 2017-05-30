@@ -11,18 +11,18 @@
         <div class="ibox-oper">
             <form class="form-inline" role="form">
                 <div class="form-group">
-                    <label class="control-label" for="sysInfoId">登陆名：</label>
+                    <label class="control-label" >登陆名：</label>
                     <input id="loginName" name="loginName" value="" maxlength="20"/>
                     &nbsp;&nbsp;
-                    <label class="control-label" for="sysInfoId">真实名：</label>
+                    <label class="control-label" >真实名：</label>
                     <input id="realName" name="realName" value="" maxlength="20"/>
                     &nbsp;&nbsp;
-                    <label class="control-label" for="sysInfoId">电话号码：</label>
+                    <label class="control-label" >电话号码：</label>
                     <input id="phone" name="phone" value="" maxlength="20"/>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input class="btn btn-primary false btn-xs" type="button" value="查询" id="querySysUsers"/>
+                    <input class="btn btn-primary false btn-xs" type="button" value="查询" id="generalQuery"/>
                     &nbsp;&nbsp;
-                    <input class="btn btn-primary false btn-xs" type="button" value="新增" id="addSysUser"/>
+                    <input class="btn btn-primary false btn-xs" type="button" value="新增" id="generalAdd"/>
                 </div>
             </form>
         </div>

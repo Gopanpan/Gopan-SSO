@@ -13,12 +13,10 @@ $(document).ready(function () {
                 serviceValidateErrorTipsMessage(data);
 
                 if (data.code == "20000" && data.result) {
-                    $("#loginName").val(data.result.loginName).attr("disabled",true);
-                    $("#realName").val(data.result.realName);
-                    $("#sex").val(data.result.sex);
-                    $("#phone").val(data.result.phone);
-                    $("#email").val(data.result.email);
-                    $("#birthday").val(data.result.birthday);
+                    $("#name").val(data.result.name).attr("disabled",true);
+                    $("#systemCode").val(data.result.systemCode);
+                    $("#available").val(data.result.available);
+                    $("#detailExplain").val(data.result.detailExplain);
                 }
 
             });
@@ -33,57 +31,37 @@ $(document).ready(function () {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            loginName:{
+            name:{
                 validators: {
                     notEmpty: {
-                        message: '登陆名不能为空!'
+                        message: '系统名称不能为空!'
                     },
                     stringLength: {
                         min: 6,
                         max: 30,
-                        message: '登陆名长度必须在6到30之间!'
-                    },
-                    remote:{
-                        message: '该登陆名太抢手了,请换一个试试!',//提示消息
-                        delay :  1000,//每输入一个字符，就发ajax请求，服务器压力还是太大，设置2秒发送一次ajax（默认输入一个字符，提交一次，服务器压力太大）
-                        type:"POST",
-                        url: ssoUsr_check_unique_loginName
+                        message: '系统名称长度必须在6到30之间!'
                     }
                 }
             },
-            realName:{
+            systemCode:{
                 validators: {
                     notEmpty: {
-                        message: '真实名不能为空!'
+                        message: '系统编码不能为空!'
                     }
                 }
             },
-            sex:{
+            available:{
                 validators: {
                     notEmpty: {
-                        message: '性别不能为空!'
+                        message: '可用状态不能为空!'
                     }
                 }
             },
-            phone:{
+            detailExplain:{
                 message: 'The phone is not valid',
                 validators: {
                     notEmpty: {
-                        message: '手机号码不能为空'
-                    },
-                    regexp: {
-                        regexp: /^1[3|5|8]{1}[0-9]{9}$/,
-                        message: '请输入正确的手机号码'
-                    }
-                }
-            },
-            email:{
-                validators: {
-                    notEmpty: {
-                        message: 'email不能为空!'
-                    },
-                    emailAddress: {
-                        message: 'The input is not a valid email address'
+                        message: '系统描述不能为空!'
                     }
                 }
             }

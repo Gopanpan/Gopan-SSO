@@ -139,8 +139,19 @@ public class ViewController {
      */
     @RequestMapping(value = "/ssoSystemListView",method = RequestMethod.GET)
     public String ssoSystemListView(){
-        return "ssoSystem/ssoSystemList";
+        return "ssosystem/ssoSystemList";
     }
+
+
+    /**
+     * 应用系统管理新增/修改页面
+     * @return
+     */
+    @RequestMapping(value = "/ssoSystem/addAUPdateSsoUserSystemView",method = RequestMethod.GET)
+    public String addAUPdateSsoUserSystemView(){
+        return "ssosystem/ssoSystem";
+    }
+
 
 
 

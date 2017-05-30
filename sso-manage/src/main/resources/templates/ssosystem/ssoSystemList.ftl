@@ -1,24 +1,27 @@
 <#include "frame.ftl">
 
-<#macro title_info>用户列表页</#macro>
+<#macro title_info>系统列表页</#macro>
 
 <#macro frame_content>
 <div class="ibox">
     <div class="ibox-heading">
         <div class="ibox-title">
-            <h5>系统管理用户列表 </h5>
+            <h5>应用系统列表</h5>
         </div>
         <div class="ibox-oper">
             <form class="form-inline" role="form">
                 <div class="form-group">
-                    <label class="control-label">登陆名：</label>
-                    <input id="loginName" name="loginName" value="" maxlength="20"/>
+                    <label class="control-label" >应用系统名称：</label>
+                    <input id="name" name="name" value="" maxlength="20"/>
                     &nbsp;&nbsp;
-                    <label class="control-label" >真实名：</label>
-                    <input id="realName" name="realName" value="" maxlength="20"/>
+                    <label class="control-label">应用系统编码：</label>
+                    <input id="systemCode" name="systemCode" value="" maxlength="20"/>
                     &nbsp;&nbsp;
-                    <label class="control-label" >电话号码：</label>
-                    <input id="phone" name="phone" value="" maxlength="20"/>
+                    <label class="control-label" >是否启用：</label>
+                    <select class="selectpicker" data-live-search="true" title="--请选择--" id="available" name="available">
+                        <option value='true' >可用</option>
+                        <option value='false' >禁用</option>
+                    </select>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <input class="btn btn-primary false btn-xs" type="button" value="查询" id="generalQuery"/>
                     &nbsp;&nbsp;
@@ -37,6 +40,6 @@
 </#macro>
 
 <#macro business_js>
-<script type="text/javascript" src="/static/js/sso/sysuser/systemUserList.js"></script>
+<script type="text/javascript" src="/static/js/sso/ssosystem/ssoSystemList.js"></script>
 </#macro>
 <@frame_html/>

@@ -1,9 +1,9 @@
 //封装请求页面加载的参数
 function setPostData(){
     return {
-        phone:$("#phone").val(),
-        loginName:$("#loginName").val(),
-        realName:$("#realName").val()
+        name:$("#name").val(),
+        systemCode:$("#systemCode").val(),
+        available:$("#available").val()
 
     };
 }
@@ -12,23 +12,26 @@ function setPostData(){
 $(document).ready(function () {
 
     var data_colNames = [
-        '用户Id','<div align="center"><span>用户名</span></div>','<div align="center"><span>真实名称</span></div>',
-        '<div align="center"><span>性别</span></div>','<div align="center"><span>电话号码</span></div>',
-        '<div align="center"><span>电子邮件</span></div>','<div align="center"><span>创建时间</span></div>',
-        '<div align="center"><span>最后登录时间</span></div>','<div align="center"><span>是否启用</span></div>',
+        'Id','<div align="center"><span>系统名称</span></div>','<div align="center"><span>系统编码</span></div>',
+        '<div align="center"><span>是否可用</span></div>','<div align="center"><span>创建人</span></div>',
+        '<div align="center"><span>创建时间</span></div>','<div align="center"><span>修改人</span></div>',
+        '<div align="center"><span>修改时间</span></div>',
         '<div align="center"><span>操作</span></div>'
     ];
     var data_colModel = [
         {name: 'id', index: 'id',hidden: true },
-        {name: 'loginName', index: 'loginName', sortable: false, align: 'center', width: 70},
-        {name: 'realName', index: 'realName', sortable: false, align: 'center', width: 70},
-        {name: 'sex', index: 'sex', sortable: false, align: 'center', width: 50,formatter: function (x) { return sexFormat(x);}},
-        {name: 'phone', index: 'phone', sortable: false, align: 'center', width: 80},
-        {name: 'email', index: 'email', sortable: false, align: 'center', width: 130},
-        {name: 'createTime', index: 'createTime', sortable: false, align: 'center', width: 105,formatter: function (x) {return changeDateFormat(x);}},
-        {name: 'lastLogin', index: 'lastLogin', sortable: false, align: 'center', width: 105, formatter: function (x) {return changeDateFormat(x);}},
-        {name: 'available', index: 'available', sortable: false, align: 'center', width: 55,formatter: function (x) {return availableFormat(x);}},
-        {name: 'id', index: 'id', sortable: false, resizable: false, align: 'center', width: 105,formatter: function (x,y,z) {return '<a class="btn btn-primary btn-xs" onclick="sysUserDetail(\''+x+'\');">详情</a> <a class="btn btn-primary btn-xs" onclick="updateSysUser(\''+x+'\');">修改</a> <a class="btn btn-primary btn-xs" onclick="deleteSysInfo(\''+x+'\',\''+z['loginName']+'\');">删除</a>';}}];
+        {name: 'name', index: 'name', sortable: false, align: 'center', width: 100},
+        {name: 'systemCode', index: 'systemCode', sortable: false, align: 'center', width: 100},
+        {name: 'available', index: 'available', sortable: false, align: 'center', width: 50,formatter: function (x) {
+            return availableFormat(x);
+        }},
+        {name: 'createUser', index: 'createUser', sortable: false, align: 'center', width: 100},
+        {name: 'createTime', index: 'createTime', sortable: false, align: 'center', width: 100,formatter:function (x) {
+            return changeDateFormat(x);
+        }},
+        {name: 'updateUser', index: 'updateUser', sortable: false, align: 'center', width: 100},
+        {name: 'updateTime', index: 'updateTime', sortable: false, align: 'center', width: 100, formatter: function (x) {return changeDateFormat(x);}},
+        {name: 'id', index: 'id', sortable: false, resizable: false, align: 'center', width: 100,formatter: function (x,y,z) {return '<a class="btn btn-primary btn-xs" onclick="generalDetail(\''+x+'\');">详情</a> <a class="btn btn-primary btn-xs" onclick="generalUpdate(\''+x+'\');">修改</a> <a class="btn btn-primary btn-xs" onclick="generalDelete(\''+x+'\',\''+z['loginName']+'\');">删除</a>';}}];
 
     initJqgrid(ssoSystem_list_url,data_colNames,data_colModel);
 });
@@ -37,9 +40,9 @@ $(document).ready(function () {
 
 
 //查询
-$("#querySysUsers").bind('click',function(){
+$("#generalQuery").bind('click',function(){
     var reloadParams = {
-        url: ssoUser_list_url,
+        url: ssoSystem_list_url,
         postData: setPostData()
     };
     jqgrid_reload(reloadParams);
@@ -48,7 +51,7 @@ $("#querySysUsers").bind('click',function(){
 //刷新页面
 function reload(){
     var reloadParams = {
-        url: ssoUser_list_url,
+        url: ssoSystem_list_url,
         postData: setPostData()
     };
     jqgrid_reload(reloadParams);
@@ -57,11 +60,11 @@ function reload(){
 
 
 //新增
-$("#addSysUser").bind('click',function(){
-    openPage(ssoUser_addAUpdate_view_url);
+$("#generalAdd").bind('click',function(){
+    openPage(ssoSystem_addAUpdate_view_url);
 });
-function updateSysUser(id){
-    openPage(ssoUser_addAUpdate_view_url +"?id="+id);
+function generalUpdate(id){
+    openPage(ssoSystem_addAUpdate_view_url +"?id="+id);
 
 }
 
@@ -81,7 +84,7 @@ function openPage(requestUrl){
 }
 
 //详情
-function sysUserDetail(id) {
+function generalDetail(id) {
     parent.layer.open({
         type: 2,
         title: '用户详情',
@@ -97,7 +100,7 @@ function sysUserDetail(id) {
 }
 
 //删除用户
-function deleteSysInfo(id, sysUserName) {
+function generalDelete(id, sysUserName) {
 
     layer.confirm('确定要删除系统用户:' + sysUserName, {
         btn: ['确定', '取消'] //按钮

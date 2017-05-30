@@ -2,35 +2,38 @@
 
 <#macro frame_content>
 
-<div class="ibox-content form-horizontal">
-    <input type="hidden" value="${sysInfoId}" id="sysInfoId">
+<div id="generalForm" class="ibox-content form-horizontal">
+    <input type="hidden" value="${id}" id="id">
 
     <div class="form-group">
         <label class="col-sm-4 control-label">系统名称：</label>
 
         <div class="col-sm-6">
-            <input type="text" placeholder="" class="form-control" value="" id="sysInfoName">
+            <input type="text" placeholder="" class="form-control" id="name" name="name">
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-4 control-label">系统编码：</label>
         <div class="col-sm-6">
-            <input type="text" placeholder="" class="form-control" value="" id="sysInfoName">
+            <input type="text" placeholder="" class="form-control" id="systemCode" name="systemCode">
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-sm-4 control-label">是否可用：</label>
         <div class="col-sm-6">
-            <input type="radio" name="subStationStatus" value="1" checked='checked'> 可用
-            <input type="radio" name="subStationStatus" value="0"> 不可用
+            <select class="selectpicker" data-live-search="true" title="--请选择--" id="available" name="available">
+                <option value='true' >可用</option>
+                <option value='false' >禁用</option>
+            </select>
         </div>
+
     </div>
 
     <div class="form-group">
         <label class="col-sm-4 control-label">系统描述：</label>
         <div class="col-sm-6 ckeditor">
-            <textarea id="TextArea1" cols="20" rows="2" class="ckeditor"></textarea>
+            <textarea id="detailExplain" name="detailExplain" cols="20" rows="2" class="ckeditor"></textarea>
         </div>
     </div>
 

@@ -139,4 +139,28 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+
+  <select id="findListByE" parameterType="bing.Pan.sso.domain.bussinessobject.SsoSystemBo" resultMap="BaseResultMap">
+
+    select
+    <include refid="Base_Column_List" />
+    from sso_system  su
+    <where>
+      1=1
+      <if test="name != null and name != ''">
+        and su.name  like concat('%',#{name}, '%')
+      </if>
+      <if test="systemCode != null and systemCode !=''">
+        and su.system_code like concat('%',#{systemCode},'%')
+      </if>
+      <if test="available != null and available !=''">
+        and su.available  = #{available}
+      </if>
+    </where>
+
+
+
+  </select>
 </mapper>
