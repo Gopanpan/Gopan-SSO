@@ -23,6 +23,7 @@ var sysUsr_check_unique_loginName = base_serve_url_config + "/sysUser/checkLogin
 var sysUser_findById_url = base_serve_url_config + "/sysUser/getSystemUserById";
 var sysUser_detail_view_url = base_serve_url_config +　"/sysUser/sysUserDetailView";
 var sysUser_delete_url = base_serve_url_config + "/sysUser/deleteUser";
+var sysUser_download_url = base_serve_url_config + "/sysUser/downloadSysUser";
 
 
 /**

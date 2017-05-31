@@ -56,6 +56,16 @@ function reload(){
 
 
 
+
+$("#generalExport").bind('click',function () {
+
+    $('<form method="post" action="' + sysUser_download_url + '"></form>').appendTo('body').submit().remove();
+
+});
+
+
+
+
 //新增
 $("#generalAdd").bind('click',function(){
     openPage(sysUser_addAUpdate_view_url);

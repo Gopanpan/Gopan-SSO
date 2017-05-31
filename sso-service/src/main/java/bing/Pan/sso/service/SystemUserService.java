@@ -114,7 +114,7 @@ public class SystemUserService extends BaseService  implements BaseServiceInterf
 
     @Override
     public List<SysUser> findList() throws Exception  {
-        return null;
+        return sysUserMapper.findList();
     }
 
 

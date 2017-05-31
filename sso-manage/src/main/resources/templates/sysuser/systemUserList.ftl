@@ -23,6 +23,8 @@
                     <input class="btn btn-primary false btn-xs" type="button" value="查询" id="generalQuery"/>
                     &nbsp;&nbsp;
                     <input class="btn btn-primary false btn-xs" type="button" value="新增" id="generalAdd"/>
+                    &nbsp;&nbsp;
+                    <input class="btn btn-primary false btn-xs" type="button" value="导出" id="generalExport"/>
                 </div>
             </form>
         </div>

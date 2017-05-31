@@ -51,6 +51,10 @@
         <bcprov-ext-jdk15on.version>1.52</bcprov-ext-jdk15on.version>
         <jodconverter.version>2.2.1</jodconverter.version>
         <axis2.version>1.6.2</axis2.version>
+        <poi.version>3.9</poi.version>
+        <jxl.version>2.4.2_4</jxl.version>
+
+
         <swagger.scope>compile</swagger.scope>
     </properties>
 
@@ -162,6 +166,22 @@
             <artifactId>httpclient</artifactId>
             <version>${httpclient.version}</version>
         </dependency>
+
+
+        <!-- POI -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+
+        <!--jxl.jar-->
+        <dependency>
+            <groupId>org.apache.servicemix.bundles</groupId>
+            <artifactId>org.apache.servicemix.bundles.jexcelapi</artifactId>
+            <version>${jxl.version}</version>
+        </dependency>
+
     </dependencies>
 
 

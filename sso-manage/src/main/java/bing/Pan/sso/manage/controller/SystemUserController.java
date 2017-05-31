@@ -1,12 +1,15 @@
 package bing.Pan.sso.manage.controller;
 
+import bing.Pan.sso.common.constant.ExportConstantData;
 import bing.Pan.sso.common.enums.ResponseCode;
 import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.common.response.Response;
+import bing.Pan.sso.common.utils.ExcelExportJXLTools;
 import bing.Pan.sso.domain.bussinessobject.SystemUserAddBo;
 import bing.Pan.sso.domain.bussinessobject.SystemUserBo;
 import bing.Pan.sso.domain.entity.SysUser;
 import bing.Pan.sso.service.SystemUserService;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -22,7 +25,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -120,6 +125,27 @@ public class SystemUserController extends BaseController{
         systemUserService.deleteById(sysUserId);
 
         return new Response<>();
+    }
+
+
+    @ApiOperation(value = "导出系统用户")
+    @RequestMapping(value = "/downloadSysUser",method = RequestMethod.POST)
+    public void downloadSysUser(HttpServletResponse response) throws Exception {
+
+        List<SysUser> list = systemUserService.findList();
+        List<Object> listObject = Lists.newArrayList();
+        listObject.addAll(list);
+
+        String fileName = String.format("%s%s", "客户出借列表导出-", ".xls");
+        String sheetName = "测试数据_sheetName";
+
+        ExcelExportJXLTools jxlTools = new ExcelExportJXLTools();
+        jxlTools.ExcelExportWithFormat(fileName,sheetName,ExportConstantData.sysUserRecordTitle(),ExportConstantData.sysUserCallStyle(),listObject,response);
+
+        System.out.println("Ok");
+        System.out.println("Ok");
+        System.out.println("Ok");
+        System.out.println("Ok");
     }
 
 }
