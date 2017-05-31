@@ -1,16 +1,15 @@
 package bing.Pan.sso.common.utils;
 
-import org.apache.commons.lang3.StringUtils;
+import bing.Pan.sso.common.enums.ResponseCode;
+import bing.Pan.sso.common.exception.ServiceException;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
-import org.apache.poi.xssf.usermodel.XSSFRichTextString;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
@@ -23,68 +22,49 @@ import java.util.Map;
  * @date : 2017/5/31 17:48
  * @desc :
  */
-public class ExcelExportPOITools {
+public class ExcelExportTools {
 
-    /**
-     * 工作薄对象
-     */
     private SXSSFWorkbook workbook;
 
-    /**
-     * 工作表对象
-     */
     private Sheet sheet;
 
-    /**
-     * 样式列表
-     */
     private Map<String, CellStyle> styleMap;
 
-    /**
-     * 当前行号
-     */
+    //当前行号
     private int rowNum;
 
-
-
-    public ExcelExportPOITools(String title, List<String> headerList){
+    /**
+     * 初始化excel表格
+     * @param title         excel title
+     * @param sheetName     sheet名称
+     * @param headerList    表头
+     * @param callWidth     单元格宽度
+     * @throws ServiceException
+     */
+    public ExcelExportTools(String title, String sheetName, List<String> headerList, List<Integer> callWidth) throws ServiceException {
+        if(StringUtils.isEmpty(title) || StringUtils.isEmpty(sheetName) || StringUtils.isEmpty(headerList))
+            throw new ServiceException(ResponseCode.SERVE_LOGIC_PARAM_MISS);
 
         this.workbook = new SXSSFWorkbook(500);
-        this.sheet = workbook.createSheet("Export");
+        this.sheet = workbook.createSheet(sheetName);
         this.styleMap = createStyles(workbook);
 
         //title
-        if (StringUtils.isNotBlank(title)){
-            Row titleRow = sheet.createRow(rowNum++);
-            Cell titleCell = titleRow.createCell(0);
-            titleCell.setCellStyle(styleMap.get("title"));
-            titleCell.setCellValue(title);
-            sheet.addMergedRegion(new CellRangeAddress(titleRow.getRowNum(),titleRow.getRowNum(), titleRow.getRowNum(), headerList.size()-1));
-        }
+        Row titleRow = sheet.createRow(rowNum++);
+        Cell titleCell = titleRow.createCell(0);
+        titleCell.setCellStyle(styleMap.get("title"));
+        titleCell.setCellValue(title);
+        sheet.addMergedRegion(new CellRangeAddress(titleRow.getRowNum(),titleRow.getRowNum(), titleRow.getRowNum(), headerList.size()-1));
 
         //header
         Row headerRow = sheet.createRow(rowNum++);
         for (int i = 0; i < headerList.size(); i++) {
             Cell cell = headerRow.createCell(i);
             cell.setCellStyle(styleMap.get("header"));
-            String[] ss = StringUtils.split(headerList.get(i), "**", 2);
-            if (ss.length==2){
-                cell.setCellValue(ss[0]);
-                Comment comment = this.sheet.createDrawingPatriarch().createCellComment(
-                        new XSSFClientAnchor(0, 0, 0, 0, (short) 3, 3, (short) 5, 6));
-                comment.setString(new XSSFRichTextString(ss[1]));
-                cell.setCellComment(comment);
-            }else{
-                cell.setCellValue(headerList.get(i));
-            }
-            sheet.autoSizeColumn(i);
-        }
-        for (int i = 0; i < headerList.size(); i++) {
-            int colWidth = sheet.getColumnWidth(i)*2;
-            sheet.setColumnWidth(i, colWidth < 3000 ? 3000 : colWidth);
-        }
+            cell.setCellValue(headerList.get(i));
 
-
+            sheet.setColumnWidth(i, callWidth.get(i));
+        }
     }
 
 
@@ -152,55 +132,91 @@ public class ExcelExportPOITools {
     }
 
 
+
+
     /**
-     * 添加数据（通过annotation.ExportField添加数据）
-     * @return list 数据列表
+     * 添加数据
+     * @param list          导出的list数据列
+     * @param filterField   需要过滤的列
+     * @param <E>
+     * @return
+     * @throws IllegalAccessException
      */
-    public <E> ExcelExportPOITools setDataList(List<E> list) throws IllegalAccessException {
-        Field[] fields=null;
-        for(Object obj:list){
-            int colunm = 0;
-            Row row = this.addRow();
+    public <E> ExcelExportTools setDataList(List<E> list, String[] filterField) throws IllegalAccessException {
 
-            fields=obj.getClass().getDeclaredFields();
-
-            for(Field v:fields){
-                v.setAccessible(true);
-                Object va=v.get(obj);
-                if(va==null){
-                    va="--";
-                }
-                this.addCall(row,colunm++, va);
-
-            }
-        }
+        if(StringUtils.isEmpty(filterField) )
+            dealNoFilerField(list);
+        else
+            dealFilerField(list,filterField);
         return this;
     }
 
+    /**
+     * 处理有需要过滤的列表
+     * @param list
+     * @param filterField
+     * @param <E>
+     * @throws IllegalAccessException
+     */
+    private <E> void dealFilerField(List<E> list, String[] filterField) throws IllegalAccessException {
+        Field[] fields=null;
+        for(Object obj:list){
+            int cellNum = 0;
+            Row row =  sheet.createRow(rowNum++);
+            fields=obj.getClass().getDeclaredFields();
+            for(Field field:fields){
+                field.setAccessible(true);
+                String name = field.getName();
+                if(exclusive(name,filterField)){
+                    Object va=field.get(obj);
+                    if(StringUtils.isEmpty(va))
+                        va="--";
+                    addCall(row,cellNum++, va);
+                }
+            }
+        }
+    }
 
-
-
-
-
+    private boolean exclusive(String name, String[] filterField) {
+        for (String exclusive:filterField) {
+            if(name.equals(exclusive))return false;
+        }
+        return true;
+    }
 
     /**
-     * 输出数据流
-     * @param os 输出数据流
+     * 处理没有过滤字段的列表
+     * @param list
+     * @param <E>
+     * @throws IllegalAccessException
      */
-    public ExcelExportPOITools write(OutputStream os) throws IOException {
-        workbook.write(os);
-        return this;
+    private <E> void dealNoFilerField(List<E> list) throws IllegalAccessException {
+        Field[] fields;
+        for(Object obj:list){
+            int cellNum = 0;
+            Row row =  sheet.createRow(rowNum++);
+            fields=obj.getClass().getDeclaredFields();
+            for(Field field:fields){
+                field.setAccessible(true);
+                Object va=field.get(obj);
+                if(StringUtils.isEmpty(va))
+                    va="--";
+                addCall(row,cellNum++, va);
+
+            }
+        }
+
     }
 
     /**
      * 输出到客户端
      * @param fileName 输出文件名
      */
-    public ExcelExportPOITools write(HttpServletResponse response, String fileName) throws IOException{
+    public ExcelExportTools write(HttpServletResponse response, String fileName) throws IOException{
         response.reset();
         response.setContentType("application/octet-stream; charset=utf-8");
-        response.setHeader("Content-Disposition", "attachment; filename="+fileName);
-        write(response.getOutputStream());
+        response.setHeader("Content-Disposition", "attachment; filename="+ new String(fileName.getBytes("GB2312"),"ISO8859-1"));
+        workbook.write(response.getOutputStream());
         return this;
     }
 
@@ -209,7 +225,7 @@ public class ExcelExportPOITools {
     /**
      * 清理临时文件
      */
-    public ExcelExportPOITools dispose(){
+    public ExcelExportTools dispose(){
         workbook.dispose();
         return this;
     }
@@ -220,16 +236,6 @@ public class ExcelExportPOITools {
         cell.setCellValue(va.toString());
         cell.setCellStyle(styleMap.get("data"));
     }
-
-
-    /**
-     * 添加一行
-     * @return 行对象
-     */
-    public Row addRow(){
-        return sheet.createRow(rowNum++);
-    }
-
 
 
 

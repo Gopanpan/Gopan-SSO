@@ -13,13 +13,12 @@ import java.util.List;
 public class ExportConstantData {
 
     /**
-     * 通话记录导出设置excel表头
+     * 系统用户导出设置excel表头
      * @return
      */
-    public static List<String> sysUserRecordTitle(){
+    public static List<String> sysUserHead(){
         //设置文件导出必要参数，按设定顺序创建下载文件
         List<String> excelTitle = Lists.newArrayList();
-        excelTitle.add("主键ID");
         excelTitle.add("员工姓名");
         excelTitle.add("员工真实名称");
         excelTitle.add("密码");
@@ -41,10 +40,8 @@ public class ExportConstantData {
      * 通话记录导出 设置excel cell宽度
      * @return
      */
-    public static List<Integer> sysUserCallStyle(){
-
+    public static List<Integer> sysUserCallWidth(){
         List<Integer> excelTitleCallWidth = Lists.newArrayList();
-        excelTitleCallWidth.add(3800);
         excelTitleCallWidth.add(3500);
         excelTitleCallWidth.add(3800);
         excelTitleCallWidth.add(3800);

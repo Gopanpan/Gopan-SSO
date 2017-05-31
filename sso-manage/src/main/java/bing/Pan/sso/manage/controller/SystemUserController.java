@@ -4,7 +4,7 @@ import bing.Pan.sso.common.constant.ExportConstantData;
 import bing.Pan.sso.common.enums.ResponseCode;
 import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.common.response.Response;
-import bing.Pan.sso.common.utils.ExcelExportPOITools;
+import bing.Pan.sso.common.utils.ExcelExportTools;
 import bing.Pan.sso.domain.bussinessobject.SystemUserAddBo;
 import bing.Pan.sso.domain.bussinessobject.SystemUserBo;
 import bing.Pan.sso.domain.entity.SysUser;
@@ -132,7 +132,8 @@ public class SystemUserController extends BaseController{
     public void downloadSysUser(HttpServletResponse response) throws Exception {
 
         List<SysUser> list = systemUserService.findList();
-        new ExcelExportPOITools("测试数据",ExportConstantData.sysUserRecordTitle()).setDataList(list).write(response,"poi_.xlsx").dispose();
+        String[] filterField = new String[]{"id"};
+        new ExcelExportTools("系统用户导出数据","sheetName",ExportConstantData.sysUserHead(),ExportConstantData.sysUserCallWidth()).setDataList(list,filterField).write(response,"系统用户导出数据.xlsx").dispose();
     }
 
 }

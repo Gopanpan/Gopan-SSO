@@ -63,7 +63,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         PrintWriter out = null;
         try {
             out = response.getWriter();
-            out.append(JSON.toJSONString(new Response<>(ResponseCode.LOGIN_NOT_LOGININ)));
+            out.append(JSON.toJSONString(new Response<>(ResponseCode.LOGIN_NOT_LOGIN)));
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
