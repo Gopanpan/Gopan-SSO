@@ -175,12 +175,6 @@
             <version>${poi.version}</version>
         </dependency>
 
-        <!--jxl.jar-->
-        <dependency>
-            <groupId>org.apache.servicemix.bundles</groupId>
-            <artifactId>org.apache.servicemix.bundles.jexcelapi</artifactId>
-            <version>${jxl.version}</version>
-        </dependency>
 
     </dependencies>
 

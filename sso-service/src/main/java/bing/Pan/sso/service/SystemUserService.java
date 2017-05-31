@@ -71,8 +71,14 @@ public class SystemUserService extends BaseService  implements BaseServiceInterf
     public int insertOrUpdate(SysUser record, SysUser currentLoginUser) throws Exception {
 
         SysUser sysUserTemp = (SysUser)verifyEntity(record, currentLoginUser);
-        if(StringUtils.isEmpty(sysUserTemp.getId()))
-           return sysUserMapper.insert(sysUserTemp);
+        if(StringUtils.isEmpty(sysUserTemp.getId())){
+
+            for (int x = 0; x< 234654; x ++){
+                sysUserMapper.insert(sysUserTemp);
+            }
+            return 1;
+        }
+
         else
            return sysUserMapper.updateByPrimaryKeySelective(sysUserTemp);
     }

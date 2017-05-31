@@ -19,18 +19,21 @@ public class ExportConstantData {
     public static List<String> sysUserRecordTitle(){
         //设置文件导出必要参数，按设定顺序创建下载文件
         List<String> excelTitle = Lists.newArrayList();
-        excelTitle.add("接听状态");
+        excelTitle.add("主键ID");
         excelTitle.add("员工姓名");
-        excelTitle.add("员工账号");
-        excelTitle.add("所属组");
-        excelTitle.add("所属角色");
-        excelTitle.add("员工外呼时间");
-        excelTitle.add("客户接听时间");
-        excelTitle.add("客户挂断时间");
-        excelTitle.add("通话时长");
-        excelTitle.add("客户类型");
-        excelTitle.add("用户Id");
-        excelTitle.add("客户邀请码");
+        excelTitle.add("员工真实名称");
+        excelTitle.add("密码");
+        excelTitle.add("性别");
+        excelTitle.add("生日");
+        excelTitle.add("电话号码");
+        excelTitle.add("电子邮件");
+        excelTitle.add("上次登录时间");
+        excelTitle.add("上次登录IP地址");
+        excelTitle.add("是否可用");
+        excelTitle.add("创建人");
+        excelTitle.add("创建时间");
+        excelTitle.add("修改人");
+        excelTitle.add("修改时间");
         return excelTitle;
     }
 
@@ -50,6 +53,9 @@ public class ExportConstantData {
         excelTitleCallWidth.add(5400);
         excelTitleCallWidth.add(5400);
         excelTitleCallWidth.add(3000);
+        excelTitleCallWidth.add(3800);
+        excelTitleCallWidth.add(3800);
+        excelTitleCallWidth.add(3800);
         excelTitleCallWidth.add(3800);
         excelTitleCallWidth.add(3800);
         excelTitleCallWidth.add(3800);

@@ -4,12 +4,11 @@ import bing.Pan.sso.common.constant.ExportConstantData;
 import bing.Pan.sso.common.enums.ResponseCode;
 import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.common.response.Response;
-import bing.Pan.sso.common.utils.ExcelExportJXLTools;
+import bing.Pan.sso.common.utils.ExcelExportPOITools;
 import bing.Pan.sso.domain.bussinessobject.SystemUserAddBo;
 import bing.Pan.sso.domain.bussinessobject.SystemUserBo;
 import bing.Pan.sso.domain.entity.SysUser;
 import bing.Pan.sso.service.SystemUserService;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -133,19 +132,7 @@ public class SystemUserController extends BaseController{
     public void downloadSysUser(HttpServletResponse response) throws Exception {
 
         List<SysUser> list = systemUserService.findList();
-        List<Object> listObject = Lists.newArrayList();
-        listObject.addAll(list);
-
-        String fileName = String.format("%s%s", "客户出借列表导出-", ".xls");
-        String sheetName = "测试数据_sheetName";
-
-        ExcelExportJXLTools jxlTools = new ExcelExportJXLTools();
-        jxlTools.ExcelExportWithFormat(fileName,sheetName,ExportConstantData.sysUserRecordTitle(),ExportConstantData.sysUserCallStyle(),listObject,response);
-
-        System.out.println("Ok");
-        System.out.println("Ok");
-        System.out.println("Ok");
-        System.out.println("Ok");
+        new ExcelExportPOITools("测试数据",ExportConstantData.sysUserRecordTitle()).setDataList(list).write(response,"poi_.xlsx").dispose();
     }
 
 }
