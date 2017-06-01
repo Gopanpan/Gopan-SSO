@@ -155,12 +155,4 @@ public class AESEncryptUtils {
     }
 
 
-    public static void main(String[] args) throws Exception {
-        String s = aesEncrypt("1111111");
-        System.out.println(s);
-
-        String s1 = aesDecrypt(s);
-        System.out.println(s1);
-
-    }
 }

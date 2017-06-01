@@ -106,16 +106,4 @@ public class RSAEncrypt {
     }
 
 
-
-    public static void main(String[] args) throws Exception {
-        String source = "Hello World!";//要加密的字符串
-        String cryptograph = encrypt(source);//生成的密文
-        System.out.println(cryptograph);
-
-
-
-        String target = decrypt(cryptograph);//解密密文
-        System.out.println(target);
-    }
-
 }
