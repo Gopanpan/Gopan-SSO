@@ -71,7 +71,7 @@ function generalUpdate(id){
 function openPage(requestUrl){
     parent.layer.open({
         type: 2,
-        title: '新增/修改系统用户',
+        title: '新增/修改应用系统',
         shadeClose: true,
         shade: [0.5],
         maxmin: true, //开启最大化最小化按钮
@@ -102,7 +102,7 @@ function generalDetail(id) {
 //删除用户
 function generalDelete(id, sysUserName) {
 
-    layer.confirm('确定要删除系统用户:' + sysUserName, {
+    layer.confirm('确定要删除应用系统:' + sysUserName, {
         btn: ['确定', '取消'] //按钮
     }, function () {
         $.ajax({

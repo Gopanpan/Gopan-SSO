@@ -211,17 +211,6 @@
   </update>
 
 
-
-
-
-  <select id="findList" parameterType="bing.Pan.sso.domain.bussinessobject.SystemUserBo" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from sys_user  su
-  </select>
-
-
-
   <select id="findListByE" parameterType="bing.Pan.sso.domain.bussinessobject.SystemUserBo" resultMap="BaseResultMap"  >
     select
     <include refid="Base_Column_List" />

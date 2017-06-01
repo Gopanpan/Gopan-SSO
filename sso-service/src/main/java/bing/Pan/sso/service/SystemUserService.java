@@ -72,13 +72,8 @@ public class SystemUserService extends BaseService  implements BaseServiceInterf
 
         SysUser sysUserTemp = (SysUser)verifyEntity(record, currentLoginUser);
         if(StringUtils.isEmpty(sysUserTemp.getId())){
-
-            for (int x = 0; x< 234654; x ++){
-                sysUserMapper.insert(sysUserTemp);
-            }
-            return 1;
+            return sysUserMapper.insert(sysUserTemp);
         }
-
         else
            return sysUserMapper.updateByPrimaryKeySelective(sysUserTemp);
     }
@@ -108,6 +103,11 @@ public class SystemUserService extends BaseService  implements BaseServiceInterf
     }
 
     @Override
+    public List<SysUser> findList(SystemUserBo customBo) throws Exception {
+        return sysUserMapper.findListByE(customBo);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public PageInfo findPageListByE(SystemUserBo customBo) throws Exception  {
 
@@ -117,15 +117,8 @@ public class SystemUserService extends BaseService  implements BaseServiceInterf
     }
 
 
-
     @Override
-    public List<SysUser> findList() throws Exception  {
-        return sysUserMapper.findList();
-    }
-
-
-
-    @Override
+    @Transactional(readOnly = true)
     public PageInfo findPageListByT(SysUser entity) throws Exception  {
         return null;
     }

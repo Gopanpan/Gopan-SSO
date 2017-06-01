@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.MessageFormat;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @crea : Created by intelliJ IDEA 16.1.3
@@ -101,8 +103,22 @@ public class GlobalExceptionHandler {
     }
 
     private void writeLog(Exception ex, HttpServletRequest request,String detailMessage) {
-        String url = MessageFormat.format("Exception :{0}?{1}", request.getRequestURL(), request.getParameterMap());
-        log.error(String.format("%s%s","错误详情:",detailMessage));
-        log.error(url, ex);
+
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        StringBuilder sBuilder = new StringBuilder();
+        Set<String> keySet = parameterMap.keySet();
+        for (String key:keySet) {
+            String[] strings = parameterMap.get(key);
+            StringBuilder valueSBuilder = new StringBuilder();
+            for (String single: strings) {
+                valueSBuilder.append(single);
+            }
+            sBuilder.append(String.format("%s%s%s%s",key,"=",valueSBuilder.toString(), " "));
+        }
+
+        log.error(String.format("%s%s","错误摘要: ",detailMessage));
+        log.error(String.format("%s%s","请求地址：",MessageFormat.format("{0}", request.getRequestURL())));
+        log.error(String.format("%s%s","请求参数：",sBuilder.toString()));
+        log.error("堆栈信息：", ex);
     }
 }

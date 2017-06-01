@@ -129,11 +129,13 @@ public class SystemUserController extends BaseController{
 
     @ApiOperation(value = "导出系统用户")
     @RequestMapping(value = "/downloadSysUser",method = RequestMethod.POST)
-    public void downloadSysUser(HttpServletResponse response) throws Exception {
+    public void downloadSysUser( @ModelAttribute SystemUserBo systemUserBo,HttpServletResponse response) throws Exception {
 
-        List<SysUser> list = systemUserService.findList();
+        List<SysUser> list = systemUserService.findList(systemUserBo);
         String[] filterField = new String[]{"id"};
-        new ExcelExportTools("系统用户导出数据","sheetName",ExportConstantData.sysUserHead(),ExportConstantData.sysUserCallWidth()).setDataList(list,filterField).write(response,"系统用户导出数据.xlsx").dispose();
+        new ExcelExportTools("系统用户导出数据","sheetName",ExportConstantData.sysUserHead(),
+                ExportConstantData.sysUserCallWidth()).setDataList(list,filterField).write(response,"系统用户导出数据.xlsx")
+                .dispose();
     }
 
 }

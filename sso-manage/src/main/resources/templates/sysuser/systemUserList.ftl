@@ -9,7 +9,7 @@
             <h5>系统管理用户列表 </h5>
         </div>
         <div class="ibox-oper">
-            <form class="form-inline" role="form">
+            <form  class="form-inline" role="form">
                 <div class="form-group">
                     <label class="control-label">登陆名：</label>
                     <input id="loginName" name="loginName" value="" maxlength="20"/>

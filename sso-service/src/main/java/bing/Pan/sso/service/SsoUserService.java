@@ -71,7 +71,7 @@ public class SsoUserService extends BaseService  implements BaseServiceInterface
     }
 
     @Override
-    public List<SsoUser> findList() throws Exception  {
+    public List<SsoUser> findList(SsoUserBo ssoUserBo) throws Exception {
         return null;
     }
 

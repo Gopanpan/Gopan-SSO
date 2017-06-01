@@ -3,7 +3,6 @@ package bing.Pan.sso.service;
 import bing.Pan.sso.domain.bussinessobject.SsoSystemBo;
 import bing.Pan.sso.domain.entity.SsoSystem;
 import bing.Pan.sso.domain.entity.SysUser;
-import bing.Pan.sso.domain.valueobject.SsoSystemVo;
 import bing.Pan.sso.mapper.mapperInterface.SsoSystemMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -45,7 +44,7 @@ public class SsoSystemService extends BaseService implements BaseServiceInterfac
     }
 
     @Override
-    public List<SsoSystem> findList() throws Exception {
+    public List<SsoSystem> findList(SsoSystemBo ssoSystemBo) throws Exception {
         return null;
     }
 

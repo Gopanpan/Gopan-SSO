@@ -24,15 +24,16 @@ public interface BaseServiceInterface<T,E,S> {
     Object selectById(Long id) throws Exception;
 
 
-
     /**
-     * 查询所有不带条件
+     * 查询所有不带分页
+     * @param e
      * @return
+     * @throws Exception
      */
-    List<T> findList() throws Exception;
+    List<T> findList(E e) throws Exception;
 
     /**
-     * 根基条件查询List集合
+     * 根基条件查询分页List集合
      * @param customBo 自定义类型
      * @return
      */
@@ -41,7 +42,7 @@ public interface BaseServiceInterface<T,E,S> {
 
 
     /**
-     * 根基条件查询List集合
+     * 根基条件查询分页List集合
      * @param entity
      * @return
      */
