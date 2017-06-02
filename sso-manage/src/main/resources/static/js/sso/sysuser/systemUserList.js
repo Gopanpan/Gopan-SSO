@@ -60,12 +60,9 @@ function reload(){
 $("#generalExport").bind('click',function () {
     $('<form method="post" action="' + sysUser_download_url + '">' +
         '<input name="loginName" value="'+setPostData().loginName+'"/>' +
-        '<input name="realName" value="'+setPostData().realName+'"/><input name="phone" value="'+setPostData().phone+'"></form>').appendTo('body').appendTo('').submit().remove();
-
-
-
-
-
+        '<input name="realName" value="'+setPostData().realName+'"/>' +
+        '<input name="phone" value="'+setPostData().phone+'"></form>')
+        .appendTo('body').submit().remove();
 });
 
 

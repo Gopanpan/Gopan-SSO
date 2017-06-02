@@ -116,9 +116,9 @@ public class GlobalExceptionHandler {
             sBuilder.append(String.format("%s%s%s%s",key,"=",valueSBuilder.toString(), " "));
         }
 
-        log.error(String.format("%s%s","错误摘要: ",detailMessage));
         log.error(String.format("%s%s","请求地址：",MessageFormat.format("{0}", request.getRequestURL())));
         log.error(String.format("%s%s","请求参数：",sBuilder.toString()));
+        log.error(String.format("%s%s","错误摘要: ",detailMessage));
         log.error("堆栈信息：", ex);
     }
 }

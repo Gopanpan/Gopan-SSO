@@ -134,7 +134,7 @@ public class SystemUserController extends BaseController{
         List<SysUser> list = systemUserService.findList(systemUserBo);
         String[] filterField = new String[]{"id"};
         new ExcelExportTools("系统用户导出数据","sheetName",ExportConstantData.sysUserHead(),
-                ExportConstantData.sysUserCallWidth()).setDataList(list,filterField).write(response,"系统用户导出数据.xlsx")
+                ExportConstantData.sysUserCallWidth(),list.size()).setDataList(list,filterField).write(response,"系统用户导出数据.xlsx")
                 .dispose();
     }
 

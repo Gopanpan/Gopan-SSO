@@ -2,10 +2,13 @@ package bing.Pan.sso.common.utils;
 
 import bing.Pan.sso.common.enums.ResponseCode;
 import bing.Pan.sso.common.exception.ServiceException;
+import com.google.common.collect.Lists;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletResponse;
@@ -20,18 +23,20 @@ import java.util.Map;
  * @auth : bing.Pan
  * @mail : 15923508369@163.com
  * @date : 2017/5/31 17:48
- * @desc :
+ * @desc : POI excel文件导出，支持超大数据量
  */
 public class ExcelExportTools {
 
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
+
     private SXSSFWorkbook workbook;
-
-    private Sheet sheet;
-
+    private List<Sheet> sheetList = Lists.newArrayList();
     private Map<String, CellStyle> styleMap;
 
-    //当前行号
-    private int rowNum;
+    private int sheetCount = 1;                                //sheet个数
+    private int rowNum;                                        //当前行号
+    private static final int sheetCapacity  = 1000000;         //excel单个sheet最大行数
+    private static final int memoryCacheRow = 50000;           //定内存中缓存工作薄行数数
 
     /**
      * 初始化excel表格
@@ -41,30 +46,55 @@ public class ExcelExportTools {
      * @param callWidth     单元格宽度
      * @throws ServiceException
      */
-    public ExcelExportTools(String title, String sheetName, List<String> headerList, List<Integer> callWidth) throws ServiceException {
-        if(StringUtils.isEmpty(title) || StringUtils.isEmpty(sheetName) || StringUtils.isEmpty(headerList))
+    public ExcelExportTools(String title, String sheetName, List<String> headerList, List<Integer> callWidth,int exportDataSize) throws ServiceException {
+        if(StringUtils.isEmpty(title) || StringUtils.isEmpty(sheetName) || StringUtils.isEmpty(headerList) || exportDataSize == 0)
             throw new ServiceException(ResponseCode.SERVE_LOGIC_PARAM_MISS);
 
-        this.workbook = new SXSSFWorkbook(500);
-        this.sheet = workbook.createSheet(sheetName);
-        this.styleMap = createStyles(workbook);
+        this.workbook = new SXSSFWorkbook(memoryCacheRow);
 
-        //title
-        Row titleRow = sheet.createRow(rowNum++);
-        Cell titleCell = titleRow.createCell(0);
-        titleCell.setCellStyle(styleMap.get("title"));
-        titleCell.setCellValue(title);
-        sheet.addMergedRegion(new CellRangeAddress(titleRow.getRowNum(),titleRow.getRowNum(), titleRow.getRowNum(), headerList.size()-1));
 
-        //header
-        Row headerRow = sheet.createRow(rowNum++);
-        for (int i = 0; i < headerList.size(); i++) {
-            Cell cell = headerRow.createCell(i);
-            cell.setCellStyle(styleMap.get("header"));
-            cell.setCellValue(headerList.get(i));
+        if(exportDataSize > sheetCapacity)
+            sheetCount = exportDataSize % sheetCapacity == 0? exportDataSize / sheetCapacity: exportDataSize / sheetCapacity + 1;
 
-            sheet.setColumnWidth(i, callWidth.get(i));
+
+        logger.info("------------------------------------------------------");
+        logger.info("导出excel文件");
+        logger.info("导出的数据长度为："+ exportDataSize);
+        logger.info("导出的excel sheet页为："+ sheetCount);
+        logger.info("------------------------------------------------------");
+
+
+        styleMap = createStyles(workbook);
+
+        //循环创建sheet页
+        for (int x =0; x < sheetCount; x ++){
+
+            Sheet sheet = workbook.createSheet(String.format("%s%s%s", sheetName, "_", x));
+
+            //title
+            Row titleRow = sheet.createRow(rowNum++);
+            Cell titleCell = titleRow.createCell(0);
+            titleCell.setCellStyle(styleMap.get("title"));
+            titleCell.setCellValue(title);
+            sheet.addMergedRegion(new CellRangeAddress(titleRow.getRowNum(),titleRow.getRowNum(), titleRow.getRowNum(), headerList.size()-1));
+
+            //header
+            Row headerRow = sheet.createRow(rowNum++);
+            for (int i = 0; i < headerList.size(); i++) {
+                Cell cell = headerRow.createCell(i);
+                cell.setCellStyle(styleMap.get("header"));
+                cell.setCellValue(headerList.get(i));
+
+                sheet.setColumnWidth(i, callWidth.get(i));
+            }
+            rowNum = 0;
+            sheetList.add(sheet);
+
         }
+
+
+
+
     }
 
 
@@ -144,22 +174,42 @@ public class ExcelExportTools {
      */
     public <E> ExcelExportTools setDataList(List<E> list, String[] filterField) throws IllegalAccessException {
 
-        if(StringUtils.isEmpty(filterField) )
-            dealNoFilerField(list);
-        else
-            dealFilerField(list,filterField);
+        for (int x =0; x < sheetCount; x ++){
+            List<E> sheetExportList;
+            if(x == sheetCount -1){
+                sheetExportList = list.subList(x * sheetCapacity, list.size());
+            }else{
+                sheetExportList = list.subList(x * sheetCapacity, (x+1) * sheetCapacity);
+            }
+            dealSheetData(sheetExportList,sheetList.get(x),filterField);
+
+        }
+
         return this;
+
     }
+
+    private <E> void dealSheetData(List<E> sheetExportList, Sheet sheet, String[] filterField) throws IllegalAccessException {
+        rowNum = 2;
+        if(StringUtils.isEmpty(filterField) )
+            dealNoFilerField(sheetExportList,sheet,rowNum);
+        else
+            dealFilerField(sheetExportList,sheet,filterField,rowNum);
+
+    }
+
+
 
     /**
      * 处理有需要过滤的列表
+     * @param <E>
      * @param list
      * @param filterField
-     * @param <E>
+     * @param rowNum
      * @throws IllegalAccessException
      */
-    private <E> void dealFilerField(List<E> list, String[] filterField) throws IllegalAccessException {
-        Field[] fields=null;
+    private <E> void dealFilerField(List<E> list, Sheet sheet, String[] filterField, int rowNum) throws IllegalAccessException {
+        Field[] fields;
         for(Object obj:list){
             int cellNum = 0;
             Row row =  sheet.createRow(rowNum++);
@@ -186,11 +236,13 @@ public class ExcelExportTools {
 
     /**
      * 处理没有过滤字段的列表
-     * @param list
      * @param <E>
+     * @param list
+     * @param sheet
+     * @param rowNum
      * @throws IllegalAccessException
      */
-    private <E> void dealNoFilerField(List<E> list) throws IllegalAccessException {
+    private <E> void dealNoFilerField(List<E> list, Sheet sheet, int rowNum) throws IllegalAccessException {
         Field[] fields;
         for(Object obj:list){
             int cellNum = 0;
