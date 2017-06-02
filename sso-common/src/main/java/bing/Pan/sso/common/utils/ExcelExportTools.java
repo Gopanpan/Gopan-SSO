@@ -14,6 +14,7 @@ import org.springframework.util.StringUtils;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,12 @@ import java.util.Map;
  * @mail : 15923508369@163.com
  * @date : 2017/5/31 17:48
  * @desc : POI excel文件导出，支持超大数据量
+ * @sample
+ *      初始化excel文件 --> 添加数据 --> 渲染到客户端 -->清理临时文件
+ *      new ExcelExportTools("系统用户导出数据","导出数据",ExportConstantData.sysUserHead(),ExportConstantData.sysUserColumnWidth(),list.size())
+ *      .setDataList(list,filterField)
+ *      .write(response,"系统用户导出数据.xlsx")
+ *      .dispose();
  */
 public class ExcelExportTools {
 
@@ -35,34 +42,28 @@ public class ExcelExportTools {
 
     private int sheetCount = 1;                                //sheet个数
     private int rowNum;                                        //当前行号
-    private static final int sheetCapacity  = 1000000;         //excel单个sheet最大行数
-    private static final int memoryCacheRow = 50000;           //定内存中缓存工作薄行数数
+    private static final int sheetCapacity  = 500000;          //excel单个sheet最大行数
+    private static final int memoryCacheRow = 50000;           //内存中缓存工作薄行数数
+
 
     /**
      * 初始化excel表格
-     * @param title         excel title
-     * @param sheetName     sheet名称
-     * @param headerList    表头
-     * @param callWidth     单元格宽度
+     * @param title             excel 文件标题，多个sheet页则每个sheet页的标题相同
+     * @param sheetName         sheet名称前缀,系统会自动追加当前sheet页的页号 sheetName_xxx
+     * @param headerList        表头,最终的表头集合,按照导出数据实体类型字段的创建顺序添加,
+     *                          如遇过滤字段舍弃，后面的字段补上
+     * @param columnWidth       每列宽度
+     * @param exportDataSize    导出数据集合长度
      * @throws ServiceException
      */
-    public ExcelExportTools(String title, String sheetName, List<String> headerList, List<Integer> callWidth,int exportDataSize) throws ServiceException {
+    public ExcelExportTools(String title, String sheetName, List<String> headerList, List<Integer> columnWidth,int exportDataSize) throws ServiceException {
         if(StringUtils.isEmpty(title) || StringUtils.isEmpty(sheetName) || StringUtils.isEmpty(headerList) || exportDataSize == 0)
             throw new ServiceException(ResponseCode.SERVE_LOGIC_PARAM_MISS);
 
-        this.workbook = new SXSSFWorkbook(memoryCacheRow);
-
+        workbook = new SXSSFWorkbook(memoryCacheRow);
 
         if(exportDataSize > sheetCapacity)
             sheetCount = exportDataSize % sheetCapacity == 0? exportDataSize / sheetCapacity: exportDataSize / sheetCapacity + 1;
-
-
-        logger.info("------------------------------------------------------");
-        logger.info("导出excel文件");
-        logger.info("导出的数据长度为："+ exportDataSize);
-        logger.info("导出的excel sheet页为："+ sheetCount);
-        logger.info("------------------------------------------------------");
-
 
         styleMap = createStyles(workbook);
 
@@ -85,16 +86,14 @@ public class ExcelExportTools {
                 cell.setCellStyle(styleMap.get("header"));
                 cell.setCellValue(headerList.get(i));
 
-                sheet.setColumnWidth(i, callWidth.get(i));
+                sheet.setColumnWidth(i, columnWidth.get(i));
             }
             rowNum = 0;
             sheetList.add(sheet);
-
         }
-
-
-
-
+        logger.info("导出excel文件-->初始化excel文件完成");
+        logger.info(MessageFormat.format("导出的数据长度为：{0}", exportDataSize));
+        logger.info(MessageFormat.format("导出的excel sheet总页数为：{0},单个sheet页最大行数{1}",sheetCount,sheetCapacity));
     }
 
 
@@ -260,9 +259,22 @@ public class ExcelExportTools {
 
     }
 
+
+
+    private void addCall(Row row, int i, Object va) {
+        Cell cell = row.createCell(i);
+        cell.setCellValue(va.toString());
+        cell.setCellStyle(styleMap.get("data"));
+    }
+
+
+
     /**
      * 输出到客户端
-     * @param fileName 输出文件名
+     * @param response     相应流
+     * @param fileName     保存excel文件名
+     * @return
+     * @throws IOException
      */
     public ExcelExportTools write(HttpServletResponse response, String fileName) throws IOException{
         response.reset();
@@ -279,16 +291,9 @@ public class ExcelExportTools {
      */
     public ExcelExportTools dispose(){
         workbook.dispose();
+        logger.info("导出excel文件-->excel文件导出完成");
         return this;
     }
-
-
-    private void addCall(Row row, int i, Object va) {
-        Cell cell = row.createCell(i);
-        cell.setCellValue(va.toString());
-        cell.setCellStyle(styleMap.get("data"));
-    }
-
 
 
 }
