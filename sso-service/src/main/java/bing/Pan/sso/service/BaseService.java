@@ -23,15 +23,9 @@ import java.util.Date;
 public class BaseService<T> {
 
 
-    public Logger logger =  LoggerFactory.getLogger(BaseService.class);
+    protected Logger logger =  LoggerFactory.getLogger(BaseService.class);
 
-    @Autowired protected SsoSystemProperties ssoSystemProperties;
-
-
-
-
-
-
+    @Autowired SsoSystemProperties ssoSystemProperties;
 
     //系统数据结构中通用可修改字段
     private static final String[] GENERAL_VALUE = new String[]{"password","createUser","createTime",
@@ -46,7 +40,7 @@ public class BaseService<T> {
      * @param sysUser
      * @return
      */
-    protected T verifyEntity(T verifyEntity,SysUser sysUser) throws Exception {
+     T verifyEntity(T verifyEntity,SysUser sysUser) throws Exception {
 
         Class<?> aClass = verifyEntity.getClass();
 
@@ -64,7 +58,7 @@ public class BaseService<T> {
                     if(fieldName.equals(general)){
                         if(fieldName.equals(GENERAL_VALUE[0]))
                             field.set(verifyEntity,AESEncryptUtils.aesEncrypt(
-                                    Md5Utils.md5(ssoSystemProperties.getDefaultPassword())));
+                                    Md5Utils.md5(ssoSystemProperties.getUserDefaultPassword())));
                         if(fieldName.equals(GENERAL_VALUE[1]))
                             field.set(verifyEntity, sysUser.getId());
                         if(fieldName.equals(GENERAL_VALUE[2]))

@@ -1,7 +1,7 @@
 /**
  * 系统访问路径配置
  */
-var base_serve_url_config = "http://localhost:3333";
+var base_serve_url_config = "http://127.0.0.1:3333";
 
 
 /**

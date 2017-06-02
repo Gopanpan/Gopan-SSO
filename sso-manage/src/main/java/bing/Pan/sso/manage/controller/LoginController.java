@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class LoginController extends BaseController {
 
-    @Autowired SystemUserService systemUserService;
+    @Autowired private SystemUserService systemUserService;
 
     /**
      * 登陆
@@ -42,8 +42,8 @@ public class LoginController extends BaseController {
     })
     @RequestMapping(value = "/loginSysUser", method = RequestMethod.POST)
     @ResponseBody
-    public Object loginSysUser(@RequestParam(required = true)  String loginName,
-                               @RequestParam(required = true)  String password,
+    public Object loginSysUser(@RequestParam String loginName,
+                               @RequestParam String password,
                                HttpServletRequest request) throws Exception {
 
         SysUser byLoginName = systemUserService.findByLoginName(loginName, password,request);

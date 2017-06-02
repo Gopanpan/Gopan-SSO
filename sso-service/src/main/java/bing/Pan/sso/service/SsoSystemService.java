@@ -28,7 +28,7 @@ public class SsoSystemService extends BaseService implements BaseServiceInterfac
     @Autowired private SsoSystemMapper ssoSystemMapper;
 
     @Override
-    @Transactional(readOnly = false,rollbackFor = Exception.class,propagation= Propagation.REQUIRED)
+    @Transactional(rollbackFor = Exception.class,propagation= Propagation.REQUIRED)
     public int insertOrUpdate(SsoSystem record, SysUser currentLoginUser) throws Exception {
         return 0;
     }

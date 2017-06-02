@@ -32,13 +32,13 @@ import java.util.List;
  */
 
 @Service
-public class SystemUserService extends BaseService  implements BaseServiceInterface<SysUser,SystemUserBo,SysUser>{
+public class SystemUserService extends BaseService<SysUser>  implements BaseServiceInterface<SysUser,SystemUserBo,SysUser>{
 
 
     @Autowired private SysUserMapper sysUserMapper;
 
 
-    @Transactional(readOnly = false)
+    @Transactional
     public SysUser findByLoginName(String loginName, String password, HttpServletRequest request) throws Exception {
         SysUser sysUser = sysUserMapper.findUserByLoginName(loginName);
         if(ObjectUtils.isEmpty(sysUser))
@@ -67,10 +67,11 @@ public class SystemUserService extends BaseService  implements BaseServiceInterf
 
 
     @Override
-    @Transactional(readOnly = false,rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public int insertOrUpdate(SysUser record, SysUser currentLoginUser) throws Exception {
-
-        SysUser sysUserTemp = (SysUser)verifyEntity(record, currentLoginUser);
+        String userDefaultPassword = ssoSystemProperties.getUserDefaultPassword();
+        System.out.println(userDefaultPassword);
+        SysUser sysUserTemp = verifyEntity(record, currentLoginUser);
         if(StringUtils.isEmpty(sysUserTemp.getId())){
             return sysUserMapper.insert(sysUserTemp);
         }
@@ -79,7 +80,7 @@ public class SystemUserService extends BaseService  implements BaseServiceInterf
     }
 
     @Override
-    @Transactional(readOnly = false,rollbackFor = Exception.class,propagation = Propagation.REQUIRED)
+    @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRED)
     public int deleteById(Long id) throws Exception  {
         return sysUserMapper.deleteByPrimaryKey(id);
 
@@ -98,7 +99,6 @@ public class SystemUserService extends BaseService  implements BaseServiceInterf
             sysUserVo.setCreateUserName(createUser.getLoginName());
         if(!ObjectUtils.isEmpty(updateUser))
             sysUserVo.setUpdateUserName(updateUser.getLoginName());
-
         return sysUserVo;
     }
 
@@ -112,7 +112,6 @@ public class SystemUserService extends BaseService  implements BaseServiceInterf
     public PageInfo findPageListByE(SystemUserBo customBo) throws Exception  {
 
         PageHelper.startPage(customBo.getPageIndex(), customBo.getPageSize());
-
         return new PageInfo<>(sysUserMapper.findListByE(customBo));
     }
 

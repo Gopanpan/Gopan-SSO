@@ -31,7 +31,7 @@ public class SsoSystemController extends BaseController{
 
 
     @RequestMapping("/ssoSystemList")
-    private Object ssoSystemList(@Valid @ModelAttribute SsoSystemBo ssoSystemBo, BindingResult result) throws Exception {
+    public Object ssoSystemList(@Valid @ModelAttribute SsoSystemBo ssoSystemBo, BindingResult result) throws Exception {
 
         checkValid(result);
 
@@ -39,7 +39,7 @@ public class SsoSystemController extends BaseController{
     }
 
     @RequestMapping("/addAUPdateSsoSystem")
-    private Object addAUPdateSsoSystem(@Valid @ModelAttribute SsoSystemAddBo ssoSystemAddBo, BindingResult result) throws ServiceException {
+    public Object addAUPdateSsoSystem(@Valid @ModelAttribute SsoSystemAddBo ssoSystemAddBo, BindingResult result) throws ServiceException {
         checkValid(result);
         return null;
 

@@ -25,7 +25,7 @@ import java.util.List;
  * @desc :
  */
 @Service
-public class SsoUserService extends BaseService  implements BaseServiceInterface<SsoUser,SsoUserBo,SysUser>{
+public class SsoUserService extends BaseService<SsoUser>  implements BaseServiceInterface<SsoUser,SsoUserBo,SysUser>{
     
     @Autowired private SsoUserMapper ssoUserMapper;
     @Autowired private SysUserMapper sysUserMapper;
@@ -37,10 +37,10 @@ public class SsoUserService extends BaseService  implements BaseServiceInterface
     }
 
     @Override
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED)
     public int insertOrUpdate(SsoUser record, SysUser currentLoginUser) throws Exception {
 
-        SsoUser ssoUserTemp = (SsoUser)verifyEntity(record,currentLoginUser);
+        SsoUser ssoUserTemp = verifyEntity(record,currentLoginUser);
         if(StringUtils.isEmpty(ssoUserTemp.getId()))
            return ssoUserMapper.insert(ssoUserTemp);
         else
@@ -49,7 +49,7 @@ public class SsoUserService extends BaseService  implements BaseServiceInterface
     }
 
     @Override
-    @Transactional(readOnly = false,propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED)
     public int deleteById(Long id) throws Exception {
         return ssoUserMapper.deleteByPrimaryKey(id);
     }

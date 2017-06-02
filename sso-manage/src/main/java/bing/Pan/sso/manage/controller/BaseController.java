@@ -3,8 +3,6 @@ package bing.Pan.sso.manage.controller;
 import bing.Pan.sso.common.enums.ResponseCode;
 import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.domain.entity.SysUser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
@@ -25,15 +23,13 @@ public class BaseController {
 
     @Autowired private HttpServletRequest request;
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
 
     /**
      * 获取当前登录用户
      * @return
      * @throws ServiceException
      */
-    protected SysUser getCurrnentUser() throws ServiceException {
+    SysUser getCurrentUser() throws ServiceException {
         HttpSession session = request.getSession();
         SysUser currentUser = (SysUser) session.getAttribute("user");
         if(StringUtils.isEmpty(currentUser)){
@@ -49,7 +45,7 @@ public class BaseController {
      * @param result
      * @throws ServiceException
      */
-    protected void checkValid(BindingResult result) throws ServiceException {
+    void checkValid(BindingResult result) throws ServiceException {
 
         if(result.hasErrors()) {
             StringBuilder sBuilder = new StringBuilder();

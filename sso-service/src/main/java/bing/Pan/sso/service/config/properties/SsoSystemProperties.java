@@ -11,19 +11,20 @@ import org.springframework.stereotype.Component;
  * @desc : 系统配置文件
  */
 
-@ConfigurationProperties(locations = "classpath:system.properties", prefix = "sso.user")
+@ConfigurationProperties(locations = "classpath:system.properties", prefix = "sso.system")
 @Component
 public class SsoSystemProperties {
 
-    private String defaultPassword;                  //系统初始用户密码
+    private String     userDefaultPassword;                  //系统初始用户密码
 
 
-    public String getDefaultPassword() {
-        return defaultPassword;
+
+    public String getUserDefaultPassword() {
+        return userDefaultPassword;
     }
 
-    public void setDefaultPassword(String defaultPassword) {
-        this.defaultPassword = defaultPassword;
+    public void setUserDefaultPassword(String userDefaultPassword) {
+        this.userDefaultPassword = userDefaultPassword;
     }
 }
 

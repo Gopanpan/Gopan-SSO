@@ -79,7 +79,7 @@ public class SystemUserController extends BaseController{
 
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(userAddBo,sysUser);
-        systemUserService.insertOrUpdate(sysUser,getCurrnentUser());
+        systemUserService.insertOrUpdate(sysUser, getCurrentUser());
 
         return new Response<>();
 

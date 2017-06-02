@@ -16,8 +16,7 @@ import java.util.List;
 @Configuration
 public class WebAppConfigure extends WebMvcConfigurerAdapter {
 
-    @Autowired
-    private LoginInterceptor loginInterceptor;
+    @Autowired private LoginInterceptor loginInterceptor;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

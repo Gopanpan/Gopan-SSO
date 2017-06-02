@@ -76,7 +76,7 @@ public class SsoUserController extends BaseController {
 
         SsoUser ssoUser = new SsoUser();
         BeanUtils.copyProperties(ssoUserAddBo,ssoUser);
-        ssoUserService.insertOrUpdate(ssoUser,getCurrnentUser());
+        ssoUserService.insertOrUpdate(ssoUser, getCurrentUser());
 
         return new Response<>();
 
