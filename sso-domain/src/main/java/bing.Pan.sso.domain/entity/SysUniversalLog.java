@@ -1,6 +1,6 @@
 package bing.Pan.sso.domain.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class SysUniversalLog {
     private Long id;
@@ -15,7 +15,7 @@ public class SysUniversalLog {
 
     private String requestUser;
 
-    private Date requestTime;
+    private LocalDateTime requestTime;
 
     private String requestPcName;
 
@@ -81,11 +81,11 @@ public class SysUniversalLog {
         this.requestUser = requestUser == null ? null : requestUser.trim();
     }
 
-    public Date getRequestTime() {
+    public LocalDateTime getRequestTime() {
         return requestTime;
     }
 
-    public void setRequestTime(Date requestTime) {
+    public void setRequestTime(LocalDateTime requestTime) {
         this.requestTime = requestTime;
     }
 

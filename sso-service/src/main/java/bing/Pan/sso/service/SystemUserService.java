@@ -19,6 +19,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class SystemUserService extends BaseService<SysUser>  implements BaseServ
 
 
         sysUser.setLastIp(IPAddressUtils.getIpAddr(request));
-        sysUser.setLastLogin(new Date());
+        sysUser.setLastLogin(LocalDateTime.now());
         sysUserMapper.updateByPrimaryKeySelective(sysUser);
 
         return sysUser;

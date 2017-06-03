@@ -1,44 +1,44 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="bing.Pan.sso.mapper.mapperInterface.SsoOrganizationMapper" >
-  <resultMap id="BaseResultMap" type="bing.Pan.sso.domain.entity.SsoOrganization" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="parent_Id" property="parentId" jdbcType="BIGINT" />
-    <result column="parent_Ids" property="parentIds" jdbcType="VARCHAR" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="sort" property="sort" jdbcType="INTEGER" />
-    <result column="type" property="type" jdbcType="CHAR" />
-    <result column="grade" property="grade" jdbcType="CHAR" />
-    <result column="address" property="address" jdbcType="VARCHAR" />
-    <result column="zip_code" property="zipCode" jdbcType="VARCHAR" />
-    <result column="principal" property="principal" jdbcType="VARCHAR" />
-    <result column="phone" property="phone" jdbcType="VARCHAR" />
-    <result column="fax" property="fax" jdbcType="VARCHAR" />
-    <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="enable_flag" property="enableFlag" jdbcType="BIT" />
-    <result column="system_id" property="systemId" jdbcType="BIGINT" />
-    <result column="system_name" property="systemName" jdbcType="VARCHAR" />
-    <result column="create_user" property="createUser" jdbcType="BIGINT" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_user" property="updateUser" jdbcType="BIGINT" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bing.Pan.sso.mapper.mapperInterface.SsoOrganizationMapper">
+  <resultMap id="BaseResultMap" type="bing.Pan.sso.domain.entity.SsoOrganization">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="parent_Id" jdbcType="BIGINT" property="parentId" />
+    <result column="parent_Ids" jdbcType="VARCHAR" property="parentIds" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="grade" jdbcType="CHAR" property="grade" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="zip_code" jdbcType="VARCHAR" property="zipCode" />
+    <result column="principal" jdbcType="VARCHAR" property="principal" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="fax" jdbcType="VARCHAR" property="fax" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="enable_flag" jdbcType="BIT" property="enableFlag" />
+    <result column="system_id" jdbcType="BIGINT" property="systemId" />
+    <result column="system_name" jdbcType="VARCHAR" property="systemName" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     id, parent_Id, parent_Ids, name, sort, type, grade, address, zip_code, principal, 
     phone, fax, email, enable_flag, system_id, system_name, create_user, create_time, 
     update_user, update_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sso_organization
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sso_organization
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="bing.Pan.sso.domain.entity.SsoOrganization" >
+  <insert id="insert" parameterType="bing.Pan.sso.domain.entity.SsoOrganization">
     insert into sso_organization (id, parent_Id, parent_Ids, 
       name, sort, type, grade, 
       address, zip_code, principal, 
@@ -54,197 +54,197 @@
       #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="bing.Pan.sso.domain.entity.SsoOrganization" >
+  <insert id="insertSelective" parameterType="bing.Pan.sso.domain.entity.SsoOrganization">
     insert into sso_organization
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="parentId != null" >
+      <if test="parentId != null">
         parent_Id,
       </if>
-      <if test="parentIds != null" >
+      <if test="parentIds != null">
         parent_Ids,
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         name,
       </if>
-      <if test="sort != null" >
+      <if test="sort != null">
         sort,
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         type,
       </if>
-      <if test="grade != null" >
+      <if test="grade != null">
         grade,
       </if>
-      <if test="address != null" >
+      <if test="address != null">
         address,
       </if>
-      <if test="zipCode != null" >
+      <if test="zipCode != null">
         zip_code,
       </if>
-      <if test="principal != null" >
+      <if test="principal != null">
         principal,
       </if>
-      <if test="phone != null" >
+      <if test="phone != null">
         phone,
       </if>
-      <if test="fax != null" >
+      <if test="fax != null">
         fax,
       </if>
-      <if test="email != null" >
+      <if test="email != null">
         email,
       </if>
-      <if test="enableFlag != null" >
+      <if test="enableFlag != null">
         enable_flag,
       </if>
-      <if test="systemId != null" >
+      <if test="systemId != null">
         system_id,
       </if>
-      <if test="systemName != null" >
+      <if test="systemName != null">
         system_name,
       </if>
-      <if test="createUser != null" >
+      <if test="createUser != null">
         create_user,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time,
       </if>
-      <if test="updateUser != null" >
+      <if test="updateUser != null">
         update_user,
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="parentId != null" >
+      <if test="parentId != null">
         #{parentId,jdbcType=BIGINT},
       </if>
-      <if test="parentIds != null" >
+      <if test="parentIds != null">
         #{parentIds,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="sort != null" >
+      <if test="sort != null">
         #{sort,jdbcType=INTEGER},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         #{type,jdbcType=CHAR},
       </if>
-      <if test="grade != null" >
+      <if test="grade != null">
         #{grade,jdbcType=CHAR},
       </if>
-      <if test="address != null" >
+      <if test="address != null">
         #{address,jdbcType=VARCHAR},
       </if>
-      <if test="zipCode != null" >
+      <if test="zipCode != null">
         #{zipCode,jdbcType=VARCHAR},
       </if>
-      <if test="principal != null" >
+      <if test="principal != null">
         #{principal,jdbcType=VARCHAR},
       </if>
-      <if test="phone != null" >
+      <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="fax != null" >
+      <if test="fax != null">
         #{fax,jdbcType=VARCHAR},
       </if>
-      <if test="email != null" >
+      <if test="email != null">
         #{email,jdbcType=VARCHAR},
       </if>
-      <if test="enableFlag != null" >
+      <if test="enableFlag != null">
         #{enableFlag,jdbcType=BIT},
       </if>
-      <if test="systemId != null" >
+      <if test="systemId != null">
         #{systemId,jdbcType=BIGINT},
       </if>
-      <if test="systemName != null" >
+      <if test="systemName != null">
         #{systemName,jdbcType=VARCHAR},
       </if>
-      <if test="createUser != null" >
+      <if test="createUser != null">
         #{createUser,jdbcType=BIGINT},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateUser != null" >
+      <if test="updateUser != null">
         #{updateUser,jdbcType=BIGINT},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="bing.Pan.sso.domain.entity.SsoOrganization" >
+  <update id="updateByPrimaryKeySelective" parameterType="bing.Pan.sso.domain.entity.SsoOrganization">
     update sso_organization
-    <set >
-      <if test="parentId != null" >
+    <set>
+      <if test="parentId != null">
         parent_Id = #{parentId,jdbcType=BIGINT},
       </if>
-      <if test="parentIds != null" >
+      <if test="parentIds != null">
         parent_Ids = #{parentIds,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="sort != null" >
+      <if test="sort != null">
         sort = #{sort,jdbcType=INTEGER},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         type = #{type,jdbcType=CHAR},
       </if>
-      <if test="grade != null" >
+      <if test="grade != null">
         grade = #{grade,jdbcType=CHAR},
       </if>
-      <if test="address != null" >
+      <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
       </if>
-      <if test="zipCode != null" >
+      <if test="zipCode != null">
         zip_code = #{zipCode,jdbcType=VARCHAR},
       </if>
-      <if test="principal != null" >
+      <if test="principal != null">
         principal = #{principal,jdbcType=VARCHAR},
       </if>
-      <if test="phone != null" >
+      <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="fax != null" >
+      <if test="fax != null">
         fax = #{fax,jdbcType=VARCHAR},
       </if>
-      <if test="email != null" >
+      <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="enableFlag != null" >
+      <if test="enableFlag != null">
         enable_flag = #{enableFlag,jdbcType=BIT},
       </if>
-      <if test="systemId != null" >
+      <if test="systemId != null">
         system_id = #{systemId,jdbcType=BIGINT},
       </if>
-      <if test="systemName != null" >
+      <if test="systemName != null">
         system_name = #{systemName,jdbcType=VARCHAR},
       </if>
-      <if test="createUser != null" >
+      <if test="createUser != null">
         create_user = #{createUser,jdbcType=BIGINT},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateUser != null" >
+      <if test="updateUser != null">
         update_user = #{updateUser,jdbcType=BIGINT},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="bing.Pan.sso.domain.entity.SsoOrganization" >
+  <update id="updateByPrimaryKey" parameterType="bing.Pan.sso.domain.entity.SsoOrganization">
     update sso_organization
     set parent_Id = #{parentId,jdbcType=BIGINT},
       parent_Ids = #{parentIds,jdbcType=VARCHAR},

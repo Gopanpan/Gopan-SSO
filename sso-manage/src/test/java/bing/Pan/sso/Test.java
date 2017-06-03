@@ -24,7 +24,7 @@ public class Test {
         SysUser sysUser = new SysUser();
         sysUser.setId(1L);
         sysUser.setEmail("15923508369@163.com");
-        sysUser.setCreateTime(new Date());
+        sysUser.setCreateTime(LocalDateTime.now());
 
         Map<String, Object> stringObjectMap = BeanMapUtil.beanTrans2Map(sysUser);
 

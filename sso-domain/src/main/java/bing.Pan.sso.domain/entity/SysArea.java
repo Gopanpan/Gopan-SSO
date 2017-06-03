@@ -1,6 +1,6 @@
 package bing.Pan.sso.domain.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class SysArea {
     private Long id;
@@ -23,11 +23,11 @@ public class SysArea {
 
     private Long createUser;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 
     private Long updateUser;
 
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     public Long getId() {
         return id;
@@ -109,11 +109,11 @@ public class SysArea {
         this.createUser = createUser;
     }
 
-    public Date getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 
@@ -125,11 +125,11 @@ public class SysArea {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateTime() {
+    public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
     }
 }

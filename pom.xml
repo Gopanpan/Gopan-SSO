@@ -51,6 +51,7 @@
         <axis2.version>1.6.2</axis2.version>
         <poi.version>3.9</poi.version>
         <jxl.version>2.4.2_4</jxl.version>
+        <typehandlers.version>1.0.2</typehandlers.version>
 
 
         <swagger.scope>compile</swagger.scope>
@@ -171,6 +172,13 @@
             <artifactId>org.apache.servicemix.bundles.jexcelapi</artifactId>
             <version>${jxl.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-typehandlers-jsr310</artifactId>
+            <version>${typehandlers.version}</version>
+        </dependency>
+
 
 
     </dependencies>

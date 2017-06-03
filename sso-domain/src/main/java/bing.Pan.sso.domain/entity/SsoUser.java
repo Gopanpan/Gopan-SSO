@@ -1,6 +1,6 @@
 package bing.Pan.sso.domain.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class SsoUser {
     private Long id;
@@ -25,9 +25,9 @@ public class SsoUser {
 
     private String email;
 
-    private Date joinDate;
+    private LocalDateTime joinTime;
 
-    private Date lastLogin;
+    private LocalDateTime lastLogin;
 
     private String lastIp;
 
@@ -43,11 +43,11 @@ public class SsoUser {
 
     private Long createUser;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 
     private Long updateUser;
 
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     public Long getId() {
         return id;
@@ -137,19 +137,19 @@ public class SsoUser {
         this.email = email == null ? null : email.trim();
     }
 
-    public Date getJoinDate() {
-        return joinDate;
+    public LocalDateTime getJoinTime() {
+        return joinTime;
     }
 
-    public void setJoinDate(Date joinDate) {
-        this.joinDate = joinDate;
+    public void setJoinTime(LocalDateTime joinTime) {
+        this.joinTime = joinTime;
     }
 
-    public Date getLastLogin() {
+    public LocalDateTime getLastLogin() {
         return lastLogin;
     }
 
-    public void setLastLogin(Date lastLogin) {
+    public void setLastLogin(LocalDateTime lastLogin) {
         this.lastLogin = lastLogin;
     }
 
@@ -209,11 +209,11 @@ public class SsoUser {
         this.createUser = createUser;
     }
 
-    public Date getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 
@@ -225,11 +225,11 @@ public class SsoUser {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateTime() {
+    public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
     }
 }

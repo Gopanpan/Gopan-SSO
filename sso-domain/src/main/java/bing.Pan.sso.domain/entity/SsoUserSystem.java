@@ -1,5 +1,7 @@
 package bing.Pan.sso.domain.entity;
 
+import java.time.LocalDateTime;
+
 public class SsoUserSystem {
     private Long id;
 
@@ -10,6 +12,14 @@ public class SsoUserSystem {
     private Long systemId;
 
     private String systemName;
+
+    private Long createUser;
+
+    private LocalDateTime createTime;
+
+    private Long updateUser;
+
+    private LocalDateTime updateTime;
 
     public Long getId() {
         return id;
@@ -49,5 +59,37 @@ public class SsoUserSystem {
 
     public void setSystemName(String systemName) {
         this.systemName = systemName == null ? null : systemName.trim();
+    }
+
+    public Long getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(Long createUser) {
+        this.createUser = createUser;
+    }
+
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
+
+    public Long getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(Long updateUser) {
+        this.updateUser = updateUser;
+    }
+
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
     }
 }

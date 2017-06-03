@@ -1,6 +1,6 @@
 package bing.Pan.sso.domain.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class SsoUserRole {
     private Long id;
@@ -21,11 +21,11 @@ public class SsoUserRole {
 
     private Long createUser;
 
-    private Date createDate;
+    private LocalDateTime createTime;
 
     private String updateUser;
 
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     public Long getId() {
         return id;
@@ -99,12 +99,12 @@ public class SsoUserRole {
         this.createUser = createUser;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public LocalDateTime getCreateTime() {
+        return createTime;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
     }
 
     public String getUpdateUser() {
@@ -115,11 +115,11 @@ public class SsoUserRole {
         this.updateUser = updateUser == null ? null : updateUser.trim();
     }
 
-    public Date getUpdateTime() {
+    public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
     }
 }

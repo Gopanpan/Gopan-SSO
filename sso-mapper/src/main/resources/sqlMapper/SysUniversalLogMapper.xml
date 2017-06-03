@@ -1,42 +1,45 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="bing.Pan.sso.mapper.mapperInterface.SysUniversalLogMapper" >
-  <resultMap id="BaseResultMap" type="bing.Pan.sso.domain.entity.SysUniversalLog" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="module_name" property="moduleName" jdbcType="VARCHAR" />
-    <result column="feature_name" property="featureName" jdbcType="VARCHAR" />
-    <result column="feature_path" property="featurePath" jdbcType="VARCHAR" />
-    <result column="request_param" property="requestParam" jdbcType="LONGVARCHAR" />
-    <result column="request_result" property="requestResult" jdbcType="VARCHAR" />
-    <result column="request_user" property="requestUser" jdbcType="VARCHAR" />
-    <result column="request_time" property="requestTime" jdbcType="TIMESTAMP" />
-    <result column="request_pc_name" property="requestPcName" jdbcType="VARCHAR" />
-    <result column="request_ip" property="requestIp" jdbcType="VARCHAR" />
-    <result column="extends1" property="extends1" jdbcType="VARCHAR" />
-    <result column="extends2" property="extends2" jdbcType="VARCHAR" />
-    <result column="extends3" property="extends3" jdbcType="VARCHAR" />
-    <result column="extends4" property="extends4" jdbcType="VARCHAR" />
-    <result column="extends5" property="extends5" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bing.Pan.sso.mapper.mapperInterface.SysUniversalLogMapper">
+  <resultMap id="BaseResultMap" type="bing.Pan.sso.domain.entity.SysUniversalLog">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="module_name" jdbcType="VARCHAR" property="moduleName" />
+    <result column="feature_name" jdbcType="VARCHAR" property="featureName" />
+    <result column="feature_path" jdbcType="VARCHAR" property="featurePath" />
+    <result column="request_result" jdbcType="VARCHAR" property="requestResult" />
+    <result column="request_user" jdbcType="VARCHAR" property="requestUser" />
+    <result column="request_time" jdbcType="TIMESTAMP" property="requestTime" />
+    <result column="request_pc_name" jdbcType="VARCHAR" property="requestPcName" />
+    <result column="request_ip" jdbcType="VARCHAR" property="requestIp" />
+    <result column="extends1" jdbcType="VARCHAR" property="extends1" />
+    <result column="extends2" jdbcType="VARCHAR" property="extends2" />
+    <result column="extends3" jdbcType="VARCHAR" property="extends3" />
+    <result column="extends4" jdbcType="VARCHAR" property="extends4" />
+    <result column="extends5" jdbcType="VARCHAR" property="extends5" />
   </resultMap>
-
-  <sql id="Base_Column_List" >
-    id, module_name, feature_name, feature_path,request_param, request_result, request_user, request_time,
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="bing.Pan.sso.domain.entity.SysUniversalLog">
+    <result column="request_param" jdbcType="LONGVARCHAR" property="requestParam" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, module_name, feature_name, feature_path, request_result, request_user, request_time, 
     request_pc_name, request_ip, extends1, extends2, extends3, extends4, extends5
   </sql>
-  <sql id="Blob_Column_List" >
+  <sql id="Blob_Column_List">
     request_param
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from sys_universal_log
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sys_universal_log
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="bing.Pan.sso.domain.entity.SysUniversalLog" >
+  <insert id="insert" parameterType="bing.Pan.sso.domain.entity.SysUniversalLog">
     insert into sys_universal_log (id, module_name, feature_name, 
       feature_path, request_result, request_user, 
       request_time, request_pc_name, request_ip, 
@@ -50,158 +53,174 @@
       #{extends4,jdbcType=VARCHAR}, #{extends5,jdbcType=VARCHAR}, #{requestParam,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="bing.Pan.sso.domain.entity.SysUniversalLog" >
+  <insert id="insertSelective" parameterType="bing.Pan.sso.domain.entity.SysUniversalLog">
     insert into sys_universal_log
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="moduleName != null" >
+      <if test="moduleName != null">
         module_name,
       </if>
-      <if test="featureName != null" >
+      <if test="featureName != null">
         feature_name,
       </if>
-      <if test="featurePath != null" >
+      <if test="featurePath != null">
         feature_path,
       </if>
-      <if test="requestResult != null" >
+      <if test="requestResult != null">
         request_result,
       </if>
-      <if test="requestUser != null" >
+      <if test="requestUser != null">
         request_user,
       </if>
-      <if test="requestTime != null" >
+      <if test="requestTime != null">
         request_time,
       </if>
-      <if test="requestPcName != null" >
+      <if test="requestPcName != null">
         request_pc_name,
       </if>
-      <if test="requestIp != null" >
+      <if test="requestIp != null">
         request_ip,
       </if>
-      <if test="extends1 != null" >
+      <if test="extends1 != null">
         extends1,
       </if>
-      <if test="extends2 != null" >
+      <if test="extends2 != null">
         extends2,
       </if>
-      <if test="extends3 != null" >
+      <if test="extends3 != null">
         extends3,
       </if>
-      <if test="extends4 != null" >
+      <if test="extends4 != null">
         extends4,
       </if>
-      <if test="extends5 != null" >
+      <if test="extends5 != null">
         extends5,
       </if>
-      <if test="requestParam != null" >
+      <if test="requestParam != null">
         request_param,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="moduleName != null" >
+      <if test="moduleName != null">
         #{moduleName,jdbcType=VARCHAR},
       </if>
-      <if test="featureName != null" >
+      <if test="featureName != null">
         #{featureName,jdbcType=VARCHAR},
       </if>
-      <if test="featurePath != null" >
+      <if test="featurePath != null">
         #{featurePath,jdbcType=VARCHAR},
       </if>
-      <if test="requestResult != null" >
+      <if test="requestResult != null">
         #{requestResult,jdbcType=VARCHAR},
       </if>
-      <if test="requestUser != null" >
+      <if test="requestUser != null">
         #{requestUser,jdbcType=VARCHAR},
       </if>
-      <if test="requestTime != null" >
+      <if test="requestTime != null">
         #{requestTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="requestPcName != null" >
+      <if test="requestPcName != null">
         #{requestPcName,jdbcType=VARCHAR},
       </if>
-      <if test="requestIp != null" >
+      <if test="requestIp != null">
         #{requestIp,jdbcType=VARCHAR},
       </if>
-      <if test="extends1 != null" >
+      <if test="extends1 != null">
         #{extends1,jdbcType=VARCHAR},
       </if>
-      <if test="extends2 != null" >
+      <if test="extends2 != null">
         #{extends2,jdbcType=VARCHAR},
       </if>
-      <if test="extends3 != null" >
+      <if test="extends3 != null">
         #{extends3,jdbcType=VARCHAR},
       </if>
-      <if test="extends4 != null" >
+      <if test="extends4 != null">
         #{extends4,jdbcType=VARCHAR},
       </if>
-      <if test="extends5 != null" >
+      <if test="extends5 != null">
         #{extends5,jdbcType=VARCHAR},
       </if>
-      <if test="requestParam != null" >
+      <if test="requestParam != null">
         #{requestParam,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="bing.Pan.sso.domain.entity.SysUniversalLog" >
+  <update id="updateByPrimaryKeySelective" parameterType="bing.Pan.sso.domain.entity.SysUniversalLog">
     update sys_universal_log
-    <set >
-      <if test="moduleName != null" >
+    <set>
+      <if test="moduleName != null">
         module_name = #{moduleName,jdbcType=VARCHAR},
       </if>
-      <if test="featureName != null" >
+      <if test="featureName != null">
         feature_name = #{featureName,jdbcType=VARCHAR},
       </if>
-      <if test="featurePath != null" >
+      <if test="featurePath != null">
         feature_path = #{featurePath,jdbcType=VARCHAR},
       </if>
-      <if test="requestResult != null" >
+      <if test="requestResult != null">
         request_result = #{requestResult,jdbcType=VARCHAR},
       </if>
-      <if test="requestUser != null" >
+      <if test="requestUser != null">
         request_user = #{requestUser,jdbcType=VARCHAR},
       </if>
-      <if test="requestTime != null" >
+      <if test="requestTime != null">
         request_time = #{requestTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="requestPcName != null" >
+      <if test="requestPcName != null">
         request_pc_name = #{requestPcName,jdbcType=VARCHAR},
       </if>
-      <if test="requestIp != null" >
+      <if test="requestIp != null">
         request_ip = #{requestIp,jdbcType=VARCHAR},
       </if>
-      <if test="extends1 != null" >
+      <if test="extends1 != null">
         extends1 = #{extends1,jdbcType=VARCHAR},
       </if>
-      <if test="extends2 != null" >
+      <if test="extends2 != null">
         extends2 = #{extends2,jdbcType=VARCHAR},
       </if>
-      <if test="extends3 != null" >
+      <if test="extends3 != null">
         extends3 = #{extends3,jdbcType=VARCHAR},
       </if>
-      <if test="extends4 != null" >
+      <if test="extends4 != null">
         extends4 = #{extends4,jdbcType=VARCHAR},
       </if>
-      <if test="extends5 != null" >
+      <if test="extends5 != null">
         extends5 = #{extends5,jdbcType=VARCHAR},
       </if>
-      <if test="requestParam != null" >
+      <if test="requestParam != null">
         request_param = #{requestParam,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-
-  <update id="updateByPrimaryKey" parameterType="bing.Pan.sso.domain.entity.SysUniversalLog" >
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="bing.Pan.sso.domain.entity.SysUniversalLog">
     update sys_universal_log
     set module_name = #{moduleName,jdbcType=VARCHAR},
       feature_name = #{featureName,jdbcType=VARCHAR},
       feature_path = #{featurePath,jdbcType=VARCHAR},
-      request_param = #{requestParam,jdbcType=LONGVARCHAR},
+      request_result = #{requestResult,jdbcType=VARCHAR},
+      request_user = #{requestUser,jdbcType=VARCHAR},
+      request_time = #{requestTime,jdbcType=TIMESTAMP},
+      request_pc_name = #{requestPcName,jdbcType=VARCHAR},
+      request_ip = #{requestIp,jdbcType=VARCHAR},
+      extends1 = #{extends1,jdbcType=VARCHAR},
+      extends2 = #{extends2,jdbcType=VARCHAR},
+      extends3 = #{extends3,jdbcType=VARCHAR},
+      extends4 = #{extends4,jdbcType=VARCHAR},
+      extends5 = #{extends5,jdbcType=VARCHAR},
+      request_param = #{requestParam,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="bing.Pan.sso.domain.entity.SysUniversalLog">
+    update sys_universal_log
+    set module_name = #{moduleName,jdbcType=VARCHAR},
+      feature_name = #{featureName,jdbcType=VARCHAR},
+      feature_path = #{featurePath,jdbcType=VARCHAR},
       request_result = #{requestResult,jdbcType=VARCHAR},
       request_user = #{requestUser,jdbcType=VARCHAR},
       request_time = #{requestTime,jdbcType=TIMESTAMP},

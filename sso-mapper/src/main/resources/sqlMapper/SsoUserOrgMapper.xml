@@ -1,35 +1,35 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="bing.Pan.sso.mapper.mapperInterface.SsoUserOrgMapper" >
-  <resultMap id="BaseResultMap" type="bing.Pan.sso.domain.entity.SsoUserOrg" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="user_id" property="userId" jdbcType="BIGINT" />
-    <result column="user_login_name" property="userLoginName" jdbcType="VARCHAR" />
-    <result column="organization_id" property="organizationId" jdbcType="BIGINT" />
-    <result column="organization_name" property="organizationName" jdbcType="VARCHAR" />
-    <result column="available" property="available" jdbcType="BIT" />
-    <result column="system_id" property="systemId" jdbcType="BIGINT" />
-    <result column="system_name" property="systemName" jdbcType="VARCHAR" />
-    <result column="create_user" property="createUser" jdbcType="BIGINT" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_user" property="updateUser" jdbcType="BIGINT" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bing.Pan.sso.mapper.mapperInterface.SsoUserOrgMapper">
+  <resultMap id="BaseResultMap" type="bing.Pan.sso.domain.entity.SsoUserOrg">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="user_login_name" jdbcType="VARCHAR" property="userLoginName" />
+    <result column="organization_id" jdbcType="BIGINT" property="organizationId" />
+    <result column="organization_name" jdbcType="VARCHAR" property="organizationName" />
+    <result column="available" jdbcType="BIT" property="available" />
+    <result column="system_id" jdbcType="BIGINT" property="systemId" />
+    <result column="system_name" jdbcType="VARCHAR" property="systemName" />
+    <result column="create_user" jdbcType="BIGINT" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     id, user_id, user_login_name, organization_id, organization_name, available, system_id, 
     system_name, create_user, create_time, update_user, update_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sso_user_org
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sso_user_org
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="bing.Pan.sso.domain.entity.SsoUserOrg" >
+  <insert id="insert" parameterType="bing.Pan.sso.domain.entity.SsoUserOrg">
     insert into sso_user_org (id, user_id, user_login_name, 
       organization_id, organization_name, available, 
       system_id, system_name, create_user, 
@@ -41,125 +41,125 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="bing.Pan.sso.domain.entity.SsoUserOrg" >
+  <insert id="insertSelective" parameterType="bing.Pan.sso.domain.entity.SsoUserOrg">
     insert into sso_user_org
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="userId != null" >
+      <if test="userId != null">
         user_id,
       </if>
-      <if test="userLoginName != null" >
+      <if test="userLoginName != null">
         user_login_name,
       </if>
-      <if test="organizationId != null" >
+      <if test="organizationId != null">
         organization_id,
       </if>
-      <if test="organizationName != null" >
+      <if test="organizationName != null">
         organization_name,
       </if>
-      <if test="available != null" >
+      <if test="available != null">
         available,
       </if>
-      <if test="systemId != null" >
+      <if test="systemId != null">
         system_id,
       </if>
-      <if test="systemName != null" >
+      <if test="systemName != null">
         system_name,
       </if>
-      <if test="createUser != null" >
+      <if test="createUser != null">
         create_user,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time,
       </if>
-      <if test="updateUser != null" >
+      <if test="updateUser != null">
         update_user,
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="userId != null" >
+      <if test="userId != null">
         #{userId,jdbcType=BIGINT},
       </if>
-      <if test="userLoginName != null" >
+      <if test="userLoginName != null">
         #{userLoginName,jdbcType=VARCHAR},
       </if>
-      <if test="organizationId != null" >
+      <if test="organizationId != null">
         #{organizationId,jdbcType=BIGINT},
       </if>
-      <if test="organizationName != null" >
+      <if test="organizationName != null">
         #{organizationName,jdbcType=VARCHAR},
       </if>
-      <if test="available != null" >
+      <if test="available != null">
         #{available,jdbcType=BIT},
       </if>
-      <if test="systemId != null" >
+      <if test="systemId != null">
         #{systemId,jdbcType=BIGINT},
       </if>
-      <if test="systemName != null" >
+      <if test="systemName != null">
         #{systemName,jdbcType=VARCHAR},
       </if>
-      <if test="createUser != null" >
+      <if test="createUser != null">
         #{createUser,jdbcType=BIGINT},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateUser != null" >
+      <if test="updateUser != null">
         #{updateUser,jdbcType=BIGINT},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="bing.Pan.sso.domain.entity.SsoUserOrg" >
+  <update id="updateByPrimaryKeySelective" parameterType="bing.Pan.sso.domain.entity.SsoUserOrg">
     update sso_user_org
-    <set >
-      <if test="userId != null" >
+    <set>
+      <if test="userId != null">
         user_id = #{userId,jdbcType=BIGINT},
       </if>
-      <if test="userLoginName != null" >
+      <if test="userLoginName != null">
         user_login_name = #{userLoginName,jdbcType=VARCHAR},
       </if>
-      <if test="organizationId != null" >
+      <if test="organizationId != null">
         organization_id = #{organizationId,jdbcType=BIGINT},
       </if>
-      <if test="organizationName != null" >
+      <if test="organizationName != null">
         organization_name = #{organizationName,jdbcType=VARCHAR},
       </if>
-      <if test="available != null" >
+      <if test="available != null">
         available = #{available,jdbcType=BIT},
       </if>
-      <if test="systemId != null" >
+      <if test="systemId != null">
         system_id = #{systemId,jdbcType=BIGINT},
       </if>
-      <if test="systemName != null" >
+      <if test="systemName != null">
         system_name = #{systemName,jdbcType=VARCHAR},
       </if>
-      <if test="createUser != null" >
+      <if test="createUser != null">
         create_user = #{createUser,jdbcType=BIGINT},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateUser != null" >
+      <if test="updateUser != null">
         update_user = #{updateUser,jdbcType=BIGINT},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="bing.Pan.sso.domain.entity.SsoUserOrg" >
+  <update id="updateByPrimaryKey" parameterType="bing.Pan.sso.domain.entity.SsoUserOrg">
     update sso_user_org
     set user_id = #{userId,jdbcType=BIGINT},
       user_login_name = #{userLoginName,jdbcType=VARCHAR},

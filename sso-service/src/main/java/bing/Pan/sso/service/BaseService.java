@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Field;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -62,7 +63,7 @@ public class BaseService<T> {
                         if(fieldName.equals(GENERAL_VALUE[1]))
                             field.set(verifyEntity, sysUser.getId());
                         if(fieldName.equals(GENERAL_VALUE[2]))
-                            field.set(verifyEntity, new Date());
+                            field.set(verifyEntity, LocalDateTime.now());
                         if(fieldName.equals(GENERAL_VALUE[5]))
                             field.set(verifyEntity,true);
                     }
@@ -78,7 +79,7 @@ public class BaseService<T> {
                         if(fieldName.equals(GENERAL_VALUE[3]))
                             field.set(verifyEntity,sysUser.getId());
                         if(fieldName.equals(GENERAL_VALUE[4]))
-                            field.set(verifyEntity,new Date());
+                            field.set(verifyEntity, LocalDateTime.now());
 
                     }
                 }
