@@ -132,9 +132,10 @@ public class SystemUserController extends BaseController{
     public void downloadSysUser( @ModelAttribute SystemUserBo systemUserBo,HttpServletResponse response) throws Exception {
 
         List<SysUser> list = systemUserService.findList(systemUserBo);
-        String[] filterField = new String[]{"id"};
+        String[] filterField = new String[]{"id","password"};
+        String[] booleanFormat = new String[]{"启用","禁用"};
         new ExcelExportTools("系统用户导出数据","导出数据",ExportConstantData.sysUserheaderList(),
-                ExportConstantData.sysUserColumnWidth(),list.size()).setDataList(list,filterField).write(response,"系统用户导出数据.xlsx")
+                ExportConstantData.sysUserColumnWidth(),list.size()).setDataList(list,filterField,booleanFormat,null).write(response,"系统用户导出数据.xlsx")
                 .dispose();
     }
 

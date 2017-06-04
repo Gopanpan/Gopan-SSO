@@ -21,14 +21,13 @@ public class ExportConstantData {
         List<String> headerList = Lists.newArrayList();
         headerList.add("员工姓名");
         headerList.add("员工真实名称");
-        headerList.add("密码");
         headerList.add("性别");
         headerList.add("生日");
         headerList.add("电话号码");
         headerList.add("电子邮件");
         headerList.add("上次登录时间");
         headerList.add("上次登录IP地址");
-        headerList.add("是否可用");
+        headerList.add("是否启用");
         headerList.add("创建人");
         headerList.add("创建时间");
         headerList.add("修改人");
@@ -43,7 +42,6 @@ public class ExportConstantData {
     public static List<Integer> sysUserColumnWidth(){
         List<Integer> columnWidth = Lists.newArrayList();
         columnWidth.add(3500);
-        columnWidth.add(3800);
         columnWidth.add(3800);
         columnWidth.add(3800);
         columnWidth.add(5400);

@@ -1,5 +1,6 @@
 package bing.Pan.sso.common.utils;
 
+import bing.Pan.sso.common.enums.DateEnums;
 import bing.Pan.sso.common.enums.ResponseCode;
 import bing.Pan.sso.common.exception.ServiceException;
 import com.google.common.collect.Lists;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.text.MessageFormat;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,10 +42,13 @@ public class ExcelExportTools {
     private List<Sheet> sheetList = Lists.newArrayList();
     private Map<String, CellStyle> styleMap;
 
-    private int sheetCount = 1;                                //sheet个数
-    private int rowNum;                                        //当前行号
-    private static final int sheetCapacity  = 500000;          //excel单个sheet最大行数
-    private static final int memoryCacheRow = 50000;           //内存中缓存工作薄行数数
+    private int sheetCount = 1;                                                         //sheet个数
+    private int rowNum;                                                                 //当前行号
+    private static final int sheetCapacity  = 500000;                                   //excel单个sheet最大行数
+    private static final int memoryCacheRow = 50000;                                    //内存中缓存工作薄行数数
+
+    private static final String formatData[] = new String[]{"java.time.LocalDateTime",
+            "java.lang.Boolean"};                                                       //时间格式化字符串形式
 
 
     /**
@@ -167,11 +172,14 @@ public class ExcelExportTools {
      * 添加数据
      * @param list          导出的list数据列
      * @param filterField   需要过滤的列
+     * @param booleanFormat boolean类型格式化:数组类型,下标为0时代表 为true是格式化的文字，下标为1时代表 为false是格式化的文字，
+     * @param intFormat     需要将int类型转换成对应枚举值的字段
      * @param <E>
      * @return
      * @throws IllegalAccessException
      */
-    public <E> ExcelExportTools setDataList(List<E> list, String[] filterField) throws IllegalAccessException {
+    public <E> ExcelExportTools setDataList(List<E> list, String[] filterField,String[] booleanFormat,
+                                            Map<String,List<String>> intFormat)throws IllegalAccessException {
 
         for (int x =0; x < sheetCount; x ++){
             List<E> sheetExportList;
@@ -180,7 +188,7 @@ public class ExcelExportTools {
             }else{
                 sheetExportList = list.subList(x * sheetCapacity, (x+1) * sheetCapacity);
             }
-            dealSheetData(sheetExportList,sheetList.get(x),filterField);
+            dealSheetData(sheetExportList,sheetList.get(x),filterField,booleanFormat,intFormat);
 
         }
 
@@ -188,86 +196,60 @@ public class ExcelExportTools {
 
     }
 
-    private <E> void dealSheetData(List<E> sheetExportList, Sheet sheet, String[] filterField) throws IllegalAccessException {
-        rowNum = 2;
-        if(StringUtils.isEmpty(filterField) )
-            dealNoFilerField(sheetExportList,sheet,rowNum);
-        else
-            dealFilerField(sheetExportList,sheet,filterField,rowNum);
-
-    }
-
-
-
-    /**
-     * 处理有需要过滤的列表
-     * @param <E>
-     * @param list
-     * @param filterField
-     * @param rowNum
-     * @throws IllegalAccessException
-     */
-    private <E> void dealFilerField(List<E> list, Sheet sheet, String[] filterField, int rowNum) throws IllegalAccessException {
-        Field[] fields;
-        for(Object obj:list){
+    private <E> void dealSheetData(List<E> sheetExportList, Sheet sheet, String[] filterField, String[] booleanFormat,
+                                   Map<String,List<String>> intFormat) throws IllegalAccessException {
+        rowNum = 2;         //循环创建title，表头时rowNum复位为0了,数据真实的起始行应为2
+        for(Object obj:sheetExportList){
             int cellNum = 0;
             Row row =  sheet.createRow(rowNum++);
-            fields=obj.getClass().getDeclaredFields();
-            for(Field field:fields){
+            for(Field field:obj.getClass().getDeclaredFields()){
                 field.setAccessible(true);
-                String name = field.getName();
-                if(exclusive(name,filterField)){
-                    Object va=field.get(obj);
-                    if(StringUtils.isEmpty(va))
-                        va="--";
-                    addCall(row,cellNum++, va);
+                if(exclusive(field.getName(),filterField)){
+                    if(field.getType().getName().equalsIgnoreCase(formatData[0])){
+                        Object va = field.get(obj);
+                        if(StringUtils.isEmpty(va)) va = "--";
+                        else  va = DateUtils.date2String((LocalDateTime) va, DateEnums.HYPHEN_YYYYMMddHHmmss.getPatterns());
+
+                        addCall(row,cellNum++,va);
+
+                    }else if(field.getType().getName().equalsIgnoreCase(formatData[1])){
+                        Object va=field.get(obj);
+                        if(StringUtils.isEmpty(va)) va="--";
+                        else{
+                            if(!StringUtils.isEmpty(booleanFormat)){
+                                if((boolean) va) va = booleanFormat[0];
+                                else va = booleanFormat[1];
+                            }
+                        }
+                        addCall(row,cellNum++,va);
+
+                    }else{
+                        Object va=field.get(obj);
+                        if(StringUtils.isEmpty(va))
+                            va="--";
+                        addCall(row,cellNum++, va);
+                    }
+
                 }
             }
         }
+
     }
 
     private boolean exclusive(String name, String[] filterField) {
+        if(StringUtils.isEmpty(filterField)) return  true;
+
         for (String exclusive:filterField) {
             if(name.equals(exclusive))return false;
         }
         return true;
     }
 
-    /**
-     * 处理没有过滤字段的列表
-     * @param <E>
-     * @param list
-     * @param sheet
-     * @param rowNum
-     * @throws IllegalAccessException
-     */
-    private <E> void dealNoFilerField(List<E> list, Sheet sheet, int rowNum) throws IllegalAccessException {
-        Field[] fields;
-        for(Object obj:list){
-            int cellNum = 0;
-            Row row =  sheet.createRow(rowNum++);
-            fields=obj.getClass().getDeclaredFields();
-            for(Field field:fields){
-                field.setAccessible(true);
-                Object va=field.get(obj);
-                if(StringUtils.isEmpty(va))
-                    va="--";
-                addCall(row,cellNum++, va);
-
-            }
-        }
-
-    }
-
-
-
     private void addCall(Row row, int i, Object va) {
         Cell cell = row.createCell(i);
         cell.setCellValue(va.toString());
         cell.setCellStyle(styleMap.get("data"));
     }
-
-
 
     /**
      * 输出到客户端
