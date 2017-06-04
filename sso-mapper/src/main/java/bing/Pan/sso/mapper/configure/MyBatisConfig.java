@@ -46,8 +46,7 @@ import java.util.Properties;
 @Configuration
 public class MyBatisConfig  {
 
-    @Autowired
-    DataSource dataSource;
+    @Autowired DataSource dataSource;
 
     @Bean(name = "sqlSessionFactory")
     public SqlSessionFactory sqlSessionFactoryBean() throws Exception {

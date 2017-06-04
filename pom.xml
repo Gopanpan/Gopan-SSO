@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.3.RELEASE</version>
+        <version>1.5.3.RELEASE</version>
         <relativePath/>
     </parent>
 
@@ -39,16 +39,9 @@
         <fastjson.version>1.2.23</fastjson.version>
         <guava.version>21.0</guava.version>
         <jxl.version>2.4.2_4</jxl.version>
-        <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
+        <maven-compiler-pluLgin.version>3.6.0</maven-compiler-pluLgin.version>
         <springloaded.verion>1.2.6.RELEASE</springloaded.verion>
         <httpclient.version>4.5.2</httpclient.version>
-        <itex-asian.version>5.2.0</itex-asian.version>
-        <itextpdf.version>5.5.11</itextpdf.version>
-        <core-renderer.version>R8pre2</core-renderer.version>
-        <xmlworker.version>5.4.1</xmlworker.version>
-        <bcprov-ext-jdk15on.version>1.52</bcprov-ext-jdk15on.version>
-        <jodconverter.version>2.2.1</jodconverter.version>
-        <axis2.version>1.6.2</axis2.version>
         <poi.version>3.9</poi.version>
         <jxl.version>2.4.2_4</jxl.version>
         <typehandlers.version>1.0.2</typehandlers.version>
@@ -62,10 +55,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-redis</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -83,6 +72,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

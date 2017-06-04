@@ -1,6 +1,7 @@
 package bing.Pan.sso.service.config.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,8 +12,9 @@ import org.springframework.stereotype.Component;
  * @desc : 系统配置文件
  */
 
-@ConfigurationProperties(locations = "classpath:system.properties", prefix = "sso.system")
 @Component
+@ConfigurationProperties(prefix = "sso.system")
+@PropertySource("classpath:system.properties")
 public class SsoSystemProperties {
 
     private String     userDefaultPassword;                  //系统初始用户密码
