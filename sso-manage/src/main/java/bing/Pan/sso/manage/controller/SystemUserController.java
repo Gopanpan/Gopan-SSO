@@ -14,6 +14,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.auth.In;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
@@ -134,8 +135,20 @@ public class SystemUserController extends BaseController{
         List<SysUser> list = systemUserService.findList(systemUserBo);
         String[] filterField = new String[]{"id","password"};
         String[] booleanFormat = new String[]{"启用","禁用"};
+        Map<String,Map<Integer,String>> enumFormatMap = Maps.newHashMap();
+
+
+        //性别(0女,1男,2未知)
+        Map<Integer,String> singleMap = Maps.newHashMap();
+        singleMap.put(0,"女");
+        singleMap.put(1,"男");
+        singleMap.put(2,"未知");
+        enumFormatMap.put("sex",singleMap);
+
+
+
         new ExcelExportTools("系统用户导出数据","导出数据",ExportConstantData.sysUserheaderList(),
-                ExportConstantData.sysUserColumnWidth(),list.size()).setDataList(list,filterField,booleanFormat,null).write(response,"系统用户导出数据.xlsx")
+                ExportConstantData.sysUserColumnWidth(),list.size()).setDataList(list,filterField,booleanFormat,enumFormatMap).write(response,"系统用户导出数据.xlsx")
                 .dispose();
     }
 

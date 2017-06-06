@@ -179,7 +179,7 @@ public class ExcelExportTools {
      * @throws IllegalAccessException
      */
     public <E> ExcelExportTools setDataList(List<E> list, String[] filterField,String[] booleanFormat,
-                                            Map<String,List<String>> intFormat)throws IllegalAccessException {
+                                            Map<String,Map<Integer,String>> intFormat)throws IllegalAccessException {
 
         for (int x =0; x < sheetCount; x ++){
             List<E> sheetExportList;
@@ -197,14 +197,22 @@ public class ExcelExportTools {
     }
 
     private <E> void dealSheetData(List<E> sheetExportList, Sheet sheet, String[] filterField, String[] booleanFormat,
-                                   Map<String,List<String>> intFormat) throws IllegalAccessException {
+                                   Map<String,Map<Integer,String>> intFormat) throws IllegalAccessException {
         rowNum = 2;         //循环创建title，表头时rowNum复位为0了,数据真实的起始行应为2
         for(Object obj:sheetExportList){
             int cellNum = 0;
             Row row =  sheet.createRow(rowNum++);
             for(Field field:obj.getClass().getDeclaredFields()){
                 field.setAccessible(true);
-                if(exclusive(field.getName(),filterField)){
+                String fieldName = field.getName();
+                if(exclusive(fieldName,filterField)){
+
+                    //处理枚举值
+                    if(dealEnums(intFormat,fieldName,field.get(obj),row,cellNum)){
+                        cellNum++;
+                        continue;
+                    }
+
                     if(field.getType().getName().equalsIgnoreCase(formatData[0])){
                         Object va = field.get(obj);
                         if(StringUtils.isEmpty(va)) va = "--";
@@ -236,11 +244,30 @@ public class ExcelExportTools {
 
     }
 
-    private boolean exclusive(String name, String[] filterField) {
+    private boolean dealEnums(Map<String,Map<Integer,String>> intFormat, String fieldName, Object val, Row row, int cellNum) {
+        if(StringUtils.isEmpty(intFormat) || intFormat.size() == 0) return true;
+
+        boolean whetherContinue = false;
+        for(String key: intFormat.keySet()){
+            if(fieldName.equals(key)){
+                Map<Integer, String> formatMap = intFormat.get(key);
+                for(Integer enumKey: formatMap.keySet()){
+                    if(enumKey.equals(val))
+                        addCall(row,cellNum,formatMap.get(val));
+                }
+                whetherContinue = true;
+            }
+        }
+
+        return whetherContinue;
+
+    }
+
+    private boolean exclusive(String fieldName, String[] filterField) {
         if(StringUtils.isEmpty(filterField)) return  true;
 
         for (String exclusive:filterField) {
-            if(name.equals(exclusive))return false;
+            if(fieldName.equals(exclusive))return false;
         }
         return true;
     }
