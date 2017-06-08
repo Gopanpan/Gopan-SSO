@@ -16,6 +16,7 @@
             <artifactId>sso-service</artifactId>
             <version>${project.version}</version>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -25,15 +26,9 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>bing.Pan.sso.manage.SsoManagerApplication</mainClass>
+                    <fork>true</fork>
                     <layout>ZIP</layout>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>springloaded</artifactId>
-                        <version>${springloaded.verion}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
             <plugin>

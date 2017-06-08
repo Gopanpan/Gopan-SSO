@@ -1,5 +1,7 @@
 package bing.Pan.sso.domain.bussinessobject;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -17,10 +19,12 @@ import javax.validation.constraints.Size;
  * @date : 2017/5/14 22:43
  * @desc :
  */
+@ApiModel
 public class SystemUserAddBo {
 
     private Long id;
 
+    @ApiModelProperty(value = "登录名",required = true)
     @NotBlank
     @Size(min=6,max=12,message="登录名长度应在6-12之间")
     private String loginName;

@@ -35,18 +35,27 @@ public class SsoManagerApplication {
     @Value("${server.session.timeout}")
     private int serverSessionTimeout;
 
+
+
+    public static void main(String[] args) {
+
+        SpringApplication.run(SsoManagerApplication.class, args);
+
+    }
+
+
+
     /**
-     * 配置 Spring boot session失效时间
+     * 配置 Spring boot tomcat 相关
      * @return
      */
     @Bean
     public EmbeddedServletContainerCustomizer embeddedServletContainerCustomizer() {
-        return new EmbeddedServletContainerCustomizer()  {
-            @Override
-            public void customize(ConfigurableEmbeddedServletContainer container) {
-                container.setSessionTimeout(serverSessionTimeout, TimeUnit.MINUTES);
-            }
-        };
+
+        return (ConfigurableEmbeddedServletContainer container) ->
+            container.setSessionTimeout(serverSessionTimeout, TimeUnit.MINUTES);
+
+
     }
 
 
@@ -75,16 +84,11 @@ public class SsoManagerApplication {
     public Connector httpConnector() {
         Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
         connector.setScheme("http");
-        connector.setPort(8080);
+        connector.setPort(2323);
         connector.setSecure(false);
         connector.setRedirectPort(3333);
         return connector;
     }
 
 
-    public static void main(String[] args) {
-
-        SpringApplication.run(SsoManagerApplication.class, args);
-
-    }
 }
