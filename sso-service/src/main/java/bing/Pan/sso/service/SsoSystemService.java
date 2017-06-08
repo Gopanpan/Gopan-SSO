@@ -1,5 +1,6 @@
 package bing.Pan.sso.service;
 
+import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.domain.bussinessobject.SsoSystemBo;
 import bing.Pan.sso.domain.entity.SsoSystem;
 import bing.Pan.sso.domain.entity.SysUser;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -22,7 +24,7 @@ import java.util.List;
  */
 
 @Service
-public class SsoSystemService extends BaseService implements BaseServiceInterface<SsoSystem,SsoSystemBo,SysUser>{
+public class SsoSystemService extends BaseService<SsoSystem> implements BaseServiceInterface<SsoSystem,SsoSystemBo,SysUser>{
 
 
     @Autowired private SsoSystemMapper ssoSystemMapper;
@@ -30,33 +32,39 @@ public class SsoSystemService extends BaseService implements BaseServiceInterfac
     @Override
     @Transactional(rollbackFor = Exception.class,propagation= Propagation.REQUIRED)
     public int insertOrUpdate(SsoSystem record, SysUser currentLoginUser) throws Exception {
-        return 0;
+        record = verifyEntity(record, currentLoginUser);
+        if(StringUtils.isEmpty(record.getId()))
+            return ssoSystemMapper.insert(record);
+        else
+            return ssoSystemMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
-    public int deleteById(Long id) throws Exception {
+    public int deleteById(Long id) throws ServiceException {
         return 0;
     }
 
+
+
     @Override
-    public Object selectById(Long id) throws Exception {
+    public Object findById(Long id) throws ServiceException {
+        return ssoSystemMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<SsoSystem> findList(SsoSystemBo ssoSystemBo) throws ServiceException {
         return null;
     }
 
     @Override
-    public List<SsoSystem> findList(SsoSystemBo ssoSystemBo) throws Exception {
-        return null;
-    }
-
-    @Override
-    public PageInfo findPageListByE(SsoSystemBo customBo) throws Exception {
+    public PageInfo findPageListByE(SsoSystemBo customBo) throws ServiceException {
 
         PageHelper.startPage(customBo.getPageIndex(),customBo.getPageSize());
         return new PageInfo<>(ssoSystemMapper.findListByE(customBo));
     }
 
     @Override
-    public PageInfo findPageListByT(SsoSystem entity) throws Exception {
+    public PageInfo findPageListByT(SsoSystem entity) throws ServiceException {
         return null;
     }
 }

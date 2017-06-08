@@ -62,7 +62,7 @@ public class SystemUserService extends BaseService<SysUser>  implements BaseServ
 
 
     @Transactional(readOnly = true)
-    public SysUser findByLoginName(String loginName) throws Exception  {
+    public SysUser findByLoginName(String loginName) throws ServiceException  {
         return sysUserMapper.findUserByLoginName(loginName);
     }
 
@@ -70,8 +70,6 @@ public class SystemUserService extends BaseService<SysUser>  implements BaseServ
     @Override
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public int insertOrUpdate(SysUser record, SysUser currentLoginUser) throws Exception {
-        String userDefaultPassword = ssoSystemProperties.getUserDefaultPassword();
-        System.out.println(userDefaultPassword);
         SysUser sysUserTemp = verifyEntity(record, currentLoginUser);
         if(StringUtils.isEmpty(sysUserTemp.getId())){
             return sysUserMapper.insert(sysUserTemp);
@@ -82,14 +80,14 @@ public class SystemUserService extends BaseService<SysUser>  implements BaseServ
 
     @Override
     @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRED)
-    public int deleteById(Long id) throws Exception  {
+    public int deleteById(Long id) throws ServiceException  {
         return sysUserMapper.deleteByPrimaryKey(id);
 
     }
 
     @Override
     @Transactional(readOnly = true)
-    public SysUser selectById(Long id) throws Exception  {
+    public SysUser findById(Long id) throws ServiceException  {
         SysUser sysUser = sysUserMapper.selectByPrimaryKey(id);
         SysUser createUser = sysUserMapper.selectByPrimaryKey(sysUser.getCreateUser());
         SysUser updateUser = sysUserMapper.selectByPrimaryKey(sysUser.getUpdateUser());
@@ -104,13 +102,13 @@ public class SystemUserService extends BaseService<SysUser>  implements BaseServ
     }
 
     @Override
-    public List<SysUser> findList(SystemUserBo customBo) throws Exception {
+    public List<SysUser> findList(SystemUserBo customBo) throws ServiceException {
         return sysUserMapper.findListByE(customBo);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public PageInfo findPageListByE(SystemUserBo customBo) throws Exception  {
+    public PageInfo findPageListByE(SystemUserBo customBo) throws ServiceException  {
 
         PageHelper.startPage(customBo.getPageIndex(), customBo.getPageSize());
         return new PageInfo<>(sysUserMapper.findListByE(customBo));
@@ -119,7 +117,7 @@ public class SystemUserService extends BaseService<SysUser>  implements BaseServ
 
     @Override
     @Transactional(readOnly = true)
-    public PageInfo findPageListByT(SysUser entity) throws Exception  {
+    public PageInfo findPageListByT(SysUser entity) throws ServiceException  {
         return null;
     }
 

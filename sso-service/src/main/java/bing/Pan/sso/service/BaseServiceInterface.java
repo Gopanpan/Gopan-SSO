@@ -1,5 +1,6 @@
 package bing.Pan.sso.service;
 
+import bing.Pan.sso.common.exception.ServiceException;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Component;
 
@@ -19,25 +20,26 @@ public interface BaseServiceInterface<T,E,S> {
 
     int insertOrUpdate(T record,S currentLoginUser) throws Exception;
 
-    int deleteById(Long id) throws Exception;
+    int deleteById(Long id) throws ServiceException;
 
-    Object selectById(Long id) throws Exception;
+
+    Object findById(Long id) throws ServiceException;
 
 
     /**
      * 查询所有不带分页
      * @param e
      * @return
-     * @throws Exception
+     * @throws ServiceException
      */
-    List<T> findList(E e) throws Exception;
+    List<T> findList(E e) throws ServiceException;
 
     /**
      * 根基条件查询分页List集合
      * @param customBo 自定义类型
      * @return
      */
-    PageInfo findPageListByE(E customBo) throws Exception;
+    PageInfo findPageListByE(E customBo) throws ServiceException;
 
 
 
@@ -46,7 +48,7 @@ public interface BaseServiceInterface<T,E,S> {
      * @param entity
      * @return
      */
-    PageInfo findPageListByT(T entity) throws Exception;
+    PageInfo findPageListByT(T entity) throws ServiceException;
 
 
 

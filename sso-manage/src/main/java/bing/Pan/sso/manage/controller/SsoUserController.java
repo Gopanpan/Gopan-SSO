@@ -64,7 +64,7 @@ public class SsoUserController extends BaseController {
         if(ObjectUtils.isEmpty(id))
             throw new ServiceException(ResponseCode.CLIENT_PARAM_MISS,"传入的应用系统用户ID为空!");
 
-        return new Response<>(ssoUserService.selectById(id));
+        return new Response<>(ssoUserService.findById(id));
 
     }
 

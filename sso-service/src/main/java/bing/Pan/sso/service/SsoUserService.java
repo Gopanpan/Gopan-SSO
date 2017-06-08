@@ -1,5 +1,6 @@
 package bing.Pan.sso.service;
 
+import bing.Pan.sso.common.exception.ServiceException;
 import bing.Pan.sso.domain.bussinessobject.SsoUserBo;
 import bing.Pan.sso.domain.entity.SsoUser;
 import bing.Pan.sso.domain.entity.SysUser;
@@ -40,22 +41,22 @@ public class SsoUserService extends BaseService<SsoUser>  implements BaseService
     @Transactional(propagation = Propagation.REQUIRED)
     public int insertOrUpdate(SsoUser record, SysUser currentLoginUser) throws Exception {
 
-        SsoUser ssoUserTemp = verifyEntity(record,currentLoginUser);
-        if(StringUtils.isEmpty(ssoUserTemp.getId()))
-           return ssoUserMapper.insert(ssoUserTemp);
+        record = verifyEntity(record,currentLoginUser);
+        if(StringUtils.isEmpty(record.getId()))
+           return ssoUserMapper.insert(record);
         else
-           return ssoUserMapper.updateByPrimaryKeySelective(ssoUserTemp);
+           return ssoUserMapper.updateByPrimaryKeySelective(record);
 
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public int deleteById(Long id) throws Exception {
+    public int deleteById(Long id) throws ServiceException {
         return ssoUserMapper.deleteByPrimaryKey(id);
     }
 
     @Override
-    public Object selectById(Long id) throws Exception {
+    public Object findById(Long id) throws ServiceException {
         SsoUser ssoUser = ssoUserMapper.selectByPrimaryKey(id);
         SysUser createUser = sysUserMapper.selectByPrimaryKey(ssoUser.getCreateUser());
         SysUser updateUser = sysUserMapper.selectByPrimaryKey(ssoUser.getUpdateUser());
@@ -71,19 +72,19 @@ public class SsoUserService extends BaseService<SsoUser>  implements BaseService
     }
 
     @Override
-    public List<SsoUser> findList(SsoUserBo ssoUserBo) throws Exception {
+    public List<SsoUser> findList(SsoUserBo ssoUserBo) throws ServiceException {
         return null;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public PageInfo findPageListByE(SsoUserBo customBo) throws Exception  {
+    public PageInfo findPageListByE(SsoUserBo customBo) throws ServiceException  {
         PageHelper.startPage(customBo.getPageIndex(), customBo.getPageSize());
         return new PageInfo<>(ssoUserMapper.findListByE(customBo));
     }
 
     @Override
-    public PageInfo findPageListByT(SsoUser entity) throws Exception  {
+    public PageInfo findPageListByT(SsoUser entity) throws ServiceException {
         return null;
     }
 }

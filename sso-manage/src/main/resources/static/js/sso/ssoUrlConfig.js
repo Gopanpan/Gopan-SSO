@@ -46,5 +46,6 @@ var ssoUsr_check_unique_loginName = base_serve_url_config + "/ssoUser/checkLogin
 var ssoSystem_list_url= base_serve_url_config + "/ssoSystem/ssoSystemList";
 var ssoSystem_addAUpdate_view_url = base_serve_url_config + "/ssoSystem/addAUPdateSsoUserSystemView";
 var ssoSystem_addAUpdate_url = base_serve_url_config + "/ssoSystem/addAUPdateSsoSystem";
+var ssoSystem_findById_url = base_serve_url_config + "/ssoSystem/getSsoSystemById";
 
 

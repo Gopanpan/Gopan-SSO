@@ -20,24 +20,17 @@ public class SsoSystemAddBo {
     private Long id;
 
     @NotBlank
-    @Size(min=6,max=12,message="登录名长度应在6-12之间")
-    private String loginName;
+    @Size(min=3,max=12,message="系统名称应在3-12之间")
+    private String name;
 
-    @NotEmpty(message = "真实名称不能为空!")
-    private String realName;
+    @NotEmpty(message = "系统编码不能为空!")
+    private String systemCode;
 
-    @Size(max=11,min=11,message="长度只能为11位！")
-    private String phone;
-
-    @Min(value = 0,message = "性别枚举值(0女,1男,2未知)")
-    @Max(value = 2,message = "性别枚举值(0女,1男,2未知)")
-    private int sex;
-
-    @Email(message = "电子邮件不正确")
-    private String email;
+    @NotEmpty(message = "系统状态不能为空")
+    private Boolean available;
 
 
-    private String birthday;
+    private String detailExplain;
 
 
     public Long getId() {
@@ -48,51 +41,35 @@ public class SsoSystemAddBo {
         this.id = id;
     }
 
-    public String getLoginName() {
-        return loginName;
+    public String getName() {
+        return name;
     }
 
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getRealName() {
-        return realName;
+    public String getSystemCode() {
+        return systemCode;
     }
 
-    public void setRealName(String realName) {
-        this.realName = realName;
+    public void setSystemCode(String systemCode) {
+        this.systemCode = systemCode;
     }
 
-    public String getPhone() {
-        return phone;
+    public Boolean getAvailable() {
+        return available;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 
-    public int getSex() {
-        return sex;
+    public String getDetailExplain() {
+        return detailExplain;
     }
 
-    public void setSex(int sex) {
-        this.sex = sex;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
+    public void setDetailExplain(String detailExplain) {
+        this.detailExplain = detailExplain;
     }
 }
