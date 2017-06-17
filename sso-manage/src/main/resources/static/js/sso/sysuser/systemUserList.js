@@ -120,8 +120,8 @@ function generalDelete(id, sysUserName) {
             dataType: 'json',
             data: {sysUserId:id}
         })
-            .done(function (data) {
-                serviceValidateHandleCurrent(data,true,true);
+            .done(function (result) {
+                serviceValidateHandleCurrent(result,true,true);
                 reload();
             });
     }, function () {

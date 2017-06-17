@@ -9,16 +9,16 @@ $(document).ready(function () {
             dataType: 'json',
             data: {id: id}
         })
-            .done(function (data) {
-                serviceValidateErrorTipsMessage(data);
+            .done(function (result) {
+                serviceValidateErrorTipsMessage(result);
 
-                if (data.code == "20000" && data.result) {
-                    $("#loginName").val(data.result.loginName).attr("disabled",true);
-                    $("#realName").val(data.result.realName);
-                    $("#sex").val(data.result.sex);
-                    $("#phone").val(data.result.phone);
-                    $("#email").val(data.result.email);
-                    $("#birthday").val(data.result.birthday);
+                if (result.code == "20000" && result.data) {
+                    $("#loginName").val(result.data.loginName).attr("disabled",true);
+                    $("#realName").val(result.data.realName);
+                    $("#sex").val(result.data.sex);
+                    $("#phone").val(result.data.phone);
+                    $("#email").val(result.data.email);
+                    $("#birthday").val(result.data.birthday);
                 }
 
             });
@@ -120,8 +120,8 @@ $('#btnUpdate').click(function () {
                 dataType: 'json',
                 data: setPostData()
             })
-            .done(function (data) {
-                serviceValidateHandleCurrent(data,true,false);
+            .done(function (result) {
+                serviceValidateHandleCurrent(result,true,false);
                 reload();
             });
         }

@@ -9,24 +9,24 @@ $(document).ready(function () {
             dataType: 'json',
             data: {id: id}
         })
-            .done(function (data) {
-                serviceValidateErrorTipsMessage(data);
+            .done(function (result) {
+                serviceValidateErrorTipsMessage(result);
 
-                if (data.code == "20000" && data.result) {
-                    $("#id").val(data.result.id).attr("disabled",true);
-                    $("#loginName").val(data.result.loginName).attr("disabled",true);
-                    $("#realName").val(data.result.realName).attr("disabled",true);
-                    $("#sex").val(data.result.sex).attr("disabled",true);
-                    $("#phone").val(data.result.phone).attr("disabled",true);
-                    $("#email").val(data.result.email).attr("disabled",true);
-                    $("#birthday").val(data.result.birthday).attr("disabled",true);
-                    $("#lastLogin").val(changeDateFormat(data.result.lastLogin)).attr("disabled",true);
-                    $("#lastIp").val(data.result.lastIp).attr("disabled",true);
-                    $("#createUserName").val(data.result.createUserName).attr("disabled",true);
-                    $("#createTime").val(changeDateFormat(data.result.createTime)).attr("disabled",true);
-                    $("#updateUserName").val(data.result.updateUserName).attr("disabled",true);
-                    $("#updateTime").val(changeDateFormat(data.result.updateTime)).attr("disabled",true);
-                    $("#available").val(availableFormat(data.result.available)).attr("disabled",true);
+                if (result.code == "20000" && result.data) {
+                    $("#id").val(result.data.id).attr("disabled",true);
+                    $("#loginName").val(result.data.loginName).attr("disabled",true);
+                    $("#realName").val(result.data.realName).attr("disabled",true);
+                    $("#sex").val(result.data.sex).attr("disabled",true);
+                    $("#phone").val(result.data.phone).attr("disabled",true);
+                    $("#email").val(result.data.email).attr("disabled",true);
+                    $("#birthday").val(result.data.birthday).attr("disabled",true);
+                    $("#lastLogin").val(changeDateFormat(result.data.lastLogin)).attr("disabled",true);
+                    $("#lastIp").val(result.data.lastIp).attr("disabled",true);
+                    $("#createUserName").val(result.data.createUserName).attr("disabled",true);
+                    $("#createTime").val(changeDateFormat(result.data.createTime)).attr("disabled",true);
+                    $("#updateUserName").val(result.data.updateUserName).attr("disabled",true);
+                    $("#updateTime").val(changeDateFormat(result.data.updateTime)).attr("disabled",true);
+                    $("#available").val(availableFormat(result.data.available)).attr("disabled",true);
                 }
             });
     }

@@ -16,9 +16,9 @@ public class Response<T> implements Serializable {
 
 
     private String code;            // 状态码
-    private String message;         // 消息
-    private String detailMessage;   //详细信息
-    private T result;               // 数据
+    private String message;         // 消息摘要
+    private String detailMessage;   // 详细信息
+    private T data;                 // 数据
 
     private Long timestamp = System.currentTimeMillis();
 
@@ -53,10 +53,10 @@ public class Response<T> implements Serializable {
 
 
 
-    public Response(T result) {
+    public Response(T data) {
         this.code = ResponseCode.SUCCESS.getCode();
         this.message = ResponseCode.SUCCESS.getDescription();
-        this.result = result;
+        this.data = data;
     }
 
 
@@ -84,12 +84,12 @@ public class Response<T> implements Serializable {
         this.detailMessage = detailMessage;
     }
 
-    public T getResult() {
-        return result;
+    public T getData() {
+        return data;
     }
 
-    public void setResult(T result) {
-        this.result = result;
+    public void setData(T data) {
+        this.data = data;
     }
 
     public Long getTimestamp() {

@@ -95,21 +95,21 @@ function frontErrorValidate(data){
 
 /**
  * 验证服务器端处理的返回结果
- * @param data             服务器端返回的处理结果数据
+ * @param result           服务器端返回的处理结果数据
  * @param successOperate   服务器端处理结果为成功后的页面操作 为true是执行回调函数，false不执行
  * @param errorOperate     服务器端处理结果为失败后的页面操作 为true是执行回调函数，false不执行
  */
-function topSuccessMessage (data,successOperate,errorOperate) {
+function topSuccessMessage (result,successOperate,errorOperate) {
 
-    if (data) {
-        if (data.code == "20000") {
-            layer.msg(data.message, {icon: 1,title:'服务器返回成功',time:3000}, function () {
+    if (result) {
+        if (result.code == "20000") {
+            layer.msg(result.message, {icon: 1,title:'服务器返回成功',time:3000}, function () {
                 if(successOperate ==true){
                     parent.layer.closeAll('iframe');
                 }
             });
         } else {
-            var message = "异常代码   "+data.code+"<br/>异常摘要   "+data.message+"<br/>详细信息   "+ data.detailMessage;
+            var message = "异常代码   "+result.code+"<br/>异常摘要   "+result.message+"<br/>详细信息   "+ result.detailMessage;
             layer.msg(message, {icon: 5,title:'服务器返回异常',time:3000}, function () {
                 if(errorOperate ==true){
                     parent.layer.closeAll('iframe');

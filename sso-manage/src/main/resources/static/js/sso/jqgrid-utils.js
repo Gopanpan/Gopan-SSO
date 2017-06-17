@@ -40,10 +40,10 @@ function initJqgrid(data_url,data_colNames,data_colModel) {
         datatype: "json",                           //数据格式
         jsonReader: {
             repeatitems: true,                      //是否允许乱序显示数据,true:不可以
-            root: "result.list",                    //当前页的list数据集合
-            total: "result.pages",                  //总页数
-            page: "result.pageNum",                 //当前页码
-            records: "result.total"                 //总数据量
+            root:    "data.list",                    //当前页的list数据集合
+            total:   "data.pages",                  //总页数
+            page:    "data.pageNum",                 //当前页码
+            records: "data.total"                 //总数据量
 
         },
         url: data_url,                              //数据来源地址
@@ -53,8 +53,8 @@ function initJqgrid(data_url,data_colNames,data_colModel) {
         },
         colNames: data_colNames,                  //显示的标题
         colModel: data_colModel,
-        loadComplete: function (data) {
-            serviceValidateErrorTipsMessage(data);
+        loadComplete: function (result) {
+            serviceValidateErrorTipsMessage(result);
         }
     }).jqGrid('setGridWidth', $(".ibox-content").width());
 

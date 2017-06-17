@@ -9,14 +9,14 @@ $(document).ready(function () {
             dataType: 'json',
             data: {id: id}
         })
-            .done(function (data) {
-                serviceValidateErrorTipsMessage(data);
+            .done(function (result) {
+                serviceValidateErrorTipsMessage(result);
 
-                if (data.code == "20000" && data.result) {
-                    $("#name").val(data.result.name).attr("disabled",true);
-                    $("#systemCode").val(data.result.systemCode);
-                    $("#available").val(data.result.available);
-                    $("#detailExplain").val(data.result.detailExplain);
+                if (result.code == "20000" && result.data) {
+                    $("#name").val(result.data.name).attr("disabled",true);
+                    $("#systemCode").val(result.data.systemCode);
+                    $("#available").val(result.data.available);
+                    $("#detailExplain").val(result.data.detailExplain);
                 }
 
             });
@@ -74,14 +74,14 @@ $(document).ready(function () {
 function setPostData(){
     return {
         id  : $("#id").val(),
-        loginName : $("#loginName").val(),
-        realName : $("#realName").val(),
-        sex : $("#sex").val(),
-        phone: $("#phone").val(),
-        email : $("#email").val(),
-        birthday : $("#birthday").val()
+        name : $("#name").val(),
+        systemCode : $("#systemCode").val(),
+        available : $("#available").val(),
+        detailExplain: $("#detailExplain").val()
     }
 }
+
+
 
 
 
@@ -98,8 +98,8 @@ $('#btnUpdate').click(function () {
                 dataType: 'json',
                 data: setPostData()
             })
-            .done(function (data) {
-                serviceValidateHandleCurrent(data,true,false);
+            .done(function (result) {
+                serviceValidateHandleCurrent(result,true,false);
                 reload();
             });
         }
