@@ -1,5 +1,7 @@
 package bing.Pan.sso.common.response;
 
+
+
 import bing.Pan.sso.common.enums.ResponseCode;
 
 import java.io.Serializable;
@@ -15,9 +17,9 @@ public class Response<T> implements Serializable {
     private static final long serialVersionUID = 355207958304927788L;
 
 
-    private String code;            // 状态码
-    private String message;         // 消息摘要
-    private String detailMessage;   // 详细信息
+    private String code;            // 执行结果状态码
+    private String message;         // 执行结果消息摘要
+    private String detailMessage;   // 执行结果详细信息
     private T data;                 // 数据
 
     private Long timestamp = System.currentTimeMillis();
@@ -25,15 +27,17 @@ public class Response<T> implements Serializable {
     public Response() {
         this.code = ResponseCode.SUCCESS.getCode();
         this.message = ResponseCode.SUCCESS.getDescription();
+        this.detailMessage = ResponseCode.SUCCESS.getDetailMessage();
     }
 
     public Response(ResponseCode response) {
         this.code = response.getCode();
         this.message = response.getDescription();
+        this.detailMessage = response.getDetailMessage();
     }
 
 
-    public Response(ResponseCode response,String detailMessage) {
+    public Response(ResponseCode response, String detailMessage) {
         this.code = response.getCode();
         this.message = response.getDescription();
         this.detailMessage = detailMessage;
@@ -45,7 +49,7 @@ public class Response<T> implements Serializable {
         this.message = message;
     }
 
-    public Response(String code, String message,String detailMessage) {
+    public Response(String code, String message, String detailMessage) {
         this.code = code;
         this.message = message;
         this.detailMessage = detailMessage;
@@ -56,6 +60,7 @@ public class Response<T> implements Serializable {
     public Response(T data) {
         this.code = ResponseCode.SUCCESS.getCode();
         this.message = ResponseCode.SUCCESS.getDescription();
+        this.detailMessage = ResponseCode.SUCCESS.getDetailMessage();
         this.data = data;
     }
 
