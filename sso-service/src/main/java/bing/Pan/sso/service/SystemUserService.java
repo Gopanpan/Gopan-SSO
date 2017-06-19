@@ -102,9 +102,10 @@ public class SystemUserService extends BaseService<SysUser>  implements BaseServ
     }
 
     @Override
-    public List<SysUser> findList(SystemUserBo customBo) throws ServiceException {
-        return sysUserMapper.findListByE(customBo);
+    public List<SysUser> findListByE(SystemUserBo customBo) throws ServiceException {
+        return null;
     }
+
 
     @Override
     @Transactional(readOnly = true)
@@ -112,6 +113,11 @@ public class SystemUserService extends BaseService<SysUser>  implements BaseServ
 
         PageHelper.startPage(customBo.getPageIndex(), customBo.getPageSize());
         return new PageInfo<>(sysUserMapper.findListByE(customBo));
+    }
+
+    @Override
+    public PageInfo findListByT(SysUser entity) throws ServiceException {
+        return null;
     }
 
 

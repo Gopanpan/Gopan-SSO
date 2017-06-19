@@ -52,15 +52,21 @@ public class SsoSystemService extends BaseService<SsoSystem> implements BaseServ
     }
 
     @Override
-    public List<SsoSystem> findList(SsoSystemBo ssoSystemBo) throws ServiceException {
+    public List<SsoSystem> findListByE(SsoSystemBo customBo) throws ServiceException {
         return null;
     }
+
 
     @Override
     public PageInfo findPageListByE(SsoSystemBo customBo) throws ServiceException {
 
         PageHelper.startPage(customBo.getPageIndex(),customBo.getPageSize());
         return new PageInfo<>(ssoSystemMapper.findListByE(customBo));
+    }
+
+    @Override
+    public PageInfo findListByT(SsoSystem entity) throws ServiceException {
+        return null;
     }
 
     @Override

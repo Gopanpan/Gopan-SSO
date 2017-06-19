@@ -131,7 +131,7 @@ public class SystemUserController extends BaseController{
     @RequestMapping(value = "/downloadSysUser",method = RequestMethod.POST)
     public void downloadSysUser( @ModelAttribute SystemUserBo systemUserBo,HttpServletResponse response) throws Exception {
 
-        List<SysUser> list = systemUserService.findList(systemUserBo);
+        List<SysUser> list = systemUserService.findListByE(systemUserBo);
         String[] filterField = new String[]{"id","password"};
         String[] booleanFormat = new String[]{"启用","禁用"};
         Map<String,Map<Integer,String>> enumFormatMap = Maps.newHashMap();

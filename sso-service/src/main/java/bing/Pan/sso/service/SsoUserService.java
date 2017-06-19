@@ -72,15 +72,21 @@ public class SsoUserService extends BaseService<SsoUser>  implements BaseService
     }
 
     @Override
-    public List<SsoUser> findList(SsoUserBo ssoUserBo) throws ServiceException {
+    public List<SsoUser> findListByE(SsoUserBo customBo) throws ServiceException {
         return null;
     }
+
 
     @Override
     @Transactional(readOnly = true)
     public PageInfo findPageListByE(SsoUserBo customBo) throws ServiceException  {
         PageHelper.startPage(customBo.getPageIndex(), customBo.getPageSize());
         return new PageInfo<>(ssoUserMapper.findListByE(customBo));
+    }
+
+    @Override
+    public PageInfo findListByT(SsoUser entity) throws ServiceException {
+        return null;
     }
 
     @Override
