@@ -119,11 +119,11 @@ public class GlobalExceptionHandler {
             sBuilder.append(String.format("%s%s%s%s",key,"=",valueSBuilder.toString(), " "));
         }
 
-        log.error(String.format("%s%s","请求地址：",MessageFormat.format("{0}", request.getRequestURL())));
-        log.error(String.format("%s%s","请求参数：",sBuilder.toString()));
-        log.error(String.format("%s%s","错误摘要：",detailMessage));
+        log.error(String.format("%s%s","接口地址：",MessageFormat.format("{0}", request.getRequestURL())));
         log.error(String.format("%s%s","请求地址：",request.getRemoteAddr()));
+        log.error(String.format("%s%s","请求参数：",sBuilder.toString()));
         log.error(String.format("%s%s","请求方式：",request.getMethod()));
+        log.error(String.format("%s%s","错误摘要：",detailMessage));
         log.error(String.format("%s%s","接口返回：",rs.toString()));
         log.error("堆栈信息：", ex);
     }
