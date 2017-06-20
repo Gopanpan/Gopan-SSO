@@ -60,6 +60,7 @@ public class ServiceException extends Exception implements Serializable {
         super(e.getMessage());
         this.errorCode = ResponseCode.SERVE_UNKNOWN_ERROR.getCode();
         this.errorMsg = ResponseCode.SERVE_UNKNOWN_ERROR.getDescription();
+        this.detailErrorMsg = ResponseCode.SERVE_UNKNOWN_ERROR.getDetailMessage();
     }
 
 

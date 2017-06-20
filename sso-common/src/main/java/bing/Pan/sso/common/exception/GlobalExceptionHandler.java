@@ -42,8 +42,9 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public Object handleHttpMessageNotReadableException(HttpMessageNotReadableException ex,HttpServletRequest request) {
-        writeLog(ex, request,null);
-        return new Response<>(ResponseCode.CLIENT_PARAM_ERR);
+        Response<Object> response = new Response<>(ResponseCode.CLIENT_PARAM_PARSE_ERROR);
+        writeLog(ex, request,"", response);
+        return response;
     }
 
     /**
@@ -52,8 +53,9 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public Response handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException ex,HttpServletRequest request) {
-        writeLog(ex, request,null);
-        return new Response<>(ResponseCode.CLIENT_NO_SUPPORT_METHOD);
+        Response<Object> response = new Response<>(ResponseCode.CLIENT_NO_SUPPORT_METHOD);
+        writeLog(ex, request,"", response);
+        return response;
     }
 
     /**
@@ -62,32 +64,34 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     public Object handleHttpMediaTypeNotSupportedException(Exception ex,HttpServletRequest request) {
-        writeLog(ex, request,null);
-        return new Response<>(ResponseCode.CLIENT_NO_SUPPORT_TYPE);
+        Response<Object> response = new Response<>(ResponseCode.CLIENT_NO_SUPPORT_TYPE);
+        writeLog(ex, request,"", response);
+        return response;
     }
 
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public Object handleMissingServletRequestParameterException(MissingServletRequestParameterException ex,
                                                                 HttpServletRequest request) {
-        writeLog(ex, request,null);
-        return new Response<>(ResponseCode.CLIENT_PARAM_ERR);
+        Response<Object> response = new Response<>(ResponseCode.CLIENT_PARAM_PARSE_ERROR);
+        writeLog(ex, request,"", response);
+        return response;
     }
 
     @ExceptionHandler(UnsatisfiedServletRequestParameterException.class)
     public Object handleRequestParameterException(UnsatisfiedServletRequestParameterException ex,HttpServletRequest request) {
-        Response<Object> rs = new Response<>();
-        rs.setCode("50501");
-        rs.setMessage("参数错误!" + ex.getMessage());
-        writeLog(ex, request,null);
-        return rs;
+
+        Response<Object> response = new Response<>(ResponseCode.CLIENT_PARAM_ERROR);
+        writeLog(ex, request,"", response);
+        return response;
     }
 
     @ExceptionHandler(Exception.class)
     public Object handleException(Exception ex, HttpServletRequest request) {
 
-        writeLog(ex, request,null);
-        return new Response<>(ResponseCode.SERVE_UNKNOWN_ERROR);
+        Response<Object> response = new Response<>(ResponseCode.SERVE_UNKNOWN_ERROR);
+        writeLog(ex, request,"", response);
+        return response;
     }
 
     @ExceptionHandler(ServiceException.class)
@@ -97,11 +101,11 @@ public class GlobalExceptionHandler {
         rs.setCode(ex.getErrorCode());
         rs.setMessage(ex.getMessage());
         rs.setDetailMessage(ex.getDetailErrorMsg());
-        writeLog(ex, request,ex.getDetailErrorMsg());
+        writeLog(ex, request,ex.getDetailErrorMsg(),rs);
         return rs;
     }
 
-    private void writeLog(Exception ex, HttpServletRequest request,String detailMessage) {
+    private void writeLog(Exception ex, HttpServletRequest request, String detailMessage, Response<Object> rs) {
 
         Map<String, String[]> parameterMap = request.getParameterMap();
         StringBuilder sBuilder = new StringBuilder();
@@ -117,7 +121,10 @@ public class GlobalExceptionHandler {
 
         log.error(String.format("%s%s","请求地址：",MessageFormat.format("{0}", request.getRequestURL())));
         log.error(String.format("%s%s","请求参数：",sBuilder.toString()));
-        log.error(String.format("%s%s","错误摘要: ",detailMessage));
+        log.error(String.format("%s%s","错误摘要：",detailMessage));
+        log.error(String.format("%s%s","请求地址：",request.getRemoteAddr()));
+        log.error(String.format("%s%s","请求方式：",request.getMethod()));
+        log.error(String.format("%s%s","接口返回：",rs.toString()));
         log.error("堆栈信息：", ex);
     }
 }

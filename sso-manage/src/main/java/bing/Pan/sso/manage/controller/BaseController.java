@@ -54,7 +54,7 @@ public class BaseController {
             for (ObjectError error:allErrors) {
                 sBuilder.append(String.format("%s%s",error.getDefaultMessage(),"<br/>"));
             }
-            throw new ServiceException(ResponseCode.CLIENT_PARAM_ERR,sBuilder.toString());
+            throw new ServiceException(ResponseCode.CLIENT_PARAM_PARSE_ERROR,sBuilder.toString());
         }
     }
 }

@@ -104,4 +104,15 @@ public class Response<T> implements Serializable {
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
     }
+
+
+    @Override
+    public String toString() {
+        return "Response{" +
+                "code='" + code + '\'' +
+                ", message='" + message + '\'' +
+                ", detailMessage='" + detailMessage + '\'' +
+                ", timestamp=" + timestamp +
+                '}';
+    }
 }

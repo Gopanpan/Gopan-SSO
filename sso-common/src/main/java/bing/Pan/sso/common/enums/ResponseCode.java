@@ -16,26 +16,27 @@ public enum ResponseCode {
 
 
     // ---------------------客户端请求异常-------------------
-    CLIENT_PARAM_ERR("40000", "参数解析失败/参数缺少!",""),
-    CLIENT_PARAM_MISS("40001", "参数丢失!",""),
-    CLIENT_UNABLE_RESOLVE_ERR("40004", "坏请求!",""),
-    CLIENT_NO_SUPPORT_METHOD("40005","不支持该请求方法!",""),
-    CLIENT_NO_SUPPORT_TYPE("40015"," 不支持当前媒体类型!",""),
+    CLIENT_PARAM_PARSE_ERROR    ("40000", "参数解析失败/参数缺少!",""),
+    CLIENT_PARAM_MISS           ("40010", "参数丢失!",""),
+    CLIENT_PARAM_ERROR          ("40020", "参数错误",""),
+    CLIENT_UNABLE_RESOLVE_ERR   ("40030", "坏请求!",""),
+    CLIENT_NO_SUPPORT_METHOD    ("40040", "不支持该请求方法!",""),
+    CLIENT_NO_SUPPORT_TYPE      ("40050", "不支持当前媒体类型!",""),
 
 
     // ---------------------服务端处理异常-------------------
-    SERVE_UNKNOWN_ERROR("50000", "服务器端异常!",""),
-    SERVE_LOGIC_PARAM_MISS("51000","必要逻辑参数为空!",""),
+    SERVE_UNKNOWN_ERROR         ("50000", "服务器端异常!",""),
+    SERVE_LOGIC_PARAM_MISS      ("51000", "必要逻辑参数为空!",""),
 
 
 
 
     // ---------------------登陆-------------------
-    LOGIN_USER_MISS("6001","用户不存在!",""),
-    LOGIN_USER_NOT_AVAILABLE("6002","账户已被禁用!",""),
-    LOGIN_PASSWORD_ERR("6002","密码不正确!",""),
-    LOGIN_TOME_OUT("6003","登陆过期!",""),
-    LOGIN_NOT_LOGIN("6004","用户未登陆!","");
+    LOGIN_USER_MISS            ("60010", "用户不存在!",""),
+    LOGIN_USER_NOT_AVAILABLE   ("60020", "账户已被禁用!",""),
+    LOGIN_PASSWORD_ERR         ("60030", "密码不正确!",""),
+    LOGIN_TOME_OUT             ("60040", "登陆过期!",""),
+    LOGIN_NOT_LOGIN            ("60050", "用户未登陆!","");
 
 
 
