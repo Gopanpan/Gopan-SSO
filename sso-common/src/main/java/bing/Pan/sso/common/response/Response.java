@@ -17,7 +17,7 @@ public class Response<T> implements Serializable {
     private static final long serialVersionUID = 355207958304927788L;
 
 
-    private String code;            // 执行结果状态码
+    private int    code;            // 执行结果状态码
     private String message;         // 执行结果消息摘要
     private String detailMessage;   // 执行结果详细信息
     private T data;                 // 数据
@@ -44,12 +44,12 @@ public class Response<T> implements Serializable {
     }
 
 
-    public Response(String code, String message) {
+    public Response(int code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public Response(String code, String message, String detailMessage) {
+    public Response(int code, String message, String detailMessage) {
         this.code = code;
         this.message = message;
         this.detailMessage = detailMessage;
@@ -65,11 +65,11 @@ public class Response<T> implements Serializable {
     }
 
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 

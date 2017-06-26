@@ -99,7 +99,7 @@
 
     <!-- 下面配置一些第三方包的日志过滤级别，用于避免刷屏 -->
     <logger name="org.apache" level="INFO"/>
-    <logger name="org.springframework" level="DEBUG"/>
+    <logger name="org.springframework" level="INFO"/>
     <logger name="org.quartz.core.QuartzSchedulerThread" level="INFO"/>
     <logger name="org.springframework.data.redis" level="INFO"/>
     <logger name="bing.Pan.sso" level="DEBUG"/>

@@ -18,7 +18,7 @@ function login(){
             $('#J-message').html('正在登陆,请稍后。。。');
         },
         success: function(result){
-            if(result.code == "20000") {
+            if(result.code == 20000) {
                 $('#J-message').html('登陆成功!');
                 top.location.href = system_main_url;
             }else{
