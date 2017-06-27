@@ -2,9 +2,7 @@ package bing.Pan.sso.manage.common.Interceptor;
 
 import bing.Pan.sso.common.enums.ResponseCode;
 import bing.Pan.sso.common.response.Response;
-import bing.Pan.sso.service.config.properties.SsoSystemProperties;
 import com.alibaba.fastjson.JSON;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.servlet.HandlerInterceptor;

@@ -50,6 +50,7 @@
         <poi.version>3.9</poi.version>
         <jxl.version>2.4.2_4</jxl.version>
         <typehandlers.version>1.0.2</typehandlers.version>
+        <quartz.version>2.2.3</quartz.version>
 
 
         <swagger.scope>compile</swagger.scope>
@@ -184,6 +185,12 @@
         </dependency>
 
 
+        <!--quartz-->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>${quartz.version}</version>
+        </dependency>
 
     </dependencies>
 

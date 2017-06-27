@@ -15,10 +15,8 @@ public class ServiceException extends Exception implements Serializable {
 
     private static final long serialVersionUID = -1695036681341844113L;
 
-    private int errorCode;       //错误代码
-
+    private int errorCode;          //错误代码
     private String errorMsg;        //错误描述
-
     private String detailErrorMsg;  //错误详细描述
 
     public ServiceException(String errorMsg) {

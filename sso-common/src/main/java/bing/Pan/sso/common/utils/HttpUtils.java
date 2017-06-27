@@ -276,12 +276,10 @@ public class HttpUtils {
 
     public static void main(String[] args){
         try {
-            for (int x =0 ; x < 10000; x ++){
-                Map<String,String> map = Maps.newHashMap();
-                map.put("loginName","bing.Pan");
-                map.put("password","25d55ad283aa400af464c76d713c07ad");
-                String s = HttpUtils.doPost("https://127.0.0.1:4444/loginSysUser",map);
-            }
+            Map<String,String> map = Maps.newHashMap();
+            map.put("loginName","bing.Pan");
+            map.put("password","25d55ad283aa400af464c76d713c07ad");
+            String s = HttpUtils.doPost("https://127.0.0.1:4444/loginSysUser",map);
         } catch (IOException e) {
             e.printStackTrace();
         }

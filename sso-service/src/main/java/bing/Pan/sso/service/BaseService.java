@@ -4,7 +4,7 @@ package bing.Pan.sso.service;
 import bing.Pan.sso.common.utils.AESEncryptUtils;
 import bing.Pan.sso.common.utils.Md5Utils;
 import bing.Pan.sso.domain.entity.SysUser;
-import bing.Pan.sso.service.config.properties.SsoSystemProperties;
+import bing.Pan.sso.service.config.SsoSystemProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
