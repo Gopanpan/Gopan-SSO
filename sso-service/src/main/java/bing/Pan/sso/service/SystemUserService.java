@@ -103,7 +103,7 @@ public class SystemUserService extends BaseService<SysUser>  implements BaseServ
 
     @Override
     public List<SysUser> findListByE(SystemUserBo customBo) throws ServiceException {
-        return null;
+        return sysUserMapper.findListByE(customBo);
     }
 
 
