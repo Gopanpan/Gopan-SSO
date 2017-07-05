@@ -29,7 +29,7 @@ public class SsoOrganization {
 
     private String email;
 
-    private Boolean enableFlag;
+    private Boolean available;
 
     private Long systemId;
 
@@ -147,12 +147,12 @@ public class SsoOrganization {
         this.email = email == null ? null : email.trim();
     }
 
-    public Boolean getEnableFlag() {
-        return enableFlag;
+    public Boolean getAvailable() {
+        return available;
     }
 
-    public void setEnableFlag(Boolean enableFlag) {
-        this.enableFlag = enableFlag;
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 
     public Long getSystemId() {

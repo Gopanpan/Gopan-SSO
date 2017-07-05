@@ -15,7 +15,7 @@
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="fax" jdbcType="VARCHAR" property="fax" />
     <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="enable_flag" jdbcType="BIT" property="enableFlag" />
+    <result column="available" jdbcType="BIT" property="available" />
     <result column="system_id" jdbcType="BIGINT" property="systemId" />
     <result column="system_name" jdbcType="VARCHAR" property="systemName" />
     <result column="create_user" jdbcType="BIGINT" property="createUser" />
@@ -25,8 +25,8 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, parent_Id, parent_Ids, name, sort, type, grade, address, zip_code, principal, 
-    phone, fax, email, enable_flag, system_id, system_name, create_user, create_time, 
-    update_user, update_time
+    phone, fax, email, available, system_id, system_name, create_user, create_time, update_user, 
+    update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -43,14 +43,14 @@
       name, sort, type, grade, 
       address, zip_code, principal, 
       phone, fax, email, 
-      enable_flag, system_id, system_name, 
+      available, system_id, system_name, 
       create_user, create_time, update_user, 
       update_time)
     values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{parentIds,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{type,jdbcType=CHAR}, #{grade,jdbcType=CHAR}, 
       #{address,jdbcType=VARCHAR}, #{zipCode,jdbcType=VARCHAR}, #{principal,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{enableFlag,jdbcType=BIT}, #{systemId,jdbcType=BIGINT}, #{systemName,jdbcType=VARCHAR}, 
+      #{available,jdbcType=BIT}, #{systemId,jdbcType=BIGINT}, #{systemName,jdbcType=VARCHAR}, 
       #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
@@ -96,8 +96,8 @@
       <if test="email != null">
         email,
       </if>
-      <if test="enableFlag != null">
-        enable_flag,
+      <if test="available != null">
+        available,
       </if>
       <if test="systemId != null">
         system_id,
@@ -158,8 +158,8 @@
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
       </if>
-      <if test="enableFlag != null">
-        #{enableFlag,jdbcType=BIT},
+      <if test="available != null">
+        #{available,jdbcType=BIT},
       </if>
       <if test="systemId != null">
         #{systemId,jdbcType=BIGINT},
@@ -220,8 +220,8 @@
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="enableFlag != null">
-        enable_flag = #{enableFlag,jdbcType=BIT},
+      <if test="available != null">
+        available = #{available,jdbcType=BIT},
       </if>
       <if test="systemId != null">
         system_id = #{systemId,jdbcType=BIGINT},
@@ -258,7 +258,7 @@
       phone = #{phone,jdbcType=VARCHAR},
       fax = #{fax,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      enable_flag = #{enableFlag,jdbcType=BIT},
+      available = #{available,jdbcType=BIT},
       system_id = #{systemId,jdbcType=BIGINT},
       system_name = #{systemName,jdbcType=VARCHAR},
       create_user = #{createUser,jdbcType=BIGINT},
