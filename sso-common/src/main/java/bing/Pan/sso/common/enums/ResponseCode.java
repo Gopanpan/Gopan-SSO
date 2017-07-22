@@ -18,7 +18,7 @@ public enum ResponseCode {
     // ---------------------客户端请求异常-------------------
     CLIENT_PARAM_PARSE_ERROR    (40000, "参数解析失败/参数缺少!",""),
     CLIENT_PARAM_MISS           (40010, "参数丢失!",""),
-    CLIENT_PARAM_ERROR          (4002, "参数错误",""),
+    CLIENT_PARAM_ERROR          (40002, "参数错误",""),
     CLIENT_UNABLE_RESOLVE_ERR   (40030, "坏请求!",""),
     CLIENT_NO_SUPPORT_METHOD    (40040, "不支持该请求方法!",""),
     CLIENT_NO_SUPPORT_TYPE      (40050, "不支持当前媒体类型!",""),
