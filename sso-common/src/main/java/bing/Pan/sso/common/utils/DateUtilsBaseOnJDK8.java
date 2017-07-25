@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
  * @date : 2017/5/31 9:04
  * @desc : 时间工具类，基于jdk1.8
  */
-public class DateUtils {
+public class DateUtilsBaseOnJDK8 {
 
     /**
      * 时间转字符串形式,缺省格式为：yyyy-MM-dd HH:mm:ss

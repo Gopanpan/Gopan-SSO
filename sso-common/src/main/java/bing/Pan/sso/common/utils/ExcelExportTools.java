@@ -216,7 +216,7 @@ public class ExcelExportTools {
                     if(field.getType().getName().equalsIgnoreCase(formatData[0])){
                         Object va = field.get(obj);
                         if(StringUtils.isEmpty(va)) va = "--";
-                        else  va = DateUtils.date2String((LocalDateTime) va, DateEnums.HYPHEN_YYYYMMddHHmmss.getPatterns());
+                        else  va = DateUtilsBaseOnJDK8.date2String((LocalDateTime) va, DateEnums.HYPHEN_YYYYMMddHHmmss.getPatterns());
 
                         addCall(row,cellNum++,va);
 
