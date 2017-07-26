@@ -78,23 +78,29 @@
 
 
 
+    <appender name="customer" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logBase}/sso-customer-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+
+    </appender>
+
+
+
+
 
     <!--自定义日志文件，及分类日志文件存储，可以多个节点 -->
    <!-- <logger name="bing.Pan.sso" additivity="true">
         <level value="DEBUG" />
-        <appender-ref ref="STDOUT"/>
-        <appender-ref ref="ERROR"/>
-        <appender-ref ref="WARN"/>
-        <appender-ref ref="INFO" />
-        <appender-ref ref="ACCESS"/>
+        <appender-ref ref="customer"/>
     </logger>-->
 
     <root level="INFO">
         <appender-ref ref="STDOUT" />
-        <appender-ref ref="ERROR"/>
-        <appender-ref ref="WARN"/>
-        <appender-ref ref="INFO" />
-        <appender-ref ref="ACCESS"/>
     </root>
 
 
