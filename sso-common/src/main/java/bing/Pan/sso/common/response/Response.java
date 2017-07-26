@@ -109,9 +109,10 @@ public class Response<T> implements Serializable {
     @Override
     public String toString() {
         return "Response{" +
-                "code='" + code + '\'' +
+                "code=" + code +
                 ", message='" + message + '\'' +
                 ", detailMessage='" + detailMessage + '\'' +
+                ", data=" + data +
                 ", timestamp=" + timestamp +
                 '}';
     }
