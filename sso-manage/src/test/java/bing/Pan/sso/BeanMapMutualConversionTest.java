@@ -18,7 +18,7 @@ import java.util.Map;
  * @date : 2017/6/3 14:11
  * @desc :
  */
-public class Test {
+public class BeanMapMutualConversionTest {
 
     public static void main(String[] args) throws InvocationTargetException, IllegalAccessException, IntrospectionException, InstantiationException {
         SysUser sysUser = new SysUser();
