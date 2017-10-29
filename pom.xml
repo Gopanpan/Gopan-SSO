@@ -197,24 +197,24 @@
 
     <profiles>
         <profile>
-            <id>local</id>
+            <id>macPro</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <prop.dir.name>local</prop.dir.name>
+                <prop.dir.name>macPro</prop.dir.name>
             </properties>
         </profile>
         <profile>
-            <id>sit</id>
+            <id>windows</id>
             <properties>
-                <prop.dir.name>sit</prop.dir.name>
+                <prop.dir.name>windows</prop.dir.name>
             </properties>
         </profile>
         <profile>
-            <id>online</id>
+            <id>aLiYunServer</id>
             <properties>
-                <prop.dir.name>online</prop.dir.name>
+                <prop.dir.name>aLiYunServer</prop.dir.name>
             </properties>
         </profile>
     </profiles>
