@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <logger name="bing.Pan.sso" level="DEBUG"/>
-    <property name="logBase" value="/Users/bing.pan/logs"/>
+    <property name="logBase" value="D://logs"/>
     <!-- 控制台 appender -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -115,4 +114,5 @@
     <logger name="org.springframework" level="INFO"/>
     <logger name="org.quartz.core.QuartzSchedulerThread" level="INFO"/>
     <logger name="org.springframework.data.redis" level="INFO"/>
+    <logger name="bing.Pan.sso" level="DEBUG"/>
 </configuration>
