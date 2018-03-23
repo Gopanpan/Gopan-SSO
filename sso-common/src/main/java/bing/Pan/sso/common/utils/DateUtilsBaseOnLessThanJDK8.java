@@ -1,12 +1,15 @@
 package bing.Pan.sso.common.utils;
 
 import bing.Pan.sso.common.enums.DateEnums;
+import io.swagger.models.auth.In;
 import org.springframework.util.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @crea : Created by intelliJ IDEA 16.1.3
@@ -31,6 +34,25 @@ public class DateUtilsBaseOnLessThanJDK8 {
 
         return format.format(calendar.getTime());
     }
+
+
+
+    /**
+     * 使用用户格式提取字符串日期
+     * @param strDate 日期字符串
+     * @param pattern 日期格式
+     * @return Date
+     */
+    public static Date parse(String strDate, String pattern) {
+        SimpleDateFormat df = new SimpleDateFormat(pattern);
+        try {
+            return df.parse(strDate);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+
 
 
     /**
@@ -71,12 +93,54 @@ public class DateUtilsBaseOnLessThanJDK8 {
      * 获取当前月的上月月份
      * @return
      */
-    public static String getLastMonth(){
+    public static String getBeforMonth(){
         calendar.add(Calendar.MONTH, -1);
         SimpleDateFormat beforeFormat =  new SimpleDateFormat(DateEnums.HYPHEN_YYYYMM.getPatterns());
         return beforeFormat.format(calendar.getTime());
     }
 
+
+    /**
+     * 获取当前月的下月月份
+     * @return
+     */
+    public static String getAfterMonth(){
+        calendar.add(Calendar.MONTH, 1);
+        SimpleDateFormat beforeFormat =  new SimpleDateFormat(DateEnums.HYPHEN_YYYYMM.getPatterns());
+        return beforeFormat.format(calendar.getTime());
+    }
+
+
+    /**
+     * 获取指定月份有多少个星期，从星期一到星期天，并列出时间
+     * @param strMonthDate
+     * @return
+     */
+    public static Map<Integer,Map<String,String>> getMonthWithWeek(String strMonthDate){
+        Map<Integer,Map<String,String>> weekMap = new HashMap<>();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        if(!StringUtils.isEmpty(strMonthDate))
+            calendar.setTime(DateUtilsBaseOnLessThanJDK8.parse(strMonthDate,"yyyy-MM"));
+
+        calendar.set(Calendar.DATE, 1);
+        int month = calendar.get(Calendar.MONTH);
+        int count = 0;
+        while (calendar.get(Calendar.MONTH) == month) {
+            if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY) {
+                ++ count;
+                Map<String,String> singleWeek = new HashMap<>();
+                singleWeek.put("startDate",format.format(calendar.getTime()));
+                calendar.add(Calendar.DATE, 6);
+                singleWeek.put("endDate",format.format(calendar.getTime()));
+                weekMap.put(count,singleWeek);
+            }
+            calendar.add(Calendar.DATE, 1);
+        }
+
+        return weekMap;
+
+    }
 
 
     public static String timeDifference(){
@@ -98,6 +162,11 @@ public class DateUtilsBaseOnLessThanJDK8 {
        return null;
 
     }
+
+
+
+
+
 
 
 

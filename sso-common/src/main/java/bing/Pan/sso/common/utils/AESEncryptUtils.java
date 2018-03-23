@@ -95,7 +95,10 @@ public class AESEncryptUtils {
      */
     public static byte[] aesEncryptToBytes(String content, String encryptKey) throws Exception {
         KeyGenerator kgen = KeyGenerator.getInstance("AES");
-        kgen.init(128, new SecureRandom(encryptKey.getBytes()));
+        SecureRandom secureRandom =  SecureRandom.getInstance("SHA1PRNG");
+        secureRandom.setSeed(encryptKey.getBytes());
+
+        kgen.init(128, secureRandom);
 
         SecretKey secretKey = kgen.generateKey();
         byte[] enCodeFormat = secretKey.getEncoded();
@@ -129,7 +132,10 @@ public class AESEncryptUtils {
      */
     public static String aesDecryptByBytes(byte[] encryptBytes, String decryptKey) throws Exception {
         KeyGenerator kgen = KeyGenerator.getInstance("AES");
-        kgen.init(128, new SecureRandom(decryptKey.getBytes()));
+        SecureRandom secureRandom =  SecureRandom.getInstance("SHA1PRNG");
+        secureRandom.setSeed(decryptKey.getBytes());
+        kgen.init(128, secureRandom);
+
         SecretKey secretKey = kgen.generateKey();
         byte[] encodedFormat = secretKey.getEncoded();
         SecretKeySpec key = new SecretKeySpec(encodedFormat, "AES");
