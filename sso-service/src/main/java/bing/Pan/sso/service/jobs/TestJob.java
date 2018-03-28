@@ -15,10 +15,6 @@ public class TestJob implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
-        System.out.println("自动任务执行了。。。。。。。。。。。。");
-        System.out.println("自动任务执行了。。。。。。。。。。。。");
-        System.out.println("自动任务执行了。。。。。。。。。。。。");
-        System.out.println("自动任务执行了。。。。。。。。。。。。");
     }
 
 }
