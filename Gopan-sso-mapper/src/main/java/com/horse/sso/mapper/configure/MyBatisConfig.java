@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package bing.Pan.sso.mapper.configure;
+package com.horse.sso.mapper.configure;
 
 import com.github.pagehelper.PageHelper;
 import org.apache.ibatis.plugin.Interceptor;
@@ -54,7 +54,7 @@ public class MyBatisConfig  {
 
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
-        bean.setTypeAliasesPackage("bing.Pan.sso.domain.entity");
+        bean.setTypeAliasesPackage("com.horse.sso.domain.entity");
         bean.setMapperLocations(resolver.getResources("classpath:sqlMapper/*.xml"));
 
         //分页插件

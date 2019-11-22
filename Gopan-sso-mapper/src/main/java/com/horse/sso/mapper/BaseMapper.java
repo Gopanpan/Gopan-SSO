@@ -1,10 +1,10 @@
-package bing.Pan.sso.mapper;
+package com.horse.sso.mapper;
 
 import java.util.List;
 
 /**
  * @crea :Created by intelliJ IDEA 16.1.1 .
- * @auth :bing.Pan  15923508369@163.com .
+ * @auth :Gopan  15923508369@163.com .
  * @date :2016/12/29 16:04
  * @desc :通用Mapper接口实现了基本的增删改查
  */

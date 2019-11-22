@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="bing.Pan.sso.mapper.mapperInterface.SsoOrganizationMapper">
-  <resultMap id="BaseResultMap" type="bing.Pan.sso.domain.entity.SsoOrganization">
+<mapper namespace="com.horse.sso.mapper.mapperInterface.SsoOrganizationMapper">
+  <resultMap id="BaseResultMap" type="com.horse.sso.domain.entity.SsoOrganization">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="parent_Id" jdbcType="BIGINT" property="parentId" />
     <result column="parent_Ids" jdbcType="VARCHAR" property="parentIds" />
@@ -38,7 +38,7 @@
     delete from sso_organization
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="bing.Pan.sso.domain.entity.SsoOrganization">
+  <insert id="insert" parameterType="com.horse.sso.domain.entity.SsoOrganization">
     insert into sso_organization (id, parent_Id, parent_Ids, 
       name, sort, type, grade, 
       address, zip_code, principal, 
@@ -54,7 +54,7 @@
       #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="bing.Pan.sso.domain.entity.SsoOrganization">
+  <insert id="insertSelective" parameterType="com.horse.sso.domain.entity.SsoOrganization">
     insert into sso_organization
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -181,7 +181,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="bing.Pan.sso.domain.entity.SsoOrganization">
+  <update id="updateByPrimaryKeySelective" parameterType="com.horse.sso.domain.entity.SsoOrganization">
     update sso_organization
     <set>
       <if test="parentId != null">
@@ -244,7 +244,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="bing.Pan.sso.domain.entity.SsoOrganization">
+  <update id="updateByPrimaryKey" parameterType="com.horse.sso.domain.entity.SsoOrganization">
     update sso_organization
     set parent_Id = #{parentId,jdbcType=BIGINT},
       parent_Ids = #{parentIds,jdbcType=VARCHAR},

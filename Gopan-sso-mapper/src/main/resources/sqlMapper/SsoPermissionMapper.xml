@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="bing.Pan.sso.mapper.mapperInterface.SsoRoleMapper">
-  <resultMap id="BaseResultMap" type="bing.Pan.sso.domain.entity.SsoRole">
+<mapper namespace="com.horse.sso.mapper.mapperInterface.SsoPermissionMapper">
+  <resultMap id="BaseResultMap" type="com.horse.sso.domain.entity.SsoPermission">
     <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="parent_Id" jdbcType="BIGINT" property="parentId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="permission" jdbcType="VARCHAR" property="permission" />
+    <result column="is_show" jdbcType="BIT" property="isShow" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
     <result column="system_id" jdbcType="BIGINT" property="systemId" />
     <result column="system_name" jdbcType="VARCHAR" property="systemName" />
     <result column="detail_explain" jdbcType="VARCHAR" property="detailExplain" />
@@ -15,40 +20,59 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, code, system_id, system_name, detail_explain, available, create_user, create_time, 
-    update_user, update_time
+    id, parent_Id, name, code, type, permission, is_show, location, system_id, system_name, 
+    detail_explain, available, create_user, create_time, update_user, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from sso_role
+    from sso_permission
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from sso_role
+    delete from sso_permission
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="bing.Pan.sso.domain.entity.SsoRole">
-    insert into sso_role (id, name, code, 
-      system_id, system_name, detail_explain, 
-      available, create_user, create_time, 
-      update_user, update_time)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
-      #{systemId,jdbcType=BIGINT}, #{systemName,jdbcType=VARCHAR}, #{detailExplain,jdbcType=VARCHAR}, 
-      #{available,jdbcType=BIT}, #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateUser,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.horse.sso.domain.entity.SsoPermission">
+    insert into sso_permission (id, parent_Id, name, 
+      code, type, permission, 
+      is_show, location, system_id, 
+      system_name, detail_explain, available, 
+      create_user, create_time, update_user, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR}, 
+      #{isShow,jdbcType=BIT}, #{location,jdbcType=VARCHAR}, #{systemId,jdbcType=BIGINT}, 
+      #{systemName,jdbcType=VARCHAR}, #{detailExplain,jdbcType=VARCHAR}, #{available,jdbcType=BIT}, 
+      #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="bing.Pan.sso.domain.entity.SsoRole">
-    insert into sso_role
+  <insert id="insertSelective" parameterType="com.horse.sso.domain.entity.SsoPermission">
+    insert into sso_permission
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
+      </if>
+      <if test="parentId != null">
+        parent_Id,
       </if>
       <if test="name != null">
         name,
       </if>
       <if test="code != null">
         code,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="permission != null">
+        permission,
+      </if>
+      <if test="isShow != null">
+        is_show,
+      </if>
+      <if test="location != null">
+        location,
       </if>
       <if test="systemId != null">
         system_id,
@@ -79,11 +103,26 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="code != null">
         #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null">
+        #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null">
+        #{isShow,jdbcType=BIT},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
       </if>
       <if test="systemId != null">
         #{systemId,jdbcType=BIGINT},
@@ -111,14 +150,29 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="bing.Pan.sso.domain.entity.SsoRole">
-    update sso_role
+  <update id="updateByPrimaryKeySelective" parameterType="com.horse.sso.domain.entity.SsoPermission">
+    update sso_permission
     <set>
+      <if test="parentId != null">
+        parent_Id = #{parentId,jdbcType=BIGINT},
+      </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="code != null">
         code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null">
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null">
+        is_show = #{isShow,jdbcType=BIT},
+      </if>
+      <if test="location != null">
+        location = #{location,jdbcType=VARCHAR},
       </if>
       <if test="systemId != null">
         system_id = #{systemId,jdbcType=BIGINT},
@@ -147,10 +201,15 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="bing.Pan.sso.domain.entity.SsoRole">
-    update sso_role
-    set name = #{name,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.horse.sso.domain.entity.SsoPermission">
+    update sso_permission
+    set parent_Id = #{parentId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
       code = #{code,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      permission = #{permission,jdbcType=VARCHAR},
+      is_show = #{isShow,jdbcType=BIT},
+      location = #{location,jdbcType=VARCHAR},
       system_id = #{systemId,jdbcType=BIGINT},
       system_name = #{systemName,jdbcType=VARCHAR},
       detail_explain = #{detailExplain,jdbcType=VARCHAR},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="bing.Pan.sso.mapper.mapperInterface.SysJobMapper" >
-  <resultMap id="BaseResultMap" type="bing.Pan.sso.domain.entity.SysJob" >
+<mapper namespace="com.horse.sso.mapper.mapperInterface.SysJobMapper" >
+  <resultMap id="BaseResultMap" type="com.horse.sso.domain.entity.SysJob" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="BIT" />
@@ -27,7 +27,7 @@
     delete from sys_job
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="bing.Pan.sso.domain.entity.SysJob" >
+  <insert id="insert" parameterType="com.horse.sso.domain.entity.SysJob" >
     insert into sys_job (id, name, status, 
       cron_expression, class_name, detail_explain, 
       create_user, create_time, update_user, 
@@ -37,7 +37,7 @@
       #{createUser,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="bing.Pan.sso.domain.entity.SysJob" >
+  <insert id="insertSelective" parameterType="com.horse.sso.domain.entity.SysJob" >
     insert into sys_job
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -104,7 +104,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="bing.Pan.sso.domain.entity.SysJob" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.horse.sso.domain.entity.SysJob" >
     update sys_job
     <set >
       <if test="name != null" >
@@ -137,7 +137,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="bing.Pan.sso.domain.entity.SysJob" >
+  <update id="updateByPrimaryKey" parameterType="com.horse.sso.domain.entity.SysJob" >
     update sys_job
     set name = #{name,jdbcType=VARCHAR},
       status = #{status,jdbcType=BIT},

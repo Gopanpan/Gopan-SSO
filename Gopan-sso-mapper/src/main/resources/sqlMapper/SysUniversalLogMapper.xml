@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="bing.Pan.sso.mapper.mapperInterface.SysUniversalLogMapper">
-  <resultMap id="BaseResultMap" type="bing.Pan.sso.domain.entity.SysUniversalLog">
+<mapper namespace="com.horse.sso.mapper.mapperInterface.SysUniversalLogMapper">
+  <resultMap id="BaseResultMap" type="com.horse.sso.domain.entity.SysUniversalLog">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="module_name" jdbcType="VARCHAR" property="moduleName" />
     <result column="feature_name" jdbcType="VARCHAR" property="featureName" />
@@ -17,7 +17,7 @@
     <result column="extends4" jdbcType="VARCHAR" property="extends4" />
     <result column="extends5" jdbcType="VARCHAR" property="extends5" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="bing.Pan.sso.domain.entity.SysUniversalLog">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.horse.sso.domain.entity.SysUniversalLog">
     <result column="request_param" jdbcType="LONGVARCHAR" property="requestParam" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -39,7 +39,7 @@
     delete from sys_universal_log
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="bing.Pan.sso.domain.entity.SysUniversalLog">
+  <insert id="insert" parameterType="com.horse.sso.domain.entity.SysUniversalLog">
     insert into sys_universal_log (id, module_name, feature_name, 
       feature_path, request_result, request_user, 
       request_time, request_pc_name, request_ip, 
@@ -53,7 +53,7 @@
       #{extends4,jdbcType=VARCHAR}, #{extends5,jdbcType=VARCHAR}, #{requestParam,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="bing.Pan.sso.domain.entity.SysUniversalLog">
+  <insert id="insertSelective" parameterType="com.horse.sso.domain.entity.SysUniversalLog">
     insert into sys_universal_log
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -150,7 +150,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="bing.Pan.sso.domain.entity.SysUniversalLog">
+  <update id="updateByPrimaryKeySelective" parameterType="com.horse.sso.domain.entity.SysUniversalLog">
     update sys_universal_log
     <set>
       <if test="moduleName != null">
@@ -198,7 +198,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="bing.Pan.sso.domain.entity.SysUniversalLog">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.horse.sso.domain.entity.SysUniversalLog">
     update sys_universal_log
     set module_name = #{moduleName,jdbcType=VARCHAR},
       feature_name = #{featureName,jdbcType=VARCHAR},
@@ -216,7 +216,7 @@
       request_param = #{requestParam,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="bing.Pan.sso.domain.entity.SysUniversalLog">
+  <update id="updateByPrimaryKey" parameterType="com.horse.sso.domain.entity.SysUniversalLog">
     update sys_universal_log
     set module_name = #{moduleName,jdbcType=VARCHAR},
       feature_name = #{featureName,jdbcType=VARCHAR},

@@ -1,7 +1,7 @@
-package bing.Pan.sso.mapper.configure;
+package com.horse.sso.mapper.configure;
 
-import bing.Pan.sso.mapper.BaseMapper;
-import bing.Pan.sso.mapper.Constant;
+import com.horse.sso.mapper.BaseMapper;
+import com.horse.sso.mapper.Constant;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;

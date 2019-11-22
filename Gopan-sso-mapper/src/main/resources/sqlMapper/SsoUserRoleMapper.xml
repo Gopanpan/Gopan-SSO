@@ -1,43 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="bing.Pan.sso.mapper.mapperInterface.SsoUserSystemMapper">
-  <resultMap id="BaseResultMap" type="bing.Pan.sso.domain.entity.SsoUserSystem">
+<mapper namespace="com.horse.sso.mapper.mapperInterface.SsoUserRoleMapper">
+  <resultMap id="BaseResultMap" type="com.horse.sso.domain.entity.SsoUserRole">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="user_login_name" jdbcType="VARCHAR" property="userLoginName" />
+    <result column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
     <result column="system_id" jdbcType="BIGINT" property="systemId" />
     <result column="system_name" jdbcType="VARCHAR" property="systemName" />
+    <result column="available" jdbcType="BIT" property="available" />
     <result column="create_user" jdbcType="BIGINT" property="createUser" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_user" jdbcType="BIGINT" property="updateUser" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, user_login_name, system_id, system_name, create_user, create_time, update_user, 
-    update_time
+    id, user_id, user_login_name, role_id, role_name, system_id, system_name, available, 
+    create_user, create_time, update_user, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from sso_user_system
+    from sso_user_role
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from sso_user_system
+    delete from sso_user_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="bing.Pan.sso.domain.entity.SsoUserSystem">
-    insert into sso_user_system (id, user_id, user_login_name, 
-      system_id, system_name, create_user, 
+  <insert id="insert" parameterType="com.horse.sso.domain.entity.SsoUserRole">
+    insert into sso_user_role (id, user_id, user_login_name, 
+      role_id, role_name, system_id, 
+      system_name, available, create_user, 
       create_time, update_user, update_time
       )
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userLoginName,jdbcType=VARCHAR}, 
-      #{systemId,jdbcType=BIGINT}, #{systemName,jdbcType=VARCHAR}, #{createUser,jdbcType=BIGINT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}
+      #{roleId,jdbcType=BIGINT}, #{roleName,jdbcType=VARCHAR}, #{systemId,jdbcType=BIGINT}, 
+      #{systemName,jdbcType=VARCHAR}, #{available,jdbcType=BIT}, #{createUser,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="bing.Pan.sso.domain.entity.SsoUserSystem">
-    insert into sso_user_system
+  <insert id="insertSelective" parameterType="com.horse.sso.domain.entity.SsoUserRole">
+    insert into sso_user_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -48,11 +53,20 @@
       <if test="userLoginName != null">
         user_login_name,
       </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
       <if test="systemId != null">
         system_id,
       </if>
       <if test="systemName != null">
         system_name,
+      </if>
+      <if test="available != null">
+        available,
       </if>
       <if test="createUser != null">
         create_user,
@@ -77,11 +91,20 @@
       <if test="userLoginName != null">
         #{userLoginName,jdbcType=VARCHAR},
       </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
       <if test="systemId != null">
         #{systemId,jdbcType=BIGINT},
       </if>
       <if test="systemName != null">
         #{systemName,jdbcType=VARCHAR},
+      </if>
+      <if test="available != null">
+        #{available,jdbcType=BIT},
       </if>
       <if test="createUser != null">
         #{createUser,jdbcType=BIGINT},
@@ -90,15 +113,15 @@
         #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUser != null">
-        #{updateUser,jdbcType=BIGINT},
+        #{updateUser,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="bing.Pan.sso.domain.entity.SsoUserSystem">
-    update sso_user_system
+  <update id="updateByPrimaryKeySelective" parameterType="com.horse.sso.domain.entity.SsoUserRole">
+    update sso_user_role
     <set>
       <if test="userId != null">
         user_id = #{userId,jdbcType=BIGINT},
@@ -106,11 +129,20 @@
       <if test="userLoginName != null">
         user_login_name = #{userLoginName,jdbcType=VARCHAR},
       </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
       <if test="systemId != null">
         system_id = #{systemId,jdbcType=BIGINT},
       </if>
       <if test="systemName != null">
         system_name = #{systemName,jdbcType=VARCHAR},
+      </if>
+      <if test="available != null">
+        available = #{available,jdbcType=BIT},
       </if>
       <if test="createUser != null">
         create_user = #{createUser,jdbcType=BIGINT},
@@ -119,7 +151,7 @@
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUser != null">
-        update_user = #{updateUser,jdbcType=BIGINT},
+        update_user = #{updateUser,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
@@ -127,15 +159,18 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="bing.Pan.sso.domain.entity.SsoUserSystem">
-    update sso_user_system
+  <update id="updateByPrimaryKey" parameterType="com.horse.sso.domain.entity.SsoUserRole">
+    update sso_user_role
     set user_id = #{userId,jdbcType=BIGINT},
       user_login_name = #{userLoginName,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=BIGINT},
+      role_name = #{roleName,jdbcType=VARCHAR},
       system_id = #{systemId,jdbcType=BIGINT},
       system_name = #{systemName,jdbcType=VARCHAR},
+      available = #{available,jdbcType=BIT},
       create_user = #{createUser,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_user = #{updateUser,jdbcType=BIGINT},
+      update_user = #{updateUser,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

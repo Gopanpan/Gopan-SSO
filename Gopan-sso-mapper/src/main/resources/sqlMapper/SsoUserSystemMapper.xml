@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="bing.Pan.sso.mapper.mapperInterface.SsoUserOrgMapper">
-  <resultMap id="BaseResultMap" type="bing.Pan.sso.domain.entity.SsoUserOrg">
+<mapper namespace="com.horse.sso.mapper.mapperInterface.SsoUserSystemMapper">
+  <resultMap id="BaseResultMap" type="com.horse.sso.domain.entity.SsoUserSystem">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="user_login_name" jdbcType="VARCHAR" property="userLoginName" />
-    <result column="organization_id" jdbcType="BIGINT" property="organizationId" />
-    <result column="organization_name" jdbcType="VARCHAR" property="organizationName" />
-    <result column="available" jdbcType="BIT" property="available" />
     <result column="system_id" jdbcType="BIGINT" property="systemId" />
     <result column="system_name" jdbcType="VARCHAR" property="systemName" />
     <result column="create_user" jdbcType="BIGINT" property="createUser" />
@@ -16,33 +13,31 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, user_login_name, organization_id, organization_name, available, system_id, 
-    system_name, create_user, create_time, update_user, update_time
+    id, user_id, user_login_name, system_id, system_name, create_user, create_time, update_user, 
+    update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from sso_user_org
+    from sso_user_system
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from sso_user_org
+    delete from sso_user_system
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="bing.Pan.sso.domain.entity.SsoUserOrg">
-    insert into sso_user_org (id, user_id, user_login_name, 
-      organization_id, organization_name, available, 
+  <insert id="insert" parameterType="com.horse.sso.domain.entity.SsoUserSystem">
+    insert into sso_user_system (id, user_id, user_login_name, 
       system_id, system_name, create_user, 
       create_time, update_user, update_time
       )
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userLoginName,jdbcType=VARCHAR}, 
-      #{organizationId,jdbcType=BIGINT}, #{organizationName,jdbcType=VARCHAR}, #{available,jdbcType=BIT}, 
       #{systemId,jdbcType=BIGINT}, #{systemName,jdbcType=VARCHAR}, #{createUser,jdbcType=BIGINT}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="bing.Pan.sso.domain.entity.SsoUserOrg">
-    insert into sso_user_org
+  <insert id="insertSelective" parameterType="com.horse.sso.domain.entity.SsoUserSystem">
+    insert into sso_user_system
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -52,15 +47,6 @@
       </if>
       <if test="userLoginName != null">
         user_login_name,
-      </if>
-      <if test="organizationId != null">
-        organization_id,
-      </if>
-      <if test="organizationName != null">
-        organization_name,
-      </if>
-      <if test="available != null">
-        available,
       </if>
       <if test="systemId != null">
         system_id,
@@ -91,15 +77,6 @@
       <if test="userLoginName != null">
         #{userLoginName,jdbcType=VARCHAR},
       </if>
-      <if test="organizationId != null">
-        #{organizationId,jdbcType=BIGINT},
-      </if>
-      <if test="organizationName != null">
-        #{organizationName,jdbcType=VARCHAR},
-      </if>
-      <if test="available != null">
-        #{available,jdbcType=BIT},
-      </if>
       <if test="systemId != null">
         #{systemId,jdbcType=BIGINT},
       </if>
@@ -120,23 +97,14 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="bing.Pan.sso.domain.entity.SsoUserOrg">
-    update sso_user_org
+  <update id="updateByPrimaryKeySelective" parameterType="com.horse.sso.domain.entity.SsoUserSystem">
+    update sso_user_system
     <set>
       <if test="userId != null">
         user_id = #{userId,jdbcType=BIGINT},
       </if>
       <if test="userLoginName != null">
         user_login_name = #{userLoginName,jdbcType=VARCHAR},
-      </if>
-      <if test="organizationId != null">
-        organization_id = #{organizationId,jdbcType=BIGINT},
-      </if>
-      <if test="organizationName != null">
-        organization_name = #{organizationName,jdbcType=VARCHAR},
-      </if>
-      <if test="available != null">
-        available = #{available,jdbcType=BIT},
       </if>
       <if test="systemId != null">
         system_id = #{systemId,jdbcType=BIGINT},
@@ -159,13 +127,10 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="bing.Pan.sso.domain.entity.SsoUserOrg">
-    update sso_user_org
+  <update id="updateByPrimaryKey" parameterType="com.horse.sso.domain.entity.SsoUserSystem">
+    update sso_user_system
     set user_id = #{userId,jdbcType=BIGINT},
       user_login_name = #{userLoginName,jdbcType=VARCHAR},
-      organization_id = #{organizationId,jdbcType=BIGINT},
-      organization_name = #{organizationName,jdbcType=VARCHAR},
-      available = #{available,jdbcType=BIT},
       system_id = #{systemId,jdbcType=BIGINT},
       system_name = #{systemName,jdbcType=VARCHAR},
       create_user = #{createUser,jdbcType=BIGINT},
