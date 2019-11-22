@@ -1,7 +1,7 @@
-package bing.Pan.sso.api;
+package com.horse.sso.api;
 
 
-import bing.Pan.sso.service.config.dynamicDataSource.DynamicDataSourceRegister;
+import com.horse.sso.service.config.dynamicDataSource.DynamicDataSourceRegister;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
@@ -19,12 +19,12 @@ import java.util.List;
 
 /**
  * @crea :Created by intelliJ IDEA 16.1.1 .
- * @auth :bing.Pan 15923508369@163.com .
+ * @auth :Gopan 15923508369@163.com .
  * @date :2017/1/16 20:02
  * @desc :
  */
 @SpringBootApplication
-@ComponentScan(value = "bing.Pan")
+@ComponentScan(value = "com.horse")
 @Import({DynamicDataSourceRegister.class})
 public class SsoAIPApplication {
 
