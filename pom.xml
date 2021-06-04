@@ -46,7 +46,7 @@
         <jxl.version>2.4.2_4</jxl.version>
         <maven-compiler-pluLgin.version>3.6.0</maven-compiler-pluLgin.version>
         <springloaded.verion>1.2.6.RELEASE</springloaded.verion>
-        <httpclient.version>4.5.2</httpclient.version>
+        <httpclient.version>4.5.13</httpclient.version>
         <poi.version>3.9</poi.version>
         <jxl.version>2.4.2_4</jxl.version>
         <typehandlers.version>1.0.2</typehandlers.version>
